@@ -1,0 +1,26 @@
+# this is an auto generated file. This will be overwritten
+query GetUserParam($id: ID!) {
+  getUserParam(id: $id) {
+    id
+    key
+    value
+    createdAt
+    updatedAt
+  }
+}
+query ListUserParams(
+  $filter: ModelUserParamFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUserParams(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      key
+      value
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}

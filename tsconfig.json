@@ -1,3 +1,4 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
     "angularCompilerOptions": {
         "enableIvy": false,
@@ -8,20 +9,6 @@
     "compileOnSave": false,
     "compilerOptions": {
         "baseUrl": "src",
-        "declaration": false,
-        "downlevelIteration": true,
-        "emitDecoratorMetadata": true,
-        "esModuleInterop": true,
-        "experimentalDecorators": true,
-        "importHelpers": true,
-        "allowJs": true,
-        "lib": [
-            "es2018",
-            "dom"
-        ],
-        "module": "esnext",
-        "moduleResolution": "node",
-        "noImplicitAny": true,
         "outDir": "./dist/out-tsc",
         "paths": {
             "@app/*": [
@@ -37,13 +24,17 @@
                 "testing/*"
             ]
         },
-        "resolveJsonModule": true,
         "sourceMap": true,
-        "strict": true,
+        "declaration": false,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "importHelpers": true,
         "target": "es2015",
-        "typeRoots": [
-            "node_modules/@types",
-            "src/typings"
+        "module": "es2020",
+        "lib": [
+            "es2018",
+            "dom"
         ]
     }
 }

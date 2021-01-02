@@ -13,6 +13,7 @@ export class UserService {
             firstName: 'Start',
             lastName: 'Bootstrap',
             email: 'no-reply@startbootstrap.com',
+            login: 'jibe77',
         };
     }
 

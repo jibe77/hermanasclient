@@ -22,8 +22,14 @@ import * as appCommonGuards from './guards';
 import * as appCommonServices from './services';
 import * as authServices from '@modules/auth/services';
 
+import Amplify from 'aws-amplify';
+
+import awsconfig from '../../aws-exports';
+
+Amplify.configure(awsconfig);
+
 @NgModule({
-    imports: [CommonModule, RouterModule, ...thirdParty],
+    imports: [CommonModule, RouterModule, /*AmplifyUIAngularModule,*/ ...thirdParty],
     providers: [...appCommonServices.services, ...authServices.services, ...appCommonGuards.guards],
     declarations: [...appCommonContainers.containers, ...appCommonComponents.components],
     exports: [...appCommonContainers.containers, ...appCommonComponents.components, ...thirdParty],

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Auth } from 'aws-amplify';
 
 @Component({
     selector: 'sb-login',

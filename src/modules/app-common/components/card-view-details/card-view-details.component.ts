@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Input,
+    OnInit,
+    SimpleChanges,
+} from '@angular/core';
 
 @Component({
     selector: 'sb-card-view-details',

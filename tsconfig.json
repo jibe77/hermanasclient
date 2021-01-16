@@ -9,6 +9,9 @@
     "compileOnSave": false,
     "compilerOptions": {
         "baseUrl": "src",
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        // "noImplicitAny": true,
         "outDir": "./dist/out-tsc",
         "paths": {
             "@app/*": [
@@ -24,13 +27,20 @@
                 "testing/*"
             ]
         },
+        "resolveJsonModule": true,
         "sourceMap": true,
+        // "strict": true, // breaks build
         "declaration": false,
         "downlevelIteration": true,
         "experimentalDecorators": true,
         "moduleResolution": "node",
         "importHelpers": true,
+        "allowJs": true,
         "target": "es2015",
+        "typeRoots": [
+            "node_modules/@types",
+            "src/typings"
+        ],
         "module": "es2020",
         "lib": [
             "es2018",

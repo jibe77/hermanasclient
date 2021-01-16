@@ -7,6 +7,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     styleUrls: ['dashboard-cards.component.scss'],
 })
 export class DashboardCardsComponent implements OnInit {
+    public open: 'Open it now';
     constructor() {}
     ngOnInit() {}
 }

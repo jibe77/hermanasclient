@@ -29,7 +29,7 @@ import awsconfig from '../../aws-exports';
 Amplify.configure(awsconfig);
 
 @NgModule({
-    imports: [CommonModule, RouterModule, /*AmplifyUIAngularModule,*/ ...thirdParty],
+    imports: [CommonModule, RouterModule, ...thirdParty],
     providers: [...appCommonServices.services, ...authServices.services, ...appCommonGuards.guards],
     declarations: [...appCommonContainers.containers, ...appCommonComponents.components],
     exports: [...appCommonContainers.containers, ...appCommonComponents.components, ...thirdParty],

@@ -2,16 +2,20 @@
     .col-xl-6
         sb-card
             .card-header
-                fa-icon.mr-1([icon]='["fas", "chart-area"]')
-                | Area Chart Example
-            .card-body
-                sb-charts-area
-                
-            
+                fa-icon.mr-1([icon]='["fas", "door-open"]')
+                | Door
+                .float-right
+                    sb-dashboard-door-action([stateDoorIsClosed]='stateDoorIsClosed')
+            .card-body(*ngIf='!stateDoorIsClosed') State : Opened
+            .card-body(*ngIf='stateDoorIsClosed') State : Closed
+            .card-body Next opening time :
+                |  {{nextOpeningTime}}
+            .card-body Next closing time :
+                |  {{nextClosingTime}}
+
     .col-xl-6
         sb-card
             .card-header
-                fa-icon.mr-1([icon]='["fas", "chart-bar"]')
-                | Bar Chart Example
-            .card-body
-                sb-charts-bar
+                fa-icon.mr-1([icon]='["fas", "camera"]')
+                | Webcam
+            .card-body <img src="./assets/img/webcam.png" />

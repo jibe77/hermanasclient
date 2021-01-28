@@ -21,6 +21,7 @@ import * as dashboardGuards from './guards';
 
 /* Services */
 import * as dashboardServices from './services';
+import { HttpClientModule} from '@angular/common/http';
 
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 
@@ -35,6 +36,7 @@ import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
         ChartsModule,
         TablesModule,
         AmplifyUIAngularModule,
+        HttpClientModule,
     ],
     providers: [...dashboardServices.services, ...dashboardGuards.guards],
     declarations: [...dashboardContainers.containers, ...dashboardComponents.components],

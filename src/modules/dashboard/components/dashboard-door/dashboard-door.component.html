@@ -1,19 +1,20 @@
 <div class="row">
     <div class="col-xl-6">
-        <sb-card>
-            <div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "door-open"]'></fa-icon>Door</div>
-            <div class="card-body">State : Closed</div>
-            <div class="card-body">Next opening time : 08:15</div>
-            <div class="card-body">Next closing time : 17:50</div>
-        </sb-card>
+        <sb-card
+            ><div class="card-header">
+                <fa-icon class="mr-1" [icon]='["fas", "door-open"]'></fa-icon>Door
+                <div class="float-right"><sb-dashboard-door-action [stateDoorIsClosed]="stateDoorIsClosed"></sb-dashboard-door-action></div>
+            </div>
+            <div class="card-body" *ngIf="!stateDoorIsClosed">State : Opened</div>
+            <div class="card-body" *ngIf="stateDoorIsClosed">State : Closed</div>
+            <div class="card-body">Next opening time : {{nextOpeningTime}}</div>
+            <div class="card-body">Next closing time : {{nextClosingTime}}</div></sb-card
+        >
     </div>
     <div class="col-xl-6">
         <sb-card
             ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "camera"]'></fa-icon>Webcam</div>
-            <div class="card-body">
-                <img src="./assets/img/webcam.png" />
-
-            </div
+            <div class="card-body"><img src="./assets/img/webcam.png" /></div
         ></sb-card>
     </div>
 </div>

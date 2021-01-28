@@ -6,19 +6,20 @@ import {
     faArrowLeft,
     faBars,
     faBookOpen,
+    faCamera,
     faChartArea,
     faChartBar,
     faChartPie,
     faChevronDown,
     faChevronUp,
+    faCloudSun,
     faColumns,
+    faDoorOpen,
+    faEllipsisV,
     faSearch,
     faTable,
     faTachometerAlt,
     faUser,
-    faCloudSun,
-    faCamera,
-    faDoorOpen,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeSolidIcons = {
@@ -40,4 +41,5 @@ export const fontAwesomeSolidIcons = {
     faCloudSun,
     faCamera,
     faDoorOpen,
+    faEllipsisV,
 };

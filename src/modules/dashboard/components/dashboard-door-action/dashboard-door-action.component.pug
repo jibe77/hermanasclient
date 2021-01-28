@@ -1,0 +1,21 @@
+li.nav-item.dropdown.dropdown-user.no-caret(
+    ngbDropdown,
+    placement='bottom-right',
+    display='dynamic'
+)
+    a#userDropdown.nav-link(
+        ngbDropdownToggle,
+        data-cy='userMenu',
+        role='button',
+        aria-haspopup='true',
+        aria-expanded='false'
+    )
+        fa-icon([icon]='["fas", "ellipsis-v"]')
+    .dropdown-menu(
+        ngbDropdownMenu,
+        aria-labelledby='dropdownUser'
+    )
+        a(*ngIf='stateDoorIsClosed').dropdown-item(routerLink='/dashboard')
+            | Open door
+        a(*ngIf='!stateDoorIsClosed').dropdown-item(routerLink='/dashboard')
+            | Close door

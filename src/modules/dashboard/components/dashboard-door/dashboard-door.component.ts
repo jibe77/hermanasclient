@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { faFilm } from '@fortawesome/free-solid-svg-icons';
 import { DashboardDoorActionComponent } from '@modules/dashboard/components/dashboard-door-action/dashboard-door-action.component';
 import { DashboardService } from '@modules/dashboard/services';
+import { DoorService } from '@modules/dashboard/services/door.service';
 
 @Component({
     selector: 'sb-dashboard-door',
@@ -9,12 +10,38 @@ import { DashboardService } from '@modules/dashboard/services';
     templateUrl: './dashboard-door.component.html',
     styleUrls: ['dashboard-door.component.scss'],
 })
-export class DashboardDoorComponent implements OnInit {
+export class DashboardDoorComponent implements OnInit, OnDestroy {
     public stateDoorIsClosed = false;
-    public nextOpeningTime = '8h40';
-    public nextClosingTime = '17h30';
-    public dashboardService: DashboardService;
+    public nextOpeningTime = '...';
+    public nextClosingTime = '...';
 
-    constructor() {}
-    ngOnInit() {}
+    constructor(public _doorService: DoorService) {
+        this.nextClosingTime = '___';
+    }
+
+    ngOnInit() {
+        this.nextOpeningTime = ',,,';
+        this._doorService
+            .getNextDoorOpeningTime()
+            .subscribe(
+                (data: string) => (
+                    console.log('opening time : ', this.nextOpeningTime),
+                    (this.nextOpeningTime = data),
+                    console.log('opening time : ', this.nextOpeningTime)
+                )
+            );
+        this._doorService
+            .getNextDoorClosingTime()
+            .subscribe(
+                (data: string) => (
+                    console.log('closing time ; ', this.nextClosingTime),
+                    (this.nextClosingTime = data),
+                    console.log('closing time ; ', this.nextClosingTime)
+                )
+            );
+    }
+
+    ngOnDestroy(): void {
+        console.log('destroying ', this.nextClosingTime);
+    }
 }

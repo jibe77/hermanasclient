@@ -6,6 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 /* Modules */
 import { AppCommonModule } from '@common/app-common.module';
+import { DoorService } from '@modules/dashboard/services/door.service';
 import { NavigationModule } from '@modules/navigation/navigation.module';
 import { ChartsModule } from '@modules/charts/charts.module';
 import { TablesModule } from '@modules/tables/tables.module';
@@ -21,7 +22,7 @@ import * as dashboardGuards from './guards';
 
 /* Services */
 import * as dashboardServices from './services';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 
@@ -38,7 +39,7 @@ import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
         AmplifyUIAngularModule,
         HttpClientModule,
     ],
-    providers: [...dashboardServices.services, ...dashboardGuards.guards],
+    providers: [...dashboardServices.services, ...dashboardGuards.guards, DoorService],
     declarations: [...dashboardContainers.containers, ...dashboardComponents.components],
     exports: [...dashboardContainers.containers, ...dashboardComponents.components],
 })

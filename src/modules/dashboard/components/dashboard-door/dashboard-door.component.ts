@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import { faFilm } from '@fortawesome/free-solid-svg-icons';
 import { DashboardDoorActionComponent } from '@modules/dashboard/components/dashboard-door-action/dashboard-door-action.component';
 import { DashboardService } from '@modules/dashboard/services';
@@ -15,7 +15,7 @@ export class DashboardDoorComponent implements OnInit, OnDestroy {
     public nextOpeningTime = '...';
     public nextClosingTime = '...';
 
-    constructor(public _doorService: DoorService) {
+    constructor(public _doorService: DoorService, private changeDetectorRef: ChangeDetectorRef) {
         this.nextClosingTime = '___';
     }
 
@@ -27,7 +27,8 @@ export class DashboardDoorComponent implements OnInit, OnDestroy {
                 (data: string) => (
                     console.log('opening time : ', this.nextOpeningTime),
                     (this.nextOpeningTime = data),
-                    console.log('opening time : ', this.nextOpeningTime)
+                    console.log('opening time : ', this.nextOpeningTime),
+                    this.changeDetectorRef.detectChanges()
                 )
             );
         this._doorService
@@ -36,7 +37,8 @@ export class DashboardDoorComponent implements OnInit, OnDestroy {
                 (data: string) => (
                     console.log('closing time ; ', this.nextClosingTime),
                     (this.nextClosingTime = data),
-                    console.log('closing time ; ', this.nextClosingTime)
+                    console.log('closing time ; ', this.nextClosingTime),
+                    this.changeDetectorRef.detectChanges()
                 )
             );
     }

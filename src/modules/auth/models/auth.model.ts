@@ -1,7 +1,8 @@
 export interface User {
     id: string;
     login: string;
-    firstName: string;
-    lastName: string;
     email: string;
+    backEndUser: string;
+    backEndPassword: string;
+    authState: string;
 }

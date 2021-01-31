@@ -1,7 +1,9 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, retry } from 'rxjs/operators';
+import {User} from '@modules/auth/models';
+import {UserService} from '@modules/auth/services';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 export interface NextEvents {
     nextDoorOpeningTime: string;
@@ -11,37 +13,34 @@ export interface NextEvents {
     nextLightOnTimeAsDate: Date;
     nextDoorClosingTimeAsDate: Date;
 }
+export interface DoorStatus {
+    status: string;
+    timeStatusHasChanged: string;
+    timeStatusHasChangedAsDate: Date;
+}
 
 @Injectable()
 export class DoorService {
-    constructor(private _httpClient: HttpClient) {}
-    auth = btoa('marguerite:batman');
-    headers = new HttpHeaders({
-        Authorization: 'Basic ' + this.auth,
-        'Access-Control-Allow-Origin': '*',
-    });
+    constructor(private _httpClient: HttpClient, private _userService: UserService) {}
 
-    getNextDoorClosingTime(): Observable<any> {
+    getNextDoorClosingTime(user: User): Observable<any> {
         const closingTimeUrl = 'http://poulailler57.ddns.net:5780/scheduler/doorClosingTime';
         return this._httpClient
-            .get(closingTimeUrl, { headers: this.headers, responseType: 'text' as 'text' })
+            .get(closingTimeUrl, { headers: this.getHeaders(user), responseType: 'text' as 'text' })
             .pipe(catchError(e => this.handleError(e)));
-        // return '17:47';
     }
 
-    getNextDoorOpeningTime(): Observable<any> {
+    getNextDoorOpeningTime(user: User): Observable<any> {
         const closingTimeUrl = 'http://poulailler57.ddns.net:5780/scheduler/doorOpeningTime';
         return this._httpClient
-            .get(closingTimeUrl, { headers: this.headers, responseType: 'text' as 'text' })
+            .get(closingTimeUrl, { headers: this.getHeaders(user), responseType: 'text' as 'text' })
             .pipe(catchError(e => this.handleError(e)));
-        // return '08:17';
     }
 
-    getNextEvents(): Observable<any> {
+    getNextEvents(user: User): Observable<NextEvents> {
         const nextEventsUrl = 'http://poulailler57.ddns.net:5780/scheduler/nextEvents';
-        return this._httpClient.get(nextEventsUrl, { headers: this.headers }).pipe(
+        return this._httpClient.get(nextEventsUrl, { headers: this.getHeaders(user) }).pipe(
             map((data: NextEvents) => {
-                const d = '2021-02-01T18:02:10Z';
                 data.nextDoorOpeningTimeAsDate = new Date(data.nextDoorOpeningTime);
                 data.nextLightOnTimeAsDate = new Date(data.nextLightOnTime);
                 data.nextDoorClosingTimeAsDate = new Date(data.nextDoorClosingTime);
@@ -51,13 +50,29 @@ export class DoorService {
         );
     }
 
-    getDoorStatus(): Observable<string> {
+    getDoorStatus(user: User): Observable<DoorStatus> {
+        // APIService
         const nextEventsUrl = 'http://poulailler57.ddns.net:5780/door/status';
-        return this._httpClient.get(nextEventsUrl, {
-            headers: this.headers,
-            responseType: 'text' as 'text',
+        return this._httpClient
+            .get(nextEventsUrl, {
+                headers: this.getHeaders(user),
+            })
+            .pipe(
+                map((data: DoorStatus) => {
+                    data.timeStatusHasChangedAsDate = new Date(data.timeStatusHasChanged);
+                    return data;
+                })
+            );
+    }
+
+    private getHeaders(user: User) {
+        console.log('récupération des paramètres.');
+        console.log('les paramètres ont été récupérés.');
+        const auth = btoa(user.backEndUser + ':' + user.backEndPassword);
+        return new HttpHeaders({
+            Authorization: 'Basic ' + auth,
+            'Access-Control-Allow-Origin': '*',
         });
-        // catchError(e => this.handleError(e))
     }
 
     private handleError(error: HttpErrorResponse) {

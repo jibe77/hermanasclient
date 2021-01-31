@@ -5,10 +5,10 @@ import {
     OnDestroy,
     OnInit,
 } from '@angular/core';
-import { faFilm } from '@fortawesome/free-solid-svg-icons';
-import { DashboardDoorActionComponent } from '@modules/dashboard/components/dashboard-door-action/dashboard-door-action.component';
-import { DashboardService } from '@modules/dashboard/services';
-import { DoorService, NextEvents } from '@modules/dashboard/services/door.service';
+import { User } from '@modules/auth/models';
+import { UserService } from '@modules/auth/services';
+import { DoorService, DoorStatus, NextEvents } from '@modules/dashboard/services/door.service';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'sb-dashboard-door',
@@ -20,51 +20,42 @@ export class DashboardDoorComponent implements OnInit, OnDestroy {
     public stateDoorIsClosed;
     public nextOpeningTime;
     public nextClosingTime;
+    subscription: Subscription = new Subscription();
 
-    constructor(public _doorService: DoorService, private changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        public _doorService: DoorService,
+        private changeDetectorRef: ChangeDetectorRef,
+        private _userService: UserService
+    ) {}
 
-    ngOnInit() {
-        /*
-        this._doorService
-            .getNextDoorOpeningTime()
-            .subscribe(
-                (data: string) => (
-                    console.log('opening time : ', this.nextOpeningTime),
-                    (this.nextOpeningTime = data),
-                    console.log('opening time : ', this.nextOpeningTime),
-                    this.changeDetectorRef.detectChanges()
-                )
-            );
-        this._doorService
-            .getNextDoorClosingTime()
-            .subscribe(
-                (data: string) => (
-                    console.log('closing time ; ', this.nextClosingTime),
-                    (this.nextClosingTime = data),
-                    console.log('closing time ; ', this.nextClosingTime),
-                    this.changeDetectorRef.detectChanges()
-                )
-            );
-         */
-        this._doorService.getNextEvents().subscribe((data: NextEvents) => {
+    refresh(user: User) {
+        this._doorService.getNextEvents(user).subscribe((data: NextEvents) => {
             this.nextOpeningTime = data.nextDoorOpeningTime.substr(11, 5);
             this.nextClosingTime = data.nextDoorClosingTime.substr(11, 5);
             this.changeDetectorRef.detectChanges();
         });
-
-        this._doorService.getDoorStatus().subscribe((data: string) => {
-            if (data === 'CLOSED') {
+        this._doorService.getDoorStatus(user).subscribe((data: DoorStatus) => {
+            console.log('état de la porte :', data.status);
+            if (data.status === 'CLOSED') {
                 this.stateDoorIsClosed = true;
-            } else if (data === 'OPENED') {
+            } else if (data.status === 'OPENED') {
                 this.stateDoorIsClosed = false;
             } else {
                 this.stateDoorIsClosed = undefined;
             }
+            console.log('état de la porte : ', this.stateDoorIsClosed);
             this.changeDetectorRef.detectChanges();
+        });
+    }
+
+    ngOnInit() {
+        this.subscription = this._userService.user$.subscribe((user: User) => {
+            this.refresh(user);
         });
     }
 
     ngOnDestroy(): void {
         console.log('destroying ', this.nextClosingTime);
+        this.subscription.unsubscribe();
     }
 }

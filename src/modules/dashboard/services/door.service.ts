@@ -1,27 +1,31 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, map, retry } from 'rxjs/operators';
+
+export interface NextEvents {
+    nextDoorOpeningTime: string;
+    nextLightOnTime: string;
+    nextDoorClosingTime: string;
+    nextDoorOpeningTimeAsDate: Date;
+    nextLightOnTimeAsDate: Date;
+    nextDoorClosingTimeAsDate: Date;
+}
 
 @Injectable()
 export class DoorService {
-    auth = btoa('marguerite:batman');
-
-    options = {
-        headers: new HttpHeaders({
-            Authorization: 'Basic ' + this.auth,
-            'Access-Control-Allow-Origin': '*',
-        }),
-        params: {},
-        responseType: 'text' as 'text',
-    };
     constructor(private _httpClient: HttpClient) {}
+    auth = btoa('marguerite:batman');
+    headers = new HttpHeaders({
+        Authorization: 'Basic ' + this.auth,
+        'Access-Control-Allow-Origin': '*',
+    });
 
     // http://poulailler57.ddns.net:5780/scheduler/doorClosingTime
     getNextDoorClosingTime(): Observable<any> {
         const closingTimeUrl = 'http://poulailler57.ddns.net:5780/scheduler/doorClosingTime';
         return this._httpClient
-            .get(closingTimeUrl, this.options)
+            .get(closingTimeUrl, { headers: this.headers, responseType: 'text' as 'text' })
             .pipe(catchError(e => this.handleError(e)));
         // return '17:47';
     }
@@ -30,9 +34,23 @@ export class DoorService {
     getNextDoorOpeningTime(): Observable<any> {
         const closingTimeUrl = 'http://poulailler57.ddns.net:5780/scheduler/doorOpeningTime';
         return this._httpClient
-            .get(closingTimeUrl, this.options)
+            .get(closingTimeUrl, { headers: this.headers, responseType: 'text' as 'text' })
             .pipe(catchError(e => this.handleError(e)));
         // return '08:17';
+    }
+
+    getNextEvents(): Observable<any> {
+        const nextEventsUrl = 'http://poulailler57.ddns.net:5780/scheduler/nextEvents';
+        return this._httpClient.get(nextEventsUrl, { headers: this.headers }).pipe(
+            map((data: NextEvents) => {
+                const d = '2021-02-01T18:02:10Z';
+                data.nextDoorOpeningTimeAsDate = new Date(data.nextDoorOpeningTime);
+                data.nextLightOnTimeAsDate = new Date(data.nextLightOnTime);
+                data.nextDoorClosingTimeAsDate = new Date(data.nextDoorClosingTime);
+                return data;
+            })
+            // catchError(e => this.handleError(e))
+        );
     }
 
     private handleError(error: HttpErrorResponse) {

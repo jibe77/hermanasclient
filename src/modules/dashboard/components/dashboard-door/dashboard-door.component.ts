@@ -1,8 +1,14 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    OnDestroy,
+    OnInit,
+} from '@angular/core';
 import { faFilm } from '@fortawesome/free-solid-svg-icons';
 import { DashboardDoorActionComponent } from '@modules/dashboard/components/dashboard-door-action/dashboard-door-action.component';
 import { DashboardService } from '@modules/dashboard/services';
-import { DoorService } from '@modules/dashboard/services/door.service';
+import { DoorService, NextEvents } from '@modules/dashboard/services/door.service';
 
 @Component({
     selector: 'sb-dashboard-door',
@@ -12,15 +18,13 @@ import { DoorService } from '@modules/dashboard/services/door.service';
 })
 export class DashboardDoorComponent implements OnInit, OnDestroy {
     public stateDoorIsClosed = false;
-    public nextOpeningTime = '...';
-    public nextClosingTime = '...';
+    public nextOpeningTime;
+    public nextClosingTime;
 
-    constructor(public _doorService: DoorService, private changeDetectorRef: ChangeDetectorRef) {
-        this.nextClosingTime = '___';
-    }
+    constructor(public _doorService: DoorService, private changeDetectorRef: ChangeDetectorRef) {}
 
     ngOnInit() {
-        this.nextOpeningTime = ',,,';
+        /*
         this._doorService
             .getNextDoorOpeningTime()
             .subscribe(
@@ -41,6 +45,13 @@ export class DashboardDoorComponent implements OnInit, OnDestroy {
                     this.changeDetectorRef.detectChanges()
                 )
             );
+         */
+        this._doorService.getNextEvents().subscribe((data: NextEvents) => {
+            console.log('next event has answered');
+            this.nextOpeningTime = data.nextDoorOpeningTime.substr(11, 5);
+            this.nextClosingTime = data.nextDoorClosingTime.substr(11, 5);
+            this.changeDetectorRef.detectChanges();
+        });
     }
 
     ngOnDestroy(): void {

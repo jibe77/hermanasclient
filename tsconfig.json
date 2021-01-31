@@ -36,14 +36,14 @@
         "moduleResolution": "node",
         "importHelpers": true,
         "allowJs": true,
-        "target": "es2015",
+        "target": "es6",
         "typeRoots": [
             "node_modules/@types",
             "src/typings"
         ],
         "module": "es2020",
         "lib": [
-            "es2018",
+            "es2017",
             "dom"
         ]
     }

@@ -6,13 +6,13 @@
                 | Door
                 .float-right
                     sb-dashboard-door-action([stateDoorIsClosed]='stateDoorIsClosed')
-            .card-body(*ngIf='!stateDoorIsClosed') State : Opened
-            .card-body(*ngIf='stateDoorIsClosed') State : Closed
+            .card-body(*ngIf='stateDoorIsClosed !== undefined && !stateDoorIsClosed') State : Opened
+            .card-body(*ngIf='stateDoorIsClosed !== undefined && stateDoorIsClosed') State : Closed
+            .card-body(*ngIf='stateDoorIsClosed === undefined') State : Undefined
             .card-body Next opening time :
                 |  {{nextOpeningTime}}
             .card-body Next closing time :
                 |  {{nextClosingTime}}
-
     .col-xl-6
         sb-card
             .card-header

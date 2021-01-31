@@ -21,7 +21,6 @@ export class DoorService {
         'Access-Control-Allow-Origin': '*',
     });
 
-    // http://poulailler57.ddns.net:5780/scheduler/doorClosingTime
     getNextDoorClosingTime(): Observable<any> {
         const closingTimeUrl = 'http://poulailler57.ddns.net:5780/scheduler/doorClosingTime';
         return this._httpClient
@@ -30,7 +29,6 @@ export class DoorService {
         // return '17:47';
     }
 
-    // http://poulailler57.ddns.net:5780/scheduler/doorOpeningTime
     getNextDoorOpeningTime(): Observable<any> {
         const closingTimeUrl = 'http://poulailler57.ddns.net:5780/scheduler/doorOpeningTime';
         return this._httpClient
@@ -51,6 +49,15 @@ export class DoorService {
             })
             // catchError(e => this.handleError(e))
         );
+    }
+
+    getDoorStatus(): Observable<string> {
+        const nextEventsUrl = 'http://poulailler57.ddns.net:5780/door/status';
+        return this._httpClient.get(nextEventsUrl, {
+            headers: this.headers,
+            responseType: 'text' as 'text',
+        });
+        // catchError(e => this.handleError(e))
     }
 
     private handleError(error: HttpErrorResponse) {

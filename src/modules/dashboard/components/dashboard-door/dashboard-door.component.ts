@@ -17,7 +17,7 @@ import { DoorService, NextEvents } from '@modules/dashboard/services/door.servic
     styleUrls: ['dashboard-door.component.scss'],
 })
 export class DashboardDoorComponent implements OnInit, OnDestroy {
-    public stateDoorIsClosed = false;
+    public stateDoorIsClosed;
     public nextOpeningTime;
     public nextClosingTime;
 
@@ -47,9 +47,19 @@ export class DashboardDoorComponent implements OnInit, OnDestroy {
             );
          */
         this._doorService.getNextEvents().subscribe((data: NextEvents) => {
-            console.log('next event has answered');
             this.nextOpeningTime = data.nextDoorOpeningTime.substr(11, 5);
             this.nextClosingTime = data.nextDoorClosingTime.substr(11, 5);
+            this.changeDetectorRef.detectChanges();
+        });
+
+        this._doorService.getDoorStatus().subscribe((data: string) => {
+            if (data === 'CLOSED') {
+                this.stateDoorIsClosed = true;
+            } else if (data === 'OPENED') {
+                this.stateDoorIsClosed = false;
+            } else {
+                this.stateDoorIsClosed = undefined;
+            }
             this.changeDetectorRef.detectChanges();
         });
     }

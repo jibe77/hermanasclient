@@ -3,11 +3,13 @@
         <sb-card
             ><div class="card-header">
                 <fa-icon class="mr-1" [icon]='["fas", "door-open"]'></fa-icon>Door
-                <div class="float-right"><sb-dashboard-door-action [stateDoorIsClosed]="stateDoorIsClosed"></sb-dashboard-door-action></div>
+                <div class="float-right"><sb-dashboard-door-action [doorStatus]="doorStatus"></sb-dashboard-door-action></div>
             </div>
-            <div class="card-body" *ngIf="stateDoorIsClosed !== undefined &amp;&amp; !stateDoorIsClosed">State : Opened</div>
-            <div class="card-body" *ngIf="stateDoorIsClosed !== undefined &amp;&amp; stateDoorIsClosed">State : Closed</div>
-            <div class="card-body" *ngIf="stateDoorIsClosed === undefined">State : Undefined</div>
+            <div class="card-body" *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENED"'>State : Opened</div>
+            <div class="card-body" *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSED"'>State : Closed</div>
+            <div class="card-body" *ngIf='doorStatus === undefined || doorStatus === "UNDEFINED"'>State : Undefined</div>
+            <div class="card-body" *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "SEEMS_OPENED"'>State : Seems opened</div>
+            <div class="card-body" *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "SEEMS_CLOSED"'>State : Seems closed</div>
             <div class="card-body">Next opening time : {{nextOpeningTime}}</div>
             <div class="card-body">Next closing time : {{nextClosingTime}}</div></sb-card
         >

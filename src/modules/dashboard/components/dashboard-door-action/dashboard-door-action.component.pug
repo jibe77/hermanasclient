@@ -15,7 +15,7 @@ li.nav-item.dropdown.dropdown-user.no-caret(
         ngbDropdownMenu,
         aria-labelledby='dropdownUser'
     )
-        a(*ngIf='stateDoorIsClosed').dropdown-item(routerLink='/dashboard')
+        a(*ngIf='doorStatus !== undefined && doorStatus !== "OPENED"').dropdown-item((click)="openDoor()" )
             | Open door
-        a(*ngIf='!stateDoorIsClosed').dropdown-item(routerLink='/dashboard')
+        a(*ngIf='doorStatus !== undefined && doorStatus !== "CLOSED"').dropdown-item((click)="closeDoor()" )
             | Close door

@@ -5,10 +5,10 @@ import {
     OnDestroy,
     OnInit,
 } from '@angular/core';
-import { User } from '@modules/auth/models';
 import { UserService } from '@modules/auth/services';
-import { DoorService, DoorStatus, NextEvents } from '@modules/dashboard/services/door.service';
-import {Subscription} from 'rxjs';
+import { NextEvents, SchedulerService } from '@modules/dashboard/services';
+import { DoorService, DoorStatus } from '@modules/dashboard/services/door.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'sb-dashboard-door',
@@ -17,40 +17,34 @@ import {Subscription} from 'rxjs';
     styleUrls: ['dashboard-door.component.scss'],
 })
 export class DashboardDoorComponent implements OnInit, OnDestroy {
-    public stateDoorIsClosed;
+    public doorStatus;
     public nextOpeningTime;
     public nextClosingTime;
     subscription: Subscription = new Subscription();
 
     constructor(
         public _doorService: DoorService,
+        public _schedulerService: SchedulerService,
         private changeDetectorRef: ChangeDetectorRef,
         private _userService: UserService
     ) {}
 
-    refresh(user: User) {
-        this._doorService.getNextEvents(user).subscribe((data: NextEvents) => {
+    refresh() {
+        this._schedulerService.getNextEvents().subscribe((data: NextEvents) => {
             this.nextOpeningTime = data.nextDoorOpeningTime.substr(11, 5);
             this.nextClosingTime = data.nextDoorClosingTime.substr(11, 5);
             this.changeDetectorRef.detectChanges();
         });
-        this._doorService.getDoorStatus(user).subscribe((data: DoorStatus) => {
+        this._doorService.getDoorStatus().subscribe((data: DoorStatus) => {
             console.log('état de la porte :', data.status);
-            if (data.status === 'CLOSED') {
-                this.stateDoorIsClosed = true;
-            } else if (data.status === 'OPENED') {
-                this.stateDoorIsClosed = false;
-            } else {
-                this.stateDoorIsClosed = undefined;
-            }
-            console.log('état de la porte : ', this.stateDoorIsClosed);
+            this.doorStatus = data.status;
             this.changeDetectorRef.detectChanges();
         });
     }
 
     ngOnInit() {
-        this.subscription = this._userService.user$.subscribe((user: User) => {
-            this.refresh(user);
+        this.subscription = this._userService.user$.subscribe(() => {
+            this.refresh();
         });
     }
 

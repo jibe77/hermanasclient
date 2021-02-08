@@ -1,6 +1,5 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     OnDestroy,
     OnInit,
@@ -24,8 +23,7 @@ export class TopNavUserComponent implements OnInit, OnDestroy {
 
     constructor(
         public navigationService: NavigationService,
-        public userService: UserService,
-        private ref: ChangeDetectorRef
+        public userService: UserService
     ) {}
 
     ngOnInit() {

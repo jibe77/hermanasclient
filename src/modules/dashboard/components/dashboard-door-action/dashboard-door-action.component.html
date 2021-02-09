@@ -1,4 +1,7 @@
-<li class="nav-item dropdown dropdown-user no-caret" ngbDropdown placement="bottom-right" display="dynamic">
+<li class="nav-item dropdown dropdown-user no-caret" *ngIf="_userService.user$ | async as user" ngbDropdown placement="bottom-right" display="dynamic">
     <a class="nav-link" id="userDropdown" ngbDropdownToggle data-cy="userMenu" role="button" aria-haspopup="true" aria-expanded="false"><fa-icon [icon]='["fas", "ellipsis-v"]'></fa-icon></a>
-    <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownUser"><a class="dropdown-item" *ngIf='doorStatus !== undefined &amp;&amp; doorStatus !== "OPENED"' (click)="openDoor()">Open door</a><a class="dropdown-item" *ngIf='doorStatus !== undefined &amp;&amp; doorStatus !== "CLOSED"' (click)="closeDoor()">Close door</a></div>
+    <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownUser">
+        <span [class.disabled]="user.authState !== 'signedin'"><a class="dropdown-item" *ngIf='doorStatus !== undefined &amp;&amp; doorStatus !== "OPENED"' (click)="openDoor()" routerLink="/dashboard" [class.disabled]="user.authState !== 'signedin'">Open door</a></span
+        ><span [class.disabled]="user.authState !== 'signedin'"><a class="dropdown-item" *ngIf='doorStatus !== undefined &amp;&amp; doorStatus !== "CLOSED"' (click)="closeDoor()" routerLink="/dashboard" [class.disabled]="user.authState !== 'signedin'">Close door</a></span>
+    </div>
 </li>

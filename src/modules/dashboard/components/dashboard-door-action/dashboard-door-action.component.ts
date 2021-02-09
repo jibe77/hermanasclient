@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { User } from '@modules/auth/models';
 import { UserService } from '@modules/auth/services';
+import { DashboardDoorComponent } from '@modules/dashboard/components';
 import { DoorService } from '@modules/dashboard/services';
 import { Subscription } from 'rxjs';
 
@@ -14,7 +15,12 @@ export class DashboardDoorActionComponent implements OnInit {
     user: User;
     subscription: Subscription = new Subscription();
 
-    constructor(public _doorService: DoorService, private _userService: UserService) {}
+    constructor(
+        public _doorService: DoorService,
+        private _userService: UserService,
+        private changeDetectorRef: ChangeDetectorRef,
+        private dashboardDoorComponent: DashboardDoorComponent
+    ) {}
 
     ngOnInit(): void {
         this.subscription = this._userService.user$.subscribe((user: User) => {
@@ -27,12 +33,14 @@ export class DashboardDoorActionComponent implements OnInit {
     }
 
     public openDoor() {
-        this._doorService.openDoor(this.user).subscribe();
+        this._doorService.openDoor(this.user).subscribe(() => {
+            this.dashboardDoorComponent.refreshDoorStatus();
+        });
     }
 
     public closeDoor() {
-        console.log('close door.');
-        this._doorService.closeDoor(this.user).subscribe();
-        console.log('close door.');
+        this._doorService.closeDoor(this.user).subscribe(() => {
+            this.dashboardDoorComponent.refreshDoorStatus();
+        });
     }
 }

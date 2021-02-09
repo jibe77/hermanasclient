@@ -29,12 +29,14 @@ export class DashboardDoorComponent implements OnInit, OnDestroy {
         private _userService: UserService
     ) {}
 
-    refresh() {
+    refreshNextEvent() {
         this._schedulerService.getNextEvents().subscribe((data: NextEvents) => {
             this.nextOpeningTime = data.nextDoorOpeningTime.substr(11, 5);
             this.nextClosingTime = data.nextDoorClosingTime.substr(11, 5);
             this.changeDetectorRef.detectChanges();
         });
+    }
+    refreshDoorStatus() {
         this._doorService.getDoorStatus().subscribe((data: DoorStatus) => {
             console.log('état de la porte :', data.status);
             this.doorStatus = data.status;
@@ -44,7 +46,8 @@ export class DashboardDoorComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.subscription = this._userService.user$.subscribe(() => {
-            this.refresh();
+            this.refreshNextEvent();
+            this.refreshDoorStatus();
         });
     }
 

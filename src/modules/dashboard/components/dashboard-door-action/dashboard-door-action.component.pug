@@ -1,4 +1,5 @@
 li.nav-item.dropdown.dropdown-user.no-caret(
+    *ngIf='_userService.user$ | async as user',
     ngbDropdown,
     placement='bottom-right',
     display='dynamic'
@@ -11,11 +12,13 @@ li.nav-item.dropdown.dropdown-user.no-caret(
         aria-expanded='false'
     )
         fa-icon([icon]='["fas", "ellipsis-v"]')
-    .dropdown-menu(
+    .dropdown-menu.dropdown-menu-right(
         ngbDropdownMenu,
         aria-labelledby='dropdownUser'
     )
-        a(*ngIf='doorStatus !== undefined && doorStatus !== "OPENED"').dropdown-item((click)="openDoor()" )
-            | Open door
-        a(*ngIf='doorStatus !== undefined && doorStatus !== "CLOSED"').dropdown-item((click)="closeDoor()" )
-            | Close door
+        span([class.disabled]="user.authState !== 'signedin'")
+            a.dropdown-item(*ngIf='doorStatus !== undefined && doorStatus !== "OPENED"',(click)="openDoor()", routerLink="/dashboard", [class.disabled]="user.authState !== 'signedin'")
+                | Open door
+        span([class.disabled]="user.authState !== 'signedin'")
+            a.dropdown-item(*ngIf='doorStatus !== undefined && doorStatus !== "CLOSED"',(click)="closeDoor()", routerLink="/dashboard", [class.disabled]="user.authState !== 'signedin'")
+                | Close door

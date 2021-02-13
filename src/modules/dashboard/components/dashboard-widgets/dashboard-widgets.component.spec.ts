@@ -2,7 +2,7 @@ import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DashboardDoorComponent } from './dashboard-door.component';
+import { DashboardWidgetsComponent } from './dashboard-widgets.component';
 
 @Component({
     template: `
@@ -17,19 +17,19 @@ class TestHostComponent {
     // someFunction(event: Event) {}
 }
 
-describe('DashboardChartsComponent', () => {
+describe('DashboardWidgetsComponent', () => {
     let fixture: ComponentFixture<TestHostComponent>;
     let hostComponent: TestHostComponent;
     let hostComponentDE: DebugElement;
     let hostComponentNE: Element;
 
-    let component: DashboardDoorComponent;
+    let component: DashboardWidgetsComponent;
     let componentDE: DebugElement;
     let componentNE: Element;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestHostComponent, DashboardDoorComponent],
+            declarations: [TestHostComponent, DashboardWidgetsComponent],
             imports: [NoopAnimationsModule],
             providers: [],
             schemas: [NO_ERRORS_SCHEMA],
@@ -48,6 +48,6 @@ describe('DashboardChartsComponent', () => {
     });
 
     it('should display the component', () => {
-        expect(hostComponentNE.querySelector('sb-dashboard-charts')).toEqual(jasmine.anything());
+        expect(hostComponentNE.querySelector('sb-dashboard-widgets')).toEqual(jasmine.anything());
     });
 });

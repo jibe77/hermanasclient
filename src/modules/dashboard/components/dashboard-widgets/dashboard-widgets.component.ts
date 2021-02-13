@@ -6,27 +6,33 @@ import {
     OnInit,
 } from '@angular/core';
 import { UserService } from '@modules/auth/services';
-import { NextEvents, SchedulerService } from '@modules/dashboard/services';
+import { MeteoInfo, MeteoService, NextEvents, SchedulerService } from '@modules/dashboard/services';
 import { DoorService, DoorStatus } from '@modules/dashboard/services/door.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'sb-dashboard-door',
+    selector: 'sb-dashboard-widgets',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: './dashboard-door.component.html',
-    styleUrls: ['dashboard-door.component.scss'],
+    templateUrl: './dashboard-widgets.component.html',
+    styleUrls: ['dashboard-widgets.component.scss'],
 })
-export class DashboardDoorComponent implements OnInit, OnDestroy {
+export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     public doorStatus;
     public nextOpeningTime;
     public nextClosingTime;
-    subscription: Subscription = new Subscription();
+    public temperature;
+    public temperatureExternal;
+    public humidity;
+    public humidityExternal;
+    userServiceSubscription: Subscription = new Subscription();
+    meteoServiceSubscription: Subscription = new Subscription();
 
     constructor(
         public _doorService: DoorService,
         public _schedulerService: SchedulerService,
         private changeDetectorRef: ChangeDetectorRef,
-        private _userService: UserService
+        private _userService: UserService,
+        private _meteoService: MeteoService
     ) {}
 
     refreshNextEvent() {
@@ -45,14 +51,28 @@ export class DashboardDoorComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.subscription = this._userService.user$.subscribe(() => {
+        this.userServiceSubscription = this._userService.user$.subscribe(() => {
             this.refreshNextEvent();
             this.refreshDoorStatus();
         });
+        this.meteoServiceSubscription = this._meteoService
+            .getMeteoInfo()
+            .subscribe((data: MeteoInfo) => {
+                this.refreshMeteoInfo(data);
+            });
     }
 
     ngOnDestroy(): void {
         console.log('destroying ', this.nextClosingTime);
-        this.subscription.unsubscribe();
+        this.userServiceSubscription.unsubscribe();
+        this.meteoServiceSubscription.unsubscribe();
+    }
+
+    private refreshMeteoInfo(data: MeteoInfo) {
+        this.temperature = data.temperature;
+        this.humidity = data.humidity;
+        this.temperatureExternal = data.externalTemperature;
+        this.humidityExternal = data.externalHumidity;
+        this.changeDetectorRef.detectChanges();
     }
 }

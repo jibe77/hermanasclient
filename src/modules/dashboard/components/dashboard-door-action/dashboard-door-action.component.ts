@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { User } from '@modules/auth/models';
 import { UserService } from '@modules/auth/services';
-import { DashboardDoorComponent } from '@modules/dashboard/components';
+import { DashboardWidgetsComponent } from '@modules/dashboard/components/dashboard-widgets/dashboard-widgets.component';
 import { DoorService } from '@modules/dashboard/services';
 import { Subscription } from 'rxjs';
 
@@ -19,7 +19,7 @@ export class DashboardDoorActionComponent implements OnInit {
         public _doorService: DoorService,
         private _userService: UserService,
         private changeDetectorRef: ChangeDetectorRef,
-        private dashboardDoorComponent: DashboardDoorComponent
+        private dashboardWidgetsComponent: DashboardWidgetsComponent
     ) {}
 
     ngOnInit(): void {
@@ -34,13 +34,13 @@ export class DashboardDoorActionComponent implements OnInit {
 
     public openDoor() {
         this._doorService.openDoor(this.user).subscribe(() => {
-            this.dashboardDoorComponent.refreshDoorStatus();
+            this.dashboardWidgetsComponent.refreshDoorStatus();
         });
     }
 
     public closeDoor() {
         this._doorService.closeDoor(this.user).subscribe(() => {
-            this.dashboardDoorComponent.refreshDoorStatus();
+            this.dashboardWidgetsComponent.refreshDoorStatus();
         });
     }
 }

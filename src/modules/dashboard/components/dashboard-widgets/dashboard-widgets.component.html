@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-xl-6">
+        <sb-card
+            ><div class="card-header">
+                <fa-icon class="mr-1" [icon]='["fas", "door-open"]'></fa-icon>Door
+                <div class="float-right"><sb-dashboard-door-action [doorStatus]="doorStatus"></sb-dashboard-door-action></div>
+            </div>
+            <div class="card-body">
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENED"'>State : Opened</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSED"'>State : Closed</div>
+                <div *ngIf='doorStatus === undefined || doorStatus === "UNDEFINED"'>State : Undefined</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "SEEMS_OPENED"'>State : Seems opened</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "SEEMS_CLOSED"'>State : Seems closed</div>
+                <div>Next opening time : {{nextOpeningTime}}</div>
+                <div>Next closing time : {{nextClosingTime}}</div>
+            </div></sb-card
+        >
+    </div>
+    <div class="col-xl-6">
+        <sb-card
+            ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "door-open"]'></fa-icon>Meteo</div>
+            <div class="card-body">
+                <div>Temp : {{temperature}}° ({{temperatureExternal}}° exterior)</div>
+                <div>Humidity : {{humidity}}% ({{humidityExternal}}% exterior)</div>
+            </div></sb-card
+        >
+    </div>
+    <div class="col-xl-6">
+        <sb-card
+            ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "camera"]'></fa-icon>Webcam</div>
+            <div class="card-body"><img src="./assets/img/webcam.png" /></div
+        ></sb-card>
+    </div>
+</div>

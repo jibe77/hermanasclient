@@ -17,7 +17,7 @@ export class DashboardDoorActionComponent implements OnInit {
 
     constructor(
         public _doorService: DoorService,
-        private _userService: UserService,
+        public _userService: UserService,
         private changeDetectorRef: ChangeDetectorRef,
         private dashboardWidgetsComponent: DashboardWidgetsComponent
     ) {}

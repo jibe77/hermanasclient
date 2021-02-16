@@ -28,9 +28,15 @@
                 fa-icon.mr-1([icon]='["fas", "camera"]')
                 | Accessories
             .card-body
-                div Light : Off
-                div Music : Off
-                div Fan   : Off
+                div Light :
+                    span(*ngIf='lightStatus === true')  On
+                    span(*ngIf='lightStatus !== true')  Off
+                div Music :
+                    span(*ngIf='musicStatus === true')  On
+                    span(*ngIf='musicStatus !== true')  Off
+                div Fan :
+                    span(*ngIf='fanStatus === true')  On
+                    span(*ngIf='fanStatus !== true')  Off
     .col-xl-6
         sb-card
             .card-header

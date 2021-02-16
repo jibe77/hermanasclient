@@ -29,9 +29,9 @@
         <sb-card
             ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "camera"]'></fa-icon>Accessories</div>
             <div class="card-body">
-                <div>Light : Off</div>
-                <div>Music : Off</div>
-                <div>Fan : Off</div>
+                <div>Light :<span *ngIf="lightStatus === true"> On</span><span *ngIf="lightStatus !== true"> Off</span></div>
+                <div>Music :<span *ngIf="musicStatus === true"> On</span><span *ngIf="musicStatus !== true"> Off</span></div>
+                <div>Fan :<span *ngIf="fanStatus === true"> On</span><span *ngIf="fanStatus !== true"> Off</span></div>
             </div></sb-card
         >
     </div>

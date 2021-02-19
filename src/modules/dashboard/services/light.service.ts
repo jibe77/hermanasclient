@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {User} from '@modules/auth/models';
 import { AbstractService } from '@modules/dashboard/services/abstract.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -22,5 +23,12 @@ export class LightService extends AbstractService {
                 return data;
             })
         );
+    }
+
+    public switch(param: boolean, user: User): Observable<any> {
+        const musicStatusUrl = this.domainBase + '/light/switch';
+        return this._httpClient.get(musicStatusUrl + '?param=' + param, {
+            headers: this.getHeadersWithAuth(user),
+        });
     }
 }

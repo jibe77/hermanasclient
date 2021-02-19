@@ -55,6 +55,38 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         private _lightService: LightService
     ) {}
 
+    ngOnInit() {
+        this.userServiceSubscription = this._userService.user$.subscribe(() => {
+            this.refreshNextEvent();
+            this.refreshDoorStatus();
+        });
+        this.refreshMeteoInfo();
+        this.refreshFanStatus();
+        this.refreshMusicStatus();
+        this.refreshLightStatus();
+    }
+
+    ngOnDestroy(): void {
+        console.log('destroying ', this.nextClosingTime);
+        this.userServiceSubscription.unsubscribe();
+        this.meteoServiceSubscription.unsubscribe();
+        this.musicServiceSubscription.unsubscribe();
+        this.fanServiceSubscription.unsubscribe();
+        this.lightServiceSubscription.unsubscribe();
+    }
+
+    private refreshMeteoInfo() {
+        this.meteoServiceSubscription = this._meteoService
+            .getMeteoInfo()
+            .subscribe((data: MeteoInfo) => {
+                this.temperature = data.temperature;
+                this.humidity = data.humidity;
+                this.temperatureExternal = data.externalTemperature;
+                this.humidityExternal = data.externalHumidity;
+                this.changeDetectorRef.detectChanges();
+            });
+    }
+
     refreshNextEvent() {
         this._schedulerService.getNextEvents().subscribe((data: NextEvents) => {
             this.nextOpeningTime = data.nextDoorOpeningTime.substr(11, 5);
@@ -69,59 +101,28 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
             this.changeDetectorRef.detectChanges();
         });
     }
-
-    ngOnInit() {
-        this.userServiceSubscription = this._userService.user$.subscribe(() => {
-            this.refreshNextEvent();
-            this.refreshDoorStatus();
-        });
-        this.meteoServiceSubscription = this._meteoService
-            .getMeteoInfo()
-            .subscribe((data: MeteoInfo) => {
-                this.refreshMeteoInfo(data);
-            });
+    refreshFanStatus() {
         this.fanServiceSubscription = this._fanService.getStatus().subscribe((data: FanStatus) => {
-            this.refreshFanInfo(data);
+            this.fanStatus = data.statusEnum === 'ON';
+            this.changeDetectorRef.detectChanges();
         });
+    }
+
+    refreshMusicStatus() {
         this.musicServiceSubscription = this._musiceService
             .getStatus()
             .subscribe((data: MusicStatus) => {
-                this.refreshMusicStatus(data);
+                this.musicStatus = data.statusEnum === 'ON';
+                this.changeDetectorRef.detectChanges();
             });
+    }
+
+    refreshLightStatus() {
         this.lightServiceSubscription = this._lightService
             .getStatus()
             .subscribe((data: LightStatus) => {
-                this.refreshLightStatus(data);
+                this.lightStatus = data.statusEnum === 'ON';
+                this.changeDetectorRef.detectChanges();
             });
-    }
-
-    ngOnDestroy(): void {
-        console.log('destroying ', this.nextClosingTime);
-        this.userServiceSubscription.unsubscribe();
-        this.meteoServiceSubscription.unsubscribe();
-    }
-
-    private refreshMeteoInfo(data: MeteoInfo) {
-        this.temperature = data.temperature;
-        this.humidity = data.humidity;
-        this.temperatureExternal = data.externalTemperature;
-        this.humidityExternal = data.externalHumidity;
-        this.changeDetectorRef.detectChanges();
-    }
-
-    private refreshFanInfo(data: FanStatus) {
-        this.fanStatus = data.statusEnum === 'ON';
-        this.changeDetectorRef.detectChanges();
-    }
-
-    private refreshMusicStatus(data: MusicStatus) {
-        this.musicStatus = data.statusEnum === 'ON';
-        this.changeDetectorRef.detectChanges();
-    }
-
-    private refreshLightStatus(data: LightStatus) {
-        console.log('état de la lumière', data);
-        this.lightStatus = data.statusEnum === 'ON';
-        this.changeDetectorRef.detectChanges();
     }
 }

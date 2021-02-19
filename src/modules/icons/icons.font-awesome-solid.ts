@@ -16,7 +16,9 @@ import {
     faColumns,
     faDoorOpen,
     faEllipsisV,
+    faFan,
     faSearch,
+    faSun,
     faTable,
     faTachometerAlt,
     faUser,
@@ -42,4 +44,6 @@ export const fontAwesomeSolidIcons = {
     faCamera,
     faDoorOpen,
     faEllipsisV,
+    faFan,
+    faSun,
 };

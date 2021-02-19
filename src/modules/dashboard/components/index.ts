@@ -1,6 +1,7 @@
 import { DashboardCardsComponent } from './dashboard-cards/dashboard-cards.component';
 import { DashboardChartsComponent } from './dashboard-charts/dashboard-charts.component';
 import { DashboardDoorActionComponent } from './dashboard-door-action/dashboard-door-action.component';
+import { DashboardAccessoriesActionComponent } from './dashboard-accessories-action/dashboard-accessories-action.component';
 import { DashboardTablesComponent } from './dashboard-tables/dashboard-tables.component';
 import { DashboardWidgetsComponent } from './dashboard-widgets/dashboard-widgets.component';
 
@@ -9,6 +10,7 @@ export const components = [
     DashboardChartsComponent,
     DashboardTablesComponent,
     DashboardDoorActionComponent,
+    DashboardAccessoriesActionComponent,
     DashboardWidgetsComponent,
 ];
 

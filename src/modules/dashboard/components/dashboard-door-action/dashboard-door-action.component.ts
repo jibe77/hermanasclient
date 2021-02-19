@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { User } from '@modules/auth/models';
 import { UserService } from '@modules/auth/services';
 import { DashboardWidgetsComponent } from '@modules/dashboard/components/dashboard-widgets/dashboard-widgets.component';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './dashboard-door-action.component.html',
     styleUrls: ['dashboard-door-action.component.scss'],
 })
-export class DashboardDoorActionComponent implements OnInit {
+export class DashboardDoorActionComponent implements OnInit, OnDestroy {
     @Input() public doorStatus;
     user: User;
     subscription: Subscription = new Subscription();
@@ -26,6 +26,10 @@ export class DashboardDoorActionComponent implements OnInit {
         this.subscription = this._userService.user$.subscribe((user: User) => {
             this.refresh(user);
         });
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     refresh(user: User) {

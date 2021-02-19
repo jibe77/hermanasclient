@@ -18,7 +18,7 @@
     </div>
     <div class="col-xl-6">
         <sb-card
-            ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "door-open"]'></fa-icon>Meteo</div>
+            ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "sun"]'></fa-icon>Meteo</div>
             <div class="card-body">
                 <div>Temp : {{temperature}}° ({{temperatureExternal}}° exterior)</div>
                 <div>Humidity : {{humidity}}% ({{humidityExternal}}% exterior)</div>
@@ -27,7 +27,10 @@
     </div>
     <div class="col-xl-6">
         <sb-card
-            ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "camera"]'></fa-icon>Accessories</div>
+            ><div class="card-header">
+                <fa-icon class="mr-1" [icon]='["fas", "fan"]'></fa-icon>Accessories
+                <div class="float-right"><sb-dashboard-accessories-action [lightStatus]="lightStatus" [fanStatus]="fanStatus" [musicStatus]="musicStatus"></sb-dashboard-accessories-action></div>
+            </div>
             <div class="card-body">
                 <div>Light :<span *ngIf="lightStatus === true"> On</span><span *ngIf="lightStatus !== true"> Off</span></div>
                 <div>Music :<span *ngIf="musicStatus === true"> On</span><span *ngIf="musicStatus !== true"> Off</span></div>

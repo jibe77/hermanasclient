@@ -44,4 +44,6 @@
             .card-header
                 fa-icon.mr-1([icon]='["fas", "camera"]')
                 | Webcam
-            .card-body <img src="{{picturePath}}" />
+                .float-right
+                    sb-dashboard-webcam-action()
+            .card-body <img src="{{picturePath}}" alt="chicken coop picture" />

@@ -40,8 +40,11 @@
     </div>
     <div class="col-xl-6">
         <sb-card
-            ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "camera"]'></fa-icon>Webcam</div>
-            <div class="card-body"><img src="{{picturePath}}" /></div
+            ><div class="card-header">
+                <fa-icon class="mr-1" [icon]='["fas", "camera"]'></fa-icon>Webcam
+                <div class="float-right"><sb-dashboard-webcam-action></sb-dashboard-webcam-action></div>
+            </div>
+            <div class="card-body"><img src="{{picturePath}}" alt="chicken coop picture" /></div
         ></sb-card>
     </div>
 </div>

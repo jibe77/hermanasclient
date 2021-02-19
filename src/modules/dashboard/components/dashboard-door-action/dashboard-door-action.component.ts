@@ -39,12 +39,14 @@ export class DashboardDoorActionComponent implements OnInit, OnDestroy {
     public openDoor() {
         this._doorService.openDoor(this.user).subscribe(() => {
             this.dashboardWidgetsComponent.refreshDoorStatus();
+            this.dashboardWidgetsComponent.refreshPicture();
         });
     }
 
     public closeDoor() {
         this._doorService.closeDoor(this.user).subscribe(() => {
             this.dashboardWidgetsComponent.refreshDoorStatus();
+            this.dashboardWidgetsComponent.refreshPicture();
         });
     }
 }

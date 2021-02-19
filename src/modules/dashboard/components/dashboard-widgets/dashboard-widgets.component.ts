@@ -57,7 +57,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        this.refreshWebcam();
+        this.refreshPicture();
 
         this.userServiceSubscription = this._userService.user$.subscribe(() => {
             this.refreshNextEvent();
@@ -69,8 +69,14 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.refreshLightStatus();
     }
 
-    private refreshWebcam() {
-        this.picturePath = this._lightService.domainBase + '/camera/takePicture';
+    public refreshPicture() {
+        this.picturePath =
+            this._lightService.domainBase + '/camera/takePicture#' + new Date().getTime();
+        this.changeDetectorRef.detectChanges();
+    }
+
+    displayWebcam() {
+        this.picturePath = this._lightService.domainBase + '/camera/stream';
         this.changeDetectorRef.detectChanges();
     }
 
@@ -104,7 +110,6 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     }
     refreshDoorStatus() {
         this._doorService.getDoorStatus().subscribe((data: DoorStatus) => {
-            console.log('état de la porte :', data.status);
             this.doorStatus = data.status;
             this.changeDetectorRef.detectChanges();
         });

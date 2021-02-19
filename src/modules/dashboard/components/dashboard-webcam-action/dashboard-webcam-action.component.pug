@@ -1,0 +1,23 @@
+li.nav-item.dropdown.dropdown-user.no-caret(
+    ngbDropdown,
+    placement='bottom-right',
+    display='dynamic'
+)
+    a#userDropdown.nav-link(
+        ngbDropdownToggle,
+        data-cy='userMenu',
+        role='button',
+        aria-haspopup='true',
+        aria-expanded='false'
+    )
+        fa-icon([icon]='["fas", "ellipsis-v"]')
+    .dropdown-menu.dropdown-menu-right(
+        ngbDropdownMenu,
+        aria-labelledby='dropdownUser'
+    )
+        span
+            a.dropdown-item((click)="refreshPicture(true)", routerLink="/dashboard")
+                | Refresh picture
+            a.dropdown-item((click)="displayWebcam(true)", routerLink="/dashboard")
+                | Webcam
+

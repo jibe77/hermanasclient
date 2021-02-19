@@ -3,7 +3,7 @@ import { User } from '@modules/auth/models';
 import { throwError } from 'rxjs';
 
 export class AbstractService {
-    protected domainBase = 'http://poulailler57.ddns.net:5780';
+    public domainBase = 'http://poulailler57.ddns.net:5780';
 
     protected getHeaders() {
         return new HttpHeaders({

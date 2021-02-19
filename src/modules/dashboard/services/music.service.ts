@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {User} from '@modules/auth/models';
+import { User } from '@modules/auth/models';
 import { AbstractService } from '@modules/dashboard/services/abstract.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

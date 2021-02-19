@@ -38,6 +38,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     public lightStatus = false;
     public musicStatus = false;
     public fanStatus = false;
+    public picturePath;
     userServiceSubscription: Subscription = new Subscription();
     meteoServiceSubscription: Subscription = new Subscription();
     fanServiceSubscription: Subscription = new Subscription();
@@ -56,6 +57,8 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+        this.refreshWebcam();
+
         this.userServiceSubscription = this._userService.user$.subscribe(() => {
             this.refreshNextEvent();
             this.refreshDoorStatus();
@@ -64,6 +67,11 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.refreshFanStatus();
         this.refreshMusicStatus();
         this.refreshLightStatus();
+    }
+
+    private refreshWebcam() {
+        this.picturePath = this._lightService.domainBase + '/camera/takePicture';
+        this.changeDetectorRef.detectChanges();
     }
 
     ngOnDestroy(): void {

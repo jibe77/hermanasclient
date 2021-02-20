@@ -12,8 +12,4 @@ export class DashboardWebcamActionComponent {
     public refreshPicture() {
         this._dashboardWidgetsComponent.refreshPicture();
     }
-
-    public displayWebcam() {
-        this._dashboardWidgetsComponent.displayWebcam();
-    }
 }

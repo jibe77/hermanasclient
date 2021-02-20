@@ -37,6 +37,7 @@ export class DashboardDoorActionComponent implements OnInit, OnDestroy {
     }
 
     public openDoor() {
+        this.dashboardWidgetsComponent.displayWebcam();
         this._doorService.openDoor(this.user).subscribe(() => {
             this.dashboardWidgetsComponent.refreshDoorStatus();
             this.dashboardWidgetsComponent.refreshPicture();
@@ -44,6 +45,7 @@ export class DashboardDoorActionComponent implements OnInit, OnDestroy {
     }
 
     public closeDoor() {
+        this.dashboardWidgetsComponent.displayWebcam();
         this._doorService.closeDoor(this.user).subscribe(() => {
             this.dashboardWidgetsComponent.refreshDoorStatus();
             this.dashboardWidgetsComponent.refreshPicture();

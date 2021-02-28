@@ -17,7 +17,7 @@ export class WebsocketService extends AbstractService {
     public async initWebSocket() {
         return new Promise(resolve => {
             if (!this.stompClient) {
-                const ws = new SockJS(this.serverUrl, null, );
+                const ws = new SockJS(this.serverUrl );
                 this.stompClient = Stomp.over(ws);
                 this.stompClient.connect({}, resolve);
             } else {

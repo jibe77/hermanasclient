@@ -43,7 +43,7 @@ export class DashboardAccessoriesActionComponent implements OnInit, OnDestroy {
 
     public switchLight(param: boolean) {
         this._lightService.switch(param, this.user).subscribe(() => {
-            this.dashboardWidgetsComponent.refreshLightStatus();
+            this.dashboardWidgetsComponent.createSubscriptionToLightNotifications();
         });
     }
 

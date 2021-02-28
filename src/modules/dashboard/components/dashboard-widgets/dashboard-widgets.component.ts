@@ -17,6 +17,7 @@ import {
     MusicStatus,
     NextEvents,
     SchedulerService,
+    WebsocketService,
 } from '@modules/dashboard/services';
 import { DoorService, DoorStatus } from '@modules/dashboard/services/door.service';
 import { Subscription } from 'rxjs';
@@ -53,7 +54,8 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         private _meteoService: MeteoService,
         private _fanService: FanService,
         private _musiceService: MusicService,
-        private _lightService: LightService
+        private _lightService: LightService,
+        private _websocketService: WebsocketService
     ) {}
 
     ngOnInit() {
@@ -66,7 +68,24 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.refreshMeteoInfo();
         this.refreshFanStatus();
         this.refreshMusicStatus();
-        this.refreshLightStatus();
+        this.createSubscriptionToLightNotifications();
+
+        this._websocketService.initWebSocket().then(() => {
+            this._websocketService.subscribe('socket/progress', event => {
+                if (event.body.appliance === 'LIGHT') {
+                    this.refreshLightStatus(event.body.state === 'ON');
+                }
+            });
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.userServiceSubscription.unsubscribe();
+        this.meteoServiceSubscription.unsubscribe();
+        this.musicServiceSubscription.unsubscribe();
+        this.fanServiceSubscription.unsubscribe();
+        this.lightServiceSubscription.unsubscribe();
+        this._websocketService.unsubscribeToWebSocketEvent('socket/progress');
     }
 
     public refreshPicture() {
@@ -78,15 +97,6 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     displayWebcam() {
         this.picturePath = this._lightService.domainBase + '/camera/stream';
         this.changeDetectorRef.detectChanges();
-    }
-
-    ngOnDestroy(): void {
-        console.log('destroying ', this.nextClosingTime);
-        this.userServiceSubscription.unsubscribe();
-        this.meteoServiceSubscription.unsubscribe();
-        this.musicServiceSubscription.unsubscribe();
-        this.fanServiceSubscription.unsubscribe();
-        this.lightServiceSubscription.unsubscribe();
     }
 
     private refreshMeteoInfo() {
@@ -130,12 +140,16 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
             });
     }
 
-    refreshLightStatus() {
+    createSubscriptionToLightNotifications() {
         this.lightServiceSubscription = this._lightService
             .getStatus()
             .subscribe((data: LightStatus) => {
-                this.lightStatus = data.statusEnum === 'ON';
-                this.changeDetectorRef.detectChanges();
+                this.refreshLightStatus(data.statusEnum === 'ON');
             });
+    }
+
+    private refreshLightStatus(status: boolean) {
+        this.lightStatus = status;
+        this.changeDetectorRef.detectChanges();
     }
 }

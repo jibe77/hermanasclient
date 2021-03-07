@@ -27,7 +27,7 @@ li.nav-item.dropdown.dropdown-user.no-caret(
                 | Switch music on
         span([class.disabled]="user.authState !== 'signedin'")
             a.dropdown-item(*ngIf='musicStatus !== undefined && musicStatus === true',(click)="switchMusic(false)", routerLink="/dashboard", [class.disabled]="user.authState !== 'signedin'")
-                | Switch light off
+                | Switch music off
         span([class.disabled]="user.authState !== 'signedin'")
             a.dropdown-item(*ngIf='fanStatus !== undefined && fanStatus !== true',(click)="switchFan(true)", routerLink="/dashboard", [class.disabled]="user.authState !== 'signedin'")
                 | Switch fan on

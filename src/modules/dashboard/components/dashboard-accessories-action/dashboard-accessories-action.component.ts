@@ -49,13 +49,13 @@ export class DashboardAccessoriesActionComponent implements OnInit, OnDestroy {
 
     public switchMusic(param: boolean) {
         this._musicService.switch(param, this.user).subscribe(() => {
-            this.dashboardWidgetsComponent.refreshMusicStatus();
+            this.dashboardWidgetsComponent.createSubscriptionToMusicNotifications();
         });
     }
 
     public switchFan(param: boolean) {
         this._fanService.switch(param, this.user).subscribe(() => {
-            this.dashboardWidgetsComponent.refreshFanStatus();
+            this.dashboardWidgetsComponent.createSubscriptionToFanNotifications();
         });
     }
 }

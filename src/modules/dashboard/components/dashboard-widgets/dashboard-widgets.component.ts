@@ -59,21 +59,24 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        this.refreshPicture();
-
-        this.userServiceSubscription = this._userService.user$.subscribe(() => {
-            this.refreshNextEvent();
-            this.refreshDoorStatus();
-        });
-        this.refreshMeteoInfo();
-        this.refreshFanStatus();
-        this.refreshMusicStatus();
-        this.createSubscriptionToLightNotifications();
-
         this._websocketService.initWebSocket().then(() => {
+            this.createSubscriptionToLightNotifications();
+            this.createSubscriptionToFanNotifications();
+            this.createSubscriptionToMusicNotifications();
+            this.createSubscriptionToDoorNotifications();
+            this.refreshNextEvent();
+            this.refreshPicture();
+            this.refreshMeteoInfo();
+
             this._websocketService.subscribe('socket/progress', event => {
                 if (event.body.appliance === 'LIGHT') {
                     this.refreshLightStatus(event.body.state === 'ON');
+                } else if (event.body.appliance === 'FAN') {
+                    this.refreshFanStatus(event.body.state === 'ON');
+                } else if (event.body.appliance === 'DOOR') {
+                    this.refreshDoorStatus(event.body.state);
+                } else if (event.body.appliance === 'MUSIC') {
+                    this.refreshMusicStatus(event.body.state === 'ON');
                 }
             });
         });
@@ -118,26 +121,40 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
             this.changeDetectorRef.detectChanges();
         });
     }
-    refreshDoorStatus() {
+    createSubscriptionToDoorNotifications() {
         this._doorService.getDoorStatus().subscribe((data: DoorStatus) => {
-            this.doorStatus = data.status;
-            this.changeDetectorRef.detectChanges();
+            this.refreshDoorStatus(data.status);
         });
     }
-    refreshFanStatus() {
+
+    refreshDoorStatus(status: string) {
+        this.doorStatus = status;
+        this.changeDetectorRef.detectChanges();
+    }
+
+    createSubscriptionToFanNotifications() {
         this.fanServiceSubscription = this._fanService.getStatus().subscribe((data: FanStatus) => {
-            this.fanStatus = data.statusEnum === 'ON';
+            this.refreshFanStatus(data.statusEnum === 'ON');
             this.changeDetectorRef.detectChanges();
         });
     }
 
-    refreshMusicStatus() {
+    private refreshFanStatus(status: boolean) {
+        this.fanStatus = status;
+        this.changeDetectorRef.detectChanges();
+    }
+
+    createSubscriptionToMusicNotifications() {
         this.musicServiceSubscription = this._musiceService
             .getStatus()
             .subscribe((data: MusicStatus) => {
-                this.musicStatus = data.statusEnum === 'ON';
-                this.changeDetectorRef.detectChanges();
+                this.refreshMusicStatus(data.statusEnum === 'ON');
             });
+    }
+
+    private refreshMusicStatus(status: boolean) {
+        this.musicStatus = status;
+        this.changeDetectorRef.detectChanges();
     }
 
     createSubscriptionToLightNotifications() {

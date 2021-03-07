@@ -8,17 +8,21 @@
                     sb-dashboard-door-action([doorStatus]='doorStatus')
             .card-body
                 div(*ngIf='doorStatus !== undefined && doorStatus === "OPENED"') State : Opened
+                div(*ngIf='doorStatus !== undefined && doorStatus === "OPENING"') State : Opening ...
+                div(*ngIf='doorStatus !== undefined && doorStatus === "CLOSING"') State : Closing ...
                 div(*ngIf='doorStatus !== undefined && doorStatus === "CLOSED"') State : Closed
                 div(*ngIf='doorStatus === undefined || doorStatus === "UNDEFINED"') State : Undefined
                 div(*ngIf='doorStatus !== undefined && doorStatus === "SEEMS_OPENED"') State : Seems opened
                 div(*ngIf='doorStatus !== undefined && doorStatus === "SEEMS_CLOSED"') State : Seems closed
+                div(*ngIf='doorStatus !== undefined && doorStatus === "OPENED_INCORRECTLY"') State : Opened incorrectly
+                div(*ngIf='doorStatus !== undefined && doorStatus === "CLOSED_INCORRECTLY"') State : Closed incorrectly
                 div Next opening time : {{nextOpeningTime}}
                 div Next closing time : {{nextClosingTime}}
     .col-xl-6
         sb-card
             .card-header
                 fa-icon.mr-1([icon]='["fas", "sun"]')
-                | Meteo
+                | Weather
             .card-body
                 div Temp : {{temperature}}° ({{temperatureExternal}}° exterior)
                 div Humidity : {{humidity}}% ({{humidityExternal}}% exterior)

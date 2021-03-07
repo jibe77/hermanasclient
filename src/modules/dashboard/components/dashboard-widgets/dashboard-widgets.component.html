@@ -7,10 +7,14 @@
             </div>
             <div class="card-body">
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENED"'>State : Opened</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENING"'>State : Opening ...</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSING"'>State : Closing ...</div>
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSED"'>State : Closed</div>
                 <div *ngIf='doorStatus === undefined || doorStatus === "UNDEFINED"'>State : Undefined</div>
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "SEEMS_OPENED"'>State : Seems opened</div>
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "SEEMS_CLOSED"'>State : Seems closed</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENED_INCORRECTLY"'>State : Opened incorrectly</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSED_INCORRECTLY"'>State : Closed incorrectly</div>
                 <div>Next opening time : {{nextOpeningTime}}</div>
                 <div>Next closing time : {{nextClosingTime}}</div>
             </div></sb-card
@@ -18,7 +22,7 @@
     </div>
     <div class="col-xl-6">
         <sb-card
-            ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "sun"]'></fa-icon>Meteo</div>
+            ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "sun"]'></fa-icon>Weather</div>
             <div class="card-body">
                 <div>Temp : {{temperature}}° ({{temperatureExternal}}° exterior)</div>
                 <div>Humidity : {{humidity}}% ({{humidityExternal}}% exterior)</div>

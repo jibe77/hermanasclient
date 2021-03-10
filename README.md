@@ -18,8 +18,8 @@ starter cypress tests and more, please consider our professional offering:
 ## Quick Start
 
 ```bash
-git clone git@github.com:startbootstrap/sb-admin-angular.git
-cd sb-admin-angular
+git clone git@github.com:startbootstrap/hermanas-client.git
+cd hermanas-client
 npm install
 npm start
 ```

@@ -9,7 +9,7 @@ import { filter } from 'rxjs/operators';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-    title = 'sb-admin-angular';
+    title = 'hermanas-client';
 
     constructor(public router: Router, private titleService: Title, private ref: ChangeDetectorRef) {
         this.router.events

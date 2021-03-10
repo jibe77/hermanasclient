@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const pjPath = path.resolve(path.dirname(__filename), '../package.json');
 const versionPath = path.resolve(path.dirname(__filename), '../version');
-const distVersionPath = path.resolve(path.dirname(__filename), '../dist/sb-admin-angular/assets/version');
+const distVersionPath = path.resolve(path.dirname(__filename), '../dist/hermanas-client/assets/version');
 
 const pj = require(pjPath);
 

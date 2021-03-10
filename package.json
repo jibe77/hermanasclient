@@ -1,12 +1,12 @@
 {
   "name": "hermanas-client",
-  "version": "0.2",
+  "version": "0.2.0",
   "scripts": {
     "build": "npm run build:pug && npm run ng -- build --prod --build-optimizer=true --statsJson=true && npm run build:version",
     "build:debug": "npm run build:pug && npm run ng -- build --prod --source-map --build-optimizer=true --statsJson=true && npm run build:version",
     "build:pug": "node scripts/build-pug.js",
     "build:version": "node scripts/version.js",
-    "bundle-report": "webpack-bundle-analyzer dist/sb-admin-angular/stats-es2015.json",
+    "bundle-report": "webpack-bundle-analyzer dist/hermanas-client/stats-es2015.json",
     "docker:build": "node scripts/docker/docker-build.js",
     "docker:run": "node scripts/docker/docker-run.js",
     "e2e": "npm run ng -- e2e",
@@ -17,7 +17,7 @@
     "lint:fix": "npm run ng -- lint --fix",
     "lint": "npm run ng -- lint",
     "ng": "cross-env NODE_OPTIONS=--max_old_space_size=2048 ./node_modules/.bin/ng",
-    "serve": "./node_modules/.bin/static-server dist/sb-admin-angular",
+    "serve": "./node_modules/.bin/static-server dist/hermanas-client",
     "start": "node scripts/start.js",
     "test": "npm run ng -- test"
   },

@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "sb-admin-angular": {
+        "hermanas-client": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -17,7 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/sb-admin-angular",
+                        "outputPath": "dist/hermanas-client",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -64,18 +64,18 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "sb-admin-angular:build"
+                        "browserTarget": "hermanas-client:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "sb-admin-angular:build:production"
+                            "browserTarget": "hermanas-client:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "sb-admin-angular:build"
+                        "browserTarget": "hermanas-client:build"
                     }
                 },
                 "test": {
@@ -108,16 +108,16 @@
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
                         "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "sb-admin-angular:serve"
+                        "devServerTarget": "hermanas-client:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "sb-admin-angular:serve:production"
+                            "devServerTarget": "hermanas-client:serve:production"
                         }
                     }
                 }
             }
         }
     },
-    "defaultProject": "sb-admin-angular"
+    "defaultProject": "hermanas-client"
 }

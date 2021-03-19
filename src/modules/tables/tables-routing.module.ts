@@ -19,7 +19,7 @@ export const ROUTES: Routes = [
         canActivate: [],
         component: tablesContainers.TablesComponent,
         data: {
-            title: 'Tables - My Chicken Coop',
+            title: 'Tables - Hermanas',
             breadcrumbs: [
                 {
                     text: 'Dashboard',

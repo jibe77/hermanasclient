@@ -17,7 +17,7 @@ export const ROUTES: Routes = [
     {
         path: '',
         data: {
-            title: 'Dashboard - My Chicken Coop',
+            title: 'Dashboard - Hermanas',
             breadcrumbs: [
                 {
                     text: 'Dashboard',
@@ -31,7 +31,7 @@ export const ROUTES: Routes = [
     {
         path: 'static',
         data: {
-            title: 'Dashboard Static - My Chicken Coop',
+            title: 'Dashboard Static - Hermanas',
             breadcrumbs: [
                 {
                     text: 'Dashboard',
@@ -49,7 +49,7 @@ export const ROUTES: Routes = [
     {
         path: 'light',
         data: {
-            title: 'Dashboard Light - My Chicken Coop',
+            title: 'Dashboard Light - Hermanas',
             breadcrumbs: [
                 {
                     text: 'Dashboard',

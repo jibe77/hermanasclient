@@ -24,7 +24,7 @@ export const ROUTES: Routes = [
         canActivate: [],
         component: errorContainers.Error401Component,
         data: {
-            title: 'Error 401 - My Chicken Coop',
+            title: 'Error 401 - Hermanas',
         } as SBRouteData,
     },
     {
@@ -32,7 +32,7 @@ export const ROUTES: Routes = [
         canActivate: [],
         component: errorContainers.Error404Component,
         data: {
-            title: 'Error 404 - My Chicken Coop',
+            title: 'Error 404 - Hermanas',
         } as SBRouteData,
     },
     {
@@ -40,7 +40,7 @@ export const ROUTES: Routes = [
         canActivate: [],
         component: errorContainers.Error500Component,
         data: {
-            title: 'Error 500 - My Chicken Coop',
+            title: 'Error 500 - Hermanas',
         } as SBRouteData,
     },
     {

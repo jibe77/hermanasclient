@@ -19,7 +19,7 @@ export const ROUTES: Routes = [
         canActivate: [],
         component: chartsContainers.ChartsComponent,
         data: {
-            title: 'Charts - SB Admin Angular',
+            title: 'Charts - My Chicken Coop',
             breadcrumbs: [
                 {
                     text: 'Dashboard',

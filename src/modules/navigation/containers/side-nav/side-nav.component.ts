@@ -1,14 +1,11 @@
 import {
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     Input,
     OnDestroy,
     OnInit,
 } from '@angular/core';
-import {Auth} from '@aws-amplify/auth';
-import { AuthState, CognitoUserInterface, onAuthUIStateChange } from '@aws-amplify/ui-components';
-import {User} from '@modules/auth/models';
+import { CognitoUserInterface } from '@aws-amplify/ui-components';
 import { UserService } from '@modules/auth/services';
 import { SideNavItems, SideNavSection } from '@modules/navigation/models';
 import { NavigationService } from '@modules/navigation/services';

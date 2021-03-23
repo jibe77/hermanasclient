@@ -7,7 +7,7 @@ nav#sidenavAccordion.sb-sidenav.accordion([ngClass]='sidenavStyle')
                     sb-side-nav-item(
                         [sideNavItem]='sideNavItems[item]'
                     )
-    .sb-sidenav-footer
+    footer.md-padding(layout="row")
         .small Logged in as:
         span(*ngIf='userService.user$ | async as user')
             | {{user.login}}

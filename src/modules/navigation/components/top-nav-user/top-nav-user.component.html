@@ -9,6 +9,6 @@
             </div>
         </h6>
         <div class="dropdown-divider"></div>
-        <!--a.dropdown-item(routerLink='/dashboard')//| Settings--><!--a.dropdown-item(routerLink='/dashboard')//| Activity Log--><!--.dropdown-divider--><a class="dropdown-item" routerLink="/auth/login" *ngIf='user.authState !== "signedin"'>Authentication</a><amplify-authenticator hidden></amplify-authenticator><amplify-sign-out routerLink="/dashboard" *ngIf='user.authState === "signedin"'></amplify-sign-out>
+        <!--a.dropdown-item(routerLink='/dashboard')//| Settings--><!--a.dropdown-item(routerLink='/dashboard')//| Activity Log--><!--.dropdown-divider--><!--a.dropdown-item(routerLink='/auth/login', *ngIf='user.authState !== "signedin"')--><!--    | Authentication--><!--amplify-authenticator(hidden=true)--><!--amplify-sign-out(routerLink='/dashboard', *ngIf='user.authState === "signedin"')-->
     </div>
 </li>

@@ -4,7 +4,7 @@ export const sideNavSections: SideNavSection[] = [
     {
         text: 'CORE',
         items: ['dashboard'],
-    } /*
+    },
     {
         text: 'INTERFACE',
         items: ['layouts', 'pages'],
@@ -12,7 +12,7 @@ export const sideNavSections: SideNavSection[] = [
     {
         text: 'ADDONS',
         items: ['charts', 'tables'],
-    },*/,
+    },
 ];
 
 export const sideNavItems: SideNavItems = {

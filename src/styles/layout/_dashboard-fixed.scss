@@ -7,7 +7,7 @@
     #layoutSidenav_nav {
       @extend .fixed-top;
       width: $sidenav-base-width;
-      height: 100vh;
+      height: 100%;
       z-index: $zindex-sidenav;
       .sb-sidenav {
         padding-top: $topnav-base-height;

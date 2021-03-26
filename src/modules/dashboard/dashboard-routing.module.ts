@@ -17,7 +17,7 @@ export const ROUTES: Routes = [
     {
         path: '',
         data: {
-            title: 'Dashboard - Hermanas',
+            title: 'Hermanas',
             breadcrumbs: [
                 {
                     text: 'Dashboard',

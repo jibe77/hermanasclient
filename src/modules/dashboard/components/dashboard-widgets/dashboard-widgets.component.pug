@@ -7,25 +7,30 @@
                 .float-right
                     sb-dashboard-door-action([doorStatus]='doorStatus')
             .card-body
+                div.spinner-border(*ngIf='doorStatus === undefined', role='status')
+                    span.sr-only Loading...
                 div(*ngIf='doorStatus !== undefined && doorStatus === "OPENED"') State : Opened
                 div(*ngIf='doorStatus !== undefined && doorStatus === "OPENING"') State : Opening ...
                 div(*ngIf='doorStatus !== undefined && doorStatus === "CLOSING"') State : Closing ...
                 div(*ngIf='doorStatus !== undefined && doorStatus === "CLOSED"') State : Closed
-                div(*ngIf='doorStatus === undefined || doorStatus === "UNDEFINED"') State : Undefined
                 div(*ngIf='doorStatus !== undefined && doorStatus === "SEEMS_OPENED"') State : Seems opened
                 div(*ngIf='doorStatus !== undefined && doorStatus === "SEEMS_CLOSED"') State : Seems closed
                 div(*ngIf='doorStatus !== undefined && doorStatus === "OPENED_INCORRECTLY"') State : Opened incorrectly
                 div(*ngIf='doorStatus !== undefined && doorStatus === "CLOSED_INCORRECTLY"') State : Closed incorrectly
-                div Next opening time : {{nextOpeningTime}}
-                div Next closing time : {{nextClosingTime}}
+                div(*ngIf='doorStatus !== undefined && doorStatus !== "UNDEFINED"') Next opening time : {{nextOpeningTime}}
+                div(*ngIf='doorStatus !== undefined') Next closing time : {{nextClosingTime}}
     .col-xl-6
         sb-card
             .card-header
                 fa-icon.mr-1([icon]='["fas", "sun"]')
                 | Weather
+                .float-right
+                    sb-dashboard-weather-action()
             .card-body
-                div Temp : {{temperature}}° ({{temperatureExternal}}° exterior)
-                div Humidity : {{humidity}}% ({{humidityExternal}}% exterior)
+                div.spinner-border(*ngIf='temperature === undefined',role='status')
+                    span.sr-only Loading...
+                div(*ngIf='temperature !== undefined') Temp : {{temperature}}° ({{temperatureExternal}}° exterior)
+                div(*ngIf='humidity !== undefined') Humidity : {{humidity}}% ({{humidityExternal}}% exterior)
     .col-xl-6
         sb-card
             .card-header
@@ -34,13 +39,15 @@
                 .float-right
                     sb-dashboard-accessories-action([lightStatus]='lightStatus', [fanStatus]='fanStatus', [musicStatus]='musicStatus')
             .card-body
-                div Light :
+                div.spinner-border(*ngIf='musicStatus === undefined',role='status')
+                    span.sr-only Loading...
+                div(*ngIf='lightStatus !== undefined') Light :
                     span(*ngIf='lightStatus === true')  On
                     span(*ngIf='lightStatus !== true')  Off
-                div Music :
+                div(*ngIf='musicStatus !== undefined') Music :
                     span(*ngIf='musicStatus === true')  On
                     span(*ngIf='musicStatus !== true')  Off
-                div Fan :
+                div(*ngIf='fanStatus !== undefined') Fan :
                     span(*ngIf='fanStatus === true')  On
                     span(*ngIf='fanStatus !== true')  Off
     .col-xl-6
@@ -50,4 +57,10 @@
                 | Webcam
                 .float-right
                     sb-dashboard-webcam-action()
-            .card-body <img src="{{picturePath}}" alt="chicken coop picture" />
+            .card-body
+                img(*ngIf='pictureInitialised === true',[src]='picturePath', alt="chicken coop picture")
+                div.spinner-border(*ngIf='pictureInitialised === false',role='status')
+                    span.sr-only
+                        | Loading...
+                        img([src]='picturePath',(load)='pictureIsInitialised()', alt="chicken coop picture", height=0, width=0)
+

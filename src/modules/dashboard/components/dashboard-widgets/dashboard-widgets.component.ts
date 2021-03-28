@@ -36,9 +36,10 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     public temperatureExternal;
     public humidity;
     public humidityExternal;
-    public lightStatus = false;
-    public musicStatus = false;
-    public fanStatus = false;
+    public lightStatus = undefined;
+    public musicStatus = undefined;
+    public fanStatus = undefined;
+    public pictureInitialised = false;
     public picturePath;
     userServiceSubscription: Subscription = new Subscription();
     meteoServiceSubscription: Subscription = new Subscription();
@@ -92,6 +93,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     }
 
     public refreshPicture() {
+        this.pictureInitialised = false;
         this.picturePath =
             this._lightService.domainBase + '/camera/takePicture#' + new Date().getTime();
         this.changeDetectorRef.detectChanges();
@@ -102,7 +104,16 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.changeDetectorRef.detectChanges();
     }
 
-    private refreshMeteoInfo() {
+    public pictureIsInitialised() {
+        this.pictureInitialised = true;
+        this.changeDetectorRef.detectChanges();
+    }
+
+    public refreshMeteoInfo() {
+        this.temperature = undefined;
+        this.humidity = undefined;
+        this.temperatureExternal = undefined;
+        this.humidityExternal = undefined;
         this.meteoServiceSubscription = this._meteoService
             .getMeteoInfo()
             .subscribe((data: MeteoInfo) => {

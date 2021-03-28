@@ -6,17 +6,17 @@
                 <div class="float-right"><sb-dashboard-door-action [doorStatus]="doorStatus"></sb-dashboard-door-action></div>
             </div>
             <div class="card-body">
+                <div class="spinner-border" *ngIf="doorStatus === undefined" role="status"><span class="sr-only">Loading...</span></div>
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENED"'>State : Opened</div>
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENING"'>State : Opening ...</div>
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSING"'>State : Closing ...</div>
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSED"'>State : Closed</div>
-                <div *ngIf='doorStatus === undefined || doorStatus === "UNDEFINED"'>State : Undefined</div>
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "SEEMS_OPENED"'>State : Seems opened</div>
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "SEEMS_CLOSED"'>State : Seems closed</div>
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENED_INCORRECTLY"'>State : Opened incorrectly</div>
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSED_INCORRECTLY"'>State : Closed incorrectly</div>
-                <div>Next opening time : {{nextOpeningTime}}</div>
-                <div>Next closing time : {{nextClosingTime}}</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus !== "UNDEFINED"'>Next opening time : {{nextOpeningTime}}</div>
+                <div *ngIf="doorStatus !== undefined">Next closing time : {{nextClosingTime}}</div>
             </div></sb-card
         >
     </div>
@@ -24,8 +24,9 @@
         <sb-card
             ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "sun"]'></fa-icon>Weather</div>
             <div class="card-body">
-                <div>Temp : {{temperature}}° ({{temperatureExternal}}° exterior)</div>
-                <div>Humidity : {{humidity}}% ({{humidityExternal}}% exterior)</div>
+                <div class="spinner-border" *ngIf="temperature === undefined" role="status"><span class="sr-only">Loading...</span></div>
+                <div *ngIf="temperature !== undefined">Temp : {{temperature}}° ({{temperatureExternal}}° exterior)</div>
+                <div *ngIf="humidity !== undefined">Humidity : {{humidity}}% ({{humidityExternal}}% exterior)</div>
             </div></sb-card
         >
     </div>
@@ -36,9 +37,10 @@
                 <div class="float-right"><sb-dashboard-accessories-action [lightStatus]="lightStatus" [fanStatus]="fanStatus" [musicStatus]="musicStatus"></sb-dashboard-accessories-action></div>
             </div>
             <div class="card-body">
-                <div>Light :<span *ngIf="lightStatus === true"> On</span><span *ngIf="lightStatus !== true"> Off</span></div>
-                <div>Music :<span *ngIf="musicStatus === true"> On</span><span *ngIf="musicStatus !== true"> Off</span></div>
-                <div>Fan :<span *ngIf="fanStatus === true"> On</span><span *ngIf="fanStatus !== true"> Off</span></div>
+                <div class="spinner-border" *ngIf="musicStatus === undefined" role="status"><span class="sr-only">Loading...</span></div>
+                <div *ngIf="lightStatus !== undefined">Light :<span *ngIf="lightStatus === true"> On</span><span *ngIf="lightStatus !== true"> Off</span></div>
+                <div *ngIf="musicStatus !== undefined">Music :<span *ngIf="musicStatus === true"> On</span><span *ngIf="musicStatus !== true"> Off</span></div>
+                <div *ngIf="fanStatus !== undefined">Fan :<span *ngIf="fanStatus === true"> On</span><span *ngIf="fanStatus !== true"> Off</span></div>
             </div></sb-card
         >
     </div>
@@ -48,7 +50,11 @@
                 <fa-icon class="mr-1" [icon]='["fas", "camera"]'></fa-icon>Webcam
                 <div class="float-right"><sb-dashboard-webcam-action></sb-dashboard-webcam-action></div>
             </div>
-            <div class="card-body"><img src="{{picturePath}}" alt="chicken coop picture" /></div
+            <div class="card-body">
+                <img *ngIf="pictureInitialised === true" [src]="picturePath" alt="chicken coop picture" />
+                <div class="spinner-border" *ngIf="pictureInitialised === false" role="status">
+                    <span class="sr-only">Loading...<img [src]="picturePath" (load)="pictureIsInitialised()" alt="chicken coop picture" height="0" width="0" /></span>
+                </div></div
         ></sb-card>
     </div>
 </div>

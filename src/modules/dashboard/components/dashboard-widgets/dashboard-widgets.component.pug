@@ -24,6 +24,8 @@
             .card-header
                 fa-icon.mr-1([icon]='["fas", "sun"]')
                 | Weather
+                .float-right
+                    sb-dashboard-weather-action()
             .card-body
                 div.spinner-border(*ngIf='temperature === undefined',role='status')
                     span.sr-only Loading...

@@ -109,7 +109,11 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.changeDetectorRef.detectChanges();
     }
 
-    private refreshMeteoInfo() {
+    public refreshMeteoInfo() {
+        this.temperature = undefined;
+        this.humidity = undefined;
+        this.temperatureExternal = undefined;
+        this.humidityExternal = undefined;
         this.meteoServiceSubscription = this._meteoService
             .getMeteoInfo()
             .subscribe((data: MeteoInfo) => {

@@ -4,7 +4,8 @@ This project is a web application dedicated to monitor and take control remotely
 
 ## Architecture
 
-This application based on Angular 11 and is hosted on Amazon cloud.
+This application is based on Angular 11.
+Hosting is made on Amazon cloud AWS.
 It is communicating with your chicken coop using Rest services.
 
 How to fetch the project :

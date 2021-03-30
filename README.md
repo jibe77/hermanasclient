@@ -1,21 +1,13 @@
-# SB Admin Angular
+# Hermanas Client
 
-SB Admin Angular is a free and open-sourced Bootstrap themed Angular 9 starter project.
+This project is a web application dedicated to monitor and take control remotely of your chicken coop.
 
-It shares the same project structure and subset of tooling from our professional offering,
-[SB Admin Pro Angular](https://themes.startbootstrap.com/sb-admin-pro-angular/),
-so much of the [SB Admin Pro Angular Documentation](https://docs.startbootstrap.com/sb-admin-pro-angular/quickstart) is applicable.
+## Architecture
 
-In particular the documentation for [Structure](https://docs.startbootstrap.com/sb-admin-pro-angular/structure-root-level),
-and the documentation for [SBPro Schematics](https://docs.startbootstrap.com/sb-admin-pro-angular/development-general#sb-pro-schematics)
+This application based on Angular 11 and is hosted on Amazon cloud.
+It is communicating with your chicken coop using Rest services.
 
-SB Admin Angular comes with a base implementation of navigation and layouts.
-
-For professionally designed components (including an advanced SideNav), 100% code coverage,
-starter cypress tests and more, please consider our professional offering:
-[SB Admin Pro Angular](https://themes.startbootstrap.com/sb-admin-pro-angular/)
-
-## Quick Start
+How to fetch the project :
 
 ```bash
 git clone git@github.com:startbootstrap/hermanas-client.git
@@ -50,7 +42,7 @@ npm run e2e
 
 ## Production
 
-SB Admin Angular come with a production ready Dockerfile and build scripts.
+This application come with a production ready Dockerfile and build scripts.
 
 You can get Docker [here](https://www.docker.com/get-started)
 
@@ -92,9 +84,6 @@ If you receive memory issues adjust
 ```
 
 You can adjust 2048 to any number you need.
-
-For more information about why you may need `--max_old_space_size`
-see [this article](https://medium.com/@ashleydavis75/node-js-memory-limitations-30d3fe2664c0).
 
 Keep in mind that this project only uses node to build the angular application.
 There is no production dependency on node.

@@ -4,15 +4,15 @@ export const sideNavSections: SideNavSection[] = [
     {
         text: 'CORE',
         items: ['dashboard'],
-    } /*
-    {
-        text: 'INTERFACE',
-        items: ['layouts', 'pages'],
     },
     {
-        text: 'ADDONS',
-        items: ['charts', 'tables'],
-    },*/,
+        text: 'HISTORY',
+        items: ['weather', 'webcam', 'logs'],
+    },
+    {
+        text: 'SETTING',
+        items: ['energy', 'notification', 'system'],
+    },
 ];
 
 export const sideNavItems: SideNavItems = {
@@ -21,24 +21,26 @@ export const sideNavItems: SideNavItems = {
         text: 'Dashboard',
         link: '/dashboard',
     },
-    layouts: {
+    weather: {
         icon: 'columns',
-        text: 'Layouts',
-        submenu: [
+        text: 'Weather (TODO)',
+        link: '/dashboard',
+        /*submenu: [
             {
-                text: 'Static Navigation',
+                text: 'Temperature',
                 link: '/dashboard/static',
             },
             {
                 text: 'Light Sidenav',
                 link: '/dashboard/light',
             },
-        ],
+        ],*/
     },
-    pages: {
+    webcam: {
         icon: 'book-open',
-        text: 'Pages',
-        submenu: [
+        text: 'Webcam (TODO)',
+        link: '/dashboard',
+        /*submenu: [
             {
                 text: 'Authentication',
                 submenu: [
@@ -73,16 +75,26 @@ export const sideNavItems: SideNavItems = {
                     },
                 ],
             },
-        ],
+        ],*/
     },
-    charts: {
+    logs: {
         icon: 'chart-area',
-        text: 'Charts',
-        link: '/charts',
+        text: 'Logs (TODO)',
+        link: '/dashboard',
     },
-    tables: {
+    energy: {
         icon: 'table',
-        text: 'Tables',
-        link: '/tables',
+        text: 'Energy saving (TODO)',
+        link: '/dashboard',
+    },
+    notification: {
+        icon: 'table',
+        text: 'Notification (TODO)',
+        link: '/dashboard',
+    },
+    system: {
+        icon: 'table',
+        text: 'System (TODO)',
+        link: '/dashboard',
     },
 };

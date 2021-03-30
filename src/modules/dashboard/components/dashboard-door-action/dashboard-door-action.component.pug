@@ -5,6 +5,7 @@ li.nav-item.dropdown.dropdown-user.no-caret(
     display='dynamic'
 )
     a#userDropdown.nav-link(
+        *ngIf="user.authState === 'signedin'",
         ngbDropdownToggle,
         data-cy='userMenu',
         role='button',
@@ -16,9 +17,9 @@ li.nav-item.dropdown.dropdown-user.no-caret(
         ngbDropdownMenu,
         aria-labelledby='dropdownUser'
     )
-        span([class.disabled]="user.authState !== 'signedin'")
-            a.dropdown-item(*ngIf='doorStatus !== undefined && doorStatus !== "OPENED"',(click)="openDoor()", routerLink="/dashboard", [class.disabled]="user.authState !== 'signedin'")
+        span
+            a.dropdown-item(*ngIf='doorStatus !== undefined && doorStatus !== "OPENED"',(click)="openDoor()", routerLink="/dashboard")
                 | Open door
-        span([class.disabled]="user.authState !== 'signedin'")
-            a.dropdown-item(*ngIf='doorStatus !== undefined && doorStatus !== "CLOSED"',(click)="closeDoor()", routerLink="/dashboard", [class.disabled]="user.authState !== 'signedin'")
+        span
+            a.dropdown-item(*ngIf='doorStatus !== undefined && doorStatus !== "CLOSED"',(click)="closeDoor()", routerLink="/dashboard")
                 | Close door

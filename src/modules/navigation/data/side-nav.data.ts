@@ -11,7 +11,7 @@ export const sideNavSections: SideNavSection[] = [
     },
     {
         text: 'SETTING',
-        items: ['energy', 'notification', 'system'],
+        items: ['energy', 'notification', 'music', 'system'],
     },
 ];
 
@@ -22,7 +22,7 @@ export const sideNavItems: SideNavItems = {
         link: '/dashboard',
     },
     weather: {
-        icon: 'columns',
+        icon: 'sun',
         text: 'Weather (TODO)',
         link: '/dashboard',
         /*submenu: [
@@ -37,7 +37,7 @@ export const sideNavItems: SideNavItems = {
         ],*/
     },
     webcam: {
-        icon: 'book-open',
+        icon: 'camera',
         text: 'Webcam (TODO)',
         link: '/dashboard',
         /*submenu: [
@@ -78,22 +78,27 @@ export const sideNavItems: SideNavItems = {
         ],*/
     },
     logs: {
-        icon: 'chart-area',
+        icon: 'file-contract',
         text: 'Logs (TODO)',
         link: '/dashboard',
     },
     energy: {
-        icon: 'table',
+        icon: 'car-battery',
         text: 'Energy saving (TODO)',
         link: '/dashboard',
     },
     notification: {
-        icon: 'table',
+        icon: 'envelope-open-text',
         text: 'Notification (TODO)',
         link: '/dashboard',
     },
+    music: {
+        icon: 'music',
+        text: 'Music playlist (TODO)',
+        link: '/dashboard',
+    },
     system: {
-        icon: 'table',
+        icon: 'laptop',
         text: 'System (TODO)',
         link: '/dashboard',
     },

@@ -7,6 +7,7 @@ import {
     faBars,
     faBookOpen,
     faCamera,
+    faCarBattery,
     faChartArea,
     faChartBar,
     faChartPie,
@@ -16,13 +17,17 @@ import {
     faColumns,
     faDoorOpen,
     faEllipsisV,
+    faEnvelopeOpenText,
     faFan,
+    faFileContract,
+    faLaptop,
+    faMusic,
     faSearch,
     faSun,
+    faSync,
     faTable,
     faTachometerAlt,
     faUser,
-    faSync,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeSolidIcons = {
@@ -48,4 +53,9 @@ export const fontAwesomeSolidIcons = {
     faFan,
     faSun,
     faSync,
+    faEnvelopeOpenText,
+    faFileContract,
+    faCarBattery,
+    faMusic,
+    faLaptop,
 };

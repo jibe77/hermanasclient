@@ -1,6 +1,9 @@
 # Hermanas Client
 
 This project is a web application dedicated to monitor and take control remotely of your chicken coop.
+This automation solution is currently operating from my backyard. You may try it on http://www.hermanas.fr.
+
+The back-end application, running inside the chicken coop, is hosted in a separate GitHub project on https://github.com/jibe77/hermanas.
 
 ## Architecture
 

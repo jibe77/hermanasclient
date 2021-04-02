@@ -47,6 +47,7 @@
     "@types/sockjs-client": "^1.5.0",
     "aws-amplify": "^3.3.13",
     "chart.js": "2.9.4",
+    "flag-icon-css": "^3.5.0",
     "object-hash": "2.0.3",
     "rxjs": "6.6.3",
     "tslib": "2.0.3",

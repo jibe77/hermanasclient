@@ -1,0 +1,23 @@
+li.nav-item.dropdown.dropdown-user.no-caret(
+    ngbDropdown,
+    placement='bottom-right',
+    display='dynamic'
+)
+    a#userDropdown.nav-link.dropdown-toggle(
+        ngbDropdownToggle,
+        data-cy='userMenu',
+        role='button',
+        aria-haspopup='true',
+        aria-expanded='false'
+    )
+        span.flag-icon.flag-icon-gb.flag-icon-squared
+    .dropdown-menu.dropdown-menu-right(
+        ngbDropdownMenu,
+        aria-labelledby='dropdownUser'
+    )
+        a.dropdown-item(routerLink='/dashboard')
+            span.flag-icon.flag-icon-gb.flag-icon-squared
+            |  English
+        a.dropdown-item(routerLink='/dashboard')
+            span.flag-icon.flag-icon-fr.flag-icon-squared
+            |  French

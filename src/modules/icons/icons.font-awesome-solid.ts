@@ -20,7 +20,6 @@ import {
     faEnvelopeOpenText,
     faFan,
     faFileContract,
-    faFlagUsa,
     faLaptop,
     faMusic,
     faSearch,
@@ -59,5 +58,4 @@ export const fontAwesomeSolidIcons = {
     faCarBattery,
     faMusic,
     faLaptop,
-    faFlagUsa,
 };

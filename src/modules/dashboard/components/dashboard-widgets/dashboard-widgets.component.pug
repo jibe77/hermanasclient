@@ -3,7 +3,7 @@
         sb-card
             .card-header
                 fa-icon.mr-1([icon]='["fas", "door-open"]')
-                | Door
+                span(i18n="@@door") Door
                 .float-right
                     sb-dashboard-door-action([doorStatus]='doorStatus')
             .card-body

@@ -15,7 +15,7 @@ export class WebsocketService extends AbstractService {
     public mapEndpointSubscription: Map<string, any> = new Map();
 
     public async initWebSocket() {
-        return new Promise(resolve => {
+        return new Promise<void>(resolve => {
             if (!this.stompClient) {
                 const ws = new SockJS(this.serverUrl );
                 this.stompClient = Stomp.over(ws);

@@ -1,14 +1,5 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    OnDestroy,
-    OnInit,
-} from '@angular/core';
-import { AuthState, CognitoUserInterface, onAuthUIStateChange } from '@aws-amplify/ui-components';
-import { User } from '@modules/auth/models';
-import { UserService } from '@modules/auth/services';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { NavigationService } from '@modules/navigation/services';
-import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'sb-top-nav-lang',
@@ -16,6 +7,18 @@ import { Subscription } from 'rxjs';
     templateUrl: './top-nav-lang.component.html',
     styleUrls: ['top-nav-lang.component.scss'],
 })
-export class TopNavLangComponent {
+export class TopNavLangComponent implements OnInit {
+    siteLanguage = 'English';
+    siteLocale: string;
+    languageList = [
+        { code: 'en', label: 'English' },
+        { code: 'fr', label: 'Français' },
+    ];
+
     constructor(public navigationService: NavigationService) {}
+
+    ngOnInit(): void {
+        this.siteLocale = window.location.pathname.split('/')[1];
+        this.siteLanguage = this.languageList.find(f => f.code === this.siteLocale).label;
+    }
 }

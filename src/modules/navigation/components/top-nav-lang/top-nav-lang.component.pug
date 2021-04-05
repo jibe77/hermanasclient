@@ -10,14 +10,19 @@ li.nav-item.dropdown.dropdown-user.no-caret(
         aria-haspopup='true',
         aria-expanded='false'
     )
-        span.flag-icon.flag-icon-gb.flag-icon-squared
+        span(*ngIf="siteLanguage === 'English'").flag-icon.flag-icon-gb.flag-icon-squared
     .dropdown-menu.dropdown-menu-right(
         ngbDropdownMenu,
         aria-labelledby='dropdownUser'
     )
-        a.dropdown-item(routerLink='/dashboard')
+        span(*ngIf="siteLanguage === 'Français'").flag-icon.flag-icon-fr.flag-icon-squared
+    .dropdown-menu.dropdown-menu-right(
+        ngbDropdownMenu,
+        aria-labelledby='dropdownUser'
+    )
+        a.dropdown-item(href='/en/')
             span.flag-icon.flag-icon-gb.flag-icon-squared
             |  English
-        a.dropdown-item(routerLink='/dashboard')
+        a.dropdown-item(href='/fr/')
             span.flag-icon.flag-icon-fr.flag-icon-squared
             |  French

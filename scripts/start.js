@@ -3,9 +3,9 @@ const port = process.env.PORT || 4200;
 
 concurrently([
     { command: 'node scripts/pug-watch.js', name: 'PUG_WATCH', prefixColor: 'bgGreen.bold' },
-    { 
-        command: `npm run ng -- serve --port ${port} --open`,
-        name: 'NG_SERVE', 
+    {
+        command: `npm run ng -- serve --configuration=en --port ${port} --open`,
+        name: 'NG_SERVE',
         prefixColor: 'bgBlue.bold',
     }
 ], {
@@ -14,7 +14,7 @@ concurrently([
 }).then(success, failure);
 
 function success() {
-    console.log('Success');    
+    console.log('Success');
 }
 
 function failure() {

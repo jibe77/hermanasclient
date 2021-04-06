@@ -10,12 +10,8 @@ li.nav-item.dropdown.dropdown-user.no-caret(
         aria-haspopup='true',
         aria-expanded='false'
     )
-        span(*ngIf="siteLanguage === 'English'").flag-icon.flag-icon-gb.flag-icon-squared
-    .dropdown-menu.dropdown-menu-right(
-        ngbDropdownMenu,
-        aria-labelledby='dropdownUser'
-    )
-        span(*ngIf="siteLanguage === 'Français'").flag-icon.flag-icon-fr.flag-icon-squared
+        span(*ngIf="siteLanguage === 'English'" ).flag-icon.flag-icon-gb.flag-icon-squared
+        span(*ngIf="siteLanguage === 'Français'" ).flag-icon.flag-icon-fr.flag-icon-squared
     .dropdown-menu.dropdown-menu-right(
         ngbDropdownMenu,
         aria-labelledby='dropdownUser'
@@ -26,3 +22,4 @@ li.nav-item.dropdown.dropdown-user.no-caret(
         a.dropdown-item(href='/fr/')
             span.flag-icon.flag-icon-fr.flag-icon-squared
             |  French
+

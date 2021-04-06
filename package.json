@@ -2,10 +2,11 @@
   "name": "hermanas-client",
   "version": "0.2.0",
   "scripts": {
-    "build": "npm run build:pug && npm run ng -- build --prod --localize --build-optimizer=true --statsJson=true && npm run build:version",
-    "build:debug": "npm run build:pug && npm run ng -- build --prod --source-map --build-optimizer=true --statsJson=true && npm run build:version",
+    "build": "npm run build:pug && npm run ng -- build --prod --localize --build-optimizer=true --statsJson=true && npm run build:index && npm run build:version",
+    "build:debug": "npm run build:pug && npm run ng -- build --prod --source-map --build-optimizer=true --statsJson=true && npm run build:index && npm run build:version",
     "build:pug": "node scripts/build-pug.js",
     "build:version": "node scripts/version.js",
+    "build:index": "node scripts/index.js",
     "bundle-report": "webpack-bundle-analyzer dist/hermanas-client/stats-es2015.json",
     "docker:build": "node scripts/docker/docker-build.js",
     "docker:run": "node scripts/docker/docker-run.js",

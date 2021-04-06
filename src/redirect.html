@@ -59,13 +59,14 @@
             console.log('SetCookie: ' + name + ' set to "' + value + '"', 'Expires?', expire_time);
         };
 
-        if (myApp.ReadCookie('lang_redirect')) {
-            return;
+        var lnc = myApp.ReadCookie('lang_redirect');
+        if (lnc) {
+            ln = lnc;
+        } else {
+            myApp.SetCookie('lang_redirect', ln);
         }
 
-        myApp.SetCookie('lang_redirect', ln);
-        console.log('ln value is ' + ln + '.');
-        if (ln == 'fr') {
+        if (ln !== undefined && ln.startsWith('fr')) {
             window.location.href = 'fr/index.html';
         } else {
             window.location.href = 'en/index.html';

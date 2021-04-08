@@ -18,7 +18,7 @@
                 "locales": {
                     "fr-FR": {
                         "translation": "src/locale/messages.fr.xlf",
-                        "baseHref": "/fr/"
+                        "baseHref": "/fr-FR/"
                     }
                 }
             },
@@ -57,11 +57,11 @@
                             "buildOptimizer": true
                         },
                         "fr": {
-                            "outputPath": "dist/hermanas-client/fr/",
+                            "outputPath": "dist/hermanas-client/fr-FR/",
                             "localize": ["fr-FR"]
                         },
                         "en": {
-                            "outputPath": "dist/hermanas-client/en/",
+                            "outputPath": "dist/hermanas-client/en-US/",
                             "localize": ["en-US"]
                         }
                     }

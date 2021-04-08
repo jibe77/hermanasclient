@@ -223,22 +223,22 @@
     </trans-unit>
     <trans-unit id="stateSeemsOpened">
       <source xml:space="preserve">State : Seems opened</source>
-      <target xml:space="preserve" state="needs-review-translation">État : Semble être ouvert</target>
+      <target xml:space="preserve" state="needs-review-translation">État : Semble être ouverte</target>
       <context-group purpose="location"><context context-type="linenumber">14</context></context-group>
     </trans-unit>
     <trans-unit id="stateSeemsClosed">
       <source xml:space="preserve">State : Seems closed</source>
-      <target xml:space="preserve" state="needs-review-translation">État : Semble être fermé</target>
+      <target xml:space="preserve" state="needs-review-translation">État : Semble être fermée</target>
       <context-group purpose="location"><context context-type="linenumber">15</context></context-group>
     </trans-unit>
     <trans-unit id="stateOpenedIncorrectly">
       <source xml:space="preserve">State : Opened incorrectly</source>
-      <target xml:space="preserve" state="needs-review-translation">État : Ouvert incorrectement</target>
+      <target xml:space="preserve" state="needs-review-translation">État : Incorrectement ouverte</target>
       <context-group purpose="location"><context context-type="linenumber">16</context></context-group>
     </trans-unit>
     <trans-unit id="stateClosedIncorrectly">
       <source xml:space="preserve">State : Closed incorrectly</source>
-      <target xml:space="preserve" state="needs-review-translation">État : Fermé incorrectement</target>
+      <target xml:space="preserve" state="needs-review-translation">État : Incorrectement fermée</target>
       <context-group purpose="location"><context context-type="linenumber">17</context></context-group>
     </trans-unit>
     <trans-unit id="nextOpeningTime">
@@ -260,56 +260,72 @@
       <target xml:space="preserve" state="needs-review-translation">Météo</target>
       <context-group purpose="location"><context context-type="linenumber">26</context></context-group>
     </trans-unit>
-    <trans-unit id="weatherTemp">
-      <source xml:space="preserve">
-                    ° exterior)
-                </source>
-      <target xml:space="preserve" state="needs-review-translation">
-                    ° extérieur)
-                </target>
-      <context-group purpose="location"><context context-type="linenumber">31</context></context-group>
-    </trans-unit>
-    <trans-unit id="weatherHumidity">
-      <source xml:space="preserve">
-                    % exterior)
-                </source>
-      <target xml:space="preserve" state="needs-review-translation">
-                    % extérieur)
-                </target>
-      <context-group purpose="location"><context context-type="linenumber">32</context></context-group>
-    </trans-unit>
+      <trans-unit id="weatherTemp" datatype="html">
+          <source>Temp :<x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (<x id="INTERPOLATION_1"
+                                                                                  equiv-text="{{temperatureExternal}}"/>
+              ° exterior)
+          </source>
+          <target>Température :<x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (<x id="INTERPOLATION_1"
+                                                                                  equiv-text="{{temperatureExternal}}"/>
+              ° à l'extérieur)
+          </target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">
+                  src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html
+              </context>
+              <context context-type="linenumber">31</context>
+          </context-group>
+          <note priority="1" from="description">temperature: temperature in the chichen cooop</note>
+      </trans-unit>
+      <trans-unit id="weatherHumidity" datatype="html">
+          <source>Humidity :<x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (<x id="INTERPOLATION_1"
+                                                                                   equiv-text="{{humidityExternal}}"/>%
+              exterior)
+          </source>
+          <target>Humidité :<x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (<x id="INTERPOLATION_1"
+                                                                                   equiv-text="{{humidityExternal}}"/>%
+              à l'extérieur)
+          </target>
+          <context-group purpose="location">
+              <context context-type="sourcefile">
+                  src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html
+              </context>
+              <context context-type="linenumber">32</context>
+          </context-group>
+          <note priority="1" from="description">humidity: humidity in the chicken coop</note>
+      </trans-unit>
     <trans-unit id="accessories">
       <source xml:space="preserve">Accessories</source>
       <target xml:space="preserve" state="needs-review-translation">Accessoires</target>
       <context-group purpose="location"><context context-type="linenumber">39</context></context-group>
     </trans-unit>
     <trans-unit id="light">
-      <source xml:space="preserve">Light :</source>
-      <target xml:space="preserve" state="needs-review-translation">Lumière :</target>
+      <source xml:space="preserve">Light</source>
+      <target xml:space="preserve" state="needs-review-translation">Lumière</target>
       <context-group purpose="location"><context context-type="linenumber">44</context></context-group>
     </trans-unit>
     <trans-unit id="on">
       <source xml:space="preserve">On</source>
-      <target xml:space="preserve" state="needs-review-translation">Allumé</target>
+      <target xml:space="preserve" state="needs-review-translation">Allumé(e)</target>
       <context-group purpose="location"><context context-type="linenumber">44</context></context-group>
       <context-group purpose="location"><context context-type="linenumber">45</context></context-group>
       <context-group purpose="location"><context context-type="linenumber">46</context></context-group>
     </trans-unit>
     <trans-unit id="off">
       <source xml:space="preserve">Off</source>
-      <target xml:space="preserve" state="needs-review-translation">Éteind</target>
+      <target xml:space="preserve" state="needs-review-translation">Éteint(e)</target>
       <context-group purpose="location"><context context-type="linenumber">44</context></context-group>
       <context-group purpose="location"><context context-type="linenumber">45</context></context-group>
       <context-group purpose="location"><context context-type="linenumber">46</context></context-group>
     </trans-unit>
     <trans-unit id="music">
-      <source xml:space="preserve">Music :</source>
-      <target xml:space="preserve" state="needs-review-translation">Musique :</target>
+      <source xml:space="preserve">Music</source>
+      <target xml:space="preserve" state="needs-review-translation">Musique</target>
       <context-group purpose="location"><context context-type="linenumber">45</context></context-group>
     </trans-unit>
     <trans-unit id="fan">
-      <source xml:space="preserve">Fan :</source>
-      <target xml:space="preserve" state="needs-review-translation">Ventilateur :</target>
+      <source xml:space="preserve">Fan</source>
+      <target xml:space="preserve" state="needs-review-translation">Ventilateur</target>
       <context-group purpose="location"><context context-type="linenumber">46</context></context-group>
     </trans-unit>
     <trans-unit id="webcam">

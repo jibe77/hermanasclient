@@ -28,8 +28,8 @@
             </div>
             <div class="card-body">
                 <div class="spinner-border" *ngIf="temperature === undefined" role="status"><span class="sr-only" i18n="@@loading">Loading...</span></div>
-                <div *ngIf="temperature !== undefined" i18n="@@weatherTemp">Temp : {{temperature}}° ({{temperatureExternal}}° exterior)</div>
-                <div *ngIf="humidity !== undefined" i18n="@@weatherHumidity">Humidity : {{humidity}}% ({{humidityExternal}}% exterior)</div>
+                <div *ngIf="temperature !== undefined" i18n="temperature: temperature in the chichen cooop@@weatherTemp">Temp : {{temperature}}° ({{temperatureExternal}}° exterior)</div>
+                <div *ngIf="humidity !== undefined" i18n="humidity: humidity in the chicken coop@@weatherHumidity">Humidity : {{humidity}}% ({{humidityExternal}}% exterior)</div>
             </div></sb-card
         >
     </div>
@@ -41,9 +41,9 @@
             </div>
             <div class="card-body">
                 <div class="spinner-border" *ngIf="musicStatus === undefined" role="status"><span class="sr-only" i18n="@@loading">Loading...</span></div>
-                <div *ngIf="lightStatus !== undefined"><span i18n="@@light">Light :</span><span *ngIf="lightStatus === true" i18n="@@on"> On</span><span *ngIf="lightStatus !== true" i18n="@@off"> Off</span></div>
-                <div *ngIf="musicStatus !== undefined"><span i18n="@@music">Music :</span><span *ngIf="musicStatus === true" i18n="@@on"> On</span><span *ngIf="musicStatus !== true" i18n="@@off"> Off</span></div>
-                <div *ngIf="fanStatus !== undefined"><span i18n="@@fan">Fan :</span><span *ngIf="fanStatus === true" i18n="@@on"> On</span><span *ngIf="fanStatus !== true" i18n="@@off"> Off</span></div>
+                <div *ngIf="lightStatus !== undefined"><span i18n="@@light">Light</span>{{' '}}:{{' '}}<span *ngIf="lightStatus === true" i18n="@@on"> On</span><span *ngIf="lightStatus !== true" i18n="@@off"> Off</span></div>
+                <div *ngIf="musicStatus !== undefined"><span i18n="@@music">Music</span>{{' '}}:{{' '}}<span *ngIf="musicStatus === true" i18n="@@on"> On</span><span *ngIf="musicStatus !== true" i18n="@@off"> Off</span></div>
+                <div *ngIf="fanStatus !== undefined"><span i18n="@@fan">Fan</span>{{' '}}:{{' '}}<span *ngIf="fanStatus === true" i18n="@@on"> On</span><span *ngIf="fanStatus !== true" i18n="@@off"> Off</span></div>
             </div></sb-card
         >
     </div>

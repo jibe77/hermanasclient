@@ -20,7 +20,8 @@
     "ng": "cross-env NODE_OPTIONS=--max_old_space_size=2048 ./node_modules/.bin/ng",
     "serve": "./node_modules/.bin/static-server dist/hermanas-client",
     "start": "node scripts/start.js",
-    "test": "npm run ng -- test"
+    "test": "npm run ng -- test",
+    "i18n": "npm run build:pug && ng extract-i18n --output-path src/locale --out-file messages.xlf"
   },
   "private": true,
   "dependencies": {

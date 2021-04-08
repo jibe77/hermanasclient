@@ -29,8 +29,8 @@
             .card-body
                 div.spinner-border(*ngIf='temperature === undefined',role='status')
                     span(i18n='@@loading').sr-only Loading...
-                div(*ngIf='temperature !== undefined',i18n='@@weatherTemp') Temp : {{temperature}}° ({{temperatureExternal}}° exterior)
-                div(*ngIf='humidity !== undefined',i18n='@@weatherHumidity') Humidity : {{humidity}}% ({{humidityExternal}}% exterior)
+                div(*ngIf='temperature !== undefined',i18n='temperature: temperature in the chichen cooop@@weatherTemp') Temp : {{temperature}}° ({{temperatureExternal}}° exterior)
+                div(*ngIf='humidity !== undefined',i18n='humidity: humidity in the chicken coop@@weatherHumidity') Humidity : {{humidity}}% ({{humidityExternal}}% exterior)
     .col-xl-6
         sb-card
             .card-header
@@ -42,15 +42,18 @@
                 div.spinner-border(*ngIf='musicStatus === undefined',role='status')
                     span(i18n='@@loading').sr-only Loading...
                 div(*ngIf='lightStatus !== undefined')
-                    span(i18n='@@light') Light :
+                    span(i18n='@@light') Light
+                    | {{' '}}:{{' '}}
                     span(*ngIf='lightStatus === true',i18n='@@on')  On
                     span(*ngIf='lightStatus !== true',i18n='@@off')  Off
                 div(*ngIf='musicStatus !== undefined')
-                    span(i18n='@@music') Music :
+                    span(i18n='@@music') Music
+                    | {{' '}}:{{' '}}
                     span(*ngIf='musicStatus === true',i18n='@@on')  On
                     span(*ngIf='musicStatus !== true',i18n='@@off')  Off
                 div(*ngIf='fanStatus !== undefined')
-                    span(i18n='@@fan') Fan :
+                    span(i18n='@@fan') Fan
+                    | {{' '}}:{{' '}}
                     span(*ngIf='fanStatus === true',i18n='@@on')  On
                     span(*ngIf='fanStatus !== true',i18n='@@off')  Off
     .col-xl-6

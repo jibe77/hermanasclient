@@ -20,5 +20,6 @@ export class TopNavLangComponent implements OnInit {
     ngOnInit(): void {
         this.siteLocale = window.location.pathname.split('/')[1];
         this.siteLanguage = this.languageList.find(f => f.code === this.siteLocale).label;
+        console.log('init top nav lang with ', this.siteLocale, this.siteLanguage);
     }
 }

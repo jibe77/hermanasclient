@@ -5,9 +5,8 @@ const path = require('path');
 const pjPath = path.resolve(path.dirname(__filename), '../package.json');
 const versionPath = path.resolve(path.dirname(__filename), '../version');
 const distVersionPath = path.resolve(path.dirname(__filename), '../dist/hermanas-client/assets/version');
-const distVersionPathEn = path.resolve(path.dirname(__filename), '../dist/hermanas-client/en/assets/version');
 const distVersionPathEnUs = path.resolve(path.dirname(__filename), '../dist/hermanas-client/en-US/assets/version');
-const distVersionPathFr = path.resolve(path.dirname(__filename), '../dist/hermanas-client/fr/assets/version');
+const distVersionPathFr = path.resolve(path.dirname(__filename), '../dist/hermanas-client/fr-FR/assets/version');
 
 const pj = require(pjPath);
 
@@ -30,15 +29,6 @@ fs.access(distVersionPathFr, (f) => {
     } else {
         fs.writeFileSync(distVersionPathFr, pj.version);
         console.log(`### INFO: File found : ${distVersionPathFr}`);
-    }
-});
-
-fs.access(distVersionPathEn, (f) => {
-    if (f) {
-        console.log(`### INFO: File not found : ${distVersionPathEn}`);
-    } else {
-        fs.writeFileSync(distVersionPathEn, pj.version);
-        console.log(`### INFO: File found : ${distVersionPathEn}`);
     }
 });
 

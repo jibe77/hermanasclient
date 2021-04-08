@@ -11,15 +11,19 @@ export class TopNavLangComponent implements OnInit {
     siteLanguage = 'English';
     siteLocale: string;
     languageList = [
-        { code: 'en', label: 'English' },
-        { code: 'fr', label: 'Français' },
+        { code: 'en-US', label: 'English' },
+        { code: 'fr-FR', label: 'Français' },
     ];
 
     constructor(public navigationService: NavigationService) {}
 
     ngOnInit(): void {
         this.siteLocale = window.location.pathname.split('/')[1];
-        this.siteLanguage = this.languageList.find(f => f.code === this.siteLocale).label;
-        console.log('init top nav lang with ', this.siteLocale, this.siteLanguage);
+        const language = this.languageList.find(f => f.code === this.siteLocale);
+        if (language) {
+            this.siteLanguage = language.label;
+        } else {
+            this.siteLanguage = this.languageList[0].label;
+        }
     }
 }

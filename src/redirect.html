@@ -1,7 +1,6 @@
 <script>
     window.onload = function () {
 
-        var ln = window.navigator.language || navigator.browserLanguage;
         var myApp = {}
 
         /**
@@ -59,11 +58,19 @@
             console.log('SetCookie: ' + name + ' set to "' + value + '"', 'Expires?', expire_time);
         };
 
-        var lnc = myApp.ReadCookie('lang_redirect');
-        if (lnc) {
-            ln = lnc;
-        } else {
+        let ln;
+        const urlParams = new URLSearchParams(queryString);
+        if (urlParams.has('lang_redirect')) {
+            ln = urlParams.get('lang_redirect');
             myApp.SetCookie('lang_redirect', ln);
+        } else {
+            let lnc = myApp.ReadCookie('lang_redirect');
+            if (lnc) {
+                ln = lnc;
+            } else {
+                ln = window.navigator.language || navigator.browserLanguage;
+                myApp.SetCookie('lang_redirect', ln);
+            }
         }
 
         if (ln !== undefined && ln.startsWith('fr')) {

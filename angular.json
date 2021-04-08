@@ -16,13 +16,9 @@
             "i18n": {
                 "sourceLocale": "en-US",
                 "locales": {
-                    "fr": {
+                    "fr-FR": {
                         "translation": "src/locale/messages.fr.xlf",
                         "baseHref": "/fr/"
-                    },
-                    "en": {
-                        "translation": "src/locale/messages.en.xlf",
-                        "baseHref": "/en/"
                     }
                 }
             },
@@ -62,11 +58,11 @@
                         },
                         "fr": {
                             "outputPath": "dist/hermanas-client/fr/",
-                            "localize": ["fr"]
+                            "localize": ["fr-FR"]
                         },
                         "en": {
                             "outputPath": "dist/hermanas-client/en/",
-                            "localize": ["en"]
+                            "localize": ["en-US"]
                         }
                     }
                 },

@@ -4,7 +4,7 @@ const port = process.env.PORT || 4200;
 concurrently([
     { command: 'node scripts/pug-watch.js', name: 'PUG_WATCH', prefixColor: 'bgGreen.bold' },
     {
-        command: `npm run ng -- serve --configuration=en --port ${port} --open`,
+        command: `npm run ng -- serve --configuration=fr --port ${port} --open`,
         name: 'NG_SERVE',
         prefixColor: 'bgBlue.bold',
     }

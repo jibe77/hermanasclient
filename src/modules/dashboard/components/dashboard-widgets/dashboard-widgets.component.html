@@ -2,61 +2,61 @@
     <div class="col-xl-6">
         <sb-card
             ><div class="card-header">
-                <fa-icon class="mr-1" [icon]='["fas", "door-open"]'></fa-icon><span i18n="@@door">My_Door</span>
+                <fa-icon class="mr-1" [icon]='["fas", "door-open"]'></fa-icon><span i18n="@@door">Door</span>
                 <div class="float-right"><sb-dashboard-door-action [doorStatus]="doorStatus"></sb-dashboard-door-action></div>
             </div>
             <div class="card-body">
-                <div class="spinner-border" *ngIf="doorStatus === undefined" role="status"><span class="sr-only">Loading...</span></div>
-                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENED"'>State : Opened</div>
-                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENING"'>State : Opening ...</div>
-                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSING"'>State : Closing ...</div>
-                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSED"'>State : Closed</div>
-                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "SEEMS_OPENED"'>State : Seems opened</div>
-                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "SEEMS_CLOSED"'>State : Seems closed</div>
-                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENED_INCORRECTLY"'>State : Opened incorrectly</div>
-                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSED_INCORRECTLY"'>State : Closed incorrectly</div>
-                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus !== "UNDEFINED"'>Next opening time : {{nextOpeningTime}}</div>
-                <div *ngIf="doorStatus !== undefined">Next closing time : {{nextClosingTime}}</div>
+                <div class="spinner-border" *ngIf="doorStatus === undefined" role="status"><span class="sr-only" i18n="@@loading">Loading...</span></div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENED"' i18n="@@stateOpened">State : Opened</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENING"' i18n="@@stateOpening">State : Opening ...</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSING"' i18n="@@stateClosing">State : Closing ...</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSED"' i18n="@@stateClosed">State : Closed</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "SEEMS_OPENED"' i18n="@@stateSeemsOpened">State : Seems opened</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "SEEMS_CLOSED"' i18n="@@stateSeemsClosed">State : Seems closed</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENED_INCORRECTLY"' i18n="@@stateOpenedIncorrectly">State : Opened incorrectly</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSED_INCORRECTLY"' i18n="@@stateClosedIncorrectly">State : Closed incorrectly</div>
+                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus !== "UNDEFINED"' i18n="@@nextOpeningTime">Next opening time : {{nextOpeningTime}}</div>
+                <div *ngIf="doorStatus !== undefined" i18n="@@newClosingTime">Next closing time : {{nextClosingTime}}</div>
             </div></sb-card
         >
     </div>
     <div class="col-xl-6">
         <sb-card
             ><div class="card-header">
-                <fa-icon class="mr-1" [icon]='["fas", "sun"]'></fa-icon>Weather
+                <fa-icon class="mr-1" [icon]='["fas", "sun"]'></fa-icon><span i18n="@@weather">Weather</span>
                 <div class="float-right"><sb-dashboard-weather-action></sb-dashboard-weather-action></div>
             </div>
             <div class="card-body">
-                <div class="spinner-border" *ngIf="temperature === undefined" role="status"><span class="sr-only">Loading...</span></div>
-                <div *ngIf="temperature !== undefined">Temp : {{temperature}}° ({{temperatureExternal}}° exterior)</div>
-                <div *ngIf="humidity !== undefined">Humidity : {{humidity}}% ({{humidityExternal}}% exterior)</div>
+                <div class="spinner-border" *ngIf="temperature === undefined" role="status"><span class="sr-only" i18n="@@loading">Loading...</span></div>
+                <div *ngIf="temperature !== undefined" i18n="@@weatherTemp">Temp : {{temperature}}° ({{temperatureExternal}}° exterior)</div>
+                <div *ngIf="humidity !== undefined" i18n="@@weatherHumidity">Humidity : {{humidity}}% ({{humidityExternal}}% exterior)</div>
             </div></sb-card
         >
     </div>
     <div class="col-xl-6">
         <sb-card
             ><div class="card-header">
-                <fa-icon class="mr-1" [icon]='["fas", "fan"]'></fa-icon>Accessories
+                <fa-icon class="mr-1" [icon]='["fas", "fan"]'></fa-icon><span i18n="@@accessories">Accessories</span>
                 <div class="float-right"><sb-dashboard-accessories-action [lightStatus]="lightStatus" [fanStatus]="fanStatus" [musicStatus]="musicStatus"></sb-dashboard-accessories-action></div>
             </div>
             <div class="card-body">
-                <div class="spinner-border" *ngIf="musicStatus === undefined" role="status"><span class="sr-only">Loading...</span></div>
-                <div *ngIf="lightStatus !== undefined">Light :<span *ngIf="lightStatus === true"> On</span><span *ngIf="lightStatus !== true"> Off</span></div>
-                <div *ngIf="musicStatus !== undefined">Music :<span *ngIf="musicStatus === true"> On</span><span *ngIf="musicStatus !== true"> Off</span></div>
-                <div *ngIf="fanStatus !== undefined">Fan :<span *ngIf="fanStatus === true"> On</span><span *ngIf="fanStatus !== true"> Off</span></div>
+                <div class="spinner-border" *ngIf="musicStatus === undefined" role="status"><span class="sr-only" i18n="@@loading">Loading...</span></div>
+                <div *ngIf="lightStatus !== undefined"><span i18n="@@light">Light :</span><span *ngIf="lightStatus === true" i18n="@@on"> On</span><span *ngIf="lightStatus !== true" i18n="@@off"> Off</span></div>
+                <div *ngIf="musicStatus !== undefined"><span i18n="@@music">Music :</span><span *ngIf="musicStatus === true" i18n="@@on"> On</span><span *ngIf="musicStatus !== true" i18n="@@off"> Off</span></div>
+                <div *ngIf="fanStatus !== undefined"><span i18n="@@fan">Fan :</span><span *ngIf="fanStatus === true" i18n="@@on"> On</span><span *ngIf="fanStatus !== true" i18n="@@off"> Off</span></div>
             </div></sb-card
         >
     </div>
     <div class="col-xl-6">
         <sb-card
             ><div class="card-header">
-                <fa-icon class="mr-1" [icon]='["fas", "camera"]'></fa-icon>Webcam
+                <fa-icon class="mr-1" [icon]='["fas", "camera"]'></fa-icon><span i18n="@@webcam">Webcam</span>
                 <div class="float-right"><sb-dashboard-webcam-action></sb-dashboard-webcam-action></div>
             </div>
             <div class="card-body">
-                <img *ngIf="pictureInitialised === true" [src]="picturePath" alt="chicken coop picture" />
+                <img *ngIf="pictureInitialised === true" [src]="picturePath" alt="chicken coop picture" i18n-alt="@@chicken coop picture" />
                 <div class="spinner-border" *ngIf="pictureInitialised === false" role="status">
-                    <span class="sr-only">Loading...<img [src]="picturePath" (load)="pictureIsInitialised()" alt="chicken coop picture" height="0" width="0" /></span>
+                    <span class="sr-only"><span i18n="@@loading">Loading...</span><img [src]="picturePath" (load)="pictureIsInitialised()" alt="chicken coop picture" i18n-alt="@@chicken coop picture" height="0" width="0" /></span>
                 </div></div
         ></sb-card>
     </div>

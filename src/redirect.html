@@ -59,7 +59,7 @@
         };
 
         let ln;
-        const urlParams = new URLSearchParams(queryString);
+        const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.has('lang_redirect')) {
             ln = urlParams.get('lang_redirect');
             myApp.SetCookie('lang_redirect', ln);

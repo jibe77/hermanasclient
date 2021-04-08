@@ -395,13 +395,10 @@
             </trans-unit>
             <trans-unit id="weatherTemp" datatype="html">
                 <source>Temp :<x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (
-                    <x id="INTERPOLATION_1"
-                       equiv-text="{{temperatureExternal}}"/>
-                    ° exterior)
+                    <x id="INTERPOLATION_1" equiv-text="{{temperatureExternal}}"/>° exterior)
                 </source>
-                <target>Température :<x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (<x id="INTERPOLATION_1"
-                                                                                               equiv-text="{{temperatureExternal}}"/>
-                    ° à l'extérieur)
+                <target>Température :<x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (
+                    <x id="INTERPOLATION_1" equiv-text="{{temperatureExternal}}"/>° à l'extérieur)
                 </target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
@@ -412,15 +409,11 @@
                 <note priority="1" from="description">temperature: temperature in the chichen cooop</note>
             </trans-unit>
             <trans-unit id="weatherHumidity" datatype="html">
-                <source>Humidity :<x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (<x id="INTERPOLATION_1"
-                                                                                         equiv-text="{{humidityExternal}}"/>
-                    %
-                    exterior)
+                <source>Humidity :<x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (
+                    <x id="INTERPOLATION_1" equiv-text="{{humidityExternal}}"/>% exterior)
                 </source>
-                <target>Humidité :<x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (<x id="INTERPOLATION_1"
-                                                                                         equiv-text="{{humidityExternal}}"/>
-                    %
-                    à l'extérieur)
+                <target>Humidité :<x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (
+                    <x id="INTERPOLATION_1" equiv-text="{{humidityExternal}}"/>% à l'extérieur)
                 </target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">

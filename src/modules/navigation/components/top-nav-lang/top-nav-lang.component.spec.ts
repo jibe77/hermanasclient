@@ -2,14 +2,14 @@ import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ChartsAreaComponent } from './charts-area.component';
+import { TopNavLangComponent } from './top-nav-lang.component';
 
 @Component({
     template: `
-        <sb-charts-area
+        <sbpro-top-nav-user
             [someInput]="someInput"
             (someFunction)="someFunction($event)"
-        ></sb-charts-area>
+        ></sbpro-top-nav-user>
     `,
 })
 class TestHostComponent {
@@ -17,19 +17,19 @@ class TestHostComponent {
     // someFunction(event: Event) {}
 }
 
-describe('ChartsAreaComponent', () => {
+describe('TopNavUserComponent', () => {
     let fixture: ComponentFixture<TestHostComponent>;
     let hostComponent: TestHostComponent;
     let hostComponentDE: DebugElement;
     let hostComponentNE: Element;
 
-    let component: ChartsAreaComponent;
+    let component: TopNavLangComponent;
     let componentDE: DebugElement;
     let componentNE: Element;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestHostComponent, ChartsAreaComponent],
+            declarations: [TestHostComponent, TopNavLangComponent],
             imports: [NoopAnimationsModule],
             providers: [],
             schemas: [NO_ERRORS_SCHEMA],
@@ -48,6 +48,6 @@ describe('ChartsAreaComponent', () => {
     });
 
     it('should display the component', () => {
-        expect(hostComponentNE.querySelector('sb-charts-area')).toEqual(jasmine.anything());
+        expect(hostComponentNE.querySelector('sbpro-top-nav-user')).toEqual(jasmine.anything());
     });
 });

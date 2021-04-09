@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2"
+       xmlns:trolltech="urn:trolltech:names:ts:document:1.0">
+    <file original="node_modules/@ng-bootstrap/ng-bootstrap/alert/alert.d.ts" datatype="plaintext"
+          source-language="en-US" target-language="fr-FR">
+        <body>
+            <trans-unit id="ngb.alert.close">
+                <source xml:space="preserve">Close</source>
+                <target xml:space="preserve" state="needs-review-translation">Fermer</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">3</context>
+                </context-group>
+            </trans-unit>
+        </body>
+    </file>
+    <file original="node_modules/@ng-bootstrap/ng-bootstrap/carousel/carousel.d.ts" datatype="plaintext"
+          source-language="en-US" target-language="fr-FR">
+        <body>
+            <trans-unit id="ngb.carousel.slide-number">
+                <source xml:space="preserve">
+        </source>
+                <target xml:space="preserve" state="needs-review-translation">
+        </target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">10</context>
+                </context-group>
+                <note from="translator">Currently selected slide number read by screen reader</note>
+            </trans-unit>
+            <trans-unit id="ngb.carousel.previous">
+                <source xml:space="preserve">Previous</source>
+                <target xml:space="preserve" state="needs-review-translation">Précédent</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">18</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.carousel.next">
+                <source xml:space="preserve">Next</source>
+                <target xml:space="preserve" state="needs-review-translation">Suivant</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">22</context>
+                </context-group>
+            </trans-unit>
+        </body>
+    </file>
+    <file original="node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts" datatype="plaintext"
+          source-language="en-US" target-language="fr-FR">
+        <body>
+            <trans-unit id="ngb.datepicker.previous-month">
+                <source xml:space="preserve">Previous month</source>
+                <target xml:space="preserve" state="needs-review-translation">Mois précédent</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">4</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="linenumber">5</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.datepicker.next-month">
+                <source xml:space="preserve">Next month</source>
+                <target xml:space="preserve" state="needs-review-translation">Mois suivant</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">26</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="linenumber">27</context>
+                </context-group>
+            </trans-unit>
+        </body>
+    </file>
+    <file original="node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts"
+          datatype="plaintext" source-language="en-US" target-language="fr-FR">
+        <body>
+            <trans-unit id="ngb.datepicker.select-month">
+                <source xml:space="preserve">Select month</source>
+                <target xml:space="preserve" state="needs-review-translation">Mois suivant</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">5</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="linenumber">6</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.datepicker.select-year">
+                <source xml:space="preserve">Select year</source>
+                <target xml:space="preserve" state="needs-review-translation">Année suivante</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">13</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="linenumber">14</context>
+                </context-group>
+            </trans-unit>
+        </body>
+    </file>
+    <file original="node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts" datatype="plaintext"
+          source-language="en-US" target-language="fr-FR">
+        <body>
+            <trans-unit id="ngb.pagination.first">
+                <source xml:space="preserve">««</source>
+                <target xml:space="preserve" state="needs-review-translation">««</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">2</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.previous">
+                <source xml:space="preserve">«</source>
+                <target xml:space="preserve" state="needs-review-translation">«</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">3</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.next">
+                <source xml:space="preserve">»</source>
+                <target xml:space="preserve" state="needs-review-translation">»</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.last">
+                <source xml:space="preserve">»»</source>
+                <target xml:space="preserve" state="needs-review-translation">»»</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">5</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.first-aria">
+                <source xml:space="preserve">First</source>
+                <target xml:space="preserve" state="needs-review-translation">Premier</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">14</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.previous-aria">
+                <source xml:space="preserve">Previous</source>
+                <target xml:space="preserve" state="needs-review-translation">Précédent</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">24</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.next-aria">
+                <source xml:space="preserve">Next</source>
+                <target xml:space="preserve" state="needs-review-translation">Suivant</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">44</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.pagination.last-aria">
+                <source xml:space="preserve">Last</source>
+                <target xml:space="preserve" state="needs-review-translation">Précédent</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">53</context>
+                </context-group>
+            </trans-unit>
+        </body>
+    </file>
+    <file original="node_modules/@ng-bootstrap/ng-bootstrap/progressbar/progressbar.d.ts" datatype="plaintext"
+          source-language="en-US" target-language="fr-FR">
+        <body>
+            <trans-unit id="ngb.progressbar.value">
+                <source xml:space="preserve"></source>
+                <target xml:space="preserve"></target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">6</context>
+                </context-group>
+            </trans-unit>
+        </body>
+    </file>
+    <file original="node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts" datatype="plaintext"
+          source-language="en-US" target-language="fr-FR">
+        <body>
+            <trans-unit id="ngb.timepicker.increment-hours">
+                <source xml:space="preserve">Increment hours</source>
+                <target xml:space="preserve" state="needs-review-translation">incrémentation des heures</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">9</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.HH">
+                <source xml:space="preserve">HH</source>
+                <target xml:space="preserve" state="needs-review-translation">HH</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">13</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.hours">
+                <source xml:space="preserve">Hours</source>
+                <target xml:space="preserve" state="needs-review-translation">Heures</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">15</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.decrement-hours">
+                <source xml:space="preserve">Decrement hours</source>
+                <target xml:space="preserve" state="needs-review-translation">Décrémente les heures</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">23</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.increment-minutes">
+                <source xml:space="preserve">Increment minutes</source>
+                <target xml:space="preserve" state="needs-review-translation">Incrémente les heures</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">32</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.MM">
+                <source xml:space="preserve">MM</source>
+                <target xml:space="preserve" state="needs-review-translation">MM</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">35</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.minutes">
+                <source xml:space="preserve">Minutes</source>
+                <target xml:space="preserve" state="needs-review-translation">Minutes</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">37</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.decrement-minutes">
+                <source xml:space="preserve">Decrement minutes</source>
+                <target xml:space="preserve" state="needs-review-translation">Décrémente les minutes</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">45</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.increment-seconds">
+                <source xml:space="preserve">Increment seconds</source>
+                <target xml:space="preserve" state="needs-review-translation">Incrémente les secondes</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">54</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.SS">
+                <source xml:space="preserve">SS</source>
+                <target xml:space="preserve" state="needs-review-translation">SS</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">57</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.seconds">
+                <source xml:space="preserve">Seconds</source>
+                <target xml:space="preserve" state="needs-review-translation">Secondes</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">59</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.decrement-seconds">
+                <source xml:space="preserve">Decrement seconds</source>
+                <target xml:space="preserve" state="needs-review-translation">Décrémente les secondes</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">67</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.PM">
+                <source xml:space="preserve"></source>
+                <target xml:space="preserve"></target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">76</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="ngb.timepicker.AM">
+                <source xml:space="preserve"></source>
+                <target xml:space="preserve"></target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">77</context>
+                </context-group>
+            </trans-unit>
+        </body>
+    </file>
+    <file original="node_modules/@ng-bootstrap/ng-bootstrap/toast/toast.d.ts" datatype="plaintext"
+          source-language="en-US" target-language="fr-FR">
+        <body>
+            <trans-unit id="ngb.toast.close-aria">
+                <source xml:space="preserve">Close</source>
+                <target xml:space="preserve" state="needs-review-translation">Fermer</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">8</context>
+                </context-group>
+            </trans-unit>
+        </body>
+    </file>
+    <file original="src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html"
+          datatype="plaintext" source-language="en-US" target-language="fr-FR">
+        <body>
+            <trans-unit id="door">
+                <source xml:space="preserve">Door</source>
+                <target xml:space="preserve" state="needs-review-translation">Porte</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">5</context>
+                </context-group>
+            </trans-unit>
+        </body>
+    </file>
+    <file original="
+                        src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html
+                    " datatype="plaintext" source-language="en-US" target-language="fr-FR">
+        <body>
+            <trans-unit id="loading">
+                <source xml:space="preserve">Loading...</source>
+                <target xml:space="preserve" state="needs-review-translation">Chargement...</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">9</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="linenumber">30</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="linenumber">43</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="linenumber">59</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="stateOpened">
+                <source xml:space="preserve">State : Opened</source>
+                <target xml:space="preserve" state="needs-review-translation">État : Ouvert</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">10</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="stateOpening">
+                <source xml:space="preserve">State : Opening ...</source>
+                <target xml:space="preserve" state="needs-review-translation">État : Ouverture en cours ...</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">11</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="stateClosing">
+                <source xml:space="preserve">State : Closing ...</source>
+                <target xml:space="preserve" state="needs-review-translation">État : Fermeture en cours ...</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">12</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="stateClosed">
+                <source xml:space="preserve">State : Closed</source>
+                <target xml:space="preserve" state="needs-review-translation">État : Fermé</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">13</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="stateSeemsOpened">
+                <source xml:space="preserve">State : Seems opened</source>
+                <target xml:space="preserve" state="needs-review-translation">État : Semble être ouverte</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">14</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="stateSeemsClosed">
+                <source xml:space="preserve">State : Seems closed</source>
+                <target xml:space="preserve" state="needs-review-translation">État : Semble être fermée</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">15</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="stateOpenedIncorrectly">
+                <source xml:space="preserve">State : Opened incorrectly</source>
+                <target xml:space="preserve" state="needs-review-translation">État : Incorrectement ouverte</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">16</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="stateClosedIncorrectly">
+                <source xml:space="preserve">State : Closed incorrectly</source>
+                <target xml:space="preserve" state="needs-review-translation">État : Incorrectement fermée</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">17</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="nextOpeningTime">
+                <source xml:space="preserve">
+                </source>
+                <target xml:space="preserve" state="needs-review-translation">
+                </target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">18</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="newClosingTime">
+                <source xml:space="preserve">
+                </source>
+                <target xml:space="preserve" state="needs-review-translation">
+                </target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">19</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="weather">
+                <source xml:space="preserve">Weather</source>
+                <target xml:space="preserve" state="needs-review-translation">Météo</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">26</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="weatherTemp" datatype="html">
+                <source>Temp :<x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (
+                    <x id="INTERPOLATION_1" equiv-text="{{temperatureExternal}}"/>° exterior)
+                </source>
+                <target>Température : <x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (
+                    <x id="INTERPOLATION_1" equiv-text="{{temperatureExternal}}"/>° à l'extérieur)
+                </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html
+                    </context>
+                    <context context-type="linenumber">31</context>
+                </context-group>
+                <note priority="1" from="description">temperature: temperature in the chichen cooop</note>
+            </trans-unit>
+            <trans-unit id="weatherHumidity" datatype="html">
+                <source>Humidity :<x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (
+                    <x id="INTERPOLATION_1" equiv-text="{{humidityExternal}}"/>% exterior)
+                </source>
+                <target>Humidité : <x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (
+                    <x id="INTERPOLATION_1" equiv-text="{{humidityExternal}}"/>% à l'extérieur)
+                </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html
+                    </context>
+                    <context context-type="linenumber">32</context>
+                </context-group>
+                <note priority="1" from="description">humidity: humidity in the chicken coop</note>
+            </trans-unit>
+            <trans-unit id="accessories">
+                <source xml:space="preserve">Accessories</source>
+                <target xml:space="preserve" state="needs-review-translation">Accessoires</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">39</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="light">
+                <source xml:space="preserve">Light</source>
+                <target xml:space="preserve" state="needs-review-translation">Lumière</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">44</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="on">
+                <source xml:space="preserve">On</source>
+                <target xml:space="preserve" state="needs-review-translation">Allumé</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">44</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="linenumber">45</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="linenumber">46</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="off">
+                <source xml:space="preserve">Off</source>
+                <target xml:space="preserve" state="needs-review-translation">Éteint</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">44</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="linenumber">45</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="linenumber">46</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="music">
+                <source xml:space="preserve">Music</source>
+                <target xml:space="preserve" state="needs-review-translation">Musique</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">45</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="fan">
+                <source xml:space="preserve">Fan</source>
+                <target xml:space="preserve" state="needs-review-translation">Ventilateur</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">46</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="webcam">
+                <source xml:space="preserve">Webcam</source>
+                <target xml:space="preserve" state="needs-review-translation">Caméra</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">53</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="chicken coop picture">
+                <source xml:space="preserve">chicken coop picture</source>
+                <target xml:space="preserve" state="needs-review-translation">Photo dans le poulailler</target>
+                <context-group purpose="location">
+                    <context context-type="linenumber">57</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="linenumber">59</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="dashboard" datatype="html">
+                <source>Dashboard</source>
+                <target>Tableau de bord</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/modules/dashboard/containers/dashboard/dashboard.component.html
+                    </context>
+                    <context context-type="linenumber">1</context>
+                </context-group>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

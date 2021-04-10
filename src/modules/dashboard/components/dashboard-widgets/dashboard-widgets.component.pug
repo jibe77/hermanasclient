@@ -17,8 +17,8 @@
                 div(*ngIf='doorStatus !== undefined && doorStatus === "SEEMS_CLOSED"',i18n='@@stateSeemsClosed') State : Seems closed
                 div(*ngIf='doorStatus !== undefined && doorStatus === "OPENED_INCORRECTLY"',i18n='@@stateOpenedIncorrectly') State : Opened incorrectly
                 div(*ngIf='doorStatus !== undefined && doorStatus === "CLOSED_INCORRECTLY"',i18n='@@stateClosedIncorrectly') State : Closed incorrectly
-                div(*ngIf='doorStatus !== undefined && doorStatus !== "UNDEFINED"',i18n='@@nextOpeningTime') Next opening time : {{nextOpeningTime}}
-                div(*ngIf='doorStatus !== undefined',i18n='@@newClosingTime') Next closing time : {{nextClosingTime}}
+                div(*ngIf='nextOpeningTime !== undefined',i18n='@@nextOpeningTime') Next opening time : {{nextOpeningTime}}
+                div(*ngIf='nextClosingTime !== undefined',i18n='@@nextClosingTime') Next closing time : {{nextClosingTime}}
     .col-xl-6
         sb-card
             .card-header
@@ -64,9 +64,7 @@
                 .float-right
                     sb-dashboard-webcam-action()
             .card-body
-                img(*ngIf='pictureInitialised === true',[src]='picturePath', alt="chicken coop picture", i18n-alt='@@chicken coop picture')
+                img([src]='picturePath', (load)='pictureIsInitialised()' , alt="chicken coop picture", i18n-alt='@@chicken coop picture', class="{{pictureInitialised === false ? 'hidden' : ''}}")
                 div.spinner-border(*ngIf='pictureInitialised === false',role='status')
                     span.sr-only
                         span(i18n='@@loading') Loading...
-                        img([src]='picturePath',(load)='pictureIsInitialised()', alt="chicken coop picture", i18n-alt='@@chicken coop picture', height=0, width=0)
-

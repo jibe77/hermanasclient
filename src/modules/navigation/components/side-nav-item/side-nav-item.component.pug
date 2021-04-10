@@ -5,7 +5,7 @@ a.nav-link(
 )
     .sb-nav-link-icon(*ngIf='sideNavItem.icon')
         fa-icon([icon]='["fas", sideNavItem.icon]')
-    | {{sideNavItem.text}}
+    span {{sideNavItem.text}}
     .sb-sidenav-collapse-arrow
         fa-icon(
             *ngIf='sideNavItem.submenu',

@@ -18,7 +18,9 @@ li.nav-item.dropdown.dropdown-user.no-caret(
     )
         a.dropdown-item(href='/index.html?lang_redirect=en')
             span.flag-icon.flag-icon-gb.flag-icon-squared
-            |  English
+            span {{' '}}
+            span(i18n="@@english") English
         a.dropdown-item(href='/index.html?lang_redirect=fr')
             span.flag-icon.flag-icon-fr.flag-icon-squared
-            |  French
+            span {{' '}}
+            span(i18n="@@french") French

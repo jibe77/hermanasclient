@@ -15,8 +15,8 @@
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "SEEMS_CLOSED"' i18n="@@stateSeemsClosed">State : Seems closed</div>
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "OPENED_INCORRECTLY"' i18n="@@stateOpenedIncorrectly">State : Opened incorrectly</div>
                 <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus === "CLOSED_INCORRECTLY"' i18n="@@stateClosedIncorrectly">State : Closed incorrectly</div>
-                <div *ngIf='doorStatus !== undefined &amp;&amp; doorStatus !== "UNDEFINED"' i18n="@@nextOpeningTime">Next opening time : {{nextOpeningTime}}</div>
-                <div *ngIf="doorStatus !== undefined" i18n="@@newClosingTime">Next closing time : {{nextClosingTime}}</div>
+                <div *ngIf="nextOpeningTime !== undefined" i18n="@@nextOpeningTime">Next opening time : {{nextOpeningTime}}</div>
+                <div *ngIf="nextClosingTime !== undefined" i18n="@@nextClosingTime">Next closing time : {{nextClosingTime}}</div>
             </div></sb-card
         >
     </div>
@@ -54,10 +54,11 @@
                 <div class="float-right"><sb-dashboard-webcam-action></sb-dashboard-webcam-action></div>
             </div>
             <div class="card-body">
-                <img *ngIf="pictureInitialised === true" [src]="picturePath" alt="chicken coop picture" i18n-alt="@@chicken coop picture" />
+                <img class="{{pictureInitialised === false ? 'hidden' : ''}}" [src]="picturePath" (load)="pictureIsInitialised()" alt="chicken coop picture" i18n-alt="@@chicken coop picture" />
                 <div class="spinner-border" *ngIf="pictureInitialised === false" role="status">
-                    <span class="sr-only"><span i18n="@@loading">Loading...</span><img [src]="picturePath" (load)="pictureIsInitialised()" alt="chicken coop picture" i18n-alt="@@chicken coop picture" height="0" width="0" /></span>
-                </div></div
-        ></sb-card>
+                    <span class="sr-only"><span i18n="@@loading">Loading...</span></span>
+                </div>
+            </div></sb-card
+        >
     </div>
 </div>

@@ -20,10 +20,7 @@ li.nav-item.dropdown.dropdown-user.no-caret(
             .dropdown-user-details
                 .dropdown-user-details-name(*ngIf='user.authState === "signedin"') {{ user.login }}
                 .dropdown-user-details-email(*ngIf='user.authState === "signedin"') {{ user.email }}
-                .dropdown-user-details-name(*ngIf='user.authState !== "signedin"') Guest
-        .dropdown-divider
-        a.dropdown-item(routerLink='/dashboard')
-            | Language (TODO)
+                .dropdown-user-details-name(*ngIf='user.authState !== "signedin"', i18n="@@guest") Guest
         .dropdown-divider
         a.dropdown-item(routerLink='/auth/login', *ngIf='user.authState !== "signedin"')
             amplify-button([textContent]="'sign in'")

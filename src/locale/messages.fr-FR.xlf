@@ -515,6 +515,22 @@
                     <context context-type="linenumber">5</context>
                 </context-group>
             </trans-unit>
+            <trans-unit id="logged_in_as" datatype="html">
+                <source>Logged in as:</source>
+                <target>Connecté sous le compte:</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
+                    <context context-type="linenumber">11</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="guest" datatype="html">
+                <source>Guest</source>
+                <target>Invité</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/navigation/components/top-nav-user/top-nav-user.component.html</context>
+                    <context context-type="linenumber">8</context>
+                </context-group>
+            </trans-unit>
         </body>
     </file>
 </xliff>

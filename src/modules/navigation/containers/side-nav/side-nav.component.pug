@@ -8,6 +8,7 @@ nav#sidenavAccordion.sb-sidenav.accordion([ngClass]='sidenavStyle')
                         [sideNavItem]='sideNavItems[item]'
                     )
     .sb-sidenav-footer
-        .small Logged in as:
+        .small(i18n="@@logged_in_as") Logged in as:
         span(*ngIf='userService.user$ | async as user')
-            | {{user.login}}
+            span(*ngIf="user.login === 'guest'", i18n="@@guest") Guest
+            span(*ngIf="user.login !== 'guest'") {{user.login}}

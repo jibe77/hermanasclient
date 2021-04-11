@@ -23,13 +23,13 @@ export class TopNavUserComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         const dict = {
-            fr: {
+            'fr-FR': {
                 'Sign In': 'Connexion',
                 'Sign Up': 'Création d\'un compte',
                 'Sign Out': 'Déconnexion',
                 'Forgot Password?': 'Mot de passe perdu ?',
             },
-            en: {
+            'en-US': {
                 'Sign In': 'Sign in',
                 'Sign Up': 'Sign up',
                 'Sign Out': 'Sign out',

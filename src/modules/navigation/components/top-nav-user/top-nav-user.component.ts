@@ -29,6 +29,12 @@ export class TopNavUserComponent implements OnInit, OnDestroy {
                 'Sign Out': 'Déconnexion',
                 'Forgot Password?': 'Mot de passe perdu ?',
             },
+            en: {
+                'Sign In': 'Sign in',
+                'Sign Up': 'Sign up',
+                'Sign Out': 'Sign out',
+                'Forgot Password?': 'Forgot password ?',
+            },
         };
         I18n.putVocabularies(dict);
         this.loginText = I18n.get('Sign In');

@@ -22,7 +22,6 @@ export class TopNavUserComponent implements OnInit, OnDestroy {
     constructor(public navigationService: NavigationService, public userService: UserService) {}
 
     ngOnInit() {
-        I18n.setLanguage('fr');
         const dict = {
             fr: {
                 'Sign In': 'Connexion',

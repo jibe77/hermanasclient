@@ -531,6 +531,47 @@
                     <context context-type="linenumber">8</context>
                 </context-group>
             </trans-unit>
+
+            <trans-unit id="producedBy" datatype="html">
+                <source>Brought to you by</source>
+                <target>Développé par</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/navigation/containers/footer/footer.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="underGpl3" datatype="html">
+                <source>under GNU GPL version 3.</source>
+                <target>sous licence GNU GPL version 3.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/navigation/containers/footer/footer.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="sourceCode" datatype="html">
+                <source>Source code</source>
+                <target>Code source</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/navigation/containers/footer/footer.component.html</context>
+                    <context context-type="linenumber">5</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="frontEnd" datatype="html">
+                <source>Front-End</source>
+                <target>Front-End</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/navigation/containers/footer/footer.component.html</context>
+                    <context context-type="linenumber">5</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="backEnd" datatype="html">
+                <source>Back-End</source>
+                <target>Back-End</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/navigation/containers/footer/footer.component.html</context>
+                    <context context-type="linenumber">5</context>
+                </context-group>
+            </trans-unit>
         </body>
     </file>
 </xliff>

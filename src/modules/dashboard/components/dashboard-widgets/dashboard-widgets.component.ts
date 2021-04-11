@@ -40,7 +40,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     public musicStatus = undefined;
     public fanStatus = undefined;
     public pictureInitialised = false;
-    public picturePath;
+    public picturePath = 'favicon.ico';
     userServiceSubscription: Subscription = new Subscription();
     meteoServiceSubscription: Subscription = new Subscription();
     fanServiceSubscription: Subscription = new Subscription();
@@ -84,6 +84,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.pictureInitialised = false;
         this.userServiceSubscription.unsubscribe();
         this.meteoServiceSubscription.unsubscribe();
         this.musicServiceSubscription.unsubscribe();
@@ -105,8 +106,10 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     }
 
     public pictureIsInitialised() {
-        this.pictureInitialised = true;
-        this.changeDetectorRef.detectChanges();
+        if (this.picturePath !== 'favicon.ico') {
+            this.pictureInitialised = true;
+            this.changeDetectorRef.detectChanges();
+        }
     }
 
     public refreshMeteoInfo() {

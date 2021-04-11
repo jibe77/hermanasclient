@@ -54,11 +54,10 @@
                 <div class="float-right"><sb-dashboard-webcam-action></sb-dashboard-webcam-action></div>
             </div>
             <div class="card-body">
-                <img class="{{pictureInitialised === false ? 'hidden' : ''}}" [src]="picturePath" (load)="pictureIsInitialised()" alt="chicken coop picture" i18n-alt="@@chicken coop picture" />
                 <div class="spinner-border" *ngIf="pictureInitialised === false" role="status">
                     <span class="sr-only"><span i18n="@@loading">Loading...</span></span>
                 </div>
-            </div></sb-card
-        >
+                <img class="{{pictureInitialised === false ? 'hidden':'not_hidden'}}" [src]="picturePath" (load)="pictureIsInitialised()" alt="chicken coop picture" i18n-alt="@@chicken coop picture" /></div
+        ></sb-card>
     </div>
 </div>

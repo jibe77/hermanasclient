@@ -23,6 +23,6 @@ li.nav-item.dropdown.dropdown-user.no-caret(
                 .dropdown-user-details-name(*ngIf='user.authState !== "signedin"', i18n="@@guest") Guest
         .dropdown-divider
         a.dropdown-item(routerLink='/auth/login', *ngIf='user.authState !== "signedin"')
-            amplify-button([textContent]="'sign in'")
+            amplify-button([textContent]="loginText")
         amplify-authenticator(hidden=true)
-        amplify-sign-out(routerLink='/dashboard', *ngIf='user.authState === "signedin"')
+        amplify-sign-out(routerLink='/dashboard', *ngIf='user.authState === "signedin"', [textContent]="'logoutText'" )

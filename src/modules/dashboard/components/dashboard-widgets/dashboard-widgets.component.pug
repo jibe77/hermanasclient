@@ -64,7 +64,7 @@
                 .float-right
                     sb-dashboard-webcam-action()
             .card-body
-                img([src]='picturePath', (load)='pictureIsInitialised()' , alt="chicken coop picture", i18n-alt='@@chicken coop picture', class="{{pictureInitialised === false ? 'hidden' : ''}}")
                 div.spinner-border(*ngIf='pictureInitialised === false',role='status')
                     span.sr-only
                         span(i18n='@@loading') Loading...
+                img([src]='picturePath', (load)='pictureIsInitialised()' , alt="chicken coop picture", i18n-alt='@@chicken coop picture', class="{{pictureInitialised === false ? 'hidden':'not_hidden'}}")

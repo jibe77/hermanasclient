@@ -598,7 +598,7 @@
             </trans-unit>
             <trans-unit id="energySavingMenu" datatype="html">
                 <source>Energy saving</source>
-                <target>Économie (TODO)</target>
+                <target>Énergie (TODO)</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">21</context>

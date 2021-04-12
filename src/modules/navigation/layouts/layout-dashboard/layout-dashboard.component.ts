@@ -3,11 +3,9 @@ import {
     ChangeDetectorRef,
     Component,
     HostBinding,
-    Input,
     OnDestroy,
     OnInit,
 } from '@angular/core';
-import { sideNavItems, sideNavSections } from '@modules/navigation/data';
 import { NavigationService } from '@modules/navigation/services';
 import { Subscription } from 'rxjs';
 
@@ -20,8 +18,6 @@ import { Subscription } from 'rxjs';
 export class LayoutDashboardComponent implements OnInit, OnDestroy {
     @HostBinding('class.sb-sidenav-toggled') sideNavHidden = false;
     subscription: Subscription = new Subscription();
-    sideNavItems = sideNavItems;
-    sideNavSections = sideNavSections;
 
     constructor(
         public navigationService: NavigationService,

@@ -1,12 +1,60 @@
-nav#sidenavAccordion.sb-sidenav.accordion([ngClass]='sidenavStyle')
+nav#sidenavAccordion.sb-sidenav.accordion(class="sb-sidenav-dark")
     .sb-sidenav-menu
         .nav
-            ng-container(*ngFor='let section of sideNavSections')
-                .sb-sidenav-menu-heading(*ngIf='section.text') {{ section.text }}
-                ng-container(*ngFor='let item of section.items')
-                    sb-side-nav-item(
-                        [sideNavItem]='sideNavItems[item]'
+            ng-container
+                .sb-sidenav-menu-heading Menu
+                ng-container
+                    a.nav-link(
+                        routerLink="/dashboard",
                     )
+                        .sb-nav-link-icon
+                            fa-icon([icon]='["fas", "tachometer-alt"]')
+                        span(i18n="@@dashboard") Dashboard
+                    a.nav-link(
+                        routerLink="/dashboard",
+                    )
+                        .sb-nav-link-icon
+                            fa-icon([icon]='["fas", "sun"]')
+                        span(i18n="@@weatherMenu") Weather (TODO)
+                    a.nav-link(
+                        routerLink="/dashboard",
+                    )
+                        .sb-nav-link-icon
+                            fa-icon([icon]='["fas", "camera"]')
+                        span(i18n="@@webcamMenu") Webcam (TODO)
+                    a.nav-link(
+                        routerLink="/dashboard",
+                    )
+                        .sb-nav-link-icon
+                            fa-icon([icon]='["fas", "file-contract"]')
+                        span(i18n="@@logsMenu") Logs (TODO)
+                .sb-sidenav-menu-heading Config
+                ng-container
+                    a.nav-link(
+                        routerLink="/dashboard",
+                    )
+                        .sb-nav-link-icon
+                            fa-icon([icon]='["fas", "car-battery"]')
+                        span(i18n="@@energySavingMenu") Energy saving (TODO)
+                    a.nav-link(
+                        routerLink="/dashboard",
+                    )
+                        .sb-nav-link-icon
+                            fa-icon([icon]='["fas", "envelope-open-text"]')
+                        span(i18n="@@notificationMenu") Notification (TODO)
+                    a.nav-link(
+                        routerLink="/dashboard",
+                    )
+                        .sb-nav-link-icon
+                            fa-icon([icon]='["fas", "music"]')
+                        span(i18n="@@playlistMenu") Music playlist (TODO)
+                    a.nav-link(
+                        routerLink="/dashboard",
+                    )
+                        .sb-nav-link-icon
+                            fa-icon([icon]='["fas", "laptop"]')
+                        span(i18n="@@systemMenu") System (TODO)
+
     .sb-sidenav-footer
         .small(i18n="@@logged_in_as") Logged in as:
         span(*ngIf='userService.user$ | async as user')

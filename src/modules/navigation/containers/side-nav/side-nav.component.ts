@@ -12,7 +12,6 @@ import { Subscription } from 'rxjs';
     styleUrls: ['side-nav.component.scss'],
 })
 export class SideNavComponent implements OnInit, OnDestroy {
-    @Input() sidenavStyle!: string;
     @Input() sideNavItems!: SideNavItems;
     @Input() sideNavSections!: SideNavSection[];
     user: CognitoUserInterface | undefined;

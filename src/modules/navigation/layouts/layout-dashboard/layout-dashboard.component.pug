@@ -1,12 +1,8 @@
-span([ngClass]='{"sb-nav-fixed": !static}')
+span(class="sb-nav-fixed")
     sb-top-nav
     #layoutSidenav
         #layoutSidenav_nav
-            sb-side-nav(
-                [sidenavStyle]='sidenavStyle',
-                [sideNavItems]='sideNavItems',
-                [sideNavSections]='sideNavSections'
-            )
+            sb-side-nav
         #layoutSidenav_content
             main
                 .container-fluid

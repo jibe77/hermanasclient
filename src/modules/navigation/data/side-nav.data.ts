@@ -27,58 +27,12 @@ export const sideNavItems: SideNavItems = {
         text: 'Weather (TODO)',
         i18n: '@@door',
         link: '/dashboard',
-        /*submenu: [
-            {
-                text: 'Temperature',
-                link: '/dashboard/static',
-            },
-            {
-                text: 'Light Sidenav',
-                link: '/dashboard/light',
-            },
-        ],*/
     },
     webcam: {
         icon: 'camera',
         text: 'Webcam (TODO)',
         i18n: '@@door',
         link: '/dashboard',
-        /*submenu: [
-            {
-                text: 'Authentication',
-                submenu: [
-                    {
-                        text: 'Login',
-                        link: '/auth/login',
-                    },
-                    {
-                        text: 'Register',
-                        link: '/auth/register',
-                    },
-                    {
-                        text: 'Forgot Password',
-                        link: '/auth/forgot-password',
-                    },
-                ],
-            },
-            {
-                text: 'Error',
-                submenu: [
-                    {
-                        text: '401 Page',
-                        link: '/error/401',
-                    },
-                    {
-                        text: '404 Page',
-                        link: '/error/404',
-                    },
-                    {
-                        text: '500 Page',
-                        link: '/error/500',
-                    },
-                ],
-            },
-        ],*/
     },
     logs: {
         icon: 'file-contract',

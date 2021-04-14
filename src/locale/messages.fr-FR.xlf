@@ -628,6 +628,87 @@
                     <context context-type="linenumber">30</context>
                 </context-group>
             </trans-unit>
+            <trans-unit id="switchLightOn" datatype="html">
+                <source>Switch light on</source>
+                <target>Allumer la lumière</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-accessories-action/dashboard-accessories-action.component.html</context>
+                    <context context-type="linenumber">5</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="switchLightOff" datatype="html">
+                <source>Switch light off</source>
+                <target>Éteindre la lumière</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-accessories-action/dashboard-accessories-action.component.html</context>
+                    <context context-type="linenumber">7</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="switchMusicOn" datatype="html">
+                <source>Switch music on</source>
+                <target>Allumer la musique</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-accessories-action/dashboard-accessories-action.component.html</context>
+                    <context context-type="linenumber">9</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="switchMusicOff" datatype="html">
+                <source>Switch music off</source>
+                <target>Éteindre la musique</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-accessories-action/dashboard-accessories-action.component.html</context>
+                    <context context-type="linenumber">11</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="switchFanOn" datatype="html">
+                <source>Switch fan on</source>
+                <target>Allumer le ventilateur</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-accessories-action/dashboard-accessories-action.component.html</context>
+                    <context context-type="linenumber">13</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="switchFanOff" datatype="html">
+                <source>Switch fan off</source>
+                <target>Éteindre le ventilateur</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-accessories-action/dashboard-accessories-action.component.html</context>
+                    <context context-type="linenumber">15</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="openDoor" datatype="html">
+                <source>Open door</source>
+                <target>Ouvrir la porte</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-door-action/dashboard-door-action.component.html</context>
+                    <context context-type="linenumber">5</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="closeDoor" datatype="html">
+                <source>Close door</source>
+                <target>Fermer la porte</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-door-action/dashboard-door-action.component.html</context>
+                    <context context-type="linenumber">7</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="refreshMeteoInfo" datatype="html">
+                <source>refresh meteo info</source>
+                <target>rafraichir la météo</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-weather-action/dashboard-weather-action.component.html</context>
+                    <context context-type="linenumber">2</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="refreshPicture" datatype="html">
+                <source>refresh picture</source>
+                <target>rafraichir la photo</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-webcam-action/dashboard-webcam-action.component.html</context>
+                    <context context-type="linenumber">2</context>
+                </context-group>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>

@@ -1,28 +1,28 @@
 .row
-    //-.col-xl-3.col-md-6
+    //.col-xl-3.col-md-6
         sb-card-view-details(
             link='/dashboard',
             background='bg-primary'
         )
             .card-body The door is closed
 
-    //-.col-xl-3.col-md-6
+    //.col-xl-3.col-md-6
         sb-card-view-details(
             link='/dashboard',
             background='bg-warning'
         )
             .card-body Door hasn't closed correctly
 
-    //-.col-xl-3.col-md-6
+    //.col-xl-3.col-md-6
         sb-card-view-details(
             link='/dashboard',
             background='bg-success'
         )
             .card-body Door is now opened
 
-    //-.col-xl-3.col-md-6
+    .col-xl-3.col-md-6
         sb-card-view-details(
-            link='/dashboard',
+            link='retry',
             background='bg-danger'
         )
-            .card-body Door is not closed correctly
+            .card-body(i18n="@@connectionFailed") Connection with chicken coop failed

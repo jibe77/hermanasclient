@@ -708,7 +708,30 @@
                     <context context-type="linenumber">2</context>
                 </context-group>
             </trans-unit>
-
+            <trans-unit id="connectionFailed" datatype="html">
+                <source>Connection with chicken coop failed</source>
+                <target>La connexion avec le poulailler a échoué</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-cards/dashboard-cards.component.html</context>
+                    <context context-type="linenumber">19</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="retry" datatype="html">
+                <source>Retry</source>
+                <target>Essayer à nouveau</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/app-common/components/card-view-details/card-view-details.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="viewDetails" datatype="html">
+                <source>View Details</source>
+                <target>Voir les détails</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/app-common/components/card-view-details/card-view-details.component.html</context>
+                    <context context-type="linenumber">5</context>
+                </context-group>
+            </trans-unit>
         </body>
     </file>
 </xliff>

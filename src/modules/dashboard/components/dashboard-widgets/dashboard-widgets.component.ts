@@ -67,6 +67,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         public _dashboard: DashboardComponent
     ) {
         this._dashboard.retryMessageIsDisplayed = () => {
+            console.log('evaluation retry')
             return this.isConnectionError();
         };
         this._dashboard.retry = () => {
@@ -149,7 +150,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.humidity = data === undefined ? undefined : data.humidity;
         this.temperatureExternal = data === undefined ? undefined : data.externalTemperature;
         this.humidityExternal = data === undefined ? undefined : data.externalHumidity;
-        this.refresh(error);
+        this.refresh();
     }
 
     refreshNextEvent() {
@@ -173,7 +174,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     refreshDoorStatus(status?: string, error?: any) {
         this.doorStatusOnError = error !== undefined;
         this.doorStatus = status;
-        this.refresh(error);
+        this.refresh();
     }
 
     createSubscriptionToFanNotifications() {
@@ -222,7 +223,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     private refreshMusicStatus(status?: boolean, error?: any) {
         this.musicStatusOnError = error !== undefined;
         this.musicStatus = status;
-        this.refresh(error);
+        this.refresh();
     }
 
     createSubscriptionToLightNotifications() {
@@ -248,7 +249,8 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     private refreshLightStatus(status?: boolean, error?: any) {
         this.lightStatusOnError = error !== undefined;
         this.lightStatus = status;
-        this.refresh(error);
+        console.log('refresh light');
+        this.refresh();
     }
 
     public isConnectionError(): boolean {
@@ -280,9 +282,9 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this._dashboard.refreshCardComponent();
     }
 
-    private refresh(error: any) {
+    private refresh() {
         this.changeDetectorRef.detectChanges();
-        if (error) {
+        if (this.isConnectionError()) {
             this._dashboard.refreshCardComponent();
         }
     }

@@ -30,9 +30,7 @@ export class UserService {
 
             //  this.authState = AuthState.SignedIn;
             this.api.ListUserParams().then((event: ListUserParamsQuery) => {
-                console.log('paramètres:', event.items);
                 for (const item of event.items) {
-                    console.log('item:', item.key, item.value);
                     if (item.key === 'CHICKEN_COOP_LOGIN') {
                         nUser.backEndUser = item.value;
                     } else if (item.key === 'CHICKEN_COOP_PASSWORD') {

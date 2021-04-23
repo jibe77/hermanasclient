@@ -19,19 +19,19 @@ li.nav-item.dropdown.dropdown-user.no-caret(
     )
         span
             a.dropdown-item(*ngIf='lightStatus !== undefined && lightStatus !== true',(click)="switchLight(true)", routerLink="/dashboard")
-                | Switch light on
+                span(i18n="@@switchLightOn") Switch light on
         span
             a.dropdown-item(*ngIf='lightStatus !== undefined && lightStatus === true',(click)="switchLight(false)", routerLink="/dashboard")
-                | Switch light off
+                span(i18n="@@switchLightOff") Switch light off
         span
             a.dropdown-item(*ngIf='musicStatus !== undefined && musicStatus !== true',(click)="switchMusic(true)", routerLink="/dashboard")
-                | Switch music on
+                span(i18n="@@switchMusicOn") Switch music on
         span
             a.dropdown-item(*ngIf='musicStatus !== undefined && musicStatus === true',(click)="switchMusic(false)", routerLink="/dashboard")
-                | Switch music off
+                span(i18n="@@switchMusicOff") Switch music off
         span
             a.dropdown-item(*ngIf='fanStatus !== undefined && fanStatus !== true',(click)="switchFan(true)", routerLink="/dashboard")
-                | Switch fan on
+                span(i18n="@@switchFanOn") Switch fan on
         span
             a.dropdown-item(*ngIf='fanStatus !== undefined && fanStatus === true',(click)="switchFan(false)", routerLink="/dashboard")
-                | Switch fan off
+                span(i18n="@@switchFanOff") Switch fan off

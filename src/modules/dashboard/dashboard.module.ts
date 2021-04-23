@@ -6,6 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 /* Modules */
 import { AppCommonModule } from '@common/app-common.module';
+import { HttpErrorInterceptor } from '@modules/dashboard/interceptors';
 import { NavigationModule } from '@modules/navigation/navigation.module';
 import { ChartsModule } from '@modules/charts/charts.module';
 import { TablesModule } from '@modules/tables/tables.module';
@@ -21,7 +22,7 @@ import * as dashboardGuards from './guards';
 
 /* Services */
 import * as dashboardServices from './services';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 
@@ -38,7 +39,11 @@ import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
         AmplifyUIAngularModule,
         HttpClientModule,
     ],
-    providers: [...dashboardServices.services, ...dashboardGuards.guards],
+    providers: [
+        ...dashboardServices.services,
+        ...dashboardGuards.guards,
+        { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    ],
     declarations: [...dashboardContainers.containers, ...dashboardComponents.components],
     exports: [...dashboardContainers.containers, ...dashboardComponents.components],
 })

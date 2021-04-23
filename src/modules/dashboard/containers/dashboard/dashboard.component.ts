@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 
 @Component({
     selector: 'sb-dashboard',
@@ -6,7 +6,19 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     templateUrl: './dashboard.component.html',
     styleUrls: ['dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
+    public retryMessageIsDisplayed: () => boolean;
+    public retry: () => void;
+    public cardChangeDetector: ChangeDetectorRef;
+
     constructor() {}
-    ngOnInit() {}
+    public refreshCardComponent() {
+        if (this.cardChangeDetector) {
+            this.cardChangeDetector.detectChanges();
+        }
+    }
+
+    public setCardChangeDetectorRef(changeDetectorRef: ChangeDetectorRef) {
+        this.cardChangeDetector = changeDetectorRef;
+    }
 }

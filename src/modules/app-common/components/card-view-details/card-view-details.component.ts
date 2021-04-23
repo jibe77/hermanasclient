@@ -1,10 +1,5 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    Input,
-    OnInit,
-    SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { DashboardComponent } from '@modules/dashboard/containers';
 
 @Component({
     selector: 'sb-card-view-details',
@@ -19,7 +14,7 @@ export class CardViewDetailsComponent implements OnInit {
 
     customClasses: string[] = [];
 
-    constructor() {}
+    constructor(public _dashboardComponent: DashboardComponent) {}
     ngOnInit() {
         if (this.background) {
             this.customClasses.push(this.background);

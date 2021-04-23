@@ -19,7 +19,7 @@ li.nav-item.dropdown.dropdown-user.no-caret(
     )
         span
             a.dropdown-item(*ngIf='doorStatus !== undefined && doorStatus !== "OPENED"',(click)="openDoor()", routerLink="/dashboard")
-                | Open door
+                span(i18n="@@openDoor") Open door
         span
             a.dropdown-item(*ngIf='doorStatus !== undefined && doorStatus !== "CLOSED"',(click)="closeDoor()", routerLink="/dashboard")
-                | Close door
+                span(i18n="@@closeDoor") Close door

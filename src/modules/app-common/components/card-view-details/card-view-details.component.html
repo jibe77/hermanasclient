@@ -1,7 +1,8 @@
 <div class="card text-white mb-4" [ngClass]="background">
     <ng-content select=".card-body"></ng-content>
     <div class="card-footer d-flex align-items-center justify-content-between">
-        <a class="small text-white stretched-link" [routerLink]="link">View Details</a>
+        <a class="small text-white stretched-link" *ngIf='link === "retry"' (click)="this._dashboardComponent.retry()"><span i18n="@@retry">Retry</span></a
+        ><a class="small text-white stretched-link" *ngIf='link !== "retry"' [routerLink]="link"><span i18n="@@viewDetails">View Details</span></a>
         <div class="small text-white"><fa-icon [icon]='["fas", "angle-right"]'></fa-icon></div>
     </div>
 </div>

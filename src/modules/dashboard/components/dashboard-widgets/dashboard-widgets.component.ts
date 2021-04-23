@@ -6,6 +6,7 @@ import {
     OnInit,
 } from '@angular/core';
 import { UserService } from '@modules/auth/services';
+import { DashboardComponent } from '@modules/dashboard/containers';
 import {
     FanService,
     FanStatus,
@@ -36,11 +37,17 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     public temperatureExternal;
     public humidity;
     public humidityExternal;
+    public meteoOnError = false;
     public lightStatus = undefined;
+    public lightStatusOnError = false;
     public musicStatus = undefined;
+    public musicStatusOnError = false;
     public fanStatus = undefined;
+    public fanStatusOnError = false;
+    public doorStatusOnError = false;
     public pictureInitialised = false;
     public picturePath = 'favicon.ico';
+
     userServiceSubscription: Subscription = new Subscription();
     meteoServiceSubscription: Subscription = new Subscription();
     fanServiceSubscription: Subscription = new Subscription();
@@ -56,19 +63,28 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         private _fanService: FanService,
         private _musiceService: MusicService,
         private _lightService: LightService,
-        private _websocketService: WebsocketService
-    ) {}
+        private _websocketService: WebsocketService,
+        public _dashboard: DashboardComponent
+    ) {
+        this._dashboard.retryMessageIsDisplayed = () => {
+            console.log('evaluation retry')
+            return this.isConnectionError();
+        };
+        this._dashboard.retry = () => {
+            this.refreshInfoOnError();
+        };
+    }
 
     ngOnInit() {
-        this._websocketService.initWebSocket().then(() => {
-            this.createSubscriptionToLightNotifications();
-            this.createSubscriptionToFanNotifications();
-            this.createSubscriptionToMusicNotifications();
-            this.createSubscriptionToDoorNotifications();
-            this.refreshNextEvent();
-            this.refreshPicture();
-            this.refreshMeteoInfo();
+        this.createSubscriptionToLightNotifications();
+        this.createSubscriptionToFanNotifications();
+        this.createSubscriptionToMusicNotifications();
+        this.createSubscriptionToDoorNotifications();
+        this.refreshNextEvent();
+        this.refreshPicture();
+        this.createSubscriptionToMeteoInfo();
 
+        this._websocketService.initWebSocket().then(() => {
             this._websocketService.subscribe('socket/progress', event => {
                 if (event.body.appliance === 'LIGHT') {
                     this.refreshLightStatus(event.body.state === 'ON');
@@ -100,7 +116,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.changeDetectorRef.detectChanges();
     }
 
-    displayWebcam() {
+    public displayWebcam() {
         this.picturePath = this._lightService.domainBase + '/camera/stream';
         this.changeDetectorRef.detectChanges();
     }
@@ -112,20 +128,29 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         }
     }
 
-    public refreshMeteoInfo() {
-        this.temperature = undefined;
-        this.humidity = undefined;
-        this.temperatureExternal = undefined;
-        this.humidityExternal = undefined;
+    public createSubscriptionToMeteoInfo() {
+        if (this.meteoServiceSubscription !== undefined) {
+            this.meteoServiceSubscription.unsubscribe();
+            this.refreshMeteoInfo();
+        }
         this.meteoServiceSubscription = this._meteoService
             .getMeteoInfo()
             .subscribe((data: MeteoInfo) => {
-                this.temperature = data.temperature;
-                this.humidity = data.humidity;
-                this.temperatureExternal = data.externalTemperature;
-                this.humidityExternal = data.externalHumidity;
-                this.changeDetectorRef.detectChanges();
-            });
+                this.refreshMeteoInfo(data);
+            },
+            error => {
+                this.refreshMeteoInfo(error);
+            }
+        );
+    }
+
+    public refreshMeteoInfo(data?: MeteoInfo, error?: any) {
+        this.meteoOnError = error !== undefined;
+        this.temperature = data === undefined ? undefined : data.temperature;
+        this.humidity = data === undefined ? undefined : data.humidity;
+        this.temperatureExternal = data === undefined ? undefined : data.externalTemperature;
+        this.humidityExternal = data === undefined ? undefined : data.externalHumidity;
+        this.refresh();
     }
 
     refreshNextEvent() {
@@ -136,51 +161,131 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         });
     }
     createSubscriptionToDoorNotifications() {
-        this._doorService.getDoorStatus().subscribe((data: DoorStatus) => {
-            this.refreshDoorStatus(data.status);
-        });
+        this._doorService.getDoorStatus().subscribe(
+            (data: DoorStatus) => {
+                this.refreshDoorStatus(data.status);
+            },
+            error => {
+                this.refreshDoorStatus(error);
+            }
+        );
     }
 
-    refreshDoorStatus(status: string) {
+    refreshDoorStatus(status?: string, error?: any) {
+        this.doorStatusOnError = error !== undefined;
         this.doorStatus = status;
-        this.changeDetectorRef.detectChanges();
+        this.refresh();
     }
 
     createSubscriptionToFanNotifications() {
-        this.fanServiceSubscription = this._fanService.getStatus().subscribe((data: FanStatus) => {
-            this.refreshFanStatus(data.statusEnum === 'ON');
+        if (this.fanServiceSubscription !== undefined) {
+            this.fanServiceSubscription.unsubscribe();
+            this.fanStatusOnError = false;
+            this.fanStatus = undefined;
             this.changeDetectorRef.detectChanges();
-        });
+            this._dashboard.refreshCardComponent();
+        }
+        this.fanServiceSubscription = this._fanService.getStatus().subscribe(
+            (data: FanStatus) => {
+                this.refreshFanStatus(data.statusEnum === 'ON');
+            },
+            (error: any) => {
+                this.refreshFanStatus(error);
+            }
+        );
     }
 
-    private refreshFanStatus(status: boolean) {
+    private refreshFanStatus(status?: boolean, error?: any) {
+        this.fanStatusOnError = error !== undefined;
         this.fanStatus = status;
         this.changeDetectorRef.detectChanges();
     }
 
     createSubscriptionToMusicNotifications() {
+        if (this.musicServiceSubscription !== undefined) {
+            this.musicServiceSubscription.unsubscribe();
+            this.musicStatusOnError = false;
+            this.musicStatus = undefined;
+            this.changeDetectorRef.detectChanges();
+            this._dashboard.refreshCardComponent();
+        }
         this.musicServiceSubscription = this._musiceService
             .getStatus()
             .subscribe((data: MusicStatus) => {
                 this.refreshMusicStatus(data.statusEnum === 'ON');
-            });
+            },
+            (error: any) => {
+                this.refreshMusicStatus(error);
+            }
+        );
     }
 
-    private refreshMusicStatus(status: boolean) {
+    private refreshMusicStatus(status?: boolean, error?: any) {
+        this.musicStatusOnError = error !== undefined;
         this.musicStatus = status;
-        this.changeDetectorRef.detectChanges();
+        this.refresh();
     }
 
     createSubscriptionToLightNotifications() {
+        if (this.lightServiceSubscription !== undefined) {
+            this.lightServiceSubscription.unsubscribe();
+            this.lightStatusOnError = false;
+            this.lightStatus = undefined;
+            this.changeDetectorRef.detectChanges();
+            this._dashboard.refreshCardComponent();
+        }
         this.lightServiceSubscription = this._lightService
             .getStatus()
-            .subscribe((data: LightStatus) => {
+            .subscribe(
+            (data: LightStatus) => {
                 this.refreshLightStatus(data.statusEnum === 'ON');
-            });
+            },
+            (error: any) => {
+                this.refreshLightStatus(error);
+            }
+        );
     }
 
-    private refreshLightStatus(status: boolean) {
+    private refreshLightStatus(status?: boolean, error?: any) {
+        this.lightStatusOnError = error !== undefined;
         this.lightStatus = status;
+        console.log('refresh light');
+        this.refresh();
+    }
+
+    public isConnectionError(): boolean {
+        return (
+            this.lightStatusOnError ||
+            this.fanStatusOnError ||
+            this.musicStatusOnError ||
+            this.doorStatusOnError
+        );
+    }
+
+    public refreshInfoOnError() {
+        if (this.lightStatusOnError) {
+            this.createSubscriptionToLightNotifications();
+        }
+        if (this.fanStatusOnError) {
+            this.createSubscriptionToFanNotifications();
+        }
+        if (this.musicStatusOnError) {
+            this.createSubscriptionToMusicNotifications();
+        }
+        if (this.doorStatusOnError) {
+            this.createSubscriptionToDoorNotifications();
+        }
+        if (this.meteoOnError) {
+            this.createSubscriptionToMeteoInfo();
+        }
+        this.refreshPicture();
+        this._dashboard.refreshCardComponent();
+    }
+
+    private refresh() {
         this.changeDetectorRef.detectChanges();
+        if (this.isConnectionError()) {
+            this._dashboard.refreshCardComponent();
+        }
     }
 }

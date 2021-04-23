@@ -23,11 +23,9 @@ export class TopNavLangComponent implements OnInit {
         const language = this.languageList.find(f => f.code === this.siteLocale);
         if (language) {
             this.siteLanguage = language.label;
-            console.log('setting i18n language to ', language.code);
             I18n.setLanguage(language.code);
         } else {
             this.siteLanguage = this.languageList[1].label;
-            console.log('setting default i18n language to ', this.languageList[1].code);
             I18n.setLanguage(this.languageList[1].code);
         }
     }

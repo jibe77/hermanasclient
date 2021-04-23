@@ -4,6 +4,7 @@ import { LightService } from './light.service';
 import { MeteoService } from './meteo.service';
 import { MusicService } from './music.service';
 import { SchedulerService } from './scheduler.service';
+import { VersionService } from './version.service';
 import { WebsocketService } from './websocket.service';
 
 export const services = [
@@ -14,6 +15,7 @@ export const services = [
     FanService,
     LightService,
     WebsocketService,
+    VersionService,
 ];
 
 export * from './door.service';
@@ -23,3 +25,4 @@ export * from './music.service';
 export * from './fan.service';
 export * from './light.service';
 export * from './websocket.service';
+export * from './version.service';

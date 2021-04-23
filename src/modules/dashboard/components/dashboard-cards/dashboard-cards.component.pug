@@ -19,10 +19,11 @@
             background='bg-success'
         )
             .card-body Door is now opened
-
     .col-xl-3.col-md-6
         sb-card-view-details(
+            *ngIf="this._dashboardComponent.retryMessageIsDisplayed()"
             link='retry',
             background='bg-danger'
         )
-            .card-body(i18n="@@connectionFailed") Connection with chicken coop failed
+            .card-body
+                span(i18n="@@connectionFailed") Connection with chicken coop failed

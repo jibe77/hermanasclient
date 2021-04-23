@@ -3,7 +3,7 @@
 )
     ng-content(select='.card-body')
     .card-footer.d-flex.align-items-center.justify-content-between
-        a(*ngIf='link === "retry"', href="javascript:void(0);" onclick="document.location.reload()").small.text-white.stretched-link
+        a(*ngIf='link === "retry"', (click)="this._dashboardComponent.retry()").small.text-white.stretched-link
             span(i18n="@@retry") Retry
         a(*ngIf='link !== "retry"', [routerLink]='link').small.text-white.stretched-link
             span(i18n="@@viewDetails") View Details

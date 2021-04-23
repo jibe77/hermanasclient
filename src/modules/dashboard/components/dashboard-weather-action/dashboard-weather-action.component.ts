@@ -10,6 +10,6 @@ export class DashboardWeatherActionComponent {
     constructor(private _dashboardWidgetsComponent: DashboardWidgetsComponent) {}
 
     public refreshWeather() {
-        this._dashboardWidgetsComponent.refreshMeteoInfo();
+        this._dashboardWidgetsComponent.createSubscriptionToMeteoInfo();
     }
 }

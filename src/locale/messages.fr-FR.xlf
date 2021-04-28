@@ -574,7 +574,7 @@
             </trans-unit>
             <trans-unit id="weatherMenu" datatype="html">
                 <source>Weather</source>
-                <target>Météo (TODO)</target>
+                <target>Météo</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">12</context>
@@ -582,7 +582,7 @@
             </trans-unit>
             <trans-unit id="webcamMenu" datatype="html">
                 <source>Webcam</source>
-                <target>Caméra (TODO)</target>
+                <target>Caméra</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">15</context>
@@ -598,7 +598,7 @@
             </trans-unit>
             <trans-unit id="energySavingMenu" datatype="html">
                 <source>Energy saving</source>
-                <target>Énergie (TODO)</target>
+                <target>Énergie</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">21</context>
@@ -606,7 +606,7 @@
             </trans-unit>
             <trans-unit id="notificationMenu" datatype="html">
                 <source>Notification</source>
-                <target>Notification (TODO)</target>
+                <target>Notification</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">24</context>
@@ -614,7 +614,7 @@
             </trans-unit>
             <trans-unit id="playlistMenu" datatype="html">
                 <source>Music playlist</source>
-                <target>Musique (TODO)</target>
+                <target>Musique</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">27</context>
@@ -622,7 +622,7 @@
             </trans-unit>
             <trans-unit id="systemMenu" datatype="html">
                 <source>System</source>
-                <target>Système (TODO)</target>
+                <target>Système</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">30</context>
@@ -740,7 +740,102 @@
                     <context context-type="linenumber">45</context>
                 </context-group>
             </trans-unit>
-
+            <trans-unit id="dashboardInfo" datatype="html">
+                <source>This board displays info about the chicken coop.</source>
+                <target>Cet écran affiche les informations du poulailler.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/containers/dashboard/dashboard.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="weatherInfo" datatype="html">
+                <source>This board is displaying the weather fetched from a temperature and humidity probe inside the chicken coop.</source>
+                <target>Cet écran affiche les informations météo récupérées depuis une sonde située dans le poulailler.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/weather/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="cameraInfo" datatype="html">
+                <source>This board allows you to browse through the history of the pictures.</source>
+                <target>Cet écran permet de naviguer à travers l'historique des photos du poulailler.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/camera/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="camera" datatype="html">
+                <source>Camera</source>
+                <target>Caméra</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/camera/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">2</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="energyInfo" datatype="html">
+                <source>This board allows you to configure the energy saving parameters.</source>
+                <target>Cet écran permet de configurer les paramètres de la consommation énergétique.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/energy/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="notificationInfo" datatype="html">
+                <source>This board allows you to configure the notification parameters.</source>
+                <target>Cet écran permet de configurer les paramètres de notification.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/notification/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="musicInfo" datatype="html">
+                <source>This board allows you to configure the music parameters.</source>
+                <target>Cet écran permet de configurer les paramètres musicaux.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/music/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="systemInfo" datatype="html">
+                <source>This board allows you to configure the system parameters.</source>
+                <target>Cet écran permet d'accéder aux paramètres système.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/system/containers/tables/tables.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="music" datatype="html">
+                <source>Music</source>
+                <target>Musique</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html</context>
+                    <context context-type="linenumber">45</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="system" datatype="html">
+                <source>System</source>
+                <target>Système</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/system/containers/tables/tables.component.html</context>
+                    <context context-type="linenumber">2</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="energy" datatype="html">
+                <source>Energy</source>
+                <target>Énergie</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/energy/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">2</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="logsInfo" datatype="html">
+                <source>This board allows you to browse through the history of the log file.</source>
+                <target>Cet écran permet de naviguer à travers l'historique des fichiers de log.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/logs/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
         </body>
     </file>
 </xliff>

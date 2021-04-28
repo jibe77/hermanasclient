@@ -1,0 +1,29 @@
+<sb-layout-dashboard
+    ><sb-dashboard-head title="Energy" i18n-title="@@energy" [hideBreadcrumbs]="true"></sb-dashboard-head
+    ><sb-card
+        ><div class="card-body"><span i18n="@@energyInfo">This board allows you to configure the energy saving parameters.</span></div></sb-card
+    ><sb-card
+        ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "car-battery"]'></fa-icon>Calendar parameters</div>
+        <div class="card-body"><!-- sb-charts-area--></div></sb-card
+    >
+    <div class="row">
+        <div class="col-lg-6">
+            <sb-card
+                ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "car-battery"]'></fa-icon>Eco mode</div>
+                <div class="card-body"><!-- sb-charts-bar--></div></sb-card
+            >
+        </div>
+        <div class="col-lg-6">
+            <sb-card
+                ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "car-battery"]'></fa-icon>Normal mode</div>
+                <div class="card-body"><!-- sb-charts-pie--></div></sb-card
+            >
+        </div>
+        <div class="col-lg-6">
+            <sb-card
+                ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "car-battery"]'></fa-icon>Summer mode</div>
+                <div class="card-body"><!-- sb-charts-pie--></div></sb-card
+            >
+        </div>
+    </div></sb-layout-dashboard
+>

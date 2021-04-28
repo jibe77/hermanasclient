@@ -67,7 +67,6 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         public _dashboard: DashboardComponent
     ) {
         this._dashboard.retryMessageIsDisplayed = () => {
-            console.log('evaluation retry')
             return this.isConnectionError();
         };
         this._dashboard.retry = () => {

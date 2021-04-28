@@ -1,0 +1,13 @@
+sb-layout-dashboard
+    sb-dashboard-head(title='Music', i18n-title="@@music", [hideBreadcrumbs]='true')
+
+    sb-card
+        .card-body
+            span(i18n="@@musicInfo") This board allows you to configure the music parameters.
+
+    sb-card
+        .card-header
+            fa-icon.mr-1([icon]='["fas", "music"]')
+            | Playlist
+        .card-body
+            // sb-charts-area

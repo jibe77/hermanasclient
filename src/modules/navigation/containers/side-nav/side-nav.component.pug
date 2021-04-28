@@ -11,17 +11,17 @@ nav#sidenavAccordion.sb-sidenav.accordion(class="sb-sidenav-dark")
                             fa-icon([icon]='["fas", "tachometer-alt"]')
                         span(i18n="@@dashboard") Dashboard
                     a.nav-link(
-                        routerLink="/dashboard",
+                        routerLink="/weather",
                     )
                         .sb-nav-link-icon
                             fa-icon([icon]='["fas", "sun"]')
-                        span(i18n="@@weatherMenu") Weather (TODO)
+                        span(i18n="@@weatherMenu") Weather
                     a.nav-link(
-                        routerLink="/dashboard",
+                        routerLink="/camera",
                     )
                         .sb-nav-link-icon
                             fa-icon([icon]='["fas", "camera"]')
-                        span(i18n="@@webcamMenu") Webcam (TODO)
+                        span(i18n="@@webcamMenu") Webcam
                     a.nav-link(
                         routerLink="/logs",
                     )
@@ -31,29 +31,29 @@ nav#sidenavAccordion.sb-sidenav.accordion(class="sb-sidenav-dark")
                 .sb-sidenav-menu-heading Config
                 ng-container
                     a.nav-link(
-                        routerLink="/dashboard",
+                        routerLink="/energy",
                     )
                         .sb-nav-link-icon
                             fa-icon([icon]='["fas", "car-battery"]')
-                        span(i18n="@@energySavingMenu") Energy saving (TODO)
+                        span(i18n="@@energySavingMenu") Energy saving
                     a.nav-link(
-                        routerLink="/dashboard",
+                        routerLink="/notification",
                     )
                         .sb-nav-link-icon
                             fa-icon([icon]='["fas", "envelope-open-text"]')
-                        span(i18n="@@notificationMenu") Notification (TODO)
+                        span(i18n="@@notificationMenu") Notification
                     a.nav-link(
-                        routerLink="/dashboard",
+                        routerLink="/music",
                     )
                         .sb-nav-link-icon
                             fa-icon([icon]='["fas", "music"]')
-                        span(i18n="@@playlistMenu") Music playlist (TODO)
+                        span(i18n="@@playlistMenu") Music playlist
                     a.nav-link(
-                        routerLink="/dashboard",
+                        routerLink="/system",
                     )
                         .sb-nav-link-icon
                             fa-icon([icon]='["fas", "laptop"]')
-                        span(i18n="@@systemMenu") System (TODO)
+                        span(i18n="@@systemMenu") System
 
     .sb-sidenav-footer
         .small(i18n="@@logged_in_as") Logged in as:

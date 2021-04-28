@@ -1,0 +1,36 @@
+sb-layout-dashboard
+    sb-dashboard-head(title='Energy', i18n-title="@@energy", [hideBreadcrumbs]='true')
+
+    sb-card
+        .card-body
+            span(i18n="@@energyInfo") This board allows you to configure the energy saving parameters.
+
+    sb-card
+        .card-header
+            fa-icon.mr-1([icon]='["fas", "car-battery"]')
+            | Calendar parameters
+        .card-body
+            // sb-charts-area
+
+    .row
+        .col-lg-6
+            sb-card
+                .card-header
+                    fa-icon.mr-1([icon]='["fas", "car-battery"]')
+                    | Eco mode
+                .card-body
+                    // sb-charts-bar
+        .col-lg-6
+            sb-card
+                .card-header
+                    fa-icon.mr-1([icon]='["fas", "car-battery"]')
+                    | Normal mode
+                .card-body
+                    // sb-charts-pie
+        .col-lg-6
+            sb-card
+                .card-header
+                    fa-icon.mr-1([icon]='["fas", "car-battery"]')
+                    | Summer mode
+                .card-body
+                    // sb-charts-pie

@@ -17,7 +17,7 @@ export const ROUTES: Routes = [
     {
         path: '',
         canActivate: [],
-        component: tablesContainers.TablesComponent,
+        component: tablesContainers.SystemComponent,
         data: {
             title: 'Tables - Hermanas',
             breadcrumbs: [

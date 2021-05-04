@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AbstractService } from '@common/services';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { AbstractService } from './abstract.service';
 
 export interface VersionInfo {
     time: string;
@@ -20,10 +19,11 @@ export class VersionService extends AbstractService {
     }
 
     public getVersionInfo(): Observable<VersionInfo> {
-        return this._httpClient.get('https://poulailler58.ddns.net' + '/info', { headers: this.getHeaders() }).pipe(
-                map((data: VersionInfo) => {
-                    return data;
-                })
-            );
+        return this._httpClient.get(this.domainBase + '/info', { headers: this.getHeaders() }).pipe(
+            map((data: VersionInfo) => {
+                console.log(`version is ${data.version}`);
+                return data;
+            })
+        );
     }
 }

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AbstractService } from '@common/services';
 import { User } from '@modules/auth/models';
-import { AbstractService } from '@modules/dashboard/services/abstract.service';
 import { Observable } from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 export interface LightStatus {
     statusEnum: string;

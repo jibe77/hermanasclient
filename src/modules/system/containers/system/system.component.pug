@@ -1,6 +1,6 @@
 sb-layout-dashboard
     sb-dashboard-head(title='System', i18n-title="@@system", [hideBreadcrumbs]='true')
-
+    sb-dashboard-cards
     sb-card
         .card-body
             span(i18n="@@systemInfo") This board allows you to configure the system parameters.
@@ -10,6 +10,6 @@ sb-layout-dashboard
             fa-icon.mr-1([icon]='["fas", "music"]')
             | Versions
         .card-body
-            | Front-End version : TODO
+            | Front-End version : {{frontEndVersion}}
             | <br/>
-            | Back-End version : TODO
+            | Back-End version : {{backEndVersion}}

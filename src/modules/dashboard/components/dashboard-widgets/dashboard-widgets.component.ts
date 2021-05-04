@@ -138,7 +138,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
                 this.refreshMeteoInfo(data);
             },
             error => {
-                this.refreshMeteoInfo(error);
+                this.refreshMeteoInfo(undefined, error);
             }
         );
     }
@@ -159,13 +159,14 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
             this.changeDetectorRef.detectChanges();
         });
     }
+
     createSubscriptionToDoorNotifications() {
         this._doorService.getDoorStatus().subscribe(
             (data: DoorStatus) => {
                 this.refreshDoorStatus(data.status);
             },
             error => {
-                this.refreshDoorStatus(error);
+                this.refreshDoorStatus(undefined, error);
             }
         );
     }
@@ -189,7 +190,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
                 this.refreshFanStatus(data.statusEnum === 'ON');
             },
             (error: any) => {
-                this.refreshFanStatus(error);
+                this.refreshFanStatus(undefined, error);
             }
         );
     }
@@ -214,7 +215,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
                 this.refreshMusicStatus(data.statusEnum === 'ON');
             },
             (error: any) => {
-                this.refreshMusicStatus(error);
+                this.refreshMusicStatus(undefined, error);
             }
         );
     }
@@ -240,7 +241,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
                 this.refreshLightStatus(data.statusEnum === 'ON');
             },
             (error: any) => {
-                this.refreshLightStatus(error);
+                this.refreshLightStatus(undefined, error);
             }
         );
     }
@@ -278,6 +279,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
             this.createSubscriptionToMeteoInfo();
         }
         this.refreshPicture();
+        this.changeDetectorRef.detectChanges();
         this._dashboard.refreshCardComponent();
     }
 

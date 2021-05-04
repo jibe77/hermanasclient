@@ -9,19 +9,20 @@ import { AppCommonModule } from '@common/app-common.module';
 import { NavigationModule } from '@modules/navigation/navigation.module';
 
 /* Components */
-import * as tablesComponents from './components';
+import * as systemComponents from './components';
 
 /* Containers */
-import * as tablesContainers from './containers';
+import * as systemContainers from './containers';
 
 /* Directives */
-import * as tablesDirectives from './directives';
+import * as systemDirectives from './directives';
 
 /* Guards */
-import * as tablesGuards from './guards';
+import * as systemGuards from './guards';
 
 /* Services */
-import * as tablesServices from './services';
+import * as systemService from './services';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -31,18 +32,19 @@ import * as tablesServices from './services';
         FormsModule,
         AppCommonModule,
         NavigationModule,
+        HttpClientModule,
     ],
     providers: [
         DecimalPipe,
-        ...tablesServices.services,
-        ...tablesGuards.guards,
-        ...tablesDirectives.directives,
+        ...systemService.services,
+        ...systemGuards.guards,
+        ...systemDirectives.directives,
     ],
     declarations: [
-        ...tablesContainers.containers,
-        ...tablesComponents.components,
-        ...tablesDirectives.directives,
+        ...systemContainers.containers,
+        ...systemComponents.components,
+        ...systemDirectives.directives,
     ],
-    exports: [...tablesContainers.containers, ...tablesComponents.components],
+    exports: [...systemContainers.containers, ...systemComponents.components],
 })
 export class SystemModule {}

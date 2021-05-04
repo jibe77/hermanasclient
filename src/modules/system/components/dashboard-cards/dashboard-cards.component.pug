@@ -22,8 +22,8 @@
             .card-body Door is now opened
     .col-xl-3.col-md-6
         sb-card-view-details(
-            *ngIf="this._dashboardComponent.retryMessageIsDisplayed()"
-            link='retry_dashboard',
+            *ngIf="this._systemComponent.retryMessageIsDisplayed()"
+            link='retry_system',
             background='bg-danger'
         )
             .card-body

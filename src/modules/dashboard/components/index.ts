@@ -1,3 +1,4 @@
+import { CardViewDetailsComponent } from './card-view-details/card-view-details.component';
 import { DashboardAccessoriesActionComponent } from './dashboard-accessories-action/dashboard-accessories-action.component';
 import { DashboardCardsComponent } from './dashboard-cards/dashboard-cards.component';
 import { DashboardDoorActionComponent } from './dashboard-door-action/dashboard-door-action.component';
@@ -6,12 +7,11 @@ import { DashboardWebcamActionComponent } from './dashboard-webcam-action/dashbo
 import { DashboardWidgetsComponent } from './dashboard-widgets/dashboard-widgets.component';
 
 export const components = [
-    DashboardCardsComponent,
     DashboardDoorActionComponent,
     DashboardWebcamActionComponent,
     DashboardAccessoriesActionComponent,
     DashboardWidgetsComponent,
     DashboardWeatherActionComponent,
+    DashboardCardsComponent,
+    CardViewDetailsComponent,
 ];
-
-export * from './dashboard-cards/dashboard-cards.component';

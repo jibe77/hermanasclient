@@ -1,5 +1,5 @@
-import { TablesComponent } from './tables/tables.component';
+import { SystemComponent } from './system/system.component';
 
-export const containers = [TablesComponent];
+export const containers = [SystemComponent];
 
-export * from './tables/tables.component';
+export * from './system/system.component';

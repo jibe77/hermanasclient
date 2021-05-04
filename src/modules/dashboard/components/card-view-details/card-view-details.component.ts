@@ -15,10 +15,7 @@ export class CardViewDetailsComponent implements OnInit {
 
     customClasses: string[] = [];
 
-    constructor(
-        public _dashboardComponent?: DashboardComponent,
-        public _systemComponent?: SystemComponent
-    ) {}
+    constructor(public _dashboardComponent?: DashboardComponent) {}
     ngOnInit() {
         if (this.background) {
             this.customClasses.push(this.background);

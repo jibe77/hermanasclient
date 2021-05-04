@@ -2,11 +2,14 @@ import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { TablesComponent } from './tables.component';
+import { DashboardCardsComponent } from './dashboard-cards.component';
 
 @Component({
     template: `
-        <sb-tables [someInput]="someInput" (someFunction)="someFunction($event)"></sb-tables>
+        <sb-dashboard-cards
+            [someInput]="someInput"
+            (someFunction)="someFunction($event)"
+        ></sb-dashboard-cards>
     `,
 })
 class TestHostComponent {
@@ -14,19 +17,19 @@ class TestHostComponent {
     // someFunction(event: Event) {}
 }
 
-describe('TablesComponent', () => {
+describe('DashboardCardsComponent', () => {
     let fixture: ComponentFixture<TestHostComponent>;
     let hostComponent: TestHostComponent;
     let hostComponentDE: DebugElement;
     let hostComponentNE: Element;
 
-    let component: TablesComponent;
+    let component: DashboardCardsComponent;
     let componentDE: DebugElement;
     let componentNE: Element;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestHostComponent, TablesComponent],
+            declarations: [TestHostComponent, DashboardCardsComponent],
             imports: [NoopAnimationsModule],
             providers: [],
             schemas: [NO_ERRORS_SCHEMA],
@@ -45,6 +48,6 @@ describe('TablesComponent', () => {
     });
 
     it('should display the component', () => {
-        expect(hostComponentNE.querySelector('sb-tables')).toEqual(jasmine.anything());
+        expect(hostComponentNE.querySelector('sb-dashboard-cards')).toEqual(jasmine.anything());
     });
 });

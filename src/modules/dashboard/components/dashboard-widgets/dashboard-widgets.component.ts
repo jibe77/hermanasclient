@@ -52,8 +52,10 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     userServiceSubscription: Subscription = new Subscription();
     meteoServiceSubscription: Subscription = new Subscription();
     fanServiceSubscription: Subscription = new Subscription();
+    doorServiceSubscription: Subscription = new Subscription();
     musicServiceSubscription: Subscription = new Subscription();
     lightServiceSubscription: Subscription = new Subscription();
+    nextEventSubcription: Subscription = new Subscription();
 
     constructor(
         public _doorService: DoorService,
@@ -106,6 +108,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.musicServiceSubscription.unsubscribe();
         this.fanServiceSubscription.unsubscribe();
         this.lightServiceSubscription.unsubscribe();
+        this.nextEventSubcription.unsubscribe();
         this._websocketService.unsubscribeToWebSocketEvent('socket/progress');
     }
 
@@ -154,7 +157,15 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     }
 
     createSubscriptionToNextEventNotifications() {
-        this._schedulerService.getNextEvents().subscribe(
+        if (this.nextEventSubcription !== undefined) {
+            this.nextEventSubcription.unsubscribe();
+            this.nextEventsOnError = false;
+            this.nextOpeningTime = undefined;
+            this.nextClosingTime = undefined;
+            this.changeDetectorRef.detectChanges();
+            this._dashboard.refreshCardComponent();
+        }
+        this.nextEventSubcription = this._schedulerService.getNextEvents().subscribe(
             (data: NextEvents) => {
                 this.refreshNextEvent(data);
             },
@@ -174,7 +185,14 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     }
 
     createSubscriptionToDoorNotifications() {
-        this._doorService.getDoorStatus().subscribe(
+        if (this.doorServiceSubscription !== undefined) {
+            this.doorServiceSubscription.unsubscribe();
+            this.doorStatusOnError = false;
+            this.doorStatus = undefined;
+            this.changeDetectorRef.detectChanges();
+            this._dashboard.refreshCardComponent();
+        }
+        this.doorServiceSubscription = this._doorService.getDoorStatus().subscribe(
             (data: DoorStatus) => {
                 this.refreshDoorStatus(data.status);
             },
@@ -268,6 +286,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
 
     public isConnectionError(): boolean {
         return (
+            this.meteoOnError ||
             this.lightStatusOnError ||
             this.fanStatusOnError ||
             this.musicStatusOnError ||
@@ -301,5 +320,10 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         if (this.isConnectionError()) {
             this._dashboard.refreshCardComponent();
         }
+    }
+
+    refreshWebcamEventHandler($event: any) {
+        console.log('event refreshWebcamEventHandler');
+        this.refreshPicture();
     }
 }

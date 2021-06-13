@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { DashboardWidgetsComponent } from '@modules/dashboard/components/dashboard-widgets/dashboard-widgets.component';
+import { Component, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'sb-dashboard-webcam-action',
@@ -7,9 +7,11 @@ import { DashboardWidgetsComponent } from '@modules/dashboard/components/dashboa
     styleUrls: ['dashboard-webcam-action.component.scss'],
 })
 export class DashboardWebcamActionComponent {
-    constructor(private _dashboardWidgetsComponent: DashboardWidgetsComponent) {}
+    @Output() refreshWebcamEvent = new EventEmitter();
+
+    constructor() {}
 
     public refreshPicture() {
-        this._dashboardWidgetsComponent.refreshPicture();
+        this.refreshWebcamEvent.emit('picture');
     }
 }

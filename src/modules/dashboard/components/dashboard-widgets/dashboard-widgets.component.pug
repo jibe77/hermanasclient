@@ -85,7 +85,7 @@
                 fa-icon.mr-1([icon]='["fas", "camera"]')
                 span(i18n='@@webcam') Webcam
                 .float-right
-                    sb-dashboard-webcam-action()
+                    sb-dashboard-webcam-action((refreshWebcamEvent)="refreshWebcamEventHandler($event)")
             .card-body
                 div.spinner-border(*ngIf='pictureInitialised === false',role='status')
                     span.sr-only

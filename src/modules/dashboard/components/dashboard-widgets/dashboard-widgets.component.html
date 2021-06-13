@@ -47,7 +47,7 @@
         <sb-card
             ><div class="card-header">
                 <fa-icon class="mr-1" [icon]='["fas", "camera"]'></fa-icon><span i18n="@@webcam">Webcam</span>
-                <div class="float-right"><sb-dashboard-webcam-action></sb-dashboard-webcam-action></div>
+                <div class="float-right"><sb-dashboard-webcam-action (refreshWebcamEvent)="refreshWebcamEventHandler($event)"></sb-dashboard-webcam-action></div>
             </div>
             <div class="card-body">
                 <div class="spinner-border" *ngIf="pictureInitialised === false" role="status">

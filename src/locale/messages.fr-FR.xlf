@@ -312,73 +312,81 @@
                     <context context-type="linenumber">59</context>
                 </context-group>
             </trans-unit>
+            <trans-unit id="state" datatype="html">
+                <source xml:space="preserve">State</source>
+                <target xml:space="preserve" state="needs-review-translation">État</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html</context>
+                    <context context-type="linenumber">10</context>
+                </context-group>
+            </trans-unit>
             <trans-unit id="stateOpened">
-                <source xml:space="preserve">State : Opened</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Ouvert</target>
+                <source xml:space="preserve">Opened</source>
+                <target xml:space="preserve" state="needs-review-translation">Ouvert</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">10</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateOpening">
-                <source xml:space="preserve">State : Opening ...</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Ouverture en cours ...</target>
+                <source xml:space="preserve">Opening ...</source>
+                <target xml:space="preserve" state="needs-review-translation">Ouverture en cours ...</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">11</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateClosing">
-                <source xml:space="preserve">State : Closing ...</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Fermeture en cours ...</target>
+                <source xml:space="preserve">Closing ...</source>
+                <target xml:space="preserve" state="needs-review-translation">Fermeture en cours ...</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">12</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateClosed">
-                <source xml:space="preserve">State : Closed</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Fermé</target>
+                <source xml:space="preserve">Closed</source>
+                <target xml:space="preserve" state="needs-review-translation">Fermé</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">13</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateSeemsOpened">
-                <source xml:space="preserve">State : Seems opened</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Semble être ouverte</target>
+                <source xml:space="preserve">Seems opened</source>
+                <target xml:space="preserve" state="needs-review-translation">Semble être ouverte</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">14</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateSeemsClosed">
-                <source xml:space="preserve">State : Seems closed</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Semble être fermée</target>
+                <source xml:space="preserve">Seems closed</source>
+                <target xml:space="preserve" state="needs-review-translation">Semble être fermée</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">15</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateOpenedIncorrectly">
-                <source xml:space="preserve">State : Opened incorrectly</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Incorrectement ouverte</target>
+                <source xml:space="preserve">Opened incorrectly</source>
+                <target xml:space="preserve" state="needs-review-translation">Incorrectement ouverte</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">16</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateClosedIncorrectly">
-                <source xml:space="preserve">State : Closed incorrectly</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Incorrectement fermée</target>
+                <source xml:space="preserve">Closed incorrectly</source>
+                <target xml:space="preserve" state="needs-review-translation">Incorrectement fermée</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">17</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="nextOpeningTime" datatype="html">
-                <source>Next opening time : <x id="INTERPOLATION" equiv-text="{{nextOpeningTime}}"/></source>
-                <target>Prochaine heure d'ouverture : <x id="INTERPOLATION" equiv-text="{{nextOpeningTime}}"/></target>
+                <source>Next opening time</source>
+                <target>Prochaine heure d'ouverture</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html</context>
                     <context context-type="linenumber">19</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="nextClosingTime" datatype="html">
-                <source>Next closing time : <x id="INTERPOLATION" equiv-text="{{nextClosingTime}}"/></source>
-                <target>Prochaine heure de fermeture : <x id="INTERPOLATION" equiv-text="{{nextClosingTime}}"/></target>
+                <source>Next closing time</source>
+                <target>Prochaine heure de fermeture</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html</context>
                     <context context-type="linenumber">20</context>
@@ -392,9 +400,9 @@
                 </context-group>
             </trans-unit>
             <trans-unit id="weatherTemp" datatype="html">
-                <source>Temp :<x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (<x id="INTERPOLATION_1" equiv-text="{{temperatureExternal}}"/>° exterior)
+                <source><x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (<x id="INTERPOLATION_1" equiv-text="{{temperatureExternal}}"/>° exterior)
                 </source>
-                <target>Température : <x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (<x id="INTERPOLATION_1" equiv-text="{{temperatureExternal}}"/>° à l'extérieur)
+                <target><x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (<x id="INTERPOLATION_1" equiv-text="{{temperatureExternal}}"/>° à l'extérieur)
                 </target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
@@ -405,10 +413,10 @@
                 <note priority="1" from="description">temperature: temperature in the chichen cooop</note>
             </trans-unit>
             <trans-unit id="weatherHumidity" datatype="html">
-                <source>Humidity :<x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (
+                <source><x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (
                     <x id="INTERPOLATION_1" equiv-text="{{humidityExternal}}"/>% exterior)
                 </source>
-                <target>Humidité : <x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (<x id="INTERPOLATION_1" equiv-text="{{humidityExternal}}"/>% à l'extérieur)
+                <target><x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (<x id="INTERPOLATION_1" equiv-text="{{humidityExternal}}"/>% à l'extérieur)
                 </target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
@@ -417,6 +425,24 @@
                     <context context-type="linenumber">32</context>
                 </context-group>
                 <note priority="1" from="description">humidity: humidity in the chicken coop</note>
+            </trans-unit>
+            <trans-unit id="temperature" datatype="html">
+                <source>Temperature</source>
+                <target>Température</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html</context>
+                    <context context-type="linenumber">33</context>
+                </context-group>
+                <note priority="1" from="description">temperature: temperature in the chichen cooop unavailable</note>
+            </trans-unit>
+            <trans-unit id="humidity" datatype="html">
+                <source>Humidity</source>
+                <target>Humidité</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html</context>
+                    <context context-type="linenumber">34</context>
+                </context-group>
+                <note priority="1" from="description">humidity: humidity in the chicken coop unavailable</note>
             </trans-unit>
             <trans-unit id="accessories">
                 <source xml:space="preserve">Accessories</source>

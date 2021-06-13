@@ -1,6 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { DashboardComponent } from '@modules/dashboard/containers';
-import {SystemComponent} from '@modules/system/containers';
 
 @Component({
     selector: 'sb-card-view-details',
@@ -15,10 +13,7 @@ export class CardViewDetailsComponent implements OnInit {
 
     customClasses: string[] = [];
 
-    constructor(
-        public _dashboardComponent?: DashboardComponent,
-        public _systemComponent?: SystemComponent
-    ) {}
+    constructor() {}
     ngOnInit() {
         if (this.background) {
             this.customClasses.push(this.background);
@@ -26,5 +21,9 @@ export class CardViewDetailsComponent implements OnInit {
         if (this.color) {
             this.customClasses.push(this.color);
         }
+    }
+
+    retry() {
+        console.log('retrying');
     }
 }

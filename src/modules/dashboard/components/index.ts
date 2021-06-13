@@ -1,4 +1,3 @@
-import { CardViewDetailsComponent } from './card-view-details/card-view-details.component';
 import { DashboardAccessoriesActionComponent } from './dashboard-accessories-action/dashboard-accessories-action.component';
 import { DashboardCardsComponent } from './dashboard-cards/dashboard-cards.component';
 import { DashboardDoorActionComponent } from './dashboard-door-action/dashboard-door-action.component';
@@ -13,5 +12,4 @@ export const components = [
     DashboardWidgetsComponent,
     DashboardWeatherActionComponent,
     DashboardCardsComponent,
-    CardViewDetailsComponent,
 ];

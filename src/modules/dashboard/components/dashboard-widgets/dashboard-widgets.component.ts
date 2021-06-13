@@ -33,6 +33,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     public doorStatus;
     public nextOpeningTime;
     public nextClosingTime;
+    public nextEventsOnError = false;
     public temperature;
     public temperatureExternal;
     public humidity;
@@ -79,7 +80,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.createSubscriptionToFanNotifications();
         this.createSubscriptionToMusicNotifications();
         this.createSubscriptionToDoorNotifications();
-        this.refreshNextEvent();
+        this.createSubscriptionToNextEventNotifications();
         this.refreshPicture();
         this.createSubscriptionToMeteoInfo();
 
@@ -152,12 +153,24 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.refresh();
     }
 
-    refreshNextEvent() {
-        this._schedulerService.getNextEvents().subscribe((data: NextEvents) => {
-            this.nextOpeningTime = data.nextDoorOpeningTime.substr(11, 5);
-            this.nextClosingTime = data.nextDoorClosingTime.substr(11, 5);
-            this.changeDetectorRef.detectChanges();
-        });
+    createSubscriptionToNextEventNotifications() {
+        this._schedulerService.getNextEvents().subscribe(
+            (data: NextEvents) => {
+                this.refreshNextEvent(data);
+            },
+            error => {
+                this.refreshNextEvent(undefined, error);
+            }
+        );
+    }
+
+    refreshNextEvent(data: NextEvents, error?: any) {
+        this.nextEventsOnError = error !== undefined;
+        this.nextOpeningTime =
+            data !== undefined ? data.nextDoorOpeningTime.substr(11, 5) : undefined;
+        this.nextClosingTime =
+            data !== undefined ? data.nextDoorClosingTime.substr(11, 5) : undefined;
+        this.changeDetectorRef.detectChanges();
     }
 
     createSubscriptionToDoorNotifications() {
@@ -198,7 +211,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     private refreshFanStatus(status?: boolean, error?: any) {
         this.fanStatusOnError = error !== undefined;
         this.fanStatus = status;
-        this.changeDetectorRef.detectChanges();
+        this.refresh();
     }
 
     createSubscriptionToMusicNotifications() {

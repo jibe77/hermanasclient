@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { DashboardCardsComponent } from '@modules/dashboard/components/dashboard-cards/dashboard-cards.component';
 
 @Component({
     selector: 'sb-dashboard',
@@ -9,16 +10,14 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/
 export class DashboardComponent {
     public retryMessageIsDisplayed: () => boolean;
     public retry: () => void;
-    public cardChangeDetector: ChangeDetectorRef;
+
+    //@Input()
+    //dashboardCardsComponent: DashboardCardsComponent;
 
     constructor() {}
     public refreshCardComponent() {
-        if (this.cardChangeDetector) {
-            this.cardChangeDetector.detectChanges();
-        }
-    }
-
-    public setCardChangeDetectorRef(changeDetectorRef: ChangeDetectorRef) {
-        this.cardChangeDetector = changeDetectorRef;
+        //if (this.dashboardCardsComponent) {
+        //    this.dashboardCardsComponent._changeDetectorRef.detectChanges();
+        //}
     }
 }

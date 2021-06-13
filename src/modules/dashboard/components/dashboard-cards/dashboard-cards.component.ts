@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Injectable } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    Injectable,
+    OnInit,
+    Output,
+} from '@angular/core';
 import { DashboardComponent } from '@modules/dashboard/containers';
 
 @Injectable()
@@ -9,10 +16,12 @@ import { DashboardComponent } from '@modules/dashboard/containers';
     styleUrls: ['dashboard-cards.component.scss'],
 })
 export class DashboardCardsComponent {
-    constructor(
-        public _dashboardComponent: DashboardComponent,
-        public _changeDetectorRef: ChangeDetectorRef
-    ) {
-        this._dashboardComponent.setCardChangeDetectorRef(this._changeDetectorRef);
+    //@Output()
+    //_dashboardComponent: DashboardComponent;
+
+    constructor(public _changeDetectorRef: ChangeDetectorRef) {}
+
+    retryMessageIsDisplayed(): boolean {
+        return false;
     }
 }

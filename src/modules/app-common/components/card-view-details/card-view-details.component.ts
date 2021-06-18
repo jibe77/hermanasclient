@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
     selector: 'sb-card-view-details',
@@ -10,6 +10,7 @@ export class CardViewDetailsComponent implements OnInit {
     @Input() background!: string;
     @Input() color!: string;
     @Input() link = '';
+    @Output() events = new EventEmitter();
 
     customClasses: string[] = [];
 
@@ -25,5 +26,6 @@ export class CardViewDetailsComponent implements OnInit {
 
     retry() {
         console.log('retrying');
+        this.events.emit(this.link);
     }
 }

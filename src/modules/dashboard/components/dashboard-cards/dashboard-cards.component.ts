@@ -1,12 +1,14 @@
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component,
+    Component, EventEmitter,
     Injectable,
+    Input,
+    OnDestroy,
     OnInit,
     Output,
 } from '@angular/core';
-import { DashboardComponent } from '@modules/dashboard/containers';
+import { Observable, Subject, Subscription } from 'rxjs';
 
 @Injectable()
 @Component({
@@ -15,13 +17,36 @@ import { DashboardComponent } from '@modules/dashboard/containers';
     templateUrl: './dashboard-cards.component.html',
     styleUrls: ['dashboard-cards.component.scss'],
 })
-export class DashboardCardsComponent {
-    //@Output()
-    //_dashboardComponent: DashboardComponent;
+export class DashboardCardsComponent implements OnInit, OnDestroy {
+    private eventsSubscription: Subscription;
+    retryMessageIsDisplayed = false;
+
+    @Input() notificationEvents: Observable<void>;
+    @Output() serviceRetry = new EventEmitter();
+    eventSubject: Subject<void> = new Subject<void>();
 
     constructor(public _changeDetectorRef: ChangeDetectorRef) {}
 
-    retryMessageIsDisplayed(): boolean {
-        return false;
+    ngOnInit(): void {
+        this.eventsSubscription = this.notificationEvents.subscribe(() => {
+            this.retryMessageIsDisplayed = true;
+            this._changeDetectorRef.detectChanges();
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.eventsSubscription.unsubscribe();
+    }
+
+    onEvent(event: any) {
+        this.eventSubject.next();
+        console.log(`event received ${event}`);
+        this.retry();
+    }
+
+    retry() {
+        this.retryMessageIsDisplayed = false;
+        this._changeDetectorRef.detectChanges();
+        this.serviceRetry.emit();
     }
 }

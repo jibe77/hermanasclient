@@ -1,7 +1,7 @@
 sb-layout-dashboard
     sb-dashboard-head(title='Dashboard', i18n-title="@@dashboard", [hideBreadcrumbs]='true')
-    sb-dashboard-cards
+    sb-dashboard-cards([notificationEvents]="notificationSubject.asObservable()", (serviceRetry)="onServiceRetry($event)")
     sb-card
         .card-body
             span(i18n="@@dashboardInfo") This board displays info about the chicken coop.
-    sb-dashboard-widgets
+    sb-dashboard-widgets([retryLauncherEvents]="retrySubject.asObservable()",(serviceCommunicationError)="onServiceCommunicationError($event)")

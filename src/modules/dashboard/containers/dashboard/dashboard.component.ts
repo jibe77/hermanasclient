@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { DashboardCardsComponent } from '@modules/dashboard/components/dashboard-cards/dashboard-cards.component';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'sb-dashboard',
@@ -8,16 +8,16 @@ import { DashboardCardsComponent } from '@modules/dashboard/components/dashboard
     styleUrls: ['dashboard.component.scss'],
 })
 export class DashboardComponent {
-    public retryMessageIsDisplayed: () => boolean;
-    public retry: () => void;
-
-    //@Input()
-    //dashboardCardsComponent: DashboardCardsComponent;
-
     constructor() {}
-    public refreshCardComponent() {
-        //if (this.dashboardCardsComponent) {
-        //    this.dashboardCardsComponent._changeDetectorRef.detectChanges();
-        //}
+
+    notificationSubject: Subject<void> = new Subject<void>();
+    retrySubject: Subject<void> = new Subject<void>();
+
+    onServiceCommunicationError(event: any) {
+        this.notificationSubject.next();
+    }
+
+    onServiceRetry(event: any) {
+        this.retrySubject.next();
     }
 }

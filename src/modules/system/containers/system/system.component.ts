@@ -6,7 +6,7 @@ import {
     OnInit,
 } from '@angular/core';
 import { VersionInfo, VersionService } from '@modules/system/services/version.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 import { version } from '../../../../../package.json';
 
@@ -20,8 +20,9 @@ export class SystemComponent implements OnInit, OnDestroy {
     versionServiceSubscription: Subscription = new Subscription();
     public backEndVersion: string;
     public frontEndVersion: string = version;
-    private backEndVersionOnError: boolean;
-    private cardsChangeDetectorRef: ChangeDetectorRef;
+    public backEndVersionOnError: boolean;
+
+    notificationSubject: Subject<void> = new Subject<void>();
 
     constructor(
         private _versionService: VersionService,
@@ -54,19 +55,17 @@ export class SystemComponent implements OnInit, OnDestroy {
     refreshBackEndVersion(data?: VersionInfo, error?: any) {
         this.backEndVersionOnError = error !== undefined;
         this.backEndVersion = data !== undefined ? data.version : undefined;
+        if (error !== undefined) {
+            this.notificationSubject.next();
+        }
         this.changeDetectorRef.detectChanges();
     }
 
-    public retryMessageIsDisplayed(): boolean {
-        return this.backEndVersionOnError;
-    }
-
-    public retry() {
+    onServiceRetry(event: any) {
         if (this.backEndVersionOnError) {
             this.createSubscriptionToBackendVersion();
         }
         this.changeDetectorRef.detectChanges();
-        this.cardsChangeDetectorRef.detectChanges();
     }
 
     setCardChangeDetectorRef(_changeDetectorRef: ChangeDetectorRef) {

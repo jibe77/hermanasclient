@@ -1,7 +1,8 @@
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, EventEmitter,
+    Component,
+    EventEmitter,
     Injectable,
     Input,
     OnDestroy,
@@ -12,12 +13,12 @@ import { Observable, Subject, Subscription } from 'rxjs';
 
 @Injectable()
 @Component({
-    selector: 'sb-dashboard-cards',
+    selector: 'sb-common-cards',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: './dashboard-cards.component.html',
-    styleUrls: ['dashboard-cards.component.scss'],
+    templateUrl: './common-cards.component.html',
+    styleUrls: ['common-cards.component.scss'],
 })
-export class DashboardCardsComponent implements OnInit, OnDestroy {
+export class CommonCardsComponent implements OnInit, OnDestroy {
     private eventsSubscription: Subscription;
     retryMessageIsDisplayed = false;
 

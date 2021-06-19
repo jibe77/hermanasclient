@@ -19,3 +19,16 @@ sb-layout-dashboard
                 | {{' '}}:{{' '}}
                 span(*ngIf='backEndVersion !== undefined') {{backEndVersion}}
                 span(*ngIf='backEndVersionOnError === true',i18n='@@informationNotAvailable') Information not available
+
+    sb-card
+        .card-header
+            fa-icon.mr-1([icon]='["fas", "laptop"]')
+            | Diagnostic
+        .card-body
+            | Status of upper button : Not pushed
+            | <br/>
+            | Status of bottom button : Not pushed
+            | <br/>
+            | Reset buttons
+            | <br/>
+            | Launch full check-up process

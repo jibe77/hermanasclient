@@ -21,7 +21,6 @@ export class VersionService extends AbstractService {
     public getVersionInfo(): Observable<VersionInfo> {
         return this._httpClient.get(this.domainBase + '/info', { headers: this.getHeaders() }).pipe(
             map((data: VersionInfo) => {
-                console.log(`version is ${data.version}`);
                 return data;
             })
         );

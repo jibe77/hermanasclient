@@ -120,8 +120,10 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
 
     public refreshPicture() {
         this.pictureInitialised = false;
+        // date param is functionaly useless, but technicaly allows to force the web browser to  refresh the picture
         this.picturePath =
-            this._lightService.domainBase + '/camera/takePicture#' + new Date().getTime();
+            this._lightService.domainBase + '/camera/takePicture?date=' + new Date().getTime();
+        console.log('setting picture path to ' + this.picturePath);
         this.changeDetectorRef.detectChanges();
     }
 
@@ -142,9 +144,8 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
             this.meteoServiceSubscription.unsubscribe();
             this.refreshMeteoInfo();
         }
-        this.meteoServiceSubscription = this._meteoService
-            .getMeteoInfo()
-            .subscribe((data: MeteoInfo) => {
+        this.meteoServiceSubscription = this._meteoService.getMeteoInfo().subscribe(
+            (data: MeteoInfo) => {
                 this.refreshMeteoInfo(data);
             },
             error => {
@@ -242,9 +243,8 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
             this.musicStatus = undefined;
             this.changeDetectorRef.detectChanges();
         }
-        this.musicServiceSubscription = this._musiceService
-            .getStatus()
-            .subscribe((data: MusicStatus) => {
+        this.musicServiceSubscription = this._musiceService.getStatus().subscribe(
+            (data: MusicStatus) => {
                 this.refreshMusicStatus(data.statusEnum === 'ON');
             },
             (error: any) => {
@@ -266,9 +266,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
             this.lightStatus = undefined;
             this.changeDetectorRef.detectChanges();
         }
-        this.lightServiceSubscription = this._lightService
-            .getStatus()
-            .subscribe(
+        this.lightServiceSubscription = this._lightService.getStatus().subscribe(
             (data: LightStatus) => {
                 this.refreshLightStatus(data.statusEnum === 'ON');
             },
@@ -321,7 +319,6 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     }
 
     refreshWebcamEventHandler($event: any) {
-        console.log('event refreshWebcamEventHandler');
         this.refreshPicture();
     }
 }

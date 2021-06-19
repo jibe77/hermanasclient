@@ -40,14 +40,12 @@ export class TopNavUserComponent implements OnInit, OnDestroy {
         this.loginText = I18n.get('Sign In');
         this.logoutText = I18n.get('Sign out');
         onAuthUIStateChange((authState: AuthState, authData: CognitoUserInterface) => {
-            console.log('login state change, before', this.authState, 'new state', authState);
             this.userService.reset(authState, authData);
             this.authState = authState;
         });
     }
 
     ngOnDestroy() {
-        console.log('destroy side-nav (jb).');
         this.subscription.unsubscribe();
         return onAuthUIStateChange;
     }

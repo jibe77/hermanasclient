@@ -87,7 +87,8 @@
                 .float-right
                     sb-dashboard-webcam-action((refreshWebcamEvent)="refreshWebcamEventHandler($event)")
             .card-body
-                div.spinner-border(*ngIf='pictureInitialised === false',role='status')
+                div.spinner-border(*ngIf='pictureInitialised === false && pictureNotInitialised === false',role='status')
                     span.sr-only
                         span(i18n='@@loading') Loading...
-                img([src]='picturePath', (load)='pictureIsInitialised()' , alt="chicken coop picture", i18n-alt='@@chicken coop picture', class="{{pictureInitialised === false ? 'hidden':'not_hidden'}}")
+                img([src]='picturePath', (load)='pictureIsInitialised()', (error)='pictureIsNotInitialised()' , alt="chicken coop picture", i18n-alt='@@chicken coop picture', class="{{pictureInitialised === false ? 'hidden':'not_hidden'}}")
+                span(*ngIf='pictureNotInitialised === true',i18n='@@informationNotAvailable')  Information not available

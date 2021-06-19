@@ -52,6 +52,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     public fanStatusOnError = false;
     public doorStatusOnError = false;
     public pictureInitialised = false;
+    public pictureNotInitialised = false;
     public picturePath = 'favicon.ico';
 
     private eventsSubscription: Subscription;
@@ -120,10 +121,10 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
 
     public refreshPicture() {
         this.pictureInitialised = false;
+        this.pictureNotInitialised = false;
         // date param is functionaly useless, but technicaly allows to force the web browser to  refresh the picture
         this.picturePath =
             this._lightService.domainBase + '/camera/takePicture?date=' + new Date().getTime();
-        console.log('setting picture path to ' + this.picturePath);
         this.changeDetectorRef.detectChanges();
     }
 
@@ -137,6 +138,11 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
             this.pictureInitialised = true;
             this.changeDetectorRef.detectChanges();
         }
+    }
+
+    public pictureIsNotInitialised() {
+        this.pictureNotInitialised = true;
+        this.changeDetectorRef.detectChanges();
     }
 
     public createSubscriptionToMeteoInfo() {

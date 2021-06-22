@@ -8,9 +8,14 @@ const routes: Routes = [
         redirectTo: '/dashboard',
     },
     {
-        path: 'charts',
+        path: 'auth',
         loadChildren: () =>
-            import('modules/charts/charts-routing.module').then(m => m.ChartsRoutingModule),
+            import('modules/auth/auth-routing.module').then(m => m.AuthRoutingModule),
+    },
+    {
+        path: 'camera',
+        loadChildren: () =>
+            import('modules/camera/camera-routing.module').then(m => m.CameraRoutingModule),
     },
     {
         path: 'dashboard',
@@ -20,9 +25,9 @@ const routes: Routes = [
             ),
     },
     {
-        path: 'auth',
+        path: 'energy',
         loadChildren: () =>
-            import('modules/auth/auth-routing.module').then(m => m.AuthRoutingModule),
+            import('modules/energy/energy-routing.module').then(m => m.EnergyRoutingModule),
     },
     {
         path: 'error',
@@ -30,14 +35,41 @@ const routes: Routes = [
             import('modules/error/error-routing.module').then(m => m.ErrorRoutingModule),
     },
     {
-        path: 'tables',
+        path: 'logs',
         loadChildren: () =>
-            import('modules/tables/tables-routing.module').then(m => m.TablesRoutingModule),
+            import('modules/logs/logs-routing.module').then(m => m.LogsRoutingModule),
+    },
+    {
+        path: 'music',
+        loadChildren: () =>
+            import('modules/music/music-routing.module').then(m => m.MusicRoutingModule),
+    },
+    {
+        path: 'notification',
+        loadChildren: () =>
+            import('modules/notification/notification-routing.module').then(
+                m => m.NotificationRoutingModule
+            ),
+    },
+    {
+        path: 'system',
+        loadChildren: () =>
+            import('modules/system/system-routing.module').then(m => m.SystemRoutingModule),
+    },
+    {
+        path: 'utility',
+        loadChildren: () =>
+            import('modules/utility/utility-routing.module').then(m => m.UtilityRoutingModule),
     },
     {
         path: 'version',
         loadChildren: () =>
             import('modules/utility/utility-routing.module').then(m => m.UtilityRoutingModule),
+    },
+    {
+        path: 'weather',
+        loadChildren: () =>
+            import('modules/weather/weather-routing.module').then(m => m.WeatherRoutingModule),
     },
     {
         path: '**',

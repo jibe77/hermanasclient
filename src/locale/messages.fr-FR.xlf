@@ -312,73 +312,81 @@
                     <context context-type="linenumber">59</context>
                 </context-group>
             </trans-unit>
+            <trans-unit id="state" datatype="html">
+                <source xml:space="preserve">State</source>
+                <target xml:space="preserve" state="needs-review-translation">État</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html</context>
+                    <context context-type="linenumber">10</context>
+                </context-group>
+            </trans-unit>
             <trans-unit id="stateOpened">
-                <source xml:space="preserve">State : Opened</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Ouvert</target>
+                <source xml:space="preserve">Opened</source>
+                <target xml:space="preserve" state="needs-review-translation">Ouvert</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">10</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateOpening">
-                <source xml:space="preserve">State : Opening ...</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Ouverture en cours ...</target>
+                <source xml:space="preserve">Opening ...</source>
+                <target xml:space="preserve" state="needs-review-translation">Ouverture en cours ...</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">11</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateClosing">
-                <source xml:space="preserve">State : Closing ...</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Fermeture en cours ...</target>
+                <source xml:space="preserve">Closing ...</source>
+                <target xml:space="preserve" state="needs-review-translation">Fermeture en cours ...</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">12</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateClosed">
-                <source xml:space="preserve">State : Closed</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Fermé</target>
+                <source xml:space="preserve">Closed</source>
+                <target xml:space="preserve" state="needs-review-translation">Fermé</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">13</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateSeemsOpened">
-                <source xml:space="preserve">State : Seems opened</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Semble être ouverte</target>
+                <source xml:space="preserve">Seems opened</source>
+                <target xml:space="preserve" state="needs-review-translation">Semble être ouverte</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">14</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateSeemsClosed">
-                <source xml:space="preserve">State : Seems closed</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Semble être fermée</target>
+                <source xml:space="preserve">Seems closed</source>
+                <target xml:space="preserve" state="needs-review-translation">Semble être fermée</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">15</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateOpenedIncorrectly">
-                <source xml:space="preserve">State : Opened incorrectly</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Incorrectement ouverte</target>
+                <source xml:space="preserve">Opened incorrectly</source>
+                <target xml:space="preserve" state="needs-review-translation">Incorrectement ouverte</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">16</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="stateClosedIncorrectly">
-                <source xml:space="preserve">State : Closed incorrectly</source>
-                <target xml:space="preserve" state="needs-review-translation">État : Incorrectement fermée</target>
+                <source xml:space="preserve">Closed incorrectly</source>
+                <target xml:space="preserve" state="needs-review-translation">Incorrectement fermée</target>
                 <context-group purpose="location">
                     <context context-type="linenumber">17</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="nextOpeningTime" datatype="html">
-                <source>Next opening time : <x id="INTERPOLATION" equiv-text="{{nextOpeningTime}}"/></source>
-                <target>Prochaine heure d'ouverture : <x id="INTERPOLATION" equiv-text="{{nextOpeningTime}}"/></target>
+                <source>Next opening time</source>
+                <target>Prochaine heure d'ouverture</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html</context>
                     <context context-type="linenumber">19</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="nextClosingTime" datatype="html">
-                <source>Next closing time : <x id="INTERPOLATION" equiv-text="{{nextClosingTime}}"/></source>
-                <target>Prochaine heure de fermeture : <x id="INTERPOLATION" equiv-text="{{nextClosingTime}}"/></target>
+                <source>Next closing time</source>
+                <target>Prochaine heure de fermeture</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html</context>
                     <context context-type="linenumber">20</context>
@@ -392,9 +400,9 @@
                 </context-group>
             </trans-unit>
             <trans-unit id="weatherTemp" datatype="html">
-                <source>Temp :<x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (<x id="INTERPOLATION_1" equiv-text="{{temperatureExternal}}"/>° exterior)
+                <source><x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (<x id="INTERPOLATION_1" equiv-text="{{temperatureExternal}}"/>° exterior)
                 </source>
-                <target>Température : <x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (<x id="INTERPOLATION_1" equiv-text="{{temperatureExternal}}"/>° à l'extérieur)
+                <target><x id="INTERPOLATION" equiv-text="{{temperature}}"/>° (<x id="INTERPOLATION_1" equiv-text="{{temperatureExternal}}"/>° à l'extérieur)
                 </target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
@@ -405,10 +413,10 @@
                 <note priority="1" from="description">temperature: temperature in the chichen cooop</note>
             </trans-unit>
             <trans-unit id="weatherHumidity" datatype="html">
-                <source>Humidity :<x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (
+                <source><x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (
                     <x id="INTERPOLATION_1" equiv-text="{{humidityExternal}}"/>% exterior)
                 </source>
-                <target>Humidité : <x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (<x id="INTERPOLATION_1" equiv-text="{{humidityExternal}}"/>% à l'extérieur)
+                <target><x id="INTERPOLATION" equiv-text="{{humidity}}"/>% (<x id="INTERPOLATION_1" equiv-text="{{humidityExternal}}"/>% à l'extérieur)
                 </target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
@@ -417,6 +425,24 @@
                     <context context-type="linenumber">32</context>
                 </context-group>
                 <note priority="1" from="description">humidity: humidity in the chicken coop</note>
+            </trans-unit>
+            <trans-unit id="temperature" datatype="html">
+                <source>Temperature</source>
+                <target>Température</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html</context>
+                    <context context-type="linenumber">33</context>
+                </context-group>
+                <note priority="1" from="description">temperature: temperature in the chichen cooop unavailable</note>
+            </trans-unit>
+            <trans-unit id="humidity" datatype="html">
+                <source>Humidity</source>
+                <target>Humidité</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html</context>
+                    <context context-type="linenumber">34</context>
+                </context-group>
+                <note priority="1" from="description">humidity: humidity in the chicken coop unavailable</note>
             </trans-unit>
             <trans-unit id="accessories">
                 <source xml:space="preserve">Accessories</source>
@@ -574,7 +600,7 @@
             </trans-unit>
             <trans-unit id="weatherMenu" datatype="html">
                 <source>Weather</source>
-                <target>Météo (TODO)</target>
+                <target>Météo</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">12</context>
@@ -582,7 +608,7 @@
             </trans-unit>
             <trans-unit id="webcamMenu" datatype="html">
                 <source>Webcam</source>
-                <target>Caméra (TODO)</target>
+                <target>Caméra</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">15</context>
@@ -590,7 +616,7 @@
             </trans-unit>
             <trans-unit id="logsMenu" datatype="html">
                 <source>Logs</source>
-                <target>Logs (TODO)</target>
+                <target>Logs</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">18</context>
@@ -598,7 +624,7 @@
             </trans-unit>
             <trans-unit id="energySavingMenu" datatype="html">
                 <source>Energy saving</source>
-                <target>Énergie (TODO)</target>
+                <target>Énergie</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">21</context>
@@ -606,7 +632,7 @@
             </trans-unit>
             <trans-unit id="notificationMenu" datatype="html">
                 <source>Notification</source>
-                <target>Notification (TODO)</target>
+                <target>Notification</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">24</context>
@@ -614,7 +640,7 @@
             </trans-unit>
             <trans-unit id="playlistMenu" datatype="html">
                 <source>Music playlist</source>
-                <target>Musique (TODO)</target>
+                <target>Musique</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">27</context>
@@ -622,7 +648,7 @@
             </trans-unit>
             <trans-unit id="systemMenu" datatype="html">
                 <source>System</source>
-                <target>Système (TODO)</target>
+                <target>Système</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/modules/navigation/containers/side-nav/side-nav.component.html</context>
                     <context context-type="linenumber">30</context>
@@ -740,7 +766,102 @@
                     <context context-type="linenumber">45</context>
                 </context-group>
             </trans-unit>
-
+            <trans-unit id="dashboardInfo" datatype="html">
+                <source>This board displays info about the chicken coop.</source>
+                <target>Cet écran affiche les informations du poulailler.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/containers/dashboard/dashboard.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="weatherInfo" datatype="html">
+                <source>This board is displaying the weather fetched from a temperature and humidity probe inside the chicken coop.</source>
+                <target>Cet écran affiche les informations météo récupérées depuis une sonde située dans le poulailler.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/weather/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="cameraInfo" datatype="html">
+                <source>This board allows you to browse through the history of the pictures.</source>
+                <target>Cet écran permet de naviguer à travers l'historique des photos du poulailler.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/camera/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="camera" datatype="html">
+                <source>Camera</source>
+                <target>Caméra</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/camera/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">2</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="energyInfo" datatype="html">
+                <source>This board allows you to configure the energy saving parameters.</source>
+                <target>Cet écran permet de configurer les paramètres de la consommation énergétique.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/energy/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="notificationInfo" datatype="html">
+                <source>This board allows you to configure the notification parameters.</source>
+                <target>Cet écran permet de configurer les paramètres de notification.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/notification/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="musicInfo" datatype="html">
+                <source>This board allows you to configure the music parameters.</source>
+                <target>Cet écran permet de configurer les paramètres musicaux.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/music/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="systemInfo" datatype="html">
+                <source>This board allows you to configure the system parameters.</source>
+                <target>Cet écran permet d'accéder aux paramètres système.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/system/containers/tables/tables.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="music" datatype="html">
+                <source>Music</source>
+                <target>Musique</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html</context>
+                    <context context-type="linenumber">45</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="system" datatype="html">
+                <source>System</source>
+                <target>Système</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/system/containers/tables/tables.component.html</context>
+                    <context context-type="linenumber">2</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="energy" datatype="html">
+                <source>Energy</source>
+                <target>Énergie</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/energy/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">2</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="logsInfo" datatype="html">
+                <source>This board allows you to browse through the history of the log file.</source>
+                <target>Cet écran permet de naviguer à travers l'historique des fichiers de log.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/logs/containers/charts/charts.component.html</context>
+                    <context context-type="linenumber">4</context>
+                </context-group>
+            </trans-unit>
         </body>
     </file>
 </xliff>

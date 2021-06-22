@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AbstractService } from '@common/services';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { AbstractService } from './abstract.service';
 
 export interface MeteoInfo {
     temperature: number;

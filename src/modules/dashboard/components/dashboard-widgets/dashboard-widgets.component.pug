@@ -7,18 +7,30 @@
                 .float-right
                     sb-dashboard-door-action([doorStatus]='doorStatus')
             .card-body
-                div.spinner-border(*ngIf='doorStatus === undefined', role='status')
+                div.spinner-border(*ngIf='doorStatus === undefined  && doorStatusOnError === false', role='status')
                     span(i18n='@@loading').sr-only Loading...
-                div(*ngIf='doorStatus !== undefined && doorStatus === "OPENED"',i18n='@@stateOpened') State : Opened
-                div(*ngIf='doorStatus !== undefined && doorStatus === "OPENING"',i18n='@@stateOpening') State : Opening ...
-                div(*ngIf='doorStatus !== undefined && doorStatus === "CLOSING"',i18n='@@stateClosing') State : Closing ...
-                div(*ngIf='doorStatus !== undefined && doorStatus === "CLOSED"',i18n='@@stateClosed') State : Closed
-                div(*ngIf='doorStatus !== undefined && doorStatus === "SEEMS_OPENED"',i18n='@@stateSeemsOpened') State : Seems opened
-                div(*ngIf='doorStatus !== undefined && doorStatus === "SEEMS_CLOSED"',i18n='@@stateSeemsClosed') State : Seems closed
-                div(*ngIf='doorStatus !== undefined && doorStatus === "OPENED_INCORRECTLY"',i18n='@@stateOpenedIncorrectly') State : Opened incorrectly
-                div(*ngIf='doorStatus !== undefined && doorStatus === "CLOSED_INCORRECTLY"',i18n='@@stateClosedIncorrectly') State : Closed incorrectly
-                div(*ngIf='nextOpeningTime !== undefined',i18n='@@nextOpeningTime') Next opening time : {{nextOpeningTime}}
-                div(*ngIf='nextClosingTime !== undefined',i18n='@@nextClosingTime') Next closing time : {{nextClosingTime}}
+                div(*ngIf='doorStatus !== undefined || doorStatusOnError === true')
+                    span(i18n='@@state') State
+                    | {{' '}}:{{' '}}
+                    span(*ngIf='doorStatus !== undefined && doorStatus === "OPENED"',i18n='@@stateOpened') Opened
+                    span(*ngIf='doorStatus !== undefined && doorStatus === "OPENING"',i18n='@@stateOpening') Opening ...
+                    span(*ngIf='doorStatus !== undefined && doorStatus === "CLOSING"',i18n='@@stateClosing') Closing ...
+                    span(*ngIf='doorStatus !== undefined && doorStatus === "CLOSED"',i18n='@@stateClosed') Closed
+                    span(*ngIf='doorStatus !== undefined && doorStatus === "SEEMS_OPENED"',i18n='@@stateSeemsOpened') Seems opened
+                    span(*ngIf='doorStatus !== undefined && doorStatus === "SEEMS_CLOSED"',i18n='@@stateSeemsClosed') Seems closed
+                    span(*ngIf='doorStatus !== undefined && doorStatus === "OPENED_INCORRECTLY"',i18n='@@stateOpenedIncorrectly') Opened incorrectly
+                    span(*ngIf='doorStatus !== undefined && doorStatus === "CLOSED_INCORRECTLY"',i18n='@@stateClosedIncorrectly') Closed incorrectly
+                    span(*ngIf='doorStatusOnError === true',i18n='@@informationNotAvailable') Information not available
+                div(*ngIf='nextOpeningTime !== undefined || nextEventsOnError === true')
+                    span(i18n='@@nextOpeningTime') Next opening time
+                    | {{' '}}:{{' '}}
+                    span(*ngIf='nextOpeningTime !== undefined') {{nextOpeningTime}}
+                    span(*ngIf='nextEventsOnError === true',i18n='@@informationNotAvailable') Information not available
+                div(*ngIf='nextClosingTime !== undefined || nextEventsOnError === true')
+                    span(i18n='@@nextClosingTime') Next opening time
+                    | {{' '}}:{{' '}}
+                    span(*ngIf='nextClosingTime !== undefined') {{nextClosingTime}}
+                    span(*ngIf='nextEventsOnError === true',i18n='@@informationNotAvailable') Information not available
     .col-xl-6
         sb-card
             .card-header
@@ -27,10 +39,18 @@
                 .float-right
                     sb-dashboard-weather-action()
             .card-body
-                div.spinner-border(*ngIf='temperature === undefined',role='status')
+                div.spinner-border(*ngIf='temperature === undefined && meteoOnError === false',role='status')
                     span(i18n='@@loading').sr-only Loading...
-                div(*ngIf='temperature !== undefined',i18n='temperature: temperature in the chichen cooop@@weatherTemp') Temp : {{temperature}}° ({{temperatureExternal}}° exterior)
-                div(*ngIf='humidity !== undefined',i18n='humidity: humidity in the chicken coop@@weatherHumidity') Humidity : {{humidity}}% ({{humidityExternal}}% exterior)
+                div(*ngIf='temperature !== undefined || meteoOnError === true')
+                    span(i18n='@@temperature') Temperature
+                    | {{' '}}:{{' '}}
+                    span(*ngIf='temperature !== undefined',i18n='temperature in the chichen cooop@@weatherTemp') {{temperature}}° ({{temperatureExternal}}° exterior)
+                    span(*ngIf='meteoOnError === true',i18n='temperature in the chichen cooop unavailable@@informationNotAvailable') Information not available
+                div(*ngIf='humidity !== undefined || meteoOnError === true')
+                    span(i18n='@@humidity') Humidity
+                    | {{' '}}:{{' '}}
+                    span(*ngIf='humidity !== undefined',i18n='humidity: humidity in the chicken coop@@weatherHumidity')  {{humidity}}% ({{humidityExternal}}% exterior)
+                    span(*ngIf='meteoOnError === true',i18n='humidity: humidity in the chicken coop unavailable@@informationNotAvailable')  Information not available
     .col-xl-6
         sb-card
             .card-header
@@ -65,9 +85,10 @@
                 fa-icon.mr-1([icon]='["fas", "camera"]')
                 span(i18n='@@webcam') Webcam
                 .float-right
-                    sb-dashboard-webcam-action()
+                    sb-dashboard-webcam-action((refreshWebcamEvent)="refreshWebcamEventHandler($event)")
             .card-body
-                div.spinner-border(*ngIf='pictureInitialised === false',role='status')
+                div.spinner-border(*ngIf='pictureInitialised === false && pictureNotInitialised === false',role='status')
                     span.sr-only
                         span(i18n='@@loading') Loading...
-                img([src]='picturePath', (load)='pictureIsInitialised()' , alt="chicken coop picture", i18n-alt='@@chicken coop picture', class="{{pictureInitialised === false ? 'hidden':'not_hidden'}}")
+                img([src]='picturePath', (load)='pictureIsInitialised()', (error)='pictureIsNotInitialised()' , alt="chicken coop picture", i18n-alt='@@chicken coop picture', class="{{pictureInitialised === false ? 'hidden':'not_hidden'}}")
+                span(*ngIf='pictureNotInitialised === true',i18n='@@informationNotAvailable')  Information not available

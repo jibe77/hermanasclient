@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AbstractService } from '@common/services';
 import { User } from '@modules/auth/models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { AbstractService } from './abstract.service';
 
 export interface DoorStatus {
     status: string;

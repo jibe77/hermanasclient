@@ -8,8 +8,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppCommonModule } from '@common/app-common.module';
 import { HttpErrorInterceptor } from '@modules/dashboard/interceptors';
 import { NavigationModule } from '@modules/navigation/navigation.module';
-import { ChartsModule } from '@modules/charts/charts.module';
-import { TablesModule } from '@modules/tables/tables.module';
 
 /* Components */
 import * as dashboardComponents from './components';
@@ -34,8 +32,6 @@ import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
         FormsModule,
         AppCommonModule,
         NavigationModule,
-        ChartsModule,
-        TablesModule,
         AmplifyUIAngularModule,
         HttpClientModule,
     ],

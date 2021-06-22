@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'sb-dashboard',
@@ -7,18 +8,16 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/
     styleUrls: ['dashboard.component.scss'],
 })
 export class DashboardComponent {
-    public retryMessageIsDisplayed: () => boolean;
-    public retry: () => void;
-    public cardChangeDetector: ChangeDetectorRef;
-
     constructor() {}
-    public refreshCardComponent() {
-        if (this.cardChangeDetector) {
-            this.cardChangeDetector.detectChanges();
-        }
+
+    notificationSubject: Subject<void> = new Subject<void>();
+    retrySubject: Subject<void> = new Subject<void>();
+
+    onServiceCommunicationError(event: any) {
+        this.notificationSubject.next();
     }
 
-    public setCardChangeDetectorRef(changeDetectorRef: ChangeDetectorRef) {
-        this.cardChangeDetector = changeDetectorRef;
+    onServiceRetry(event: any) {
+        this.retrySubject.next();
     }
 }

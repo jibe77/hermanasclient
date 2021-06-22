@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractService } from '@modules/dashboard/services/abstract.service';
+import { AbstractService } from '@common/services';
 import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
@@ -17,7 +17,7 @@ export class WebsocketService extends AbstractService {
     public async initWebSocket() {
         return new Promise<void>(resolve => {
             if (!this.stompClient) {
-                const ws = new SockJS(this.serverUrl );
+                const ws = new SockJS(this.serverUrl);
                 this.stompClient = Stomp.over(ws);
                 this.stompClient.connect({}, resolve);
             } else {
@@ -27,7 +27,7 @@ export class WebsocketService extends AbstractService {
     }
 
     public async subscribe(name: string, fnc: (event) => void) {
-        const subscription = this.stompClient.subscribe(`/${name}`, (event) => {
+        const subscription = this.stompClient.subscribe(`/${name}`, event => {
             fnc({ ...event, body: JSON.parse(event.body) });
         });
         this.mapEndpointSubscription.set(name, subscription);

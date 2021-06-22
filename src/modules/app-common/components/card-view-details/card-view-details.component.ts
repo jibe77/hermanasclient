@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { DashboardComponent } from '@modules/dashboard/containers';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
     selector: 'sb-card-view-details',
@@ -11,10 +10,11 @@ export class CardViewDetailsComponent implements OnInit {
     @Input() background!: string;
     @Input() color!: string;
     @Input() link = '';
+    @Output() events = new EventEmitter();
 
     customClasses: string[] = [];
 
-    constructor(public _dashboardComponent: DashboardComponent) {}
+    constructor() {}
     ngOnInit() {
         if (this.background) {
             this.customClasses.push(this.background);
@@ -22,5 +22,10 @@ export class CardViewDetailsComponent implements OnInit {
         if (this.color) {
             this.customClasses.push(this.color);
         }
+    }
+
+    retry() {
+        console.log('retrying');
+        this.events.emit(this.link);
     }
 }

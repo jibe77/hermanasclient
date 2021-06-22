@@ -2,11 +2,13 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    EventEmitter,
+    Input,
     OnDestroy,
     OnInit,
+    Output,
 } from '@angular/core';
 import { UserService } from '@modules/auth/services';
-import { DashboardComponent } from '@modules/dashboard/containers';
 import {
     FanService,
     FanStatus,
@@ -21,7 +23,7 @@ import {
     WebsocketService,
 } from '@modules/dashboard/services';
 import { DoorService, DoorStatus } from '@modules/dashboard/services/door.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: 'sb-dashboard-widgets',
@@ -30,9 +32,13 @@ import { Subscription } from 'rxjs';
     styleUrls: ['dashboard-widgets.component.scss'],
 })
 export class DashboardWidgetsComponent implements OnInit, OnDestroy {
+    @Output() serviceCommunicationError = new EventEmitter();
+    @Input() retryLauncherEvents: Observable<void>;
+
     public doorStatus;
     public nextOpeningTime;
     public nextClosingTime;
+    public nextEventsOnError = false;
     public temperature;
     public temperatureExternal;
     public humidity;
@@ -46,13 +52,18 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     public fanStatusOnError = false;
     public doorStatusOnError = false;
     public pictureInitialised = false;
+    public pictureNotInitialised = false;
     public picturePath = 'favicon.ico';
+
+    private eventsSubscription: Subscription;
 
     userServiceSubscription: Subscription = new Subscription();
     meteoServiceSubscription: Subscription = new Subscription();
     fanServiceSubscription: Subscription = new Subscription();
+    doorServiceSubscription: Subscription = new Subscription();
     musicServiceSubscription: Subscription = new Subscription();
     lightServiceSubscription: Subscription = new Subscription();
+    nextEventSubcription: Subscription = new Subscription();
 
     constructor(
         public _doorService: DoorService,
@@ -63,27 +74,25 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         private _fanService: FanService,
         private _musiceService: MusicService,
         private _lightService: LightService,
-        private _websocketService: WebsocketService,
-        public _dashboard: DashboardComponent
-    ) {
-        this._dashboard.retryMessageIsDisplayed = () => {
-            console.log('evaluation retry')
-            return this.isConnectionError();
-        };
-        this._dashboard.retry = () => {
-            this.refreshInfoOnError();
-        };
-    }
+        private _websocketService: WebsocketService
+    ) {}
 
     ngOnInit() {
+        this.eventsSubscription = this.retryLauncherEvents.subscribe(() => {
+            this.refreshInfoOnError();
+        });
         this.createSubscriptionToLightNotifications();
         this.createSubscriptionToFanNotifications();
         this.createSubscriptionToMusicNotifications();
         this.createSubscriptionToDoorNotifications();
-        this.refreshNextEvent();
+        this.createSubscriptionToNextEventNotifications();
         this.refreshPicture();
         this.createSubscriptionToMeteoInfo();
 
+        this.initWebSocket();
+    }
+
+    private initWebSocket() {
         this._websocketService.initWebSocket().then(() => {
             this._websocketService.subscribe('socket/progress', event => {
                 if (event.body.appliance === 'LIGHT') {
@@ -106,13 +115,16 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.musicServiceSubscription.unsubscribe();
         this.fanServiceSubscription.unsubscribe();
         this.lightServiceSubscription.unsubscribe();
+        this.nextEventSubcription.unsubscribe();
         this._websocketService.unsubscribeToWebSocketEvent('socket/progress');
     }
 
     public refreshPicture() {
         this.pictureInitialised = false;
+        this.pictureNotInitialised = false;
+        // date param is functionaly useless, but technicaly allows to force the web browser to  refresh the picture
         this.picturePath =
-            this._lightService.domainBase + '/camera/takePicture#' + new Date().getTime();
+            this._lightService.domainBase + '/camera/takePicture?date=' + new Date().getTime();
         this.changeDetectorRef.detectChanges();
     }
 
@@ -128,18 +140,22 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         }
     }
 
+    public pictureIsNotInitialised() {
+        this.pictureNotInitialised = true;
+        this.changeDetectorRef.detectChanges();
+    }
+
     public createSubscriptionToMeteoInfo() {
         if (this.meteoServiceSubscription !== undefined) {
             this.meteoServiceSubscription.unsubscribe();
             this.refreshMeteoInfo();
         }
-        this.meteoServiceSubscription = this._meteoService
-            .getMeteoInfo()
-            .subscribe((data: MeteoInfo) => {
+        this.meteoServiceSubscription = this._meteoService.getMeteoInfo().subscribe(
+            (data: MeteoInfo) => {
                 this.refreshMeteoInfo(data);
             },
             error => {
-                this.refreshMeteoInfo(error);
+                this.refreshMeteoInfo(undefined, error);
             }
         );
     }
@@ -150,23 +166,49 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.humidity = data === undefined ? undefined : data.humidity;
         this.temperatureExternal = data === undefined ? undefined : data.externalTemperature;
         this.humidityExternal = data === undefined ? undefined : data.externalHumidity;
-        this.refresh();
+        this.refresh(error);
     }
 
-    refreshNextEvent() {
-        this._schedulerService.getNextEvents().subscribe((data: NextEvents) => {
-            this.nextOpeningTime = data.nextDoorOpeningTime.substr(11, 5);
-            this.nextClosingTime = data.nextDoorClosingTime.substr(11, 5);
+    createSubscriptionToNextEventNotifications() {
+        if (this.nextEventSubcription !== undefined) {
+            this.nextEventSubcription.unsubscribe();
+            this.nextEventsOnError = false;
+            this.nextOpeningTime = undefined;
+            this.nextClosingTime = undefined;
             this.changeDetectorRef.detectChanges();
-        });
+        }
+        this.nextEventSubcription = this._schedulerService.getNextEvents().subscribe(
+            (data: NextEvents) => {
+                this.refreshNextEvent(data);
+            },
+            error => {
+                this.refreshNextEvent(undefined, error);
+            }
+        );
     }
+
+    refreshNextEvent(data: NextEvents, error?: any) {
+        this.nextEventsOnError = error !== undefined;
+        this.nextOpeningTime =
+            data !== undefined ? data.nextDoorOpeningTime.substr(11, 5) : undefined;
+        this.nextClosingTime =
+            data !== undefined ? data.nextDoorClosingTime.substr(11, 5) : undefined;
+        this.refresh(error);
+    }
+
     createSubscriptionToDoorNotifications() {
-        this._doorService.getDoorStatus().subscribe(
+        if (this.doorServiceSubscription !== undefined) {
+            this.doorServiceSubscription.unsubscribe();
+            this.doorStatusOnError = false;
+            this.doorStatus = undefined;
+            this.changeDetectorRef.detectChanges();
+        }
+        this.doorServiceSubscription = this._doorService.getDoorStatus().subscribe(
             (data: DoorStatus) => {
                 this.refreshDoorStatus(data.status);
             },
             error => {
-                this.refreshDoorStatus(error);
+                this.refreshDoorStatus(undefined, error);
             }
         );
     }
@@ -174,7 +216,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     refreshDoorStatus(status?: string, error?: any) {
         this.doorStatusOnError = error !== undefined;
         this.doorStatus = status;
-        this.refresh();
+        this.refresh(error);
     }
 
     createSubscriptionToFanNotifications() {
@@ -183,14 +225,13 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
             this.fanStatusOnError = false;
             this.fanStatus = undefined;
             this.changeDetectorRef.detectChanges();
-            this._dashboard.refreshCardComponent();
         }
         this.fanServiceSubscription = this._fanService.getStatus().subscribe(
             (data: FanStatus) => {
                 this.refreshFanStatus(data.statusEnum === 'ON');
             },
             (error: any) => {
-                this.refreshFanStatus(error);
+                this.refreshFanStatus(undefined, error);
             }
         );
     }
@@ -198,7 +239,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     private refreshFanStatus(status?: boolean, error?: any) {
         this.fanStatusOnError = error !== undefined;
         this.fanStatus = status;
-        this.changeDetectorRef.detectChanges();
+        this.refresh(error);
     }
 
     createSubscriptionToMusicNotifications() {
@@ -207,15 +248,13 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
             this.musicStatusOnError = false;
             this.musicStatus = undefined;
             this.changeDetectorRef.detectChanges();
-            this._dashboard.refreshCardComponent();
         }
-        this.musicServiceSubscription = this._musiceService
-            .getStatus()
-            .subscribe((data: MusicStatus) => {
+        this.musicServiceSubscription = this._musiceService.getStatus().subscribe(
+            (data: MusicStatus) => {
                 this.refreshMusicStatus(data.statusEnum === 'ON');
             },
             (error: any) => {
-                this.refreshMusicStatus(error);
+                this.refreshMusicStatus(undefined, error);
             }
         );
     }
@@ -223,7 +262,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     private refreshMusicStatus(status?: boolean, error?: any) {
         this.musicStatusOnError = error !== undefined;
         this.musicStatus = status;
-        this.refresh();
+        this.refresh(error);
     }
 
     createSubscriptionToLightNotifications() {
@@ -232,16 +271,13 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
             this.lightStatusOnError = false;
             this.lightStatus = undefined;
             this.changeDetectorRef.detectChanges();
-            this._dashboard.refreshCardComponent();
         }
-        this.lightServiceSubscription = this._lightService
-            .getStatus()
-            .subscribe(
+        this.lightServiceSubscription = this._lightService.getStatus().subscribe(
             (data: LightStatus) => {
                 this.refreshLightStatus(data.statusEnum === 'ON');
             },
             (error: any) => {
-                this.refreshLightStatus(error);
+                this.refreshLightStatus(undefined, error);
             }
         );
     }
@@ -249,12 +285,12 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     private refreshLightStatus(status?: boolean, error?: any) {
         this.lightStatusOnError = error !== undefined;
         this.lightStatus = status;
-        console.log('refresh light');
-        this.refresh();
+        this.refresh(error);
     }
 
     public isConnectionError(): boolean {
         return (
+            this.meteoOnError ||
             this.lightStatusOnError ||
             this.fanStatusOnError ||
             this.musicStatusOnError ||
@@ -279,13 +315,16 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
             this.createSubscriptionToMeteoInfo();
         }
         this.refreshPicture();
-        this._dashboard.refreshCardComponent();
     }
 
-    private refresh() {
-        this.changeDetectorRef.detectChanges();
-        if (this.isConnectionError()) {
-            this._dashboard.refreshCardComponent();
+    private refresh(error?: any) {
+        if (error !== undefined) {
+            this.serviceCommunicationError.emit(error);
         }
+        this.changeDetectorRef.detectChanges();
+    }
+
+    refreshWebcamEventHandler($event: any) {
+        this.refreshPicture();
     }
 }

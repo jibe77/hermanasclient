@@ -101,6 +101,8 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
                     this.refreshFanStatus(event.body.state === 'ON');
                 } else if (event.body.appliance === 'DOOR') {
                     this.refreshDoorStatus(event.body.state);
+                    this.refreshPicture();
+                    this.createSubscriptionToNextEventNotifications();
                 } else if (event.body.appliance === 'MUSIC') {
                     this.refreshMusicStatus(event.body.state === 'ON');
                 }
@@ -117,6 +119,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.lightServiceSubscription.unsubscribe();
         this.nextEventSubcription.unsubscribe();
         this._websocketService.unsubscribeToWebSocketEvent('socket/progress');
+        this._websocketService.disconnect();
     }
 
     public refreshPicture() {
@@ -313,6 +316,9 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         }
         if (this.meteoOnError) {
             this.createSubscriptionToMeteoInfo();
+        }
+        if (this.nextEventsOnError) {
+            this.createSubscriptionToNextEventNotifications();
         }
         this.refreshPicture();
     }

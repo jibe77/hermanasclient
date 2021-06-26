@@ -8,8 +8,6 @@ import {
 import { VersionInfo, VersionService } from '@modules/system/services/version.service';
 import { Subject, Subscription } from 'rxjs';
 
-import { version } from '../../../../../package.json';
-
 @Component({
     selector: 'sb-system',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,7 +17,7 @@ import { version } from '../../../../../package.json';
 export class SystemComponent implements OnInit, OnDestroy {
     versionServiceSubscription: Subscription = new Subscription();
     public backEndVersion: string;
-    public frontEndVersion: string = version;
+    public frontEndVersion = '0.3.2x';
     public backEndVersionOnError: boolean;
 
     notificationSubject: Subject<void> = new Subject<void>();

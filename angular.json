@@ -26,7 +26,6 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "aot": true,
                         "localize": true,
                         "outputPath": "dist/hermanas-client",
                         "index": "src/index.html",
@@ -38,7 +37,13 @@
                         "stylePreprocessorOptions": {
                             "includePaths": ["src", "./node_modules"]
                         },
-                        "scripts": []
+                        "scripts": [],
+                        "vendorChunk": true,
+                        "extractLicenses": false,
+                        "buildOptimizer": false,
+                        "sourceMap": true,
+                        "optimization": false,
+                        "namedChunks": true
                     },
                     "configurations": {
                         "production": {
@@ -64,7 +69,8 @@
                             "outputPath": "dist/hermanas-client/en-US/",
                             "localize": ["en-US"]
                         }
-                    }
+                    },
+                    "defaultConfiguration": ""
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",

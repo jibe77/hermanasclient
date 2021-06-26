@@ -9,7 +9,6 @@
     "compileOnSave": false,
     "compilerOptions": {
         "baseUrl": "src",
-        "emitDecoratorMetadata": true,
         "esModuleInterop": true,
         // "noImplicitAny": true,
         "outDir": "./dist/out-tsc",

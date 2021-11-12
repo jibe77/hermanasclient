@@ -1,5 +1,5 @@
-import { ChartsService } from './charts.service';
+import { WeatherService } from './weather.service';
 
-export const services = [ChartsService];
+export const services = [WeatherService];
 
-export * from './charts.service';
+export * from './weather.service';

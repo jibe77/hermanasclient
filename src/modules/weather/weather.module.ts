@@ -18,7 +18,7 @@ import * as chartsContainers from './containers';
 import * as chartsGuards from './guards';
 
 /* Services */
-import * as chartsServices from './services';
+import * as weatherServices from './services';
 
 @NgModule({
     imports: [
@@ -29,7 +29,7 @@ import * as chartsServices from './services';
         AppCommonModule,
         NavigationModule,
     ],
-    providers: [...chartsServices.services, ...chartsGuards.guards],
+    providers: [...weatherServices.services, ...chartsGuards.guards],
     declarations: [...chartsContainers.containers, ...chartsComponents.components],
     exports: [...chartsContainers.containers, ...chartsComponents.components],
 })

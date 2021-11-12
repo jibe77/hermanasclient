@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DoorService } from './door.service';
+import { VersionService } from './version.service';
 
 describe('VersionService', () => {
-  let service: DoorService;
+    let service: VersionService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(DoorService);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(VersionService);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
 });

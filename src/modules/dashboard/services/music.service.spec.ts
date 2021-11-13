@@ -3,14 +3,14 @@ import { TestBed } from '@angular/core/testing';
 import { SchedulerService } from './scheduler.service';
 
 describe('MusicService', () => {
-  let service: SchedulerService;
+    let service: SchedulerService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(SchedulerService);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(SchedulerService);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
 });

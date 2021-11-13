@@ -1,16 +1,19 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-
-import { SchedulerService } from './scheduler.service';
+import { FanService } from '@modules/dashboard/services/fan.service';
 
 describe('FanService', () => {
-  let service: SchedulerService;
+    let service: FanService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(SchedulerService);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [HttpClientTestingModule],
+            providers: [FanService],
+        });
+        service = TestBed.inject(FanService);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
 });

@@ -1,6 +1,6 @@
 {
     "name": "hermanas-client",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "scripts": {
         "build": "npm run build:pug && npm run ng -- build --configuration production --localize --build-optimizer=true --statsJson=true && npm run build:index && npm run build:version",
         "build:debug": "npm run build:pug && npm run ng -- build --configuration production --source-map --build-optimizer=true --statsJson=true && npm run build:index && npm run build:version",
@@ -42,7 +42,7 @@
         "@fortawesome/free-brands-svg-icons": "5.15.3",
         "@fortawesome/free-regular-svg-icons": "5.15.3",
         "@fortawesome/free-solid-svg-icons": "5.15.3",
-        "@ng-bootstrap/ng-bootstrap": "9.1.3",
+        "@ng-bootstrap/ng-bootstrap": "^10.0.0",
         "@prettier/plugin-pug": "1.13.5",
         "@stomp/ng2-stompjs": "^8.0.0",
         "@stomp/stompjs": "^6.1.0",

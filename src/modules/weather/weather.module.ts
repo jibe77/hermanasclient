@@ -1,6 +1,9 @@
 /* tslint:disable: ordered-imports*/
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
@@ -20,6 +23,9 @@ import * as chartsGuards from './guards';
 /* Services */
 import * as weatherServices from './services';
 
+/* Directives */
+import * as tablesDirectives from './directives';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -28,8 +34,15 @@ import * as weatherServices from './services';
         FormsModule,
         AppCommonModule,
         NavigationModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
     ],
-    providers: [...weatherServices.services, ...chartsGuards.guards],
+    providers: [
+        ...weatherServices.services,
+        ...chartsGuards.guards,
+        ...tablesDirectives.directives,
+    ],
     declarations: [...chartsContainers.containers, ...chartsComponents.components],
     exports: [...chartsContainers.containers, ...chartsComponents.components],
 })

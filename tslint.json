@@ -12,7 +12,8 @@
             "element",
             [
                 "app",
-                "sb"
+                "sb",
+                "hermanas"
             ],
             "kebab-case"
         ],
@@ -26,7 +27,8 @@
             "attribute",
             [
                 "app",
-                "sb"
+                "sb",
+                "hermanas"
             ],
             "camelCase"
         ],

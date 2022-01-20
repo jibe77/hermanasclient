@@ -1,16 +1,19 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-
-import { SchedulerService } from './scheduler.service';
+import { MusicService } from '@modules/dashboard/services/music.service';
 
 describe('MusicService', () => {
-  let service: SchedulerService;
+    let service: MusicService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(SchedulerService);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [HttpClientTestingModule],
+            providers: [MusicService],
+        });
+        service = TestBed.inject(MusicService);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
 });

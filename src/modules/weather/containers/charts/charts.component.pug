@@ -8,9 +8,19 @@ sb-layout-dashboard
     sb-card
         .card-header
             fa-icon.mr-1([icon]='["fas", "table"]')
-            | Last 24 hours
+            | Last week
         .card-body
             // put a table here
+            hermanas-weather-table-area
+            // sb-ng-bootstrap-table([pageSize]='6')
+        .card-footer.small.text-muted Updated yesterday at 11:59 PM
+
+    sb-card
+        .card-header
+            fa-icon.mr-1([icon]='["fas", "table"]')
+            | Last month
+        .card-body
+            // put a diagram here
             // sb-charts-area
             // sb-ng-bootstrap-table([pageSize]='6')
         .card-footer.small.text-muted Updated yesterday at 11:59 PM

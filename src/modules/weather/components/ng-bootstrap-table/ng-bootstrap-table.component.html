@@ -1,5 +1,5 @@
 <form>
-    <div class="form-group form-inline">Full text search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="countryService.searchTerm" /><span class="ml-3" *ngIf="countryService.loading$ | async">Loading...</span></div>
+    <div class="form-group form-inline">Full text search:<input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="countryService.searchTerm" /><span class="ml-3" *ngIf="countryService.loading$ | async">Loading...</span></div>
     <table class="table table-striped">
         <thead>
             <tr>

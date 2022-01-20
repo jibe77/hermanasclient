@@ -557,7 +557,14 @@
                     <context context-type="linenumber">8</context>
                 </context-group>
             </trans-unit>
-
+            <trans-unit id="signin" datatype="html">
+                <source>Login / Sign up</source>
+                <target>Connexion / Inscription</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/modules/navigation/components/top-nav-user/top-nav-user.component.html</context>
+                    <context context-type="linenumber">12</context>
+                </context-group>
+            </trans-unit>
             <trans-unit id="producedBy" datatype="html">
                 <source>Brought to you by</source>
                 <target>Développé par</target>

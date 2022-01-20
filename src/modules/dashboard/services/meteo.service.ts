@@ -4,11 +4,12 @@ import { AbstractService } from '@common/services';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-export interface MeteoInfo {
-    temperature: number;
+export class MeteoInfo {
+    temperature: string;
     externalTemperature: number;
     humidity: number;
     externalHumidity: number;
+    dateTime: string;
 }
 
 @Injectable()

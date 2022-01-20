@@ -1,4 +1,4 @@
-import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
+/*import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -51,3 +51,4 @@ describe('ChartsPieComponent', () => {
         expect(hostComponentNE.querySelector('sb-charts-pie')).toEqual(jasmine.anything());
     });
 });
+*/

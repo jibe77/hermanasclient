@@ -1,8 +1,9 @@
-<form>
+<div class="spinner-border" *ngIf="tableIsLoading"><span class="sr-only" i18n="@@loading">Loading...</span></div>
+<div *ngIf="!tableIsLoading">
     <table mat-table matSort [dataSource]="dataSource">
         <ng-container matColumnDef="dateTime"
             ><th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-            <td mat-cell *matCellDef="let info">{{ info.dateTime | date : 'short' }}</td></ng-container
+            <td mat-cell *matCellDef="let info">{{ info.dateTime | date : 'd/M, H:mm' }}</td></ng-container
         ><ng-container matColumnDef="temperature"
             ><th mat-header-cell *matHeaderCellDef mat-sort-header>Temperature</th>
             <td mat-cell *matCellDef="let info">{{ info.temperature | temperature }}</td></ng-container
@@ -20,4 +21,4 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
-</form>
+</div>

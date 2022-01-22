@@ -75,7 +75,8 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "hermanas-client:build"
+                        "browserTarget": "hermanas-client:build",
+                        "publicHost":"https://poulailler57.ddns.net:5780/sockjs-node/"
                     },
                     "configurations": {
                         "production": {

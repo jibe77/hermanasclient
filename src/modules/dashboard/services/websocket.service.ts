@@ -5,7 +5,7 @@ import SockJS from 'sockjs-client';
 
 @Injectable()
 export class WebsocketService extends AbstractService {
-    private serverUrl = this.domainBase + `/socket`;
+    private serverUrl = this.domainBase + `/sockjs-node`;
     private stompClient;
     public mapEndpointSubscription: Map<string, any> = new Map();
 

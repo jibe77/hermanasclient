@@ -1,4 +1,5 @@
-import {VersionService} from '@modules/system/services/version.service';
+import { VersionService } from '@modules/system/services/version.service';
+
 import { DoorService } from './door.service';
 import { FanService } from './fan.service';
 import { LightService } from './light.service';
@@ -15,6 +16,7 @@ export const services = [
     FanService,
     LightService,
     WebsocketService,
+    VersionService,
 ];
 
 export * from './door.service';

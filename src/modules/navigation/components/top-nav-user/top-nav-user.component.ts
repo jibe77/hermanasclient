@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import { AuthState, CognitoUserInterface, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { User } from '@modules/auth/models';
 import { UserService } from '@modules/auth/services';
@@ -19,7 +20,13 @@ export class TopNavUserComponent implements OnInit, OnDestroy {
     loginText: string;
     logoutText: string;
 
-    constructor(public navigationService: NavigationService, public userService: UserService) {}
+    constructor(
+        public navigationService: NavigationService,
+        public userService: UserService,
+        private ngZone: NgZone,
+        private changeDetectorRef: ChangeDetectorRef,
+        private router: Router
+    ) {}
 
     ngOnInit() {
         const dict = {
@@ -43,6 +50,10 @@ export class TopNavUserComponent implements OnInit, OnDestroy {
             this.userService.reset(authState, authData);
             this.authState = authState;
         });
+    }
+
+    navigateTo(url) {
+        this.router.navigate([url]);
     }
 
     ngOnDestroy() {

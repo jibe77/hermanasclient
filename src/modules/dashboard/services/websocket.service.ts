@@ -3,11 +3,6 @@ import { AbstractService } from '@common/services';
 import { Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
-export interface CoopStatus {
-    appliance: string;
-    state: string;
-}
-
 @Injectable()
 export class WebsocketService extends AbstractService {
     private serverUrl = this.domainBase + `/socket`;
@@ -17,12 +12,11 @@ export class WebsocketService extends AbstractService {
     public async initWebSocket() {
         return new Promise<void>(resolve => {
             if (!this.stompClient) {
-                const ws = new SockJS(this.serverUrl);
-                this.stompClient = Stomp.over(ws);
-                this.stompClient.connect({}, resolve);
-            } else {
-                resolve();
+                this.stompClient = Stomp.over(function () {
+                    return new SockJS(this.serverUrl);
+                });
             }
+            this.stompClient.connect({}, resolve);
         });
     }
 

@@ -1,22 +1,16 @@
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component,
-    Input,
+    Component, OnDestroy,
     OnInit,
-    QueryList,
     ViewChild,
-    ViewChildren,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import {MatSort, MatSortable} from '@angular/material/sort';
+import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MeteoInfo } from '@modules/dashboard/services';
-import { SBSortableHeaderDirective } from '@modules/system/directives';
-import { Country } from '@modules/system/models';
-import { SortEvent } from '@modules/weather/directives';
 import { WeatherService } from '@modules/weather/services';
-import { Observable } from 'rxjs';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'hermanas-weather-table-area',
@@ -24,8 +18,7 @@ import { Observable } from 'rxjs';
     templateUrl: './weather-table-area.component.html',
     styleUrls: ['weather-table-area.component.scss'],
 })
-export class WeatherTableAreaComponent implements OnInit {
-    info$!: Observable<MeteoInfo[]>;
+export class WeatherTableAreaComponent implements OnInit, OnDestroy {
     displayedColumns = [
         'dateTime',
         'temperature',
@@ -36,30 +29,44 @@ export class WeatherTableAreaComponent implements OnInit {
     dataSource = new MatTableDataSource<MeteoInfo>();
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
+    public tableIsLoading = false;
 
-    constructor(public weatherService: WeatherService) {}
+    infoSubscription: Subscription = new Subscription();
+
+    constructor(
+        public weatherService: WeatherService,
+        private changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     ngOnInit() {
+        this.tableIsLoading = true;
+        this.changeDetectorRef.detectChanges();
+
         const today = new Date();
         const to = this.formatDate(today);
 
         const sevenDaysAgo = new Date(today.getTime() - 7 * 1000 * 60 * 60 * 24);
         const from = this.formatDate(sevenDaysAgo);
 
-        console.log('to : ' + to);
-        console.log('from : ' + from);
+        this.infoSubscription = this.weatherService
+            .getInfoUsingDateRange(from, to)
+            .subscribe(data => {
+                this.dataSource.data = data;
+                this.tableIsLoading = false;
+                this.changeDetectorRef.detectChanges();
+                this.sort.sort({ id: 'dateTime', start: 'desc' } as MatSortable);
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+            });
+    }
 
-        this.info$ = this.weatherService.getInfoUsingDateRange(from, to);
-        this.info$.subscribe(data => {
-            this.dataSource.data = data;
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-            this.sort.sort({ id: 'dateTime', start: 'desc' } as MatSortable);
-        });
+    ngOnDestroy(): void {
+        this.infoSubscription.unsubscribe();
     }
 
     private formatDate(today: Date) {
-        return today.getFullYear() +
+        return (
+            today.getFullYear() +
             '-' +
             (today.getMonth() + 1 + '').padStart(2, '0') +
             '-' +
@@ -67,6 +74,7 @@ export class WeatherTableAreaComponent implements OnInit {
             '-' +
             (today.getHours() + '').padStart(2, '0') +
             '-' +
-            (today.getMinutes() + '').padStart(2, '0');
+            (today.getMinutes() + '').padStart(2, '0')
+        );
     }
 }

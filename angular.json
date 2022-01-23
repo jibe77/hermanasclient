@@ -80,13 +80,17 @@
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "hermanas-client:build:production"
+                            "browserTarget": "hermanas-client:build:production",
+                            "publicHost":"https://poulailler57.ddns.net:5780/sockjs-node/"
+
                         },
                         "fr": {
-                            "browserTarget": "hermanas-client:build:fr"
+                            "browserTarget": "hermanas-client:build:fr",
+                            "publicHost":"https://poulailler57.ddns.net:5780/sockjs-node/"
                         },
                         "en": {
-                            "browserTarget": "hermanas-client:build:en"
+                            "browserTarget": "hermanas-client:build:en",
+                            "publicHost":"https://poulailler57.ddns.net:5780/sockjs-node/"
                         }
                     }
                 },

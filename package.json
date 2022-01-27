@@ -1,6 +1,6 @@
 {
     "name": "hermanas-client",
-    "version": "0.3.2",
+    "version": "0.6.6",
     "scripts": {
         "build": "npm run build:pug && npm run ng -- build --configuration production --localize --build-optimizer=true --statsJson=true && npm run build:index && npm run build:version",
         "build:debug": "npm run build:pug && npm run ng -- build --configuration production --source-map --build-optimizer=true --statsJson=true && npm run build:index && npm run build:version",

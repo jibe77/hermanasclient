@@ -4,7 +4,7 @@ import { User } from '@modules/auth/models';
 export class AbstractService {
     public domainBase = 'https://poulailler57.ddns.net:5780';
 
-    protected getHeaders() {
+    public getHeaders() {
         return new HttpHeaders({
             'Access-Control-Allow-Origin': '*',
         });

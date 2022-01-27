@@ -75,22 +75,18 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "hermanas-client:build",
-                        "publicHost":"https://poulailler57.ddns.net:5780/sockjs-node/"
+                        "browserTarget": "hermanas-client:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "hermanas-client:build:production",
-                            "publicHost":"https://poulailler57.ddns.net:5780/sockjs-node/"
+                            "browserTarget": "hermanas-client:build:production"
 
                         },
                         "fr": {
-                            "browserTarget": "hermanas-client:build:fr",
-                            "publicHost":"https://poulailler57.ddns.net:5780/sockjs-node/"
+                            "browserTarget": "hermanas-client:build:fr"
                         },
                         "en": {
-                            "browserTarget": "hermanas-client:build:en",
-                            "publicHost":"https://poulailler57.ddns.net:5780/sockjs-node/"
+                            "browserTarget": "hermanas-client:build:en"
                         }
                     }
                 },

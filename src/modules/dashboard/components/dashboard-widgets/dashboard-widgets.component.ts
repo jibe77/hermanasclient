@@ -20,9 +20,9 @@ import {
     MusicStatus,
     NextEvents,
     SchedulerService,
-    WebsocketService,
 } from '@modules/dashboard/services';
 import { DoorService, DoorStatus } from '@modules/dashboard/services/door.service';
+import { ProgressWebsocketService } from '@modules/dashboard/services/progresswebsocket.service';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -74,7 +74,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         private _fanService: FanService,
         private _musiceService: MusicService,
         private _lightService: LightService,
-        private _websocketService: WebsocketService
+        private _websocketService: ProgressWebsocketService
     ) {}
 
     ngOnInit() {
@@ -93,21 +93,24 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     }
 
     private initWebSocket() {
-        this._websocketService.initWebSocket().then(() => {
-            this._websocketService.subscribe('socket/progress', event => {
-                if (event.body.appliance === 'LIGHT') {
-                    this.refreshLightStatus(event.body.state === 'ON');
-                } else if (event.body.appliance === 'FAN') {
-                    this.refreshFanStatus(event.body.state === 'ON');
-                } else if (event.body.appliance === 'DOOR') {
-                    this.refreshDoorStatus(event.body.state);
+        this._websocketService.getObservable().subscribe(
+            data => {
+                if (data.message.appliance === 'LIGHT') {
+                    this.refreshLightStatus(data.message.state === 'ON');
+                } else if (data.message.appliance === 'FAN') {
+                    this.refreshFanStatus(data.message.state === 'ON');
+                } else if (data.message.appliance === 'DOOR') {
+                    this.refreshDoorStatus(data.message.state);
                     this.refreshPicture();
                     this.createSubscriptionToNextEventNotifications();
-                } else if (event.body.appliance === 'MUSIC') {
-                    this.refreshMusicStatus(event.body.state === 'ON');
+                } else if (data.message.appliance === 'MUSIC') {
+                    this.refreshMusicStatus(data.message.state === 'ON');
                 }
-            });
-        });
+            },
+            msg => {
+                console.log('Error Getting message: ', msg);
+            }
+        );
     }
 
     ngOnDestroy(): void {
@@ -118,8 +121,8 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         this.fanServiceSubscription.unsubscribe();
         this.lightServiceSubscription.unsubscribe();
         this.nextEventSubcription.unsubscribe();
-        this._websocketService.unsubscribeToWebSocketEvent('socket/progress');
-        this._websocketService.disconnect();
+        // this._websocketService.unsubscribeToWebSocketEvent('socket/progress');
+        // this._websocketService.disconnect();
     }
 
     public refreshPicture() {
@@ -285,7 +288,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
         );
     }
 
-    private refreshLightStatus(status?: boolean, error?: any) {
+    public refreshLightStatus(status?: boolean, error?: any) {
         this.lightStatusOnError = error !== undefined;
         this.lightStatus = status;
         this.refresh(error);

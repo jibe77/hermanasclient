@@ -17,7 +17,7 @@ import { Subject, Subscription } from 'rxjs';
 export class SystemComponent implements OnInit, OnDestroy {
     versionServiceSubscription: Subscription = new Subscription();
     public backEndVersion: string;
-    public frontEndVersion = '0.3.2x';
+    public frontEndVersion = '0.6.6';
     public backEndVersionOnError: boolean;
 
     notificationSubject: Subject<void> = new Subject<void>();

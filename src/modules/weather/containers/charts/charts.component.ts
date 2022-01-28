@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'sb-charts',
@@ -6,7 +7,17 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     templateUrl: './charts.component.html',
     styleUrls: ['charts.component.scss'],
 })
-export class ChartsComponent implements OnInit {
+export class ChartsComponent {
     constructor() {}
-    ngOnInit() {}
+
+    notificationSubject: Subject<void> = new Subject<void>();
+    retrySubject: Subject<void> = new Subject<void>();
+
+    onServiceCommunicationError(event: any) {
+        this.notificationSubject.next();
+    }
+
+    onServiceRetry(event: any) {
+        this.retrySubject.next();
+    }
 }

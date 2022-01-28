@@ -1,6 +1,6 @@
 sb-layout-dashboard
     sb-dashboard-head(title='Weather', i18n-title="@@weather", [hideBreadcrumbs]='true')
-
+    sb-common-cards([notificationEvents]="notificationSubject.asObservable()", (serviceRetry)="onServiceRetry($event)")
     sb-card
         .card-body
             span(i18n="@@weatherInfo") This board is displaying the weather fetched from a temperature and humidity probe inside the chicken coop.
@@ -11,7 +11,7 @@ sb-layout-dashboard
             | Last week
         .card-body
             // put a table here
-            hermanas-weather-table-area
+            hermanas-weather-table-area([retryLauncherEvents]="retrySubject.asObservable()",(serviceCommunicationError)="onServiceCommunicationError($event)")
             // sb-ng-bootstrap-table([pageSize]='6')
         .card-footer.small.text-muted Updated yesterday at 11:59 PM
 

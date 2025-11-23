@@ -9,6 +9,7 @@ frontend:
         - npm install
     build:
       commands:
+        - mkdir -p dist/hermanas-client
         - npm run build
   artifacts:
     baseDirectory: dist/hermanas-client

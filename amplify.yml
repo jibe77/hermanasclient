@@ -8,7 +8,7 @@ frontend:
       commands:
         - npm run build
   artifacts:
-    baseDirectory: dist/sb-admin-angular
+    baseDirectory: dist/hermanas-client
     files:
       - '**/*'
   cache:

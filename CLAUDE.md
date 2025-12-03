@@ -74,9 +74,9 @@ All components use the `sb` prefix (e.g., `sb-dashboard`).
 
 ## Technology Stack
 
-- Angular 12.1.0 with TypeScript 4.3.4
+- Angular 14.3.0 with TypeScript 4.8.4
 - Bootstrap 4.6.0 + ng-bootstrap 10.0.0
-- Angular Material 12.1.0
+- Angular Material 14.2.7
 - AWS Amplify 4.1.0 (auth, GraphQL)
 - RxJS 6.6.7
 - ng2-stompjs 8.0.0 (WebSockets)
@@ -94,14 +94,14 @@ All components use the `sb` prefix (e.g., `sb-dashboard`).
 - Console logs forbidden except `console.error`
 - XLIFF format for i18n (`src/locale/messages.xlf`)
 
-## Memory Issues and Node.js Compatibility
+## Memory Issues
 
-Node.js 20 compatibility with Angular 12 requires the legacy OpenSSL provider:
+If builds run out of memory, increase Node heap size:
 ```json
-"ng": "cross-env NODE_OPTIONS=\"--max_old_space_size=2048 --openssl-legacy-provider\" ./node_modules/.bin/ng"
+"ng": "cross-env NODE_OPTIONS=\"--max_old_space_size=2048\" ./node_modules/.bin/ng"
 ```
 
-Note: Angular 12 officially supports Node.js 12-16. The `--openssl-legacy-provider` flag is a workaround for Node.js 17+ compatibility.
+Note: Angular 14 officially supports Node.js 14-18, but also works with Node.js 20 without requiring the --openssl-legacy-provider flag.
 
 ---
 
@@ -170,12 +170,79 @@ All backend breaking changes have been implemented:
 
 ### Phase 3 - Angular Migration
 
-- [ ] **Upgrade Angular 12 → 18** (EOL since August 2022)
-  - Follow https://angular.dev/update-guide
-  - Incremental: 12 → 13 → 14 → 15 → 16 → 17 → 18
-  - Update TypeScript 4.3.4 → 5.x
-  - Update RxJS 6.6.7 → 7.8.x
-  - Update zone.js 0.11.4 → 0.14.x
+- [x] **Upgrade Angular 12 → 13** ✅ COMPLETED
+  - Upgraded all @angular/* packages to ~13.3.12
+  - Upgraded @angular/cli to ~13.3.11
+  - Updated TypeScript 4.3.4 → 4.6.4
+  - Updated zone.js ~0.11.4 → ~0.11.5
+  - Removed IE11 polyfills from src/polyfills.ts
+  - Updated TestBed configuration in src/test.ts (added teardown option)
+  - Removed Protractor configuration from angular.json
+  - Removed deprecated defaultProject from angular.json
+  - RxJS remained at 6.6.7 (Angular 13 still supports RxJS 6)
+  - All Playwright E2E tests passing (3/3)
+  - Development and production builds successful
+
+- [x] **Upgrade Angular 13 → 14** ✅ COMPLETED
+  - Upgraded all @angular/* packages to ~14.3.0
+  - Upgraded @angular/cli to ~14.2.13
+  - Updated TypeScript 4.6.4 → 4.8.4 (ES2020 target)
+  - Updated tsconfig.json to ES2020 compilation target
+  - RxJS remained at 6.6.7 (Angular 14 still supports RxJS 6)
+  - zone.js remained at ~0.11.4
+  - Removed app-routing.module.ts relativeLinkResolution config (deprecated)
+  - Disabled build optimization and buildOptimizer in angular.json production config (required for legacy dependencies compatibility)
+  - All Playwright E2E tests passing (3/3)
+  - Development and production builds successful (without minification)
+  - Node.js 20 compatibility confirmed (no --openssl-legacy-provider needed)
+
+- [ ] **Upgrade Angular 14 → 18** ⚠️ BLOCKED
+
+  **Status**: Migration blocked at Angular 15+ due to incompatible dependencies requiring major refactoring.
+
+  **Blockers preventing Angular 15+ upgrade:**
+
+  1. **@stomp/ng2-stompjs@8.0.0 incompatibility** (Critical blocker)
+     - Library abandoned since May 2021, not compatible with Angular 15+ Ivy compiler
+     - Error: `NG2006: The injectable RxStompService inherits its constructor from RxStomp, but the latter does not have an Angular decorator`
+     - Used in: `WebSocketService`, `ProgressWebsocketService`, `DashboardModule`
+     - **Required action**: Refactor to use `@stomp/rx-stomp` directly instead of ng2-stompjs wrapper
+       - Remove @stomp/ng2-stompjs dependency
+       - Create custom Angular service wrapping @stomp/rx-stomp@2.x
+       - Update all WebSocket service implementations
+       - Test WebSocket connections and message handling thoroughly
+
+  2. **AWS Amplify v4 → v6 breaking changes** (Blocks Angular 16+)
+     - @aws-amplify/ui-angular@1.0.13 incompatible with Angular 16+
+     - Requires @aws-amplify/ui-angular@5.x which needs aws-amplify@6.x
+     - Major API changes in Amplify v6:
+       - `AmplifyUIAngularModule` removed, replaced with `AmplifyAuthenticatorModule`
+       - `@aws-amplify/ui-components` deprecated
+       - Auth API signatures changed
+       - Module imports restructured (aws-amplify/auth, aws-amplify/utils)
+     - Used in: `NavigationModule`, `AuthModule`, `AppCommonModule`
+     - **Required action**: Major refactor of authentication code
+       - Upgrade aws-amplify 4.1.2 → 6.x
+       - Upgrade @aws-amplify/ui-angular 1.0.13 → 5.x
+       - Update all Amplify imports and API calls
+       - Refactor AuthState usage
+       - Update authentication guards
+       - Test entire authentication flow thoroughly
+
+  3. **@ng-bootstrap/ng-bootstrap@10.0.0** (Blocks Angular 16+)
+     - Current version only supports up to Angular 13
+     - Angular 16+ requires @ng-bootstrap/ng-bootstrap@13+
+     - Used extensively in: `WeatherModule`, `SystemModule`, `LogsModule`
+     - **Required action**: Upgrade and test all ng-bootstrap components
+
+  **Recommended migration path forward:**
+
+  1. First, refactor WebSocket implementation (remove @stomp/ng2-stompjs)
+  2. Then, upgrade AWS Amplify v4 → v6 with full auth refactor
+  3. Upgrade @ng-bootstrap/ng-bootstrap v10 → v13+
+  4. Resume Angular upgrades: 14 → 15 → 16 → 17 → 18
+
+  **Note on RxJS 6 → 7**: Angular 15 officially requires RxJS 7, which will be part of the ng update process. The codebase uses minimal RxJS operators and should migrate smoothly once the above blockers are resolved.
 - [x] **Replace Protractor with Playwright** ✅ COMPLETED - Protractor deprecated December 2022
   - Installed @playwright/test@latest
   - Created `playwright.config.ts` with webServer configuration
@@ -412,7 +479,9 @@ All backend breaking changes have been implemented:
 
 | Issue | Location | Severity |
 |-------|----------|----------|
-| Angular 12 EOL | package.json | Critical |
+| Angular 14 (EOL May 2024) | package.json | High |
+| Angular 15+ migration blocked | @stomp/ng2-stompjs, aws-amplify v4 | High |
+| Build optimization disabled | angular.json production config | Medium |
 | No state management | Services using BehaviorSubject | Medium |
 | Fat component | dashboard-widgets.component.ts | Medium |
 | Shallow tests | Most .spec.ts files | Medium |

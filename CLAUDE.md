@@ -191,22 +191,6 @@ All backend breaking changes have been implemented:
 
   Recommended Migration Order
 
-  🔴 PHASE 1: Replace Protractor (Do This FIRST)
-
-  Priority: Highest
-  Risk: Low-Medium
-  Timeline: 1-2 weeks
-
-  Why first:
-  - Protractor is deprecated and may break with newer Angular versions
-  - You need working E2E tests during the Angular upgrade
-  - Independent from other upgrades - can be done safely on Angular 12
-  - Will give you confidence to test subsequent upgrades
-  - Cypress/Playwright work well with all Angular versions
-
-  Recommended: Use Playwright (better TypeScript support, faster, cross-browser)
-
-  ---
   🟠 PHASE 2: Upgrade Angular 12 → 18 (Incrementally)
 
   Priority: Critical

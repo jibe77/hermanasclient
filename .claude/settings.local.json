@@ -10,7 +10,10 @@
       "Bash(npm run lint:*)",
       "Bash(npx tsc:*)",
       "Bash(npx playwright install chromium)",
-      "Bash(npm run e2e:*)"
+      "Bash(npm run e2e:*)",
+      "Bash(npm run build:pug:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

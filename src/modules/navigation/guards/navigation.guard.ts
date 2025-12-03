@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, UrlTree } from '@angular/router';
+import { Router, UrlTree } from '@angular/router';
 import { User, AuthState } from '@modules/auth/models';
 import { UserService } from '@modules/auth/services';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 @Injectable()
-export class NavigationGuard implements CanActivate {
+export class NavigationGuard  {
     constructor(private userService: UserService, private router: Router) {}
 
     canActivate(): Observable<boolean | UrlTree> {

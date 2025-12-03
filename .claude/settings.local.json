@@ -15,7 +15,11 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(npm view:*)",
-      "Bash(inherits its constructor from RxStomp, but the latter does not have an Angular)"
+      "Bash(inherits its constructor from RxStomp, but the latter does not have an Angular)",
+      "WebSearch",
+      "WebFetch(domain:docs.amplify.aws)",
+      "Bash(npx ng update:*)",
+      "Bash(npx ng version:*)"
     ],
     "deny": [],
     "ask": []

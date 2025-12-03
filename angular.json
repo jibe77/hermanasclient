@@ -75,25 +75,25 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "hermanas-client:build"
+                      "buildTarget": "hermanas-client:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "hermanas-client:build:production"
+                          "buildTarget": "hermanas-client:build:production"
 
                         },
                         "fr": {
-                            "browserTarget": "hermanas-client:build:fr"
+                          "buildTarget": "hermanas-client:build:fr"
                         },
                         "en": {
-                            "browserTarget": "hermanas-client:build:en"
+                          "buildTarget": "hermanas-client:build:en"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "hermanas-client:build"
+                      "buildTarget": "hermanas-client:build"
                     }
                 },
                 "test": {

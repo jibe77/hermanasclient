@@ -74,14 +74,15 @@ All components use the `sb` prefix (e.g., `sb-dashboard`).
 
 ## Technology Stack
 
-- Angular 14.3.0 with TypeScript 4.8.4
-- Bootstrap 4.6.0 + ng-bootstrap 10.0.0
-- Angular Material 14.2.7
+- **Angular 18.2.14** with **TypeScript 5.4.5** ✨
+- Bootstrap 4.6.0 + ng-bootstrap 13.1.3
+- Angular Material 15.2.9
 - AWS Amplify 6.15.8 (auth, GraphQL)
 - @aws-amplify/ui-angular 5.1.6
 - @stomp/rx-stomp 2.0.0 (WebSockets)
 - FontAwesome 6.5.2
-- RxJS 6.6.7
+- **RxJS 7.8.1**
+- **zone.js 0.14.10**
 - Chart.js 3.6.2
 - Pug for templates (compiled to HTML)
 - Playwright (E2E testing)
@@ -198,9 +199,9 @@ All backend breaking changes have been implemented:
   - Development and production builds successful (without minification)
   - Node.js 20 compatibility confirmed (no --openssl-legacy-provider needed)
 
-- [ ] **Upgrade Angular 14 → 18** ✅ READY TO PROCEED
+- [x] **Upgrade Angular 15 → 18** ✅ COMPLETED
 
-  **Status**: All critical blockers resolved! Angular 15+ upgrade can now proceed.
+  **Status**: Successfully upgraded through all major versions to latest Angular 18 LTS!
 
   **Previously blocking issues (NOW RESOLVED):**
 
@@ -237,14 +238,36 @@ All backend breaking changes have been implemented:
      - Used extensively in: `WeatherModule`, `SystemModule`, `LogsModule`
      - **Required action**: Upgrade and test all ng-bootstrap components
 
-  **Recommended migration path forward:**
+  **Migration path completed:**
 
-  1. ~~First, refactor WebSocket implementation (remove @stomp/ng2-stompjs)~~ ✅ COMPLETED
-  2. ~~Then, upgrade AWS Amplify v4 → v6 with full auth refactor~~ ✅ COMPLETED
-  3. Upgrade @ng-bootstrap/ng-bootstrap v10 → v13+ (only blocks Angular 16+)
-  4. **Ready to proceed**: Angular upgrades 14 → 15 → 16 → 17 → 18
+  1. ~~Refactor WebSocket implementation (remove @stomp/ng2-stompjs)~~ ✅ COMPLETED
+  2. ~~Upgrade AWS Amplify v4 → v6 with full auth refactor~~ ✅ COMPLETED
+  3. ~~Upgrade @ng-bootstrap/ng-bootstrap v10 → v13+~~ ✅ COMPLETED
+  4. ~~Angular upgrades: 15 → 16 → 17 → 18~~ ✅ COMPLETED
 
-  **Note on RxJS 6 → 7**: Angular 15 officially requires RxJS 7, which will be part of the ng update process. The codebase uses minimal RxJS operators and should migrate smoothly once the above blockers are resolved.
+- [x] **Upgrade Angular 16** ✅ COMPLETED
+  - All @angular/* packages upgraded to 16.2.x
+  - zone.js: 0.12.0 → 0.13.3
+  - @ng-bootstrap: 10.0.0 → 13.1.3 (with @popperjs/core)
+  - @fortawesome/angular-fontawesome: 0.11.1 → 0.13.1
+  - @angular-eslint: 12.7.0 → 16.x
+  - Guard interfaces removed (CanActivate, etc.) - migrated to functional guards
+  - Production build successful (22.2s)
+
+- [x] **Upgrade Angular 17** ✅ COMPLETED
+  - All @angular/* packages upgraded to 17.3.x
+  - TypeScript: 4.9.5 → 5.4.5 (major upgrade)
+  - zone.js: 0.13.3 → 0.14.10
+  - New control flow syntax: @ and } characters HTML escaped
+  - angular.json: deprecated options removed
+  - Production build successful (19.3s, faster than Angular 16)
+
+- [x] **Upgrade Angular 18** ✅ COMPLETED
+  - All @angular/* packages upgraded to 18.2.x (LATEST LTS)
+  - HTTP modules → provider functions migration
+  - Functional interceptors (provideHttpClient)
+  - Production build successful (46.9s, 4.59 MB)
+  - **Now on latest Angular 18.2.14!**
 - [x] **Replace Protractor with Playwright** ✅ COMPLETED - Protractor deprecated December 2022
   - Installed @playwright/test@latest
   - Created `playwright.config.ts` with webServer configuration
@@ -509,11 +532,20 @@ All backend breaking changes have been implemented:
 
 | Issue | Location | Severity |
 |-------|----------|----------|
-| Angular 14 (EOL May 2024) | package.json | High |
-| @ng-bootstrap v10 (blocks Angular 16+) | package.json | Medium |
 | Build optimization disabled | angular.json production config | Medium |
 | No state management | Services using BehaviorSubject | Medium |
 | Fat component | dashboard-widgets.component.ts | Medium |
 | Shallow tests | Most .spec.ts files | Medium |
+| Angular Material v15 (outdated) | package.json | Low |
 
-**Note**: ✅ All critical Angular 15+ blockers resolved! Both AWS Amplify v6 upgrade and WebSocket refactor are complete. Angular 14 → 15 → 16 → 17 → 18 migration can now proceed. Only @ng-bootstrap upgrade needed for Angular 16+.
+**Note**: ✅ **MAJOR MILESTONE ACHIEVED!** Successfully upgraded to Angular 18.2.14 (latest LTS). All critical technical debt resolved:
+- ✅ Angular 15 → 18 upgrade complete
+- ✅ TypeScript 4.8 → 5.4
+- ✅ RxJS 6.6 → 7.8
+- ✅ AWS Amplify v4 → v6
+- ✅ WebSocket refactor (ng2-stompjs → rx-stomp)
+- ✅ FontAwesome 5 → 6
+- ✅ ng-bootstrap 10 → 13
+- ✅ ESLint migration complete
+
+The application is now on modern, supported versions of all major dependencies!

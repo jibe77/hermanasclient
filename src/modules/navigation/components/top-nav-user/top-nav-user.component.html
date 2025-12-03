@@ -1,46 +1,15 @@
-<li
-    class="nav-item dropdown dropdown-user no-caret"
-    *ngIf="userService.user$ | async as user"
-    ngbDropdown
-    placement="bottom-right"
-    display="dynamic"
->
-    <a
-        class="nav-link dropdown-toggle"
-        id="userDropdown"
-        ngbDropdownToggle
-        data-cy="userMenu"
-        role="button"
-        aria-haspopup="true"
-        aria-expanded="false"
-        ><fa-icon [icon]="['fas', 'user']"></fa-icon
-    ></a>
+<li class="nav-item dropdown dropdown-user no-caret" *ngIf="userService.user$ | async as user" ngbDropdown placement="bottom-right" display="dynamic">
+    <a class="nav-link dropdown-toggle" id="userDropdown" ngbDropdownToggle data-cy="userMenu" role="button" aria-haspopup="true" aria-expanded="false"><fa-icon [icon]='["fas", "user"]'></fa-icon></a>
     <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownUser">
         <h6 class="dropdown-header">
             <div class="dropdown-user-details">
-                <div class="dropdown-user-details-name" *ngIf="user.authState === 'signedin'">
-                    {{ user.login }}
-                </div>
-                <div class="dropdown-user-details-email" *ngIf="user.authState === 'signedin'">
-                    {{ user.email }}
-                </div>
-                <div
-                    class="dropdown-user-details-name"
-                    *ngIf="user.authState !== 'signedin'"
-                    i18n="@@guest"
-                >
-                    Guest
-                </div>
+                <div class="dropdown-user-details-name" *ngIf='user.authState === "signedin"'>{{ user.login }}</div>
+                <div class="dropdown-user-details-email" *ngIf='user.authState === "signedin"'>{{ user.email }}</div>
+                <div class="dropdown-user-details-name" *ngIf='user.authState !== "signedin"' i18n="@@guest">Guest</div>
             </div>
         </h6>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" routerLink="/auth/login" *ngIf="user.authState !== 'signedin'"
-            ><span i18n="@@signin">Connexion / Inscription</span></a
-        ><amplify-authenticator hidden></amplify-authenticator
-        ><amplify-sign-out
-            routerLink="/dashboard"
-            *ngIf="user.authState === 'signedin'"
-            [textContent]="'logoutText'"
-        ></amplify-sign-out>
+        <a class="dropdown-item" routerLink="/auth/login" *ngIf='user.authState !== "signedin"'><span i18n="@@signin">Connexion / Inscription</span></a
+        ><amplify-authenticator hidden></amplify-authenticator><amplify-sign-out routerLink="/dashboard" *ngIf='user.authState === "signedin"' [textContent]="'logoutText'"></amplify-sign-out>
     </div>
 </li>

@@ -21,10 +21,14 @@ npm run build:pug        # Compile Pug templates to HTML
 
 # Testing
 npm test                 # Unit tests (Karma/Jasmine)
-npm run e2e              # E2E tests (Protractor)
+npm run e2e              # E2E tests (Playwright)
+npm run e2e:headed       # E2E tests with visible browser
+npm run e2e:ui           # E2E tests with Playwright UI mode
+npm run e2e:debug        # E2E tests in debug mode
+npm run e2e:report       # Show HTML test report
 
 # Code Quality
-npm run lint             # Run TSLint
+npm run lint             # Run ESLint
 npm run lint:fix         # Auto-fix lint issues
 
 # Docker
@@ -78,22 +82,26 @@ All components use the `sb` prefix (e.g., `sb-dashboard`).
 - ng2-stompjs 8.0.0 (WebSockets)
 - Chart.js 3.6.2
 - Pug for templates (compiled to HTML)
+- Playwright (E2E testing)
+- ESLint with Prettier integration
 
 ## Code Style
 
-- TSLint with Prettier integration
+- ESLint with Prettier integration
 - 140 character max line length
 - 4-space indentation
 - Single quotes
 - Console logs forbidden except `console.error`
 - XLIFF format for i18n (`src/locale/messages.xlf`)
 
-## Memory Issues
+## Memory Issues and Node.js Compatibility
 
-If builds run out of memory, increase Node heap size in package.json:
+Node.js 20 compatibility with Angular 12 requires the legacy OpenSSL provider:
 ```json
-"ng": "cross-env NODE_OPTIONS=--max_old_space_size=2048 ./node_modules/.bin/ng"
+"ng": "cross-env NODE_OPTIONS=\"--max_old_space_size=2048 --openssl-legacy-provider\" ./node_modules/.bin/ng"
 ```
+
+Note: Angular 12 officially supports Node.js 12-16. The `--openssl-legacy-provider` flag is a workaround for Node.js 17+ compatibility.
 
 ---
 
@@ -168,10 +176,205 @@ All backend breaking changes have been implemented:
   - Update TypeScript 4.3.4 → 5.x
   - Update RxJS 6.6.7 → 7.8.x
   - Update zone.js 0.11.4 → 0.14.x
-- [ ] **Replace Protractor with Cypress/Playwright** - Protractor deprecated December 2022
+- [x] **Replace Protractor with Playwright** ✅ COMPLETED - Protractor deprecated December 2022
+  - Installed @playwright/test@latest
+  - Created `playwright.config.ts` with webServer configuration
+  - Migrated E2E tests from `e2e/src/app.e2e-spec.ts` to `tests/e2e/app.spec.ts`
+  - Updated package.json scripts: e2e, e2e:headed, e2e:ui, e2e:debug, e2e:report
+  - Removed Protractor and jasmine-spec-reporter dependencies
+  - Deleted old `e2e/` directory
+  - Removed Protractor configuration from `angular.json`
+  - All 3 Playwright tests passing (authentication redirect, console errors, meta tags)
 - [ ] **Upgrade Bootstrap 4.6.0 → 5.x**
 - [ ] **Upgrade AWS Amplify 4.x → 6.x**
 - [ ] **Upgrade FontAwesome 5.x → 6.x**
+
+  Recommended Migration Order
+
+  🔴 PHASE 1: Replace Protractor (Do This FIRST)
+
+  Priority: Highest
+  Risk: Low-Medium
+  Timeline: 1-2 weeks
+
+  Why first:
+  - Protractor is deprecated and may break with newer Angular versions
+  - You need working E2E tests during the Angular upgrade
+  - Independent from other upgrades - can be done safely on Angular 12
+  - Will give you confidence to test subsequent upgrades
+  - Cypress/Playwright work well with all Angular versions
+
+  Recommended: Use Playwright (better TypeScript support, faster, cross-browser)
+
+  ---
+  🟠 PHASE 2: Upgrade Angular 12 → 18 (Incrementally)
+
+  Priority: Critical
+  Risk: High
+  Timeline: 3-6 weeks
+
+  Why second:
+  - Angular 12 is EOL - critical security risk
+  - Most other libraries depend on Angular version
+  - Must be done incrementally: 12 → 13 → 14 → 15 → 16 → 17 → 18
+  - TypeScript, RxJS, and zone.js will upgrade automatically with Angular
+  - Bootstrap 5, Amplify 6, and FontAwesome 6 likely require Angular 15+
+
+  Important steps:
+  1. Run ng update @angular/core@13 @angular/cli@13 (and test)
+  2. Repeat for each version up to 18
+  3. Fix breaking changes at each step
+  4. Run tests after each major version
+  5. Update package.json dependencies as guided by Angular CLI
+
+  Expected automatic updates during Angular upgrade:
+  - TypeScript 4.3.4 → 5.4.x (Angular 18 requires TS 5.4+)
+  - RxJS 6.6.7 → 7.8.x (Angular 15+ requires RxJS 7)
+  - zone.js 0.11.4 → 0.14.x
+  - ESLint packages will need updates
+
+  ---
+  🟡 PHASE 3: Upgrade Bootstrap 4.6 → 5.x
+
+  Priority: Medium-High
+  Risk: Medium
+  Timeline: 2-3 weeks
+
+  Why third:
+  - Requires stable Angular environment
+  - Has significant breaking changes:
+    - Class name changes (.ml-* → .ms-*, .mr-* → .me-*)
+    - Form controls markup changes
+    - Removed jQuery dependency
+    - Updated utility classes
+  - Need to update all templates across the app
+  - ng-bootstrap will also need upgrade to v14+ (for Angular 15+)
+
+  Major changes to handle:
+  - Update all Bootstrap classes in templates
+  - Test responsive layouts
+  - Update custom SCSS if any
+  - May need to update ng-bootstrap components
+
+  ---
+  🟢 PHASE 4: Upgrade AWS Amplify 4.x → 6.x
+
+  Priority: Medium
+  Risk: Medium
+  Timeline: 1-2 weeks
+
+  Why fourth:
+  - Authentication is critical - needs stable environment
+  - Amplify 6 has breaking changes in API
+  - Better to upgrade after Angular is stable
+  - May require updates to auth flow
+
+  Major changes to handle:
+  - API signature changes
+  - Auth flow updates
+  - GraphQL client updates if used
+  - Test authentication thoroughly
+
+  ---
+  🔵 PHASE 5: Upgrade FontAwesome 5.x → 6.x
+
+  Priority: Low
+  Risk: Low
+  Timeline: 1 week
+
+  Why last:
+  - Least critical upgrade
+  - Mostly cosmetic changes
+  - Some icon names changed but mostly backward compatible
+  - Can be done anytime but best when everything else is stable
+  - Low risk of breaking anything
+
+  Changes to handle:
+  - Update icon names if any changed
+  - Update package references
+  - Test icon displays
+
+  ---
+  Pre-Migration Checklist
+
+  Before starting, prepare:
+
+  # 1. Create a feature branch
+  git checkout -b migration/angular-18
+
+  # 2. Ensure all tests pass
+  npm test
+  npm run e2e
+  npm run lint
+
+  # 3. Document current state
+  npm list > pre-migration-deps.txt
+  npm run build > build-output.txt
+
+  # 4. Backup
+  git tag pre-migration-backup
+
+  ---
+  Migration Timeline Summary
+
+  | Phase | Task               | Duration   | Risk Level |
+  |-------|--------------------|------------|------------|
+  | 1     | Replace Protractor | 1-2 weeks  | Low-Medium |
+  | 2     | Angular 12 → 18    | 3-6 weeks  | High       |
+  | 3     | Bootstrap 4 → 5    | 2-3 weeks  | Medium     |
+  | 4     | Amplify 4 → 6      | 1-2 weeks  | Medium     |
+  | 5     | FontAwesome 5 → 6  | 1 week     | Low        |
+  | Total | Full Migration     | 8-14 weeks | -          |
+
+  ---
+  Alternative Approach (Faster but Riskier)
+
+  If you're comfortable with higher risk and have good test coverage:
+
+  1. Replace Protractor (1-2 weeks)
+  2. Jump to Angular 18 directly (3-4 weeks)
+    - Still test at major versions but don't commit until 18
+    - Fix all breaking changes in one go
+    - Riskier but faster
+  3. Upgrade Bootstrap, Amplify, FontAwesome in parallel (2-3 weeks)
+    - Can overlap if you have multiple developers
+    - Higher risk of conflicts
+
+  ---
+  Key Success Factors
+
+  1. Test thoroughly at each step - Don't move forward until tests pass
+  2. Commit after each major version - Easy rollback points
+  3. Use Angular Update Guide - https://angular.dev/update-guide
+  4. Update one thing at a time - Easier to identify issues
+  5. Have rollback plan - Git tags at each phase
+  6. Monitor bundle size - Newer versions should be smaller/faster
+
+  ---
+  ⚠️ Critical Warnings
+
+  Don't do these:
+  - ❌ Upgrade multiple major things simultaneously
+  - ❌ Skip Angular versions (must go incrementally)
+  - ❌ Upgrade dependencies manually without using ng update
+  - ❌ Proceed without passing tests
+
+  Do these:
+  - ✅ Follow Angular update guide exactly
+  - ✅ Run ng update to let CLI handle dependencies
+  - ✅ Test after each major version upgrade
+  - ✅ Read migration guides for each library
+  - ✅ Keep a rollback plan ready
+
+  ---
+  My Recommendation
+
+  Start with Protractor replacement - It's independent, relatively safe, and you'll need good E2E tests for the Angular migration. Once that's done
+   and you have confidence in your test suite, tackle the Angular upgrade incrementally with good test coverage at each step.
+
+  Would you like me to help you start with Phase 1 (Protractor replacement) or would you prefer to dive into the Angular migration planning?
+
+
 
 ### Phase 4 - Architecture Improvements
 
@@ -226,7 +429,6 @@ All backend breaking changes have been implemented:
 | Issue | Location | Severity |
 |-------|----------|----------|
 | Angular 12 EOL | package.json | Critical |
-| Protractor deprecated | e2e/ | High |
 | No state management | Services using BehaviorSubject | Medium |
 | Fat component | dashboard-widgets.component.ts | Medium |
 | Shallow tests | Most .spec.ts files | Medium |

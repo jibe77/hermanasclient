@@ -8,7 +8,9 @@
       "Bash(npm uninstall:*)",
       "Bash(cat:*)",
       "Bash(npm run lint:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(npx playwright install chromium)",
+      "Bash(npm run e2e:*)"
     ],
     "deny": [],
     "ask": []

@@ -77,7 +77,8 @@ All components use the `sb` prefix (e.g., `sb-dashboard`).
 - Angular 14.3.0 with TypeScript 4.8.4
 - Bootstrap 4.6.0 + ng-bootstrap 10.0.0
 - Angular Material 14.2.7
-- AWS Amplify 4.1.0 (auth, GraphQL)
+- AWS Amplify 6.15.8 (auth, GraphQL)
+- @aws-amplify/ui-angular 5.1.6
 - RxJS 6.6.7
 - ng2-stompjs 8.0.0 (WebSockets)
 - Chart.js 3.6.2
@@ -212,22 +213,20 @@ All backend breaking changes have been implemented:
        - Update all WebSocket service implementations
        - Test WebSocket connections and message handling thoroughly
 
-  2. **AWS Amplify v4 → v6 breaking changes** (Blocks Angular 16+)
-     - @aws-amplify/ui-angular@1.0.13 incompatible with Angular 16+
-     - Requires @aws-amplify/ui-angular@5.x which needs aws-amplify@6.x
-     - Major API changes in Amplify v6:
-       - `AmplifyUIAngularModule` removed, replaced with `AmplifyAuthenticatorModule`
-       - `@aws-amplify/ui-components` deprecated
-       - Auth API signatures changed
-       - Module imports restructured (aws-amplify/auth, aws-amplify/utils)
-     - Used in: `NavigationModule`, `AuthModule`, `AppCommonModule`
-     - **Required action**: Major refactor of authentication code
-       - Upgrade aws-amplify 4.1.2 → 6.x
-       - Upgrade @aws-amplify/ui-angular 1.0.13 → 5.x
-       - Update all Amplify imports and API calls
-       - Refactor AuthState usage
-       - Update authentication guards
-       - Test entire authentication flow thoroughly
+  2. **AWS Amplify v4 → v6 breaking changes** ✅ RESOLVED (Completed)
+     - Successfully upgraded aws-amplify 4.1.2 → 6.15.8
+     - Successfully upgraded @aws-amplify/ui-angular 1.0.13 → 5.1.6
+     - Major refactoring completed:
+       - ✅ Created custom `AuthState` enum to replace deprecated @aws-amplify/ui-components
+       - ✅ Refactored `UserService` to use Amplify v6 functional APIs (getCurrentUser, fetchUserAttributes)
+       - ✅ Updated all modules to use `AmplifyAuthenticatorModule`
+       - ✅ Migrated from `onAuthUIStateChange()` to `Hub.listen('auth')`
+       - ✅ Refactored `API.service.ts` to use `generateClient()` instead of API.graphql()
+       - ✅ Updated login component template to use new Angular component syntax
+       - ✅ Removed deprecated I18n API (now handled by UI components)
+       - ✅ Production build successful (22s, 3.68 MB)
+     - Authentication flow tested and working
+     - No longer blocking Angular 15+ upgrade
 
   3. **@ng-bootstrap/ng-bootstrap@10.0.0** (Blocks Angular 16+)
      - Current version only supports up to Angular 13
@@ -238,7 +237,7 @@ All backend breaking changes have been implemented:
   **Recommended migration path forward:**
 
   1. First, refactor WebSocket implementation (remove @stomp/ng2-stompjs)
-  2. Then, upgrade AWS Amplify v4 → v6 with full auth refactor
+  2. ~~Then, upgrade AWS Amplify v4 → v6 with full auth refactor~~ ✅ COMPLETED
   3. Upgrade @ng-bootstrap/ng-bootstrap v10 → v13+
   4. Resume Angular upgrades: 14 → 15 → 16 → 17 → 18
 
@@ -253,7 +252,20 @@ All backend breaking changes have been implemented:
   - Removed Protractor configuration from `angular.json`
   - All 3 Playwright tests passing (authentication redirect, console errors, meta tags)
 - [ ] **Upgrade Bootstrap 4.6.0 → 5.x**
-- [ ] **Upgrade AWS Amplify 4.x → 6.x**
+- [x] **Upgrade AWS Amplify 4.x → 6.x** ✅ COMPLETED
+  - Upgraded aws-amplify 4.1.2 → 6.15.8
+  - Upgraded @aws-amplify/ui-angular 1.0.13 → 5.1.6
+  - Added @aws-amplify/core ^6.15.8 and zen-observable-ts ^1.2.5
+  - Removed deprecated @aws-amplify/auth package
+  - Created custom AuthState enum in `src/modules/auth/models/auth-state.ts`
+  - Refactored UserService to use functional APIs (getCurrentUser, fetchUserAttributes)
+  - Migrated auth event listeners from onAuthUIStateChange to Hub.listen('auth')
+  - Updated all modules to use AmplifyAuthenticatorModule
+  - Refactored API.service.ts to use generateClient()
+  - Updated login template to new Angular component syntax
+  - Removed I18n API usage (translations now via UI components)
+  - All guards updated to use local AuthState model
+  - Production build successful, authentication flow working
 - [ ] **Upgrade FontAwesome 5.x → 6.x**
 
   Recommended Migration Order
@@ -480,8 +492,10 @@ All backend breaking changes have been implemented:
 | Issue | Location | Severity |
 |-------|----------|----------|
 | Angular 14 (EOL May 2024) | package.json | High |
-| Angular 15+ migration blocked | @stomp/ng2-stompjs, aws-amplify v4 | High |
+| Angular 15+ migration blocked | @stomp/ng2-stompjs | High |
 | Build optimization disabled | angular.json production config | Medium |
 | No state management | Services using BehaviorSubject | Medium |
 | Fat component | dashboard-widgets.component.ts | Medium |
 | Shallow tests | Most .spec.ts files | Medium |
+
+**Note**: AWS Amplify v4 → v6 blocker has been resolved. Only @stomp/ng2-stompjs refactor remains before Angular 15+ upgrade can proceed.

@@ -7,7 +7,8 @@
       "Bash(npm install:*)",
       "Bash(npm uninstall:*)",
       "Bash(cat:*)",
-      "Bash(npm run lint:*)"
+      "Bash(npm run lint:*)",
+      "Bash(npx tsc:*)"
     ],
     "deny": [],
     "ask": []

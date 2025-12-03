@@ -5,7 +5,8 @@ import {
     EventEmitter,
     Input,
     OnDestroy,
-    OnInit, Output,
+    OnInit,
+    Output,
     ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';

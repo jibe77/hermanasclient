@@ -4,9 +4,7 @@ import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class UtilityGuard implements CanActivate {
-
     canActivate(): Observable<boolean> {
         return of(true);
     }
-
 }

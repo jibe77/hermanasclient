@@ -1,8 +1,15 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AuthState, CognitoUserInterface, onAuthUIStateChange} from '@aws-amplify/ui-components';
-import {UserService} from '@modules/auth/services';
-import {NavigationService} from '@modules/navigation/services';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    NgZone,
+    OnDestroy,
+    OnInit,
+} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthState, CognitoUserInterface, onAuthUIStateChange } from '@aws-amplify/ui-components';
+import { UserService } from '@modules/auth/services';
+import { NavigationService } from '@modules/navigation/services';
 
 @Component({
     selector: 'sb-login',

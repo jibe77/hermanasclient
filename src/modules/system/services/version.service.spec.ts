@@ -1,6 +1,6 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import {MeteoService} from '@modules/dashboard/services';
+import { MeteoService } from '@modules/dashboard/services';
 
 import { VersionService } from './version.service';
 

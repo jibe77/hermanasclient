@@ -11,7 +11,11 @@ import { filter } from 'rxjs/operators';
 export class AppComponent implements OnInit {
     title = 'hermanas-client';
 
-    constructor(public router: Router, private titleService: Title, private ref: ChangeDetectorRef) {
+    constructor(
+        public router: Router,
+        private titleService: Title,
+        private ref: ChangeDetectorRef
+    ) {
         this.router.events
             .pipe(filter(event => event instanceof ChildActivationEnd))
             .subscribe(event => {

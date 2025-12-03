@@ -125,9 +125,12 @@ All backend breaking changes have been implemented:
   - Removed tslint, tslint-plugin-prettier, and codelyzer packages
   - Deleted tslint.json configuration file
   - ESLint now working with `npm run lint` and `npm run lint:fix`
-- [ ] **Move hardcoded URLs to environment files**
-  - `src/modules/app-common/services/abstract.service.ts:5` - `domainBase`
-  - `src/modules/dashboard/services/websocket.service.ts:16` - `brokerURL`
+- [x] **Move hardcoded URLs to environment files** ✅ COMPLETED
+  - Added `apiUrl` and `wsUrl` to both `environment.ts` and `environment.prod.ts`
+  - Updated `AbstractService` to use `environment.apiUrl` instead of hardcoded URL
+  - Updated `WebSocketService` to use `environment.wsUrl` instead of hardcoded URL
+  - Updated `ProgressWebsocketService` to use `environment.wsUrl` instead of hardcoded URL
+  - URLs now configurable per environment (development/production)
 - [ ] **Fix memory leaks - unmanaged subscriptions**
   - `src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.ts:95-113` - WebSocket subscription never unsubscribed
   - `src/modules/weather/components/weather-table-area/weather-table-area.component.ts:40-61` - `eventsSubscription` missing unsubscribe
@@ -206,7 +209,6 @@ All backend breaking changes have been implemented:
 | Angular 12 EOL | package.json | Critical |
 | Protractor deprecated | e2e/ | High |
 | Non-functional guards | src/modules/*/guards/ | High |
-| Hardcoded URLs | abstract.service.ts, websocket.service.ts | High |
 | Memory leaks | dashboard-widgets, weather-table-area | High |
 | No state management | Services using BehaviorSubject | Medium |
 | Fat component | dashboard-widgets.component.ts | Medium |

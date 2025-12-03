@@ -7,6 +7,7 @@ import { FanService } from './fan.service';
 import { LightService } from './light.service';
 import { MeteoService } from './meteo.service';
 import { MusicService } from './music.service';
+import { RxStompService } from './rx-stomp.service';
 import { SchedulerService } from './scheduler.service';
 
 export const services = [
@@ -17,6 +18,7 @@ export const services = [
     FanService,
     LightService,
     VersionService,
+    RxStompService,
     WebSocketService,
     ProgressWebsocketService,
 ];
@@ -27,5 +29,6 @@ export * from './meteo.service';
 export * from './music.service';
 export * from './fan.service';
 export * from './light.service';
+export * from './rx-stomp.service';
 export * from './websocket.service';
 export * from './progresswebsocket.service';

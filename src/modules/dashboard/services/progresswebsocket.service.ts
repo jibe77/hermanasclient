@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { RxStompService } from '@stomp/ng2-stompjs';
-import { StompConfig } from '@stomp/stompjs';
+import { RxStompConfig } from '@stomp/rx-stomp';
 import { environment } from '../../../environments/environment';
 
 import { WebSocketOptions } from '../models';
 
+import { RxStompService } from './rx-stomp.service';
 import { WebSocketService } from './websocket.service';
 
-export const progressStompConfig: StompConfig = {
+export const progressStompConfig: RxStompConfig = {
     webSocketFactory: () => {
         console.log('connect to stomp');
         return new WebSocket(environment.wsUrl);

@@ -56,6 +56,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     public picturePath = 'favicon.ico';
 
     private eventsSubscription: Subscription;
+    private websocketSubscription: Subscription;
 
     userServiceSubscription: Subscription = new Subscription();
     meteoServiceSubscription: Subscription = new Subscription();
@@ -93,7 +94,7 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     }
 
     private initWebSocket() {
-        this._websocketService.getObservable().subscribe(
+        this.websocketSubscription = this._websocketService.getObservable().subscribe(
             data => {
                 if (data.message.appliance === 'LIGHT') {
                     this.refreshLightStatus(data.message.state === 'ON');
@@ -115,12 +116,19 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.pictureInitialised = false;
+        if (this.eventsSubscription) {
+            this.eventsSubscription.unsubscribe();
+        }
+        if (this.websocketSubscription) {
+            this.websocketSubscription.unsubscribe();
+        }
         this.userServiceSubscription.unsubscribe();
         this.meteoServiceSubscription.unsubscribe();
         this.musicServiceSubscription.unsubscribe();
         this.fanServiceSubscription.unsubscribe();
         this.lightServiceSubscription.unsubscribe();
         this.nextEventSubcription.unsubscribe();
+        this.doorServiceSubscription.unsubscribe();
         // this._websocketService.unsubscribeToWebSocketEvent('socket/progress');
         // this._websocketService.disconnect();
     }

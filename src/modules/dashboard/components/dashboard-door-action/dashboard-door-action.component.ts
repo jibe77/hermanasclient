@@ -4,6 +4,7 @@ import { UserService } from '@modules/auth/services';
 import { DashboardWidgetsComponent } from '@modules/dashboard/components/dashboard-widgets/dashboard-widgets.component';
 import { DoorService } from '@modules/dashboard/services';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
     selector: 'sb-dashboard-door-action',
@@ -38,15 +39,21 @@ export class DashboardDoorActionComponent implements OnInit, OnDestroy {
 
     public openDoor() {
         this.dashboardWidgetsComponent.displayWebcam();
-        this._doorService.openDoor(this.user).subscribe(() => {
-            this.dashboardWidgetsComponent.refreshPicture();
-        });
+        this._doorService
+            .openDoor(this.user)
+            .pipe(take(1))
+            .subscribe(() => {
+                this.dashboardWidgetsComponent.refreshPicture();
+            });
     }
 
     public closeDoor() {
         this.dashboardWidgetsComponent.displayWebcam();
-        this._doorService.closeDoor(this.user).subscribe(() => {
-            this.dashboardWidgetsComponent.refreshPicture();
-        });
+        this._doorService
+            .closeDoor(this.user)
+            .pipe(take(1))
+            .subscribe(() => {
+                this.dashboardWidgetsComponent.refreshPicture();
+            });
     }
 }

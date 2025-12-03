@@ -131,11 +131,20 @@ All backend breaking changes have been implemented:
   - Updated `WebSocketService` to use `environment.wsUrl` instead of hardcoded URL
   - Updated `ProgressWebsocketService` to use `environment.wsUrl` instead of hardcoded URL
   - URLs now configurable per environment (development/production)
-- [ ] **Fix memory leaks - unmanaged subscriptions**
-  - `src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.ts:95-113` - WebSocket subscription never unsubscribed
-  - `src/modules/weather/components/weather-table-area/weather-table-area.component.ts:40-61` - `eventsSubscription` missing unsubscribe
-  - `src/modules/dashboard/components/dashboard-door-action/dashboard-door-action.component.ts:39-51` - fire-and-forget subscriptions
-  - `src/modules/dashboard/components/dashboard-accessories-action/dashboard-accessories-action.component.ts:44-60` - fire-and-forget subscriptions
+- [x] **Fix memory leaks - unmanaged subscriptions** ✅ COMPLETED
+  - Fixed `dashboard-widgets.component.ts`:
+    - Added `websocketSubscription` property to store WebSocket subscription
+    - Added unsubscribe for `eventsSubscription` in ngOnDestroy
+    - Added unsubscribe for `websocketSubscription` in ngOnDestroy
+    - Added unsubscribe for `doorServiceSubscription` in ngOnDestroy (was missing)
+  - Fixed `weather-table-area.component.ts`:
+    - Added unsubscribe for `eventsSubscription` in ngOnDestroy
+  - Fixed `dashboard-door-action.component.ts`:
+    - Added `take(1)` operator to `openDoor()` and `closeDoor()` subscriptions
+    - Ensures automatic unsubscribe after first emission for one-time HTTP requests
+  - Fixed `dashboard-accessories-action.component.ts`:
+    - Added `take(1)` operator to `switchLight()`, `switchMusic()`, and `switchFan()` subscriptions
+    - Ensures automatic unsubscribe after first emission for one-time HTTP requests
 - [ ] **Implement route guards** - All guards return `of(true)` with no actual protection
   - `src/modules/auth/guards/auth.guard.ts`
   - `src/modules/dashboard/guards/dashboard.guard.ts`
@@ -209,7 +218,6 @@ All backend breaking changes have been implemented:
 | Angular 12 EOL | package.json | Critical |
 | Protractor deprecated | e2e/ | High |
 | Non-functional guards | src/modules/*/guards/ | High |
-| Memory leaks | dashboard-widgets, weather-table-area | High |
 | No state management | Services using BehaviorSubject | Medium |
 | Fat component | dashboard-widgets.component.ts | Medium |
 | Shallow tests | Most .spec.ts files | Medium |

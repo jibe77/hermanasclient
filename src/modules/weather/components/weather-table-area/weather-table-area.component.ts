@@ -59,7 +59,12 @@ export class WeatherTableAreaComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.infoSubscription.unsubscribe();
+        if (this.infoSubscription) {
+            this.infoSubscription.unsubscribe();
+        }
+        if (this.eventsSubscription) {
+            this.eventsSubscription.unsubscribe();
+        }
     }
 
     createSubscriptionToWeatherService() {

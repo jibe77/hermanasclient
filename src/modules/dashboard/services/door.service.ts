@@ -34,7 +34,7 @@ export class DoorService extends AbstractService {
     public closeDoor(user: User) {
         const nextEventsUrl = this.domainBase + '/door/close';
         console.log('service close door');
-        return this._httpClient.get(nextEventsUrl, {
+        return this._httpClient.post(nextEventsUrl, null, {
             headers: this.getHeadersWithAuth(user),
         });
     }
@@ -42,7 +42,7 @@ export class DoorService extends AbstractService {
     public openDoor(user: User) {
         const nextEventsUrl = this.domainBase + '/door/open';
         console.log('service open door');
-        return this._httpClient.get(nextEventsUrl, {
+        return this._httpClient.post(nextEventsUrl, null, {
             headers: this.getHeadersWithAuth(user),
         });
     }

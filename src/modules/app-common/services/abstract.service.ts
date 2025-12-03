@@ -2,7 +2,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { User } from '@modules/auth/models';
 
 export class AbstractService {
-    public domainBase = 'https://poulailler57.ddns.net:5780';
+    public domainBase = 'https://poulailler57.ddns.net:5780/api/v1';
 
     public getHeaders() {
         return new HttpHeaders({

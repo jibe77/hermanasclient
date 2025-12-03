@@ -27,7 +27,7 @@ export class LightService extends AbstractService {
 
     public switch(param: boolean, user: User): Observable<any> {
         const musicStatusUrl = this.domainBase + '/light/switch';
-        return this._httpClient.get(musicStatusUrl + '?param=' + param, {
+        return this._httpClient.post(musicStatusUrl + '?param=' + param, null, {
             headers: this.getHeadersWithAuth(user),
         });
     }

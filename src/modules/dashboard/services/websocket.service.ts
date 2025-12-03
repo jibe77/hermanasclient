@@ -13,7 +13,7 @@ export class WebSocketService {
     private obsStompConnection: Observable<any>;
     private subscribers: Array<any> = [];
     private subscriberIndex = 0;
-    private brokerURL = 'wss://poulailler57.ddns.net:5780/stomp';
+    private brokerURL = 'wss://poulailler57.ddns.net:5780/api/v1/stomp';
 
     private stompConfig: StompConfig = {
         heartbeatIncoming: 0,

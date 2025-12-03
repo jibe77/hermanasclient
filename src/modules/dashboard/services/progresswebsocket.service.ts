@@ -9,7 +9,7 @@ import { WebSocketService } from './websocket.service';
 export const progressStompConfig: StompConfig = {
     webSocketFactory: () => {
         console.log('connect to stomp');
-        return new WebSocket('wss://poulailler57.ddns.net:5780/stomp');
+        return new WebSocket('wss://poulailler57.ddns.net:5780/api/v1/stomp');
     },
 };
 

@@ -61,8 +61,9 @@ src/modules/
 Each module contains: `components/`, `containers/`, `services/`, `guards/`, `models/`, and routing module.
 
 ### Key Services
-- **WebSocketService** (`src/modules/dashboard/services/`) - STOMP WebSocket connection to broker at `wss://poulailler57.ddns.net:5780/stomp`
+- **WebSocketService** (`src/modules/dashboard/services/`) - STOMP WebSocket connection to broker at `wss://poulailler57.ddns.net:5780/api/v1/stomp`
 - **API.service.ts** (`src/app/`) - Auto-generated AWS Amplify GraphQL service
+- **AbstractService** (`src/modules/app-common/services/`) - Base service with domain configuration at `https://poulailler57.ddns.net:5780/api/v1`
 
 ### Component Prefix
 All components use the `sb` prefix (e.g., `sb-dashboard`).
@@ -98,7 +99,22 @@ If builds run out of memory, increase Node heap size in package.json:
 
 ## TODO: Improvement Plan
 
-### Phase 1 - Critical (Immediate)
+### Phase 1 - Backend Integration Updates ✅ COMPLETED
+
+All backend breaking changes have been implemented:
+
+- [x] **Updated HTTP methods** - Changed state-changing endpoints from GET to POST:
+  - `door.service.ts` - POST /api/v1/door/open, POST /api/v1/door/close
+  - `light.service.ts` - POST /api/v1/light/switch
+  - Note: /system/shutdown and /system/reboot not yet implemented in frontend
+
+- [x] **Updated API paths to v1** - All REST endpoints now use /api/v1/* paths:
+  - Updated `abstract.service.ts` - Base URL now includes /api/v1
+  - Updated `websocket.service.ts` - WebSocket endpoint now /api/v1/stomp
+  - Updated `progresswebsocket.service.ts` - WebSocket endpoint now /api/v1/stomp
+  - All services now automatically use versioned endpoints via AbstractService
+
+### Phase 2 - Critical (Immediate)
 
 - [ ] **Migrate TSLint to ESLint** - TSLint is deprecated since 2022
   ```bash
@@ -118,7 +134,7 @@ If builds run out of memory, increase Node heap size in package.json:
   - `src/modules/dashboard/guards/dashboard.guard.ts`
   - `src/modules/navigation/guards/navigation.guard.ts`
 
-### Phase 2 - Angular Migration
+### Phase 3 - Angular Migration
 
 - [ ] **Upgrade Angular 12 → 18** (EOL since August 2022)
   - Follow https://angular.dev/update-guide
@@ -131,7 +147,7 @@ If builds run out of memory, increase Node heap size in package.json:
 - [ ] **Upgrade AWS Amplify 4.x → 6.x**
 - [ ] **Upgrade FontAwesome 5.x → 6.x**
 
-### Phase 3 - Architecture Improvements
+### Phase 4 - Architecture Improvements
 
 - [ ] **Implement state management** (NgRx or signals) - Currently ad-hoc BehaviorSubjects
 - [ ] **Refactor fat component** `dashboard-widgets.component.ts` (339 lines, 7 subscriptions)
@@ -147,7 +163,7 @@ If builds run out of memory, increase Node heap size in package.json:
   - `src/modules/dashboard/services/websocket.service.ts:13-14`
   - All switch services: `light.service.ts`, `fan.service.ts`, `music.service.ts`
 
-### Phase 4 - Testing
+### Phase 5 - Testing
 
 - [ ] **Add WebSocket service tests** - Critical async logic untested
   - `src/modules/dashboard/services/websocket.service.ts`

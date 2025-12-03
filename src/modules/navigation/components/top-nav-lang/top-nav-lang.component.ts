@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NavigationService } from '@modules/navigation/services';
-import { I18n } from 'aws-amplify';
 
 @Component({
     selector: 'sb-top-nav-lang',
@@ -23,10 +22,10 @@ export class TopNavLangComponent implements OnInit {
         const language = this.languageList.find(f => f.code === this.siteLocale);
         if (language) {
             this.siteLanguage = language.label;
-            I18n.setLanguage(language.code);
+            // Note: I18n API removed in Amplify v6 - translations now configured via Amplify UI components
         } else {
             this.siteLanguage = this.languageList[1].label;
-            I18n.setLanguage(this.languageList[1].code);
+            // Note: I18n API removed in Amplify v6 - translations now configured via Amplify UI components
         }
     }
 }

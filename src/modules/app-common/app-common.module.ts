@@ -22,7 +22,7 @@ import * as appCommonGuards from './guards';
 import * as appCommonServices from './services';
 import * as authServices from '@modules/auth/services';
 
-import Amplify from 'aws-amplify';
+import { Amplify } from 'aws-amplify';
 
 import awsconfig from '../../aws-exports';
 

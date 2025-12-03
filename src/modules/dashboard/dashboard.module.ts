@@ -22,7 +22,7 @@ import * as dashboardGuards from './guards';
 import * as dashboardServices from './services';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
-import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 
 @NgModule({
     imports: [
@@ -32,7 +32,7 @@ import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
         FormsModule,
         AppCommonModule,
         NavigationModule,
-        AmplifyUIAngularModule,
+        AmplifyAuthenticatorModule,
         HttpClientModule,
     ],
     providers: [

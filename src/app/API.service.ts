@@ -2,11 +2,15 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 import { Injectable } from "@angular/core";
-import API, { graphqlOperation, GraphQLResult } from "@aws-amplify/api-graphql";
+import { generateClient, GraphQLResult, GraphQLSubscription } from "aws-amplify/api";
 import { Observable } from "zen-observable-ts";
 
 export interface SubscriptionResponse<T> {
   value: GraphQLResult<T>;
+}
+
+export interface GraphqlSubscriptionMessage<T> {
+  data: T;
 }
 
 export type CreateUserParamInput = {
@@ -177,6 +181,8 @@ export type OnDeleteUserParamSubscription = {
   providedIn: "root"
 })
 export class APIService {
+  private client = generateClient();
+
   async CreateUserParam(
     input: CreateUserParamInput,
     condition?: ModelUserParamConditionInput
@@ -197,9 +203,10 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
+    const response = (await this.client.graphql({
+      query: statement,
+      variables: gqlAPIServiceArguments
+    })) as any;
     return <CreateUserParamMutation>response.data.createUserParam;
   }
   async UpdateUserParam(
@@ -222,9 +229,10 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
+    const response = (await this.client.graphql({
+      query: statement,
+      variables: gqlAPIServiceArguments
+    })) as any;
     return <UpdateUserParamMutation>response.data.updateUserParam;
   }
   async DeleteUserParam(
@@ -247,9 +255,10 @@ export class APIService {
     if (condition) {
       gqlAPIServiceArguments.condition = condition;
     }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
+    const response = (await this.client.graphql({
+      query: statement,
+      variables: gqlAPIServiceArguments
+    })) as any;
     return <DeleteUserParamMutation>response.data.deleteUserParam;
   }
   async GetUserParam(id: string): Promise<GetUserParamQuery> {
@@ -266,9 +275,10 @@ export class APIService {
     const gqlAPIServiceArguments: any = {
       id
     };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
+    const response = (await this.client.graphql({
+      query: statement,
+      variables: gqlAPIServiceArguments
+    })) as any;
     return <GetUserParamQuery>response.data.getUserParam;
   }
   async ListUserParams(
@@ -300,16 +310,15 @@ export class APIService {
     if (nextToken) {
       gqlAPIServiceArguments.nextToken = nextToken;
     }
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
+    const response = (await this.client.graphql({
+      query: statement,
+      variables: gqlAPIServiceArguments
+    })) as any;
     return <ListUserParamsQuery>response.data.listUserParams;
   }
-  OnCreateUserParamListener: Observable<
-    SubscriptionResponse<OnCreateUserParamSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnCreateUserParam {
+  get OnCreateUserParamListener() {
+    return this.client.graphql({
+      query: `subscription OnCreateUserParam {
         onCreateUserParam {
           __typename
           id
@@ -319,14 +328,12 @@ export class APIService {
           updatedAt
         }
       }`
-    )
-  ) as Observable<SubscriptionResponse<OnCreateUserParamSubscription>>;
+    });
+  }
 
-  OnUpdateUserParamListener: Observable<
-    SubscriptionResponse<OnUpdateUserParamSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnUpdateUserParam {
+  get OnUpdateUserParamListener() {
+    return this.client.graphql({
+      query: `subscription OnUpdateUserParam {
         onUpdateUserParam {
           __typename
           id
@@ -336,14 +343,12 @@ export class APIService {
           updatedAt
         }
       }`
-    )
-  ) as Observable<SubscriptionResponse<OnUpdateUserParamSubscription>>;
+    });
+  }
 
-  OnDeleteUserParamListener: Observable<
-    SubscriptionResponse<OnDeleteUserParamSubscription>
-  > = API.graphql(
-    graphqlOperation(
-      `subscription OnDeleteUserParam {
+  get OnDeleteUserParamListener() {
+    return this.client.graphql({
+      query: `subscription OnDeleteUserParam {
         onDeleteUserParam {
           __typename
           id
@@ -353,6 +358,6 @@ export class APIService {
           updatedAt
         }
       }`
-    )
-  ) as Observable<SubscriptionResponse<OnDeleteUserParamSubscription>>;
+    });
+  }
 }

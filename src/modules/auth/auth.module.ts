@@ -20,7 +20,7 @@ import * as authGuards from './guards';
 /* Services */
 import * as authServices from './services';
 
-import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 
 @NgModule({
     imports: [
@@ -30,7 +30,7 @@ import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
         FormsModule,
         AppCommonModule,
         NavigationModule,
-        AmplifyUIAngularModule,
+        AmplifyAuthenticatorModule,
     ],
     providers: [...authServices.services, ...authGuards.guards],
     declarations: [...authContainers.containers, ...authComponents.components],

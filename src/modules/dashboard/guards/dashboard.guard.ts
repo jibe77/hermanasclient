@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
-import { AuthState } from '@aws-amplify/ui-components';
-import { User } from '@modules/auth/models';
+import { User, AuthState } from '@modules/auth/models';
 import { UserService } from '@modules/auth/services';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';

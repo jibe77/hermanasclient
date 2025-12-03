@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { APIService, ListUserParamsQuery } from '@app/API.service';
-import { AuthState, CognitoUserInterface } from '@aws-amplify/ui-components';
 import { Observable, ReplaySubject } from 'rxjs';
+import { getCurrentUser, fetchUserAttributes } from 'aws-amplify/auth';
 
-import { User } from '../models';
+import { User, AuthState } from '../models';
 
 const userSubject: ReplaySubject<User> = new ReplaySubject(1);
 
@@ -11,6 +11,8 @@ const userSubject: ReplaySubject<User> = new ReplaySubject(1);
 export class UserService {
     constructor(private api: APIService) {
         this.user = this.createDefaultNewUser();
+        // Initialize auth state on service creation
+        this.checkAuthState();
     }
 
     set user(user: User) {
@@ -21,27 +23,65 @@ export class UserService {
         return userSubject.asObservable();
     }
 
-    reset(authState: AuthState, authData: CognitoUserInterface) {
-        const nUser: User = this.createDefaultNewUser();
-        nUser.authState = authState;
-        if (authState === AuthState.SignedIn) {
-            nUser.login = authData.username;
-            nUser.email = authData.attributes.email;
+    /**
+     * Check current auth state and update user
+     */
+    async checkAuthState(): Promise<void> {
+        try {
+            const currentUser = await getCurrentUser();
+            const attributes = await fetchUserAttributes();
+            await this.setSignedInUser(currentUser.username, attributes.email || '');
+        } catch (error) {
+            // User is not signed in
+            this.setSignedOutUser();
+        }
+    }
 
-            //  this.authState = AuthState.SignedIn;
-            this.api.ListUserParams().then((event: ListUserParamsQuery) => {
-                for (const item of event.items) {
-                    if (item.key === 'CHICKEN_COOP_LOGIN') {
-                        nUser.backEndUser = item.value;
-                    } else if (item.key === 'CHICKEN_COOP_PASSWORD') {
-                        nUser.backEndPassword = item.value;
-                    }
+    /**
+     * Set user as signed in with auth data
+     */
+    async setSignedInUser(username: string, email: string): Promise<void> {
+        const nUser: User = this.createDefaultNewUser();
+        nUser.authState = AuthState.SignedIn;
+        nUser.login = username;
+        nUser.email = email;
+
+        // Fetch backend credentials from GraphQL
+        try {
+            const event: ListUserParamsQuery = await this.api.ListUserParams();
+            for (const item of event.items) {
+                if (item.key === 'CHICKEN_COOP_LOGIN') {
+                    nUser.backEndUser = item.value;
+                } else if (item.key === 'CHICKEN_COOP_PASSWORD') {
+                    nUser.backEndPassword = item.value;
                 }
-                this.user = nUser;
-            });
+            }
+        } catch (error) {
+            console.error('Error fetching user params:', error);
+        }
+
+        this.user = nUser;
+    }
+
+    /**
+     * Set user as signed out
+     */
+    setSignedOutUser(): void {
+        const nUser: User = this.createDefaultNewUser();
+        nUser.login = 'guest';
+        nUser.authState = AuthState.SignedOut;
+        this.user = nUser;
+    }
+
+    /**
+     * Legacy method for compatibility - now delegates to new methods
+     * @deprecated Use checkAuthState() instead
+     */
+    reset(authState: string, authData?: { username?: string; attributes?: { email?: string } }): void {
+        if (authState === AuthState.SignedIn && authData) {
+            this.setSignedInUser(authData.username || '', authData.attributes?.email || '');
         } else {
-            nUser.login = 'guest';
-            this.user = nUser;
+            this.setSignedOutUser();
         }
     }
 

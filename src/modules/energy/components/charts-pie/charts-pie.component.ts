@@ -16,7 +16,7 @@ import { Chart } from 'chart.js';
 })
 export class ChartsPieComponent implements OnInit, AfterViewInit {
     @ViewChild('myPieChart') myPieChart!: ElementRef<HTMLCanvasElement>;
-    chart!: Chart;
+    chart: any;
 
     constructor() {}
     ngOnInit() {}

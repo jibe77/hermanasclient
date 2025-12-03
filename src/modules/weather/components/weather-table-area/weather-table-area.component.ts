@@ -9,9 +9,9 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { MatSort, MatSortable } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { MeteoInfo } from '@modules/dashboard/services';
 import { WeatherService } from '@modules/weather/services';
 import { Observable, Subscription } from 'rxjs';

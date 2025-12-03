@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Hermanas Client is an Angular 12 SPA for remote monitoring and control of an automated chicken coop IoT system. It communicates with a Spring Boot backend via REST APIs and WebSockets (STOMP protocol).
+Hermanas Client is an Angular 18 SPA for remote monitoring and control of an automated chicken coop IoT system. It communicates with a Spring Boot backend via REST APIs and WebSockets (STOMP protocol).
 
 - **Live**: http://www.hermanas.fr
 - **Backend repo**: https://github.com/jibe77/hermanas

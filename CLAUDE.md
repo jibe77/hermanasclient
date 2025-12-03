@@ -145,10 +145,20 @@ All backend breaking changes have been implemented:
   - Fixed `dashboard-accessories-action.component.ts`:
     - Added `take(1)` operator to `switchLight()`, `switchMusic()`, and `switchFan()` subscriptions
     - Ensures automatic unsubscribe after first emission for one-time HTTP requests
-- [ ] **Implement route guards** - All guards return `of(true)` with no actual protection
-  - `src/modules/auth/guards/auth.guard.ts`
-  - `src/modules/dashboard/guards/dashboard.guard.ts`
-  - `src/modules/navigation/guards/navigation.guard.ts`
+- [x] **Implement route guards** ✅ COMPLETED - All guards now have proper authentication/authorization checks
+  - **AuthGuard** (`src/modules/auth/guards/auth.guard.ts`):
+    - Checks if user is authenticated via AWS Amplify (`AuthState.SignedIn`)
+    - Redirects to `/auth/login` if not authenticated
+    - Uses UserService to observe authentication state
+  - **DashboardGuard** (`src/modules/dashboard/guards/dashboard.guard.ts`):
+    - Checks if user is authenticated
+    - Validates backend credentials are configured (backEndUser, backEndPassword)
+    - Redirects to login if not authenticated
+    - Applied to dashboard route in `dashboard-routing.module.ts`
+  - **NavigationGuard** (`src/modules/navigation/guards/navigation.guard.ts`):
+    - Checks if user is authenticated
+    - Redirects to `/auth/login` if not authenticated
+    - Can be applied to protected navigation routes
 
 ### Phase 3 - Angular Migration
 
@@ -217,7 +227,6 @@ All backend breaking changes have been implemented:
 |-------|----------|----------|
 | Angular 12 EOL | package.json | Critical |
 | Protractor deprecated | e2e/ | High |
-| Non-functional guards | src/modules/*/guards/ | High |
 | No state management | Services using BehaviorSubject | Medium |
 | Fat component | dashboard-widgets.component.ts | Medium |
 | Shallow tests | Most .spec.ts files | Medium |

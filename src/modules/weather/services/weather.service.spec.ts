@@ -1,16 +1,17 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { WeatherService } from './weather.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('WeatherService', () => {
     let weatherService: WeatherService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule],
-            providers: [WeatherService],
-        });
+    imports: [],
+    providers: [WeatherService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
         weatherService = TestBed.inject(WeatherService);
     });
 

@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { take } from 'rxjs/operators';
 
@@ -13,9 +13,9 @@ describe('UtilityService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [HttpClientTestingModule],
-            providers: [UtilityService],
-        });
+    imports: [],
+    providers: [UtilityService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
         utilityService = TestBed.inject(UtilityService);
 
         httpClient = TestBed.inject(HttpClient);

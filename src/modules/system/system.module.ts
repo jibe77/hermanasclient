@@ -22,29 +22,23 @@ import * as systemGuards from './guards';
 
 /* Services */
 import * as systemService from './services';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-@NgModule({
-    imports: [
-        CommonModule,
-        RouterModule,
-        ReactiveFormsModule,
-        FormsModule,
-        AppCommonModule,
-        NavigationModule,
-        HttpClientModule,
-    ],
-    providers: [
-        DecimalPipe,
-        ...systemService.services,
-        ...systemGuards.guards,
-        ...systemDirectives.directives,
-    ],
-    declarations: [
+@NgModule({ declarations: [
         ...systemContainers.containers,
         ...systemComponents.components,
         ...systemDirectives.directives,
     ],
-    exports: [...systemContainers.containers, ...systemComponents.components],
-})
+    exports: [...systemContainers.containers, ...systemComponents.components], imports: [CommonModule,
+        RouterModule,
+        ReactiveFormsModule,
+        FormsModule,
+        AppCommonModule,
+        NavigationModule], providers: [
+        DecimalPipe,
+        ...systemService.services,
+        ...systemGuards.guards,
+        ...systemDirectives.directives,
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class SystemModule {}

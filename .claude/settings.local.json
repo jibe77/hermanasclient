@@ -14,7 +14,8 @@
       "Bash(npm run build:pug:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(npm view:*)"
+      "Bash(npm view:*)",
+      "Bash(inherits its constructor from RxStomp, but the latter does not have an Angular)"
     ],
     "deny": [],
     "ask": []

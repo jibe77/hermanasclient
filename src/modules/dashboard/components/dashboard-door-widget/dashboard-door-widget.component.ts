@@ -137,4 +137,21 @@ export class DashboardDoorWidgetComponent implements OnInit, OnDestroy {
         this.pictureNotInitialised = true;
         this.changeDetectorRef.markForCheck();
     }
+
+    // Helper methods to simplify template logic
+    public isDoorStatus(status: string): boolean {
+        return this.doorStatus !== undefined && this.doorStatus === status;
+    }
+
+    public get isLoading(): boolean {
+        return this.doorStatus === undefined && this.doorStatusOnError === false;
+    }
+
+    public get hasError(): boolean {
+        return this.doorStatusOnError === true;
+    }
+
+    public get isPictureLoading(): boolean {
+        return this.pictureInitialised === false && this.pictureNotInitialised === false;
+    }
 }

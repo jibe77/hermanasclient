@@ -9,18 +9,29 @@ const userSubject: ReplaySubject<User> = new ReplaySubject(1);
 
 @Injectable()
 export class UserService {
+    private currentUser: User;
+
     constructor(private api: APIService) {
-        this.user = this.createDefaultNewUser();
+        this.currentUser = this.createDefaultNewUser();
+        this.user = this.currentUser;
         // Initialize auth state on service creation
         this.checkAuthState();
     }
 
     set user(user: User) {
+        this.currentUser = user;
         userSubject.next(user);
     }
 
     get user$(): Observable<User> {
         return userSubject.asObservable();
+    }
+
+    /**
+     * Get the current user synchronously (for use in interceptors)
+     */
+    getCurrentUser(): User {
+        return this.currentUser;
     }
 
     /**

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AbstractService } from '@common/services';
 import { User } from '@modules/auth/models';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { SwitchResponse } from '../models';
 
 export interface FanStatus {
     statusEnum: string;
@@ -17,17 +17,13 @@ export class FanService extends AbstractService {
     }
 
     public getStatus(): Observable<FanStatus> {
-        const musicStatusUrl = this.domainBase + '/fan/status';
-        return this._httpClient.get(musicStatusUrl, { headers: this.getHeaders() }).pipe(
-            map((data: FanStatus) => {
-                return data;
-            })
-        );
+        const fanStatusUrl = this.domainBase + '/fan/status';
+        return this._httpClient.get<FanStatus>(fanStatusUrl, { headers: this.getHeaders() });
     }
 
-    public switch(param: boolean, user: User): Observable<any> {
-        const musicStatusUrl = this.domainBase + '/fan/switch';
-        return this._httpClient.get(musicStatusUrl + '?param=' + param, {
+    public switch(param: boolean, user: User): Observable<SwitchResponse> {
+        const fanSwitchUrl = this.domainBase + '/fan/switch';
+        return this._httpClient.get<SwitchResponse>(fanSwitchUrl + '?param=' + param, {
             headers: this.getHeadersWithAuth(user),
         });
     }

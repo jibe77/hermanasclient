@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AbstractService } from '@common/services';
 import { User } from '@modules/auth/models';
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { SwitchResponse } from '../models';
 
 export interface LightStatus {
     statusEnum: string;
@@ -17,18 +17,18 @@ export class LightService extends AbstractService {
     }
 
     public getStatus(): Observable<LightStatus> {
-        const musicStatusUrl = this.domainBase + '/light/status';
-        return this._httpClient.get(musicStatusUrl, { headers: this.getHeaders() }).pipe(
-            map((data: LightStatus) => {
-                return data;
-            })
-        );
+        const lightStatusUrl = this.domainBase + '/light/status';
+        return this._httpClient.get<LightStatus>(lightStatusUrl, { headers: this.getHeaders() });
     }
 
-    public switch(param: boolean, user: User): Observable<any> {
-        const musicStatusUrl = this.domainBase + '/light/switch';
-        return this._httpClient.post(musicStatusUrl + '?param=' + param, null, {
-            headers: this.getHeadersWithAuth(user),
-        });
+    public switch(param: boolean, user: User): Observable<SwitchResponse> {
+        const lightSwitchUrl = this.domainBase + '/light/switch';
+        return this._httpClient.post<SwitchResponse>(
+            lightSwitchUrl + '?param=' + param,
+            null,
+            {
+                headers: this.getHeadersWithAuth(user),
+            }
+        );
     }
 }

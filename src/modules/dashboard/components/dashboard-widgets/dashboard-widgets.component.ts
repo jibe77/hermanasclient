@@ -9,6 +9,7 @@ import {
     Output,
 } from '@angular/core';
 import { UserService } from '@modules/auth/services';
+import { ApplianceMessage } from '@modules/dashboard/models';
 import {
     FanService,
     FanStatus,
@@ -96,16 +97,20 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     private initWebSocket() {
         this.websocketSubscription = this._websocketService.getObservable().subscribe(
             data => {
-                if (data.message.appliance === 'LIGHT') {
-                    this.refreshLightStatus(data.message.state === 'ON');
-                } else if (data.message.appliance === 'FAN') {
-                    this.refreshFanStatus(data.message.state === 'ON');
-                } else if (data.message.appliance === 'DOOR') {
-                    this.refreshDoorStatus(data.message.state);
-                    this.refreshPicture();
-                    this.createSubscriptionToNextEventNotifications();
-                } else if (data.message.appliance === 'MUSIC') {
-                    this.refreshMusicStatus(data.message.state === 'ON');
+                // Type guard: check if message is ApplianceMessage
+                if (typeof data.message !== 'string' && 'appliance' in data.message) {
+                    const message = data.message as ApplianceMessage;
+                    if (message.appliance === 'LIGHT') {
+                        this.refreshLightStatus(message.state === 'ON');
+                    } else if (message.appliance === 'FAN') {
+                        this.refreshFanStatus(message.state === 'ON');
+                    } else if (message.appliance === 'DOOR') {
+                        this.refreshDoorStatus(message.state);
+                        this.refreshPicture();
+                        this.createSubscriptionToNextEventNotifications();
+                    } else if (message.appliance === 'MUSIC') {
+                        this.refreshMusicStatus(message.state === 'ON');
+                    }
                 }
             },
             msg => {

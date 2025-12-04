@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { APIService, ListUserParamsQuery } from '@app/API.service';
 import { Observable, ReplaySubject } from 'rxjs';
 import { getCurrentUser, fetchUserAttributes } from 'aws-amplify/auth';
+import { LoggerService } from '@common/services';
 
 import { User, AuthState } from '../models';
 
@@ -11,7 +12,10 @@ const userSubject: ReplaySubject<User> = new ReplaySubject(1);
 export class UserService {
     private currentUser: User;
 
-    constructor(private api: APIService) {
+    constructor(
+        private api: APIService,
+        private logger: LoggerService
+    ) {
         this.currentUser = this.createDefaultNewUser();
         this.user = this.currentUser;
         // Initialize auth state on service creation
@@ -68,7 +72,7 @@ export class UserService {
                 }
             }
         } catch (error) {
-            console.error('Error fetching user params:', error);
+            this.logger.error('Error fetching user params', error, 'UserService');
         }
 
         this.user = nUser;

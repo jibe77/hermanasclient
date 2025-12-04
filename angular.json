@@ -53,13 +53,13 @@
                                     "with": "src/environments/environment.prod.ts"
                                 }
                             ],
-                            "optimization": false,
+                            "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
                             "namedChunks": false,
                             "extractLicenses": true,
                             "vendorChunk": false,
-                            "buildOptimizer": false
+                            "buildOptimizer": true
                         },
                         "fr": {
                             "outputPath": "dist/hermanas-client/fr-FR/",

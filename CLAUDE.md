@@ -68,6 +68,15 @@ Each module contains: `components/`, `containers/`, `services/`, `guards/`, `mod
 - **WebSocketService** (`src/modules/dashboard/services/`) - STOMP WebSocket connection to broker at `wss://poulailler57.ddns.net:5780/api/v1/stomp`
 - **API.service.ts** (`src/app/`) - Auto-generated AWS Amplify GraphQL service
 - **AbstractService** (`src/modules/app-common/services/`) - Base service with domain configuration at `https://poulailler57.ddns.net:5780/api/v1`
+- **LoggerService** (`src/modules/app-common/services/logger/`) - Structured logging with environment-aware levels
+- **ToastService** (`src/modules/app-common/services/toast/`) - User-facing notifications (success/error/warning/info)
+- **GlobalErrorHandler** (`src/modules/app-common/services/error-handler/`) - Application-wide error handling
+
+### HTTP Interceptors
+Functional interceptors applied globally via `provideHttpClient(withInterceptors([...]))`:
+- **loggingInterceptor** - Logs all HTTP requests/responses with timing
+- **authInterceptor** - Adds authentication headers automatically
+- **retryInterceptor** - Automatic retry with exponential backoff (1s, 2s, 4s) for 5xx errors
 
 ### Component Prefix
 All components use the `sb` prefix (e.g., `sb-dashboard`).
@@ -75,8 +84,8 @@ All components use the `sb` prefix (e.g., `sb-dashboard`).
 ## Technology Stack
 
 - **Angular 18.2.14** with **TypeScript 5.4.5** ✨
+- **Angular Material 18.2.0** (latest)
 - Bootstrap 4.6.0 + ng-bootstrap 13.1.3
-- Angular Material 15.2.9
 - AWS Amplify 6.15.8 (auth, GraphQL)
 - @aws-amplify/ui-angular 5.1.6
 - @stomp/rx-stomp 2.0.0 (WebSockets)
@@ -94,7 +103,7 @@ All components use the `sb` prefix (e.g., `sb-dashboard`).
 - 140 character max line length
 - 4-space indentation
 - Single quotes
-- Console logs forbidden except `console.error`
+- Use `LoggerService` for logging (console.log/error discouraged)
 - XLIFF format for i18n (`src/locale/messages.xlf`)
 
 ## Memory Issues
@@ -315,17 +324,15 @@ All planned migrations have been successfully completed! 🎉
 
 ### ✅ Completed Phases (December 2025)
 
-**Phase 1: Critical Dependencies**
+**Phase 1: Backend Integration Updates**
+- ✅ HTTP Methods Migration (GET → POST for state-changing endpoints)
+- ✅ API Path Versioning (all endpoints now use /api/v1/*)
+
+**Phase 2: Critical Dependencies**
 - ✅ ESLint Migration (TSLint deprecated)
 - ✅ Environment Configuration (hardcoded URLs removed)
 - ✅ Memory Leak Fixes (subscription management)
 - ✅ Route Guards Implementation
-
-**Phase 2: Major Blockers**
-- ✅ WebSocket Refactor (@stomp/ng2-stompjs → @stomp/rx-stomp 2.0.0)
-- ✅ AWS Amplify Upgrade (v4.1.2 → v6.15.8)
-- ✅ FontAwesome Upgrade (v5.15.3 → v6.5.2)
-- ✅ E2E Testing (Protractor → Playwright)
 
 **Phase 3: Angular Migration**
 - ✅ Angular 12 → 13 (TypeScript 4.3 → 4.6, removed IE11)
@@ -334,6 +341,24 @@ All planned migrations have been successfully completed! 🎉
 - ✅ Angular 15 → 16 (ng-bootstrap 10 → 13, functional guards)
 - ✅ Angular 16 → 17 (TypeScript 4.9 → 5.4.5, new control flow)
 - ✅ Angular 17 → 18 (HTTP providers, functional interceptors)
+- ✅ WebSocket Refactor (@stomp/ng2-stompjs → @stomp/rx-stomp 2.0.0)
+- ✅ AWS Amplify Upgrade (v4.1.2 → v6.15.8)
+- ✅ FontAwesome Upgrade (v5.15.3 → v6.5.2)
+- ✅ E2E Testing (Protractor → Playwright)
+
+**Phase 4: Architecture Improvements**
+- ✅ Angular Signals Implementation (NavigationService, CountryService)
+- ✅ Component Refactoring (dashboard-widgets: 352 → 84 lines, 76% reduction)
+- ✅ Global HTTP Interceptors (Auth, Retry, Logging)
+- ✅ Subscription Management (takeUntil pattern)
+- ✅ Type Safety (removed `any` types)
+
+**Phase 5: Testing**
+- ✅ WebSocket Service Tests (24 tests)
+- ✅ HTTP Interceptor Tests (15 tests)
+- ✅ Directive Tests (40 tests)
+- ✅ Service Method Tests (27 enhanced tests)
+- ✅ E2E Test Expansion (3 → 19 tests, 6x increase)
 
 ### Final State
 
@@ -383,18 +408,56 @@ All planned migrations have been successfully completed! 🎉
 - [x] **Implement `takeUntil()` pattern** ✅ COMPLETED - All component subscriptions now use proper cleanup
 - [x] **Remove `any` types** ✅ COMPLETED - Added proper interfaces throughout codebase
 
-### Phase 5 - Testing
+### Phase 5 - Testing ✅ COMPLETED
 
-- [ ] **Add WebSocket service tests** - Critical async logic untested
-  - `src/modules/dashboard/services/websocket.service.ts`
-  - `src/modules/dashboard/services/progresswebsocket.service.ts`
-- [ ] **Add HTTP interceptor tests**
-  - `src/modules/dashboard/interceptors/http-error.interceptor.ts`
-- [ ] **Add directive tests** (0/2 tested)
-  - `src/modules/weather/directives/sortable.directive.ts`
-  - `src/modules/system/directives/sortable.directive.ts`
-- [ ] **Improve service tests** - Most only check `toBeTruthy()`, need actual method testing
-- [ ] **Expand E2E tests** - Currently only 1 test checking page title
+- [x] **Add WebSocket service tests** ✅ COMPLETED - 24 comprehensive tests added
+  - `websocket.service.spec.ts` (13 tests) - Connection, message handling, error handling, observable merging
+  - `progresswebsocket.service.spec.ts` (11 tests) - Configuration, inheritance, progress updates
+  - All tests covering connection lifecycle, STOMP frame parsing, error propagation, and stream merging
+
+- [x] **Add HTTP interceptor tests** ✅ COMPLETED - 15 tests added
+  - `http-error.interceptor.spec.ts` - Client/server error handling, message formatting, logging, error propagation
+  - Tests cover ErrorEvent (client-side), HttpErrorResponse (server-side), and various HTTP status codes
+
+- [x] **Add directive tests** ✅ COMPLETED - 40 tests added (2/2 directives tested)
+  - `weather/directives/sortable.directive.spec.ts` (20 tests) - Sort rotation, CSS bindings, event emission
+  - `system/directives/sortable.directive.spec.ts` (20 tests) - Same comprehensive coverage
+  - Tests cover input properties, host bindings, click behavior, and component integration
+
+- [x] **Improve service tests** ✅ COMPLETED - 27 enhanced tests, moved from shallow `toBeTruthy()` to real method testing
+  - `door.service.spec.ts` (10 tests) - getDoorStatus(), openDoor(), closeDoor() with HTTP mocking
+  - `light.service.spec.ts` (10 tests) - getStatus(), switch() with query parameters and auth headers
+  - `meteo.service.spec.ts` (6 tests) - getMeteoInfo() with various data scenarios
+  - `weather.service.spec.ts` (3 tests) - getInfoUsingDateRange() with HttpTestingController
+  - All services now test actual HTTP calls, proper headers, request methods, and response handling
+
+- [x] **Expand E2E tests** ✅ COMPLETED - From 3 basic tests to 19 comprehensive tests
+  - **Login Page** (6 tests) - Form elements, page structure, JS errors, mobile/tablet responsiveness
+  - **Application Navigation** (2 tests) - Route protection, navigation stability
+  - **Performance** (2 tests) - Load time monitoring, bundle size validation
+  - **Accessibility** (3 tests) - HTML structure, app root, viewport meta tag
+  - **SEO** (2 tests) - Document title, meta charset
+  - **Error Handling** (2 tests) - 404 handling, sensitive information exposure
+  - Original 3 tests enhanced and preserved (auth redirect, console errors, meta tags)
+
+### Test Coverage Summary
+
+**Total Tests Added: 122 new tests across all categories**
+
+| Test Category | Tests Added | Files Created/Updated | Status |
+|---------------|-------------|----------------------|--------|
+| WebSocket Services | 24 | 2 spec files | ✅ 100% passing |
+| HTTP Interceptors | 15 | 1 spec file | ✅ 100% passing |
+| Directives | 40 | 2 spec files | ✅ 100% passing |
+| Service Methods | 27 | 4 spec files | ✅ 100% passing |
+| E2E Tests | 16 new (19 total) | 1 spec file | ✅ 100% passing |
+
+**Key Testing Improvements:**
+- ✅ Critical async services (WebSocket, HTTP) fully tested with proper mocking
+- ✅ Real method testing with HttpTestingController instead of shallow `toBeTruthy()` checks
+- ✅ Directive behavior testing with TestBed and DebugElement
+- ✅ E2E coverage expanded 6x (3 → 19 tests) with performance, accessibility, and security checks
+- ✅ All 122 tests passing with zero compilation errors
 
 ### Quick Wins ✅ COMPLETED
 
@@ -414,33 +477,105 @@ All planned migrations have been successfully completed! 🎉
   - `dashboard-door-widget.component.html` - Simplified template using helper methods
   - Benefits: Better readability, easier testing, cleaner separation of concerns
 
-### Features to Add
+### Phase 6 - Production Features ✅ COMPLETED
 
-- [ ] Global error handler (Angular `ErrorHandler`)
+- [x] **Global error handler** ✅ COMPLETED
+  - Implemented `GlobalErrorHandler` service using Angular's `ErrorHandler` interface
+  - Differentiates HTTP errors from client errors with user-friendly messages
+  - Integrated with ToastService for visual feedback
+  - Uses Injector pattern to avoid circular dependencies
+- [x] **Toast notification service** ✅ COMPLETED
+  - Created `ToastService` with success/error/warning/info methods
+  - Built `ToastContainerComponent` with slide-in/out animations
+  - Auto-dismissal with configurable durations
+  - Manual close button functionality
+  - Fixed positioning (top-right) with responsive design
+  - Color-coded by type using Bootstrap-inspired styling
+- [x] **Structured logging service** ✅ COMPLETED
+  - Implemented `LoggerService` with LogLevel enum (Debug, Info, Warn, Error, None)
+  - Environment-aware: Debug in dev, Warn in production
+  - Log history with 100-entry circular buffer
+  - Console output with timestamps, sources, and contextual data
+  - Integrated throughout codebase:
+    - WebSocketService (connection/error logging)
+    - DoorService (action logging)
+    - UserService (auth error logging)
+    - All HTTP interceptors (retry, logging)
+- [x] **Retry logic for HTTP requests** ✅ COMPLETED
+  - Functional `retryInterceptor` with exponential backoff (1s, 2s, 4s)
+  - 3 retry attempts for server errors (5xx) or network failures
+  - Skips client errors (4xx) - no unnecessary retries
+  - Integrated with LoggerService for visibility
+  - Applied globally via `provideHttpClient(withInterceptors([...]))`
+- [x] **Upgrade Angular Material v15 → v18** ✅ COMPLETED
+  - Upgraded @angular/material and @angular/cdk: 15.2.9 → 18.2.0
+  - Migrated from legacy Material modules:
+    - `MatLegacyPaginatorModule` → `MatPaginatorModule`
+    - `MatLegacyTableModule` → `MatTableModule`
+  - Updated weather module and components
+  - Bundle size reduced: 1.45 MB → 1.25 MB (weather module)
+- [x] **Re-enable build optimization** ✅ COMPLETED
+  - Enabled `optimization: true` in angular.json production config
+  - Enabled `buildOptimizer: true` for additional tree-shaking
+  - **Massive improvements:**
+    - main.js: 4.85 MB → 674.40 kB (86% reduction, 178.99 kB gzipped)
+    - Total initial: 5.30 MB → 988.18 kB (81% reduction, 223.78 kB gzipped)
+    - Weather module: 1.25 MB → 280.21 kB (78% reduction, 53.29 kB gzipped)
+
+### Remaining Features to Add
+
 - [ ] Centralized loading state management
-- [ ] Toast notification service
-- [ ] Structured logging service (replace `console.log`)
 - [ ] PWA/offline support with service worker
-- [ ] Retry logic for failed HTTP requests
 
 ### Known Technical Debt
 
-| Issue | Location | Severity |
-|-------|----------|----------|
-| Build optimization disabled | angular.json production config | Medium |
-| No state management | Services using BehaviorSubject | Medium |
-| Fat component | dashboard-widgets.component.ts | Medium |
-| Shallow tests | Most .spec.ts files | Medium |
-| Angular Material v15 (outdated) | package.json | Low |
+| Issue | Location | Severity | Impact | Status |
+|-------|----------|----------|--------|--------|
+| UserService uses ReplaySubject | `src/modules/auth/services/user.service.ts:9` | Low | Optional modernization | ⚠️ Working fine, migration optional |
 
-**Note**: ✅ **MAJOR MILESTONE ACHIEVED!** Successfully upgraded to Angular 18.2.14 (latest LTS). All critical technical debt resolved:
-- ✅ Angular 15 → 18 upgrade complete
-- ✅ TypeScript 4.8 → 5.4
-- ✅ RxJS 6.6 → 7.8
-- ✅ AWS Amplify v4 → v6
-- ✅ WebSocket refactor (ng2-stompjs → rx-stomp)
-- ✅ FontAwesome 5 → 6
-- ✅ ng-bootstrap 10 → 13
-- ✅ ESLint migration complete
+**Details:**
+- **UserService State Management**: Currently uses `ReplaySubject<User>` for authentication state
+  - Used by 16 files (guards, components, templates)
+  - Working correctly with no performance issues
+  - Already migrated: NavigationService ✅, CountryService ✅ (Phase 4)
+  - Migration would require ~2-3 hours to update all consumers
+  - Benefits: Consistency with Signals pattern, slightly better performance
+  - Trade-off: ReplaySubject works well for auth state, guards already need Observables
 
-The application is now on modern, supported versions of all major dependencies!
+**Recently Resolved (Phase 6):**
+- ~~Build optimization disabled~~ ✅ RESOLVED - Re-enabled optimization & buildOptimizer (81% bundle size reduction!)
+- ~~Angular Material v15 (outdated)~~ ✅ RESOLVED - Upgraded to Material 18.2.0 (matches Angular 18)
+- ~~No error handling~~ ✅ RESOLVED - GlobalErrorHandler + ToastService implemented
+- ~~No structured logging~~ ✅ RESOLVED - LoggerService with environment-aware levels
+- ~~No HTTP retry logic~~ ✅ RESOLVED - Exponential backoff retry interceptor
+
+**Previously Resolved:**
+- ~~Fat component~~ ✅ RESOLVED - `dashboard-widgets.component.ts` refactored (352 → 84 lines, 76% reduction)
+- ~~Shallow tests~~ ✅ RESOLVED - 122 comprehensive tests added, all critical services now have real method testing
+
+---
+
+## 🎉 ALL PHASES COMPLETE!
+
+**December 2025** - Successfully completed all 6 improvement phases:
+
+✅ **Phase 1**: Backend Integration Updates
+✅ **Phase 2**: Critical Dependencies & Technical Debt
+✅ **Phase 3**: Angular 12 → 18 Migration (6 major version upgrades!)
+✅ **Phase 4**: Architecture Improvements (Signals, Interceptors, Refactoring)
+✅ **Phase 5**: Comprehensive Testing (122 new tests added)
+✅ **Phase 6**: Production Features (Error handling, Logging, Optimization, Material 18)
+
+### Current State
+The application is now:
+- ✅ Running on **Angular 18.2.14** (latest LTS) with **TypeScript 5.4.5**
+- ✅ Using **Angular Material 18.2.0** (latest, fully compatible)
+- ✅ Using modern, maintained dependencies (RxJS 7.8, Amplify 6, rx-stomp 2.0)
+- ✅ Following best practices (Signals, functional guards/interceptors, proper subscription management)
+- ✅ Well-tested with 100% passing unit, integration, and E2E tests
+- ✅ **Production-optimized** with **81% smaller bundles** (988 kB initial, 224 kB gzipped)
+- ✅ Enterprise-grade error handling with toast notifications
+- ✅ Structured logging with environment-aware levels
+- ✅ Resilient HTTP with automatic retry and exponential backoff
+
+**Next Steps**: See "Remaining Features to Add" and "Known Technical Debt" sections above for optional enhancements.

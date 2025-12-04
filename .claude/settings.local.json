@@ -1,30 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ng add:*)",
-      "Bash(npm run ng:*)",
-      "WebFetch(domain:github.com)",
-      "Bash(npm install:*)",
-      "Bash(npm uninstall:*)",
-      "Bash(cat:*)",
-      "Bash(npm run lint:*)",
-      "Bash(npx tsc:*)",
-      "Bash(npx playwright install chromium)",
+      "Bash(npm test:*)",
       "Bash(npm run e2e:*)",
-      "Bash(npm run build:pug:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(npm view:*)",
-      "Bash(inherits its constructor from RxStomp, but the latter does not have an Angular)",
-      "WebSearch",
-      "WebFetch(domain:docs.amplify.aws)",
-      "Bash(npx ng update:*)",
-      "Bash(npx ng version:*)",
       "Bash(npm run build:*)",
-      "Bash(find:*)",
-      "Bash(doorStatus === 'X'\"\n     * Now uses clean isDoorStatus(''X'') method calls\n     * Replaced *ngIf=\"doorStatus === undefined)",
-      "Bash(doorStatusOnError === false\"\n     * Now uses isLoading getter\n     * Replaced *ngIf=\"pictureInitialised === false)",
-      "Bash(pictureNotInitialised === false\"\n     * Now uses isPictureLoading getter\n\nBenefits:\n- Improved template readability and maintainability\n- Reduced code duplication in templates\n- Easier to test and modify logic in TypeScript vs templates\n- Better separation of concerns (logic in component, presentation in template)\n\nProduction Build: ✅ Successful (19.9s)\n\n🤖 Generated with Claude Code\nEOF\n)\")"
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []

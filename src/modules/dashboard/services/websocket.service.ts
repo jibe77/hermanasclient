@@ -3,6 +3,7 @@ import { RxStompConfig } from '@stomp/rx-stomp';
 import { merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { LoggerService } from '@common/services';
 
 import { SocketResponse, WebSocketOptions } from '../models';
 import { RxStompService } from './rx-stomp.service';
@@ -21,10 +22,10 @@ export class WebSocketService {
         reconnectDelay: 10000,
         brokerURL: this.brokerURL,
         debug: str => {
-            console.log(str);
+            this.logger.debug(str, undefined, 'WebSocketService');
         },
         webSocketFactory: () => {
-            console.log('connect to stomp');
+            this.logger.info('Connecting to STOMP broker', { brokerURL: this.brokerURL }, 'WebSocketService');
             return new WebSocket(this.brokerURL);
         },
     };
@@ -32,7 +33,8 @@ export class WebSocketService {
     constructor(
         private stompService: RxStompService,
         private updatedStompConfig: RxStompConfig,
-        private options: WebSocketOptions
+        private options: WebSocketOptions,
+        private logger: LoggerService
     ) {
         // Update StompJs configuration.
         this.stompConfig = { ...this.stompConfig, ...this.updatedStompConfig };
@@ -68,10 +70,11 @@ export class WebSocketService {
         // Subscribe to errors using RxStomp's stompErrors$ observable
         const errors$ = this.stompService.stompClient.stompErrors$.pipe(
             map(errorFrame => {
-                console.log('Broker reported error: ' + errorFrame.headers['message']);
+                const errorMessage = errorFrame.headers['message'] || 'Unknown STOMP error';
+                this.logger.error('Broker reported error', { message: errorMessage, headers: errorFrame.headers }, 'WebSocketService');
                 const response: SocketResponse = {
                     type: 'ERROR',
-                    message: errorFrame.headers['message'] || 'Unknown STOMP error',
+                    message: errorMessage,
                 };
                 return response;
             })

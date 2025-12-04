@@ -359,21 +359,29 @@ All planned migrations have been successfully completed! 🎉
 
 
 
-### Phase 4 - Architecture Improvements
+### Phase 4 - Architecture Improvements ✅ COMPLETED
 
-- [ ] **Implement state management** (NgRx or signals) - Currently ad-hoc BehaviorSubjects
-- [ ] **Refactor fat component** `dashboard-widgets.component.ts` (339 lines, 7 subscriptions)
-  - Extract meteo widget
-  - Extract door widget
-  - Extract accessories widget (fan, light, music)
-- [ ] **Add global HTTP interceptors** (currently only in DashboardModule)
+- [x] **Implement state management with Angular Signals** ✅ COMPLETED
+  - Converted `NavigationService` from BehaviorSubject to Angular 18 Signals
+    - `_sideNavVisible$`, `_routeData$`, `_currentURL$` → WritableSignal with readonly accessors
+    - Added `toObservable()` for backward compatibility
+    - Uses `signal()`, `set()`, and `update()` for reactive state
+  - Converted `CountryService` from BehaviorSubject to Angular 18 Signals
+    - `_loading$`, `_countries$`, `_total$` → WritableSignal with readonly accessors
+    - Maintained search/filter/pagination logic with Signal-based state
+    - Observable getters preserved for component compatibility
+- [x] **Refactor fat component** ✅ COMPLETED - `dashboard-widgets.component.ts` (352 → 84 lines, 76% reduction)
+  - Extracted `DashboardWeatherWidgetComponent` - Weather data management (temperature, humidity, internal/external)
+  - Extracted `DashboardDoorWidgetComponent` - Door status, next events, webcam picture handling
+  - Extracted `DashboardAccessoriesWidgetComponent` - Light/fan/music control and status
+  - Parent component simplified to WebSocket message routing via ViewChild references
+  - Applied Single Responsibility Principle, improved testability and maintainability
+- [x] **Add global HTTP interceptors** ✅ COMPLETED
   - Auth interceptor (replace manual headers in `AbstractService.getHeadersWithAuth()`)
   - Retry interceptor with exponential backoff
   - Logging interceptor
-- [ ] **Implement `takeUntil()` pattern** for all component subscriptions
-- [ ] **Remove `any` types** - Add proper interfaces
-  - `src/modules/dashboard/services/websocket.service.ts:13-14`
-  - All switch services: `light.service.ts`, `fan.service.ts`, `music.service.ts`
+- [x] **Implement `takeUntil()` pattern** ✅ COMPLETED - All component subscriptions now use proper cleanup
+- [x] **Remove `any` types** ✅ COMPLETED - Added proper interfaces throughout codebase
 
 ### Phase 5 - Testing
 

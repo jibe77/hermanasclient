@@ -7,7 +7,8 @@ import {
     OnInit,
 } from '@angular/core';
 import { NavigationService } from '@modules/navigation/services';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'sb-layout-dashboard',
@@ -17,21 +18,25 @@ import { Subscription } from 'rxjs';
 })
 export class LayoutDashboardComponent implements OnInit, OnDestroy {
     @HostBinding('class.sb-sidenav-toggled') sideNavHidden = false;
-    subscription: Subscription = new Subscription();
+    private destroy$ = new Subject<void>();
 
     constructor(
         public navigationService: NavigationService,
         private changeDetectorRef: ChangeDetectorRef
     ) {}
+
     ngOnInit() {
-        this.subscription.add(
-            this.navigationService.sideNavVisible$().subscribe(isVisible => {
+        this.navigationService
+            .sideNavVisible$()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(isVisible => {
                 this.sideNavHidden = !isVisible;
                 this.changeDetectorRef.markForCheck();
-            })
-        );
+            });
     }
+
     ngOnDestroy() {
-        this.subscription.unsubscribe();
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

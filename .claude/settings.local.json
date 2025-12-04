@@ -19,7 +19,8 @@
       "WebSearch",
       "WebFetch(domain:docs.amplify.aws)",
       "Bash(npx ng update:*)",
-      "Bash(npx ng version:*)"
+      "Bash(npx ng version:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

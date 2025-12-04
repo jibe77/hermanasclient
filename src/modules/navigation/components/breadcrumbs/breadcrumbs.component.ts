@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Breadcrumb } from '@modules/navigation/models';
 import { NavigationService } from '@modules/navigation/services';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'sb-breadcrumbs',
@@ -10,19 +11,22 @@ import { Subscription } from 'rxjs';
     styleUrls: ['breadcrumbs.component.scss'],
 })
 export class BreadcrumbsComponent implements OnInit, OnDestroy {
-    subscription: Subscription = new Subscription();
     breadcrumbs!: Breadcrumb[];
+    private destroy$ = new Subject<void>();
 
     constructor(public navigationService: NavigationService) {}
+
     ngOnInit() {
-        this.subscription.add(
-            this.navigationService.routeData$().subscribe(routeData => {
+        this.navigationService
+            .routeData$()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(routeData => {
                 this.breadcrumbs = routeData.breadcrumbs;
-            })
-        );
+            });
     }
 
     ngOnDestroy() {
-        this.subscription.unsubscribe();
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

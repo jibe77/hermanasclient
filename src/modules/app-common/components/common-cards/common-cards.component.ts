@@ -3,15 +3,14 @@ import {
     ChangeDetectorRef,
     Component,
     EventEmitter,
-    Injectable,
     Input,
     OnDestroy,
     OnInit,
     Output,
 } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-@Injectable()
 @Component({
     selector: 'sb-common-cards',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,24 +18,25 @@ import { Observable, Subject, Subscription } from 'rxjs';
     styleUrls: ['common-cards.component.scss'],
 })
 export class CommonCardsComponent implements OnInit, OnDestroy {
-    private eventsSubscription: Subscription;
     retryMessageIsDisplayed = false;
 
     @Input() notificationEvents: Observable<void>;
     @Output() serviceRetry = new EventEmitter();
     eventSubject: Subject<void> = new Subject<void>();
+    private destroy$ = new Subject<void>();
 
     constructor(public _changeDetectorRef: ChangeDetectorRef) {}
 
     ngOnInit(): void {
-        this.eventsSubscription = this.notificationEvents.subscribe(() => {
+        this.notificationEvents.pipe(takeUntil(this.destroy$)).subscribe(() => {
             this.retryMessageIsDisplayed = true;
             this._changeDetectorRef.detectChanges();
         });
     }
 
     ngOnDestroy(): void {
-        this.eventsSubscription.unsubscribe();
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     onEvent(event: any) {

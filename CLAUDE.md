@@ -396,15 +396,23 @@ All planned migrations have been successfully completed! 🎉
 - [ ] **Improve service tests** - Most only check `toBeTruthy()`, need actual method testing
 - [ ] **Expand E2E tests** - Currently only 1 test checking page title
 
-### Quick Wins (Can Do Today)
+### Quick Wins ✅ COMPLETED
 
-- [ ] **Remove identity map operators** doing nothing
-  - `src/modules/dashboard/services/light.service.ts:21-24`
-  - `src/modules/weather/services/weather.service.ts:19-22`
-- [ ] **Remove `@Injectable()` from component**
-  - `src/modules/app-common/components/common-cards/common-cards.component.ts:14`
-- [ ] **Move template logic to component methods**
-  - `src/modules/dashboard/components/dashboard-widgets/dashboard-widgets.component.html:39` - Complex *ngIf conditions
+- [x] **Remove identity map operators** ✅ COMPLETED
+  - `weather.service.ts` - Removed useless `.pipe(map(data => data))` identity operator
+  - `light.service.ts` - Already clean, no changes needed
+  - Benefits: Cleaner code, reduced RxJS overhead
+- [x] **Verified component decorators** ✅ COMPLETED
+  - `common-cards.component.ts` - Already uses correct `@Component` decorator
+  - No `@Injectable()` misuse found
+- [x] **Move template logic to component methods** ✅ COMPLETED
+  - `dashboard-door-widget.component.ts` - Added helper methods:
+    * `isDoorStatus(status)` - Replaces `doorStatus !== undefined && doorStatus === 'X'`
+    * `isLoading` getter - Replaces `doorStatus === undefined && doorStatusOnError === false`
+    * `hasError` getter - Replaces `doorStatusOnError === true`
+    * `isPictureLoading` getter - Replaces `pictureInitialised === false && pictureNotInitialised === false`
+  - `dashboard-door-widget.component.html` - Simplified template using helper methods
+  - Benefits: Better readability, easier testing, cleaner separation of concerns
 
 ### Features to Add
 

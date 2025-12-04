@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Subject } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     selector: 'sb-dashboard',
@@ -8,10 +9,11 @@ import { Subject } from 'rxjs';
     styleUrls: ['dashboard.component.scss'],
 })
 export class DashboardComponent {
-    constructor() {}
-
     notificationSubject: Subject<void> = new Subject<void>();
     retrySubject: Subject<void> = new Subject<void>();
+    domainBase = environment.apiUrl;
+
+    constructor() {}
 
     onServiceCommunicationError(event: any) {
         this.notificationSubject.next();

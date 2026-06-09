@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
     selector: 'sb-sort-icon',
@@ -6,9 +6,8 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
     templateUrl: './sort-icon.component.html',
     styleUrls: ['sort-icon.component.scss'],
 })
-export class SortIconComponent implements OnInit {
+export class SortIconComponent {
     @Input() direction!: string;
 
     constructor() {}
-    ngOnInit() {}
 }

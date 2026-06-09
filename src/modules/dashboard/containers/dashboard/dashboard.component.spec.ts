@@ -16,13 +16,13 @@ class TestHostComponent {
 
 describe('DashboardComponent', () => {
     let fixture: ComponentFixture<TestHostComponent>;
-    let hostComponent: TestHostComponent;
+    let _hostComponent: TestHostComponent;
     let hostComponentDE: DebugElement;
     let hostComponentNE: Element;
 
-    let component: DashboardComponent;
+    let _component: DashboardComponent;
     let componentDE: DebugElement;
-    let componentNE: Element;
+    let _componentNE: Element;
 
     beforeEach(() => {
         TestBed.configureTestingModule({

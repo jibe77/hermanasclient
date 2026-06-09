@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 @Injectable()
-export class DashboardGuard  {
+export class DashboardGuard {
     constructor(private userService: UserService, private router: Router) {}
 
     canActivate(): Observable<boolean | UrlTree> {

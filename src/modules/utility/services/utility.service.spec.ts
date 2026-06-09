@@ -8,14 +8,18 @@ import { UtilityService } from './utility.service';
 describe('UtilityService', () => {
     let utilityService: UtilityService;
 
-    let httpClient: HttpClient;
+    let _httpClient: HttpClient;
     let httpTestingController: HttpTestingController;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-    imports: [],
-    providers: [UtilityService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+            imports: [],
+            providers: [
+                UtilityService,
+                provideHttpClient(withInterceptorsFromDi()),
+                provideHttpClientTesting(),
+            ],
+        });
         utilityService = TestBed.inject(UtilityService);
 
         httpClient = TestBed.inject(HttpClient);

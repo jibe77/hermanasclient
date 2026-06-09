@@ -7,7 +7,7 @@ import { User, AuthState } from '../models';
 import { UserService } from '../services';
 
 @Injectable()
-export class AuthGuard  {
+export class AuthGuard {
     constructor(private userService: UserService, private router: Router) {}
 
     canActivate(): Observable<boolean | UrlTree> {

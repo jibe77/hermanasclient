@@ -19,13 +19,13 @@ class TestHostComponent {
 
 describe('LayoutAuthComponent', () => {
     let fixture: ComponentFixture<TestHostComponent>;
-    let hostComponent: TestHostComponent;
+    let _hostComponent: TestHostComponent;
     let hostComponentDE: DebugElement;
     let hostComponentNE: Element;
 
-    let component: LayoutAuthComponent;
+    let _component: LayoutAuthComponent;
     let componentDE: DebugElement;
-    let componentNE: Element;
+    let _componentNE: Element;
 
     beforeEach(() => {
         TestBed.configureTestingModule({

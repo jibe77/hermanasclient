@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'sb-layout-error',
@@ -6,7 +6,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     templateUrl: './layout-error.component.html',
     styleUrls: ['layout-error.component.scss'],
 })
-export class LayoutErrorComponent implements OnInit {
+export class LayoutErrorComponent {
     constructor() {}
-    ngOnInit() {}
 }

@@ -16,13 +16,13 @@ class TestHostComponent {
 
 describe('Error401Component', () => {
     let fixture: ComponentFixture<TestHostComponent>;
-    let hostComponent: TestHostComponent;
+    let _hostComponent: TestHostComponent;
     let hostComponentDE: DebugElement;
     let hostComponentNE: Element;
 
-    let component: Error401Component;
+    let _component: Error401Component;
     let componentDE: DebugElement;
-    let componentNE: Element;
+    let _componentNE: Element;
 
     beforeEach(() => {
         TestBed.configureTestingModule({

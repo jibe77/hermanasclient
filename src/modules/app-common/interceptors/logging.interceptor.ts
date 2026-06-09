@@ -19,7 +19,12 @@ export const loggingInterceptor: HttpInterceptorFn = (req, next) => {
                     const elapsed = Date.now() - started;
                     logger.debug(
                         `${req.method} ${req.urlWithParams} - ${event.status}`,
-                        { elapsed: `${elapsed}ms`, status: event.status, method: req.method, url: req.urlWithParams },
+                        {
+                            elapsed: `${elapsed}ms`,
+                            status: event.status,
+                            method: req.method,
+                            url: req.urlWithParams,
+                        },
                         'LoggingInterceptor'
                     );
                 }
@@ -28,7 +33,13 @@ export const loggingInterceptor: HttpInterceptorFn = (req, next) => {
                 const elapsed = Date.now() - started;
                 logger.error(
                     `${req.method} ${req.urlWithParams} - ${error.status} ${error.statusText}`,
-                    { elapsed: `${elapsed}ms`, status: error.status, method: req.method, url: req.urlWithParams, error },
+                    {
+                        elapsed: `${elapsed}ms`,
+                        status: error.status,
+                        method: req.method,
+                        url: req.urlWithParams,
+                        error,
+                    },
                     'LoggingInterceptor'
                 );
             },

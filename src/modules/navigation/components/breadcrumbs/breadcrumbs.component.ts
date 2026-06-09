@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { OnInit, ChangeDetectionStrategy, Component, OnDestroy} from '@angular/core';
 import { Breadcrumb } from '@modules/navigation/models';
 import { NavigationService } from '@modules/navigation/services';
 import { Subject } from 'rxjs';

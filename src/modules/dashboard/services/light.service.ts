@@ -23,12 +23,8 @@ export class LightService extends AbstractService {
 
     public switch(param: boolean, user: User): Observable<SwitchResponse> {
         const lightSwitchUrl = this.domainBase + '/light/switch';
-        return this._httpClient.post<SwitchResponse>(
-            lightSwitchUrl + '?param=' + param,
-            null,
-            {
-                headers: this.getHeadersWithAuth(user),
-            }
-        );
+        return this._httpClient.post<SwitchResponse>(lightSwitchUrl + '?param=' + param, null, {
+            headers: this.getHeadersWithAuth(user),
+        });
     }
 }

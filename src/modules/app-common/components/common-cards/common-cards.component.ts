@@ -41,7 +41,6 @@ export class CommonCardsComponent implements OnInit, OnDestroy {
 
     onEvent(event: any) {
         this.eventSubject.next();
-        console.log(`event received ${event}`);
         this.retry();
     }
 

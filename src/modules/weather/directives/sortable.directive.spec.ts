@@ -9,7 +9,9 @@ import { SBSortableHeaderDirective, SortEvent } from './sortable.directive';
         <table>
             <thead>
                 <tr>
-                    <th sbSortable="name" [direction]="sortDirection" (sort)="onSort($event)">Name</th>
+                    <th sbSortable="name" [direction]="sortDirection" (sort)="onSort($event)">
+                        Name
+                    </th>
                 </tr>
             </thead>
         </table>
@@ -26,7 +28,7 @@ class TestComponent {
 }
 
 describe('SBSortableHeaderDirective', () => {
-    let component: TestComponent;
+    let _component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
     let directiveElement: DebugElement;
     let directive: SBSortableHeaderDirective;
@@ -54,7 +56,9 @@ describe('SBSortableHeaderDirective', () => {
 
         it('should default direction to empty string', () => {
             const newFixture = TestBed.createComponent(TestComponent);
-            const newDirectiveElement = newFixture.debugElement.query(By.directive(SBSortableHeaderDirective));
+            const newDirectiveElement = newFixture.debugElement.query(
+                By.directive(SBSortableHeaderDirective)
+            );
             const newDirective = newDirectiveElement.injector.get(SBSortableHeaderDirective);
 
             expect(newDirective.direction).toBe('');

@@ -20,7 +20,11 @@ describe('LightService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [],
-            providers: [LightService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()],
+            providers: [
+                LightService,
+                provideHttpClient(withInterceptorsFromDi()),
+                provideHttpClientTesting(),
+            ],
         });
         service = TestBed.inject(LightService);
         httpMock = TestBed.inject(HttpTestingController);
@@ -87,7 +91,9 @@ describe('LightService', () => {
                 expect(response.message).toBe('Light turned on');
             });
 
-            const req = httpMock.expectOne(request => request.url.includes('/light/switch?param=true'));
+            const req = httpMock.expectOne(request =>
+                request.url.includes('/light/switch?param=true')
+            );
             expect(req.request.method).toBe('POST');
             expect(req.request.body).toBeNull();
             req.flush(mockResponse);
@@ -104,7 +110,9 @@ describe('LightService', () => {
                 expect(response.message).toBe('Light turned off');
             });
 
-            const req = httpMock.expectOne(request => request.url.includes('/light/switch?param=false'));
+            const req = httpMock.expectOne(request =>
+                request.url.includes('/light/switch?param=false')
+            );
             expect(req.request.method).toBe('POST');
             req.flush(mockResponse);
         });

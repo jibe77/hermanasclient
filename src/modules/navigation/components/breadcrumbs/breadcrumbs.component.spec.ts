@@ -21,13 +21,13 @@ class TestHostComponent {
 
 describe('BreadcrumbsComponent', () => {
     let fixture: ComponentFixture<TestHostComponent>;
-    let hostComponent: TestHostComponent;
+    let _hostComponent: TestHostComponent;
     let hostComponentDE: DebugElement;
     let hostComponentNE: Element;
 
-    let component: BreadcrumbsComponent;
+    let _component: BreadcrumbsComponent;
     let componentDE: DebugElement;
-    let componentNE: Element;
+    let _componentNE: Element;
 
     let navigationService: NavigationService;
 

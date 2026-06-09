@@ -3,7 +3,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    OnInit,
     ViewChild,
 } from '@angular/core';
 import { Chart } from 'chart.js';
@@ -14,12 +13,11 @@ import { Chart } from 'chart.js';
     templateUrl: './charts-pie.component.html',
     styleUrls: ['charts-pie.component.scss'],
 })
-export class ChartsPieComponent implements OnInit, AfterViewInit {
+export class ChartsPieComponent implements AfterViewInit {
     @ViewChild('myPieChart') myPieChart!: ElementRef<HTMLCanvasElement>;
     chart: any;
 
     constructor() {}
-    ngOnInit() {}
 
     ngAfterViewInit() {
         this.chart = new Chart(this.myPieChart.nativeElement, {

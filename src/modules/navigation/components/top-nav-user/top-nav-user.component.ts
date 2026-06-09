@@ -45,7 +45,7 @@ export class TopNavUserComponent implements OnInit, OnDestroy {
         this.userService.checkAuthState();
 
         // Listen for auth events
-        this.hubUnsubscribe = Hub.listen('auth', (data) => {
+        this.hubUnsubscribe = Hub.listen('auth', data => {
             const event = data.payload.event;
 
             if (event === 'signedIn') {

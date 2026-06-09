@@ -25,7 +25,11 @@ export class WebSocketService {
             this.logger.debug(str, undefined, 'WebSocketService');
         },
         webSocketFactory: () => {
-            this.logger.info('Connecting to STOMP broker', { brokerURL: this.brokerURL }, 'WebSocketService');
+            this.logger.info(
+                'Connecting to STOMP broker',
+                { brokerURL: this.brokerURL },
+                'WebSocketService'
+            );
             return new WebSocket(this.brokerURL);
         },
     };
@@ -71,7 +75,11 @@ export class WebSocketService {
         const errors$ = this.stompService.stompClient.stompErrors$.pipe(
             map(errorFrame => {
                 const errorMessage = errorFrame.headers['message'] || 'Unknown STOMP error';
-                this.logger.error('Broker reported error', { message: errorMessage, headers: errorFrame.headers }, 'WebSocketService');
+                this.logger.error(
+                    'Broker reported error',
+                    { message: errorMessage, headers: errorFrame.headers },
+                    'WebSocketService'
+                );
                 const response: SocketResponse = {
                     type: 'ERROR',
                     message: errorMessage,

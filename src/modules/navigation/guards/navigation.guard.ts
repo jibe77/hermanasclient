@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 @Injectable()
-export class NavigationGuard  {
+export class NavigationGuard {
     constructor(private userService: UserService, private router: Router) {}
 
     canActivate(): Observable<boolean | UrlTree> {

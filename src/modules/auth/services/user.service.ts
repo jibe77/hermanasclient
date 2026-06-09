@@ -1,41 +1,50 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { APIService, ListUserParamsQuery } from '@app/API.service';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { getCurrentUser, fetchUserAttributes } from 'aws-amplify/auth';
 import { LoggerService } from '@common/services';
 
 import { User, AuthState } from '../models';
 
-const userSubject: ReplaySubject<User> = new ReplaySubject(1);
-
 @Injectable()
 export class UserService {
-    private currentUser: User;
+    private readonly _user: WritableSignal<User>;
+    private readonly _user$: Observable<User>;
 
-    constructor(
-        private api: APIService,
-        private logger: LoggerService
-    ) {
-        this.currentUser = this.createDefaultNewUser();
-        this.user = this.currentUser;
+    constructor(private api: APIService, private logger: LoggerService) {
+        this._user = signal(this.createDefaultNewUser());
+        this._user$ = toObservable(this._user);
         // Initialize auth state on service creation
         this.checkAuthState();
     }
 
-    set user(user: User) {
-        this.currentUser = user;
-        userSubject.next(user);
+    /**
+     * Get the current user as a signal (readonly)
+     */
+    get user(): WritableSignal<User> {
+        return this._user;
     }
 
+    /**
+     * Set the current user
+     */
+    set user(user: User) {
+        this._user.set(user);
+    }
+
+    /**
+     * Get the current user as an observable (for backward compatibility)
+     */
     get user$(): Observable<User> {
-        return userSubject.asObservable();
+        return this._user$;
     }
 
     /**
      * Get the current user synchronously (for use in interceptors)
      */
     getCurrentUser(): User {
-        return this.currentUser;
+        return this._user();
     }
 
     /**
@@ -92,7 +101,10 @@ export class UserService {
      * Legacy method for compatibility - now delegates to new methods
      * @deprecated Use checkAuthState() instead
      */
-    reset(authState: string, authData?: { username?: string; attributes?: { email?: string } }): void {
+    reset(
+        authState: string,
+        authData?: { username?: string; attributes?: { email?: string } }
+    ): void {
         if (authState === AuthState.SignedIn && authData) {
             this.setSignedInUser(authData.username || '', authData.attributes?.email || '');
         } else {

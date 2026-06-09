@@ -32,7 +32,6 @@ export class CardViewDetailsComponent implements OnInit {
     }
 
     retry() {
-        console.log('retrying');
         this.events.emit(this.link);
     }
 }

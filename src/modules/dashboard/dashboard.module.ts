@@ -20,27 +20,21 @@ import * as dashboardGuards from './guards';
 
 /* Services */
 import * as dashboardServices from './services';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 
-@NgModule({
-    imports: [
-        CommonModule,
+@NgModule({ declarations: [...dashboardContainers.containers, ...dashboardComponents.components],
+    exports: [...dashboardContainers.containers, ...dashboardComponents.components], imports: [CommonModule,
         RouterModule,
         ReactiveFormsModule,
         FormsModule,
         AppCommonModule,
         NavigationModule,
-        AmplifyUIAngularModule,
-        HttpClientModule,
-    ],
-    providers: [
+        AmplifyAuthenticatorModule], providers: [
         ...dashboardServices.services,
         ...dashboardGuards.guards,
         { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
-    ],
-    declarations: [...dashboardContainers.containers, ...dashboardComponents.components],
-    exports: [...dashboardContainers.containers, ...dashboardComponents.components],
-})
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class DashboardModule {}

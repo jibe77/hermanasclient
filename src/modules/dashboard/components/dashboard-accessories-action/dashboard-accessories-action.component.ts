@@ -4,6 +4,7 @@ import { UserService } from '@modules/auth/services';
 import { DashboardWidgetsComponent } from '@modules/dashboard/components/dashboard-widgets/dashboard-widgets.component';
 import { FanService, LightService, MusicService } from '@modules/dashboard/services';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
     selector: 'sb-dashboard-accessories-action',
@@ -42,20 +43,29 @@ export class DashboardAccessoriesActionComponent implements OnInit, OnDestroy {
     }
 
     public switchLight(param: boolean) {
-        this._lightService.switch(param, this.user).subscribe(() => {
-            this.dashboardWidgetsComponent.createSubscriptionToLightNotifications();
-        });
+        this._lightService
+            .switch(param, this.user)
+            .pipe(take(1))
+            .subscribe(() => {
+                this.dashboardWidgetsComponent.createSubscriptionToLightNotifications();
+            });
     }
 
     public switchMusic(param: boolean) {
-        this._musicService.switch(param, this.user).subscribe(() => {
-            this.dashboardWidgetsComponent.createSubscriptionToMusicNotifications();
-        });
+        this._musicService
+            .switch(param, this.user)
+            .pipe(take(1))
+            .subscribe(() => {
+                this.dashboardWidgetsComponent.createSubscriptionToMusicNotifications();
+            });
     }
 
     public switchFan(param: boolean) {
-        this._fanService.switch(param, this.user).subscribe(() => {
-            this.dashboardWidgetsComponent.createSubscriptionToFanNotifications();
-        });
+        this._fanService
+            .switch(param, this.user)
+            .pipe(take(1))
+            .subscribe(() => {
+                this.dashboardWidgetsComponent.createSubscriptionToFanNotifications();
+            });
     }
 }

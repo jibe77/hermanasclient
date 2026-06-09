@@ -1,9 +1,10 @@
 import { DecimalPipe } from '@angular/common';
-import { Injectable, PipeTransform } from '@angular/core';
+import { Injectable, PipeTransform, signal, WritableSignal, Signal, computed, effect } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { COUNTRIES } from '@modules/system/data/countries';
 import { SortDirection } from '@modules/system/directives';
 import { Country } from '@modules/system/models';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 
 interface SearchResult {
@@ -44,10 +45,16 @@ function matches(country: Country, term: string, pipe: PipeTransform) {
 
 @Injectable({ providedIn: 'root' })
 export class CountryService {
-    private _loading$ = new BehaviorSubject<boolean>(true);
+    // Signals for reactive state management
+    private _loading: WritableSignal<boolean> = signal(true);
     private _search$ = new Subject<void>();
-    private _countries$ = new BehaviorSubject<Country[]>([]);
-    private _total$ = new BehaviorSubject<number>(0);
+    private _countries: WritableSignal<Country[]> = signal([]);
+    private _total: WritableSignal<number> = signal(0);
+
+    // Public readonly signals
+    readonly loading: Signal<boolean> = this._loading.asReadonly();
+    readonly countries: Signal<Country[]> = this._countries.asReadonly();
+    readonly total: Signal<number> = this._total.asReadonly();
 
     private _state: State = {
         page: 1,
@@ -60,28 +67,29 @@ export class CountryService {
     constructor(private pipe: DecimalPipe) {
         this._search$
             .pipe(
-                tap(() => this._loading$.next(true)),
+                tap(() => this._loading.set(true)),
                 debounceTime(120),
                 switchMap(() => this._search()),
                 delay(120),
-                tap(() => this._loading$.next(false))
+                tap(() => this._loading.set(false))
             )
             .subscribe(result => {
-                this._countries$.next(result.countries);
-                this._total$.next(result.total);
+                this._countries.set(result.countries);
+                this._total.set(result.total);
             });
 
         this._search$.next();
     }
 
-    get countries$() {
-        return this._countries$.asObservable();
+    // Observable getters for backward compatibility
+    get countries$(): Observable<Country[]> {
+        return toObservable(this._countries);
     }
-    get total$() {
-        return this._total$.asObservable();
+    get total$(): Observable<number> {
+        return toObservable(this._total);
     }
-    get loading$() {
-        return this._loading$.asObservable();
+    get loading$(): Observable<boolean> {
+        return toObservable(this._loading);
     }
     get page() {
         return this._state.page;

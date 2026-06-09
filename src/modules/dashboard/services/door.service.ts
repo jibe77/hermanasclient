@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AbstractService } from '@common/services';
+import { AbstractService, LoggerService } from '@common/services';
 import { User } from '@modules/auth/models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,7 +13,10 @@ export interface DoorStatus {
 
 @Injectable()
 export class DoorService extends AbstractService {
-    constructor(private _httpClient: HttpClient) {
+    constructor(
+        private _httpClient: HttpClient,
+        private logger: LoggerService
+    ) {
         super();
     }
 
@@ -33,16 +36,16 @@ export class DoorService extends AbstractService {
 
     public closeDoor(user: User) {
         const nextEventsUrl = this.domainBase + '/door/close';
-        console.log('service close door', user.backEndUser, user.backEndPassword);
-        return this._httpClient.get(nextEventsUrl, {
+        this.logger.info('Closing door', { user: user.login, url: nextEventsUrl }, 'DoorService');
+        return this._httpClient.post(nextEventsUrl, null, {
             headers: this.getHeadersWithAuth(user),
         });
     }
 
     public openDoor(user: User) {
         const nextEventsUrl = this.domainBase + '/door/open';
-        console.log('service open door', user.backEndUser, user.backEndPassword);
-        return this._httpClient.get(nextEventsUrl, {
+        this.logger.info('Opening door', { user: user.login, url: nextEventsUrl }, 'DoorService');
+        return this._httpClient.post(nextEventsUrl, null, {
             headers: this.getHeadersWithAuth(user),
         });
     }

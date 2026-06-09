@@ -6,7 +6,8 @@ import {
     OnInit,
 } from '@angular/core';
 import { VersionInfo, VersionService } from '@modules/system/services/version.service';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'sb-system',
@@ -15,12 +16,12 @@ import { Subject, Subscription } from 'rxjs';
     styleUrls: ['system.component.scss'],
 })
 export class SystemComponent implements OnInit, OnDestroy {
-    versionServiceSubscription: Subscription = new Subscription();
     public backEndVersion: string;
-    public frontEndVersion = '0.6.6';
+    public frontEndVersion = '0.7.0';
     public backEndVersionOnError: boolean;
 
     notificationSubject: Subject<void> = new Subject<void>();
+    private destroy$ = new Subject<void>();
 
     constructor(
         private _versionService: VersionService,
@@ -32,22 +33,22 @@ export class SystemComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.versionServiceSubscription.unsubscribe();
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     createSubscriptionToBackendVersion() {
-        if (this.versionServiceSubscription !== undefined) {
-            this.versionServiceSubscription.unsubscribe();
-            this.changeDetectorRef.detectChanges();
-        }
-        this.versionServiceSubscription = this._versionService.getVersionInfo().subscribe(
-            (data: VersionInfo) => {
-                this.refreshBackEndVersion(data);
-            },
-            (error: any) => {
-                this.refreshBackEndVersion(undefined, error);
-            }
-        );
+        this._versionService
+            .getVersionInfo()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(
+                (data: VersionInfo) => {
+                    this.refreshBackEndVersion(data);
+                },
+                (error: any) => {
+                    this.refreshBackEndVersion(undefined, error);
+                }
+            );
     }
 
     refreshBackEndVersion(data?: VersionInfo, error?: any) {

@@ -25,7 +25,7 @@ export const ROUTES: Routes = [
                 },
             ],
         } as SBRouteData,
-        canActivate: [],
+        canActivate: [dashboardGuards.DashboardGuard],
         component: dashboardContainers.DashboardComponent,
     },
 ];

@@ -29,9 +29,7 @@ describe('VersionComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [TestHostComponent, VersionComponent],
-            imports: [
-                NoopAnimationsModule,
-            ],
+            imports: [NoopAnimationsModule],
             providers: [],
             schemas: [NO_ERRORS_SCHEMA],
         }).compileComponents();
@@ -49,9 +47,6 @@ describe('VersionComponent', () => {
     });
 
     it('should display the component', () => {
-        expect(
-            hostComponentNE.querySelector('sbpro-version'),
-        ).toEqual(jasmine.anything());
+        expect(hostComponentNE.querySelector('sbpro-version')).toEqual(jasmine.anything());
     });
-
 });

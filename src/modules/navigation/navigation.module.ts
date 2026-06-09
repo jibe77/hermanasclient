@@ -21,10 +21,10 @@ import * as navigationGuards from './guards';
 /* Services */
 import * as navigationServices from './services';
 
-import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 
 @NgModule({
-    imports: [CommonModule, RouterModule, AppCommonModule, AmplifyUIAngularModule],
+    imports: [CommonModule, RouterModule, AppCommonModule, AmplifyAuthenticatorModule],
     providers: [...navigationServices.services, ...navigationGuards.guards],
     declarations: [
         ...navigationContainers.containers,

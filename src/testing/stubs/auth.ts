@@ -1,10 +1,17 @@
 import { APIService } from '@app/API.service';
-import { AuthState, CognitoUserInterface } from '@aws-amplify/ui-components';
+import { AuthState } from '@modules/auth/models/auth-state';
 import { UserService } from '@modules/auth/services';
 import { MockUser, User } from '@testing/mocks';
 import { Observable, of } from 'rxjs';
 
 const mockUser = new MockUser();
+
+interface CognitoUserInterface {
+    username: string;
+    attributes: {
+        email: string;
+    };
+}
 
 // @ts-ignore
 export class UserServiceStub implements UserService {

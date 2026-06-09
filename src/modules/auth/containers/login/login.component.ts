@@ -1,8 +1,16 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AuthState, CognitoUserInterface, onAuthUIStateChange} from '@aws-amplify/ui-components';
-import {UserService} from '@modules/auth/services';
-import {NavigationService} from '@modules/navigation/services';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    NgZone,
+    OnDestroy,
+    OnInit,
+} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Hub } from 'aws-amplify/utils';
+import { AuthState } from '@modules/auth/models';
+import { UserService } from '@modules/auth/services';
+import { NavigationService } from '@modules/navigation/services';
 
 @Component({
     selector: 'sb-login',
@@ -10,8 +18,9 @@ import {NavigationService} from '@modules/navigation/services';
     templateUrl: './login.component.html',
     styleUrls: ['login.component.scss'],
 })
-export class LoginComponent implements OnInit {
-    authState: AuthState;
+export class LoginComponent implements OnInit, OnDestroy {
+    authState: AuthState = AuthState.SignedOut;
+    private hubUnsubscribe: (() => void) | undefined;
 
     constructor(
         public navigationService: NavigationService,
@@ -23,15 +32,27 @@ export class LoginComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        onAuthUIStateChange((authState: AuthState, authData: CognitoUserInterface) => {
-            this.userService.reset(authState, authData);
-            if (this.authState !== undefined && authState === AuthState.SignedIn) {
-                this.authState = authState;
-                // but this will work fine
+        // Check initial auth state
+        this.userService.checkAuthState();
+
+        // Listen for auth events
+        this.hubUnsubscribe = Hub.listen('auth', (data) => {
+            const event = data.payload.event;
+
+            if (event === 'signedIn') {
+                this.authState = AuthState.SignedIn;
                 this.ngZone.run(() => this.router.navigate(['dashboard']));
-            } else {
-                this.authState = authState;
+            } else if (event === 'signedOut') {
+                this.authState = AuthState.SignedOut;
             }
+
+            this.ref.markForCheck();
         });
+    }
+
+    ngOnDestroy() {
+        if (this.hubUnsubscribe) {
+            this.hubUnsubscribe();
+        }
     }
 }

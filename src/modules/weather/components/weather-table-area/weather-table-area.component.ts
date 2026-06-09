@@ -5,7 +5,8 @@ import {
     EventEmitter,
     Input,
     OnDestroy,
-    OnInit, Output,
+    OnInit,
+    Output,
     ViewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -58,7 +59,12 @@ export class WeatherTableAreaComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.infoSubscription.unsubscribe();
+        if (this.infoSubscription) {
+            this.infoSubscription.unsubscribe();
+        }
+        if (this.eventsSubscription) {
+            this.eventsSubscription.unsubscribe();
+        }
     }
 
     createSubscriptionToWeatherService() {

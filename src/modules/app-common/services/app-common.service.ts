@@ -8,5 +8,4 @@ export class AppCommonService {
     getAppCommon$(): Observable<{}> {
         return of({});
     }
-
 }

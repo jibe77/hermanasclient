@@ -48,6 +48,8 @@ describe('WeatherChartsAreaComponent', () => {
     });
 
     it('should display the component', () => {
-        expect(hostComponentNE.querySelector('hermanas-weather-charts-area')).toEqual(jasmine.anything());
+        expect(hostComponentNE.querySelector('hermanas-weather-charts-area')).toEqual(
+            jasmine.anything()
+        );
     });
 });

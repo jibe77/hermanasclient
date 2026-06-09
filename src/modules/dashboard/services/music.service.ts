@@ -1,9 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractService } from '@common/services';
 import { User } from '@modules/auth/models';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { SwitchResponse } from '../models';
 
 export interface MusicStatus {
     statusEnum: string;
@@ -18,16 +18,12 @@ export class MusicService extends AbstractService {
 
     public getStatus(): Observable<MusicStatus> {
         const musicStatusUrl = this.domainBase + '/music/status';
-        return this._httpClient.get(musicStatusUrl, { headers: this.getHeaders() }).pipe(
-            map((data: MusicStatus) => {
-                return data;
-            })
-        );
+        return this._httpClient.get<MusicStatus>(musicStatusUrl, { headers: this.getHeaders() });
     }
 
-    public switch(param: boolean, user: User): Observable<any> {
-        const musicStatusUrl = this.domainBase + '/music/switch';
-        return this._httpClient.get(musicStatusUrl + '?param=' + param, {
+    public switch(param: boolean, user: User): Observable<SwitchResponse> {
+        const musicSwitchUrl = this.domainBase + '/music/switch';
+        return this._httpClient.get<SwitchResponse>(musicSwitchUrl + '?param=' + param, {
             headers: this.getHeadersWithAuth(user),
         });
     }

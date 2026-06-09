@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
+
 import { Observable, of } from 'rxjs';
 
 @Injectable()
-export class TablesGuard implements CanActivate {
+export class TablesGuard  {
     canActivate(): Observable<boolean> {
         return of(true);
     }

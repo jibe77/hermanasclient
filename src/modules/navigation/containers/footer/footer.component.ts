@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'sb-footer',
@@ -6,7 +6,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     templateUrl: './footer.component.html',
     styleUrls: ['footer.component.scss'],
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
     constructor() {}
-    ngOnInit() {}
 }

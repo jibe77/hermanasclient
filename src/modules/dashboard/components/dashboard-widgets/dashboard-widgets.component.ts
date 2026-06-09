@@ -28,7 +28,8 @@ export class DashboardWidgetsComponent implements OnInit, OnDestroy {
     @Input() domainBase: string;
 
     @ViewChild(DashboardDoorWidgetComponent) doorWidget?: DashboardDoorWidgetComponent;
-    @ViewChild(DashboardAccessoriesWidgetComponent) accessoriesWidget?: DashboardAccessoriesWidgetComponent;
+    @ViewChild(DashboardAccessoriesWidgetComponent)
+    accessoriesWidget?: DashboardAccessoriesWidgetComponent;
     @ViewChild(DashboardWeatherWidgetComponent) weatherWidget?: DashboardWeatherWidgetComponent;
 
     private destroy$ = new Subject<void>();

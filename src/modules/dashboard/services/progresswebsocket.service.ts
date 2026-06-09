@@ -12,7 +12,11 @@ import { WebSocketService } from './websocket.service';
 export function createProgressStompConfig(logger: LoggerService): RxStompConfig {
     return {
         webSocketFactory: () => {
-            logger.info('Connecting to progress STOMP broker', { wsUrl: environment.wsUrl }, 'ProgressWebsocketService');
+            logger.info(
+                'Connecting to progress STOMP broker',
+                { wsUrl: environment.wsUrl },
+                'ProgressWebsocketService'
+            );
             return new WebSocket(environment.wsUrl);
         },
     };
@@ -20,10 +24,12 @@ export function createProgressStompConfig(logger: LoggerService): RxStompConfig 
 
 @Injectable()
 export class ProgressWebsocketService extends WebSocketService {
-    constructor(
-        stompService: RxStompService,
-        logger: LoggerService
-    ) {
-        super(stompService, createProgressStompConfig(logger), new WebSocketOptions('/topic/progress'), logger);
+    constructor(stompService: RxStompService, logger: LoggerService) {
+        super(
+            stompService,
+            createProgressStompConfig(logger),
+            new WebSocketOptions('/topic/progress'),
+            logger
+        );
     }
 }

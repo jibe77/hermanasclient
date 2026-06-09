@@ -1,14 +1,18 @@
 <div class="toast-container">
-    <div *ngFor="let toast of toasts"
-         [class]="'toast ' + getToastClass(toast.type)"
-         [@toastAnimation]>
+    <div
+        *ngFor="let toast of toasts"
+        [class]="'toast ' + getToastClass(toast.type)"
+        [@toastAnimation]
+    >
         <div class="toast-header">
             <fa-icon [icon]="['fas', getIconClass(toast.type)]" class="toast-icon"></fa-icon>
             <strong class="toast-title">{{ toast.title || toast.type | titlecase }}</strong>
-            <button type="button"
-                    class="toast-close"
-                    (click)="removeToast(toast.id)"
-                    aria-label="Close">
+            <button
+                type="button"
+                class="toast-close"
+                (click)="removeToast(toast.id)"
+                aria-label="Close"
+            >
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>

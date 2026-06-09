@@ -1,8 +1,10 @@
+import { signal, WritableSignal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { APIService } from '@app/API.service';
 import { AuthState } from '@modules/auth/models/auth-state';
 import { UserService } from '@modules/auth/services';
 import { MockUser, User } from '@testing/mocks';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 const mockUser = new MockUser();
 
@@ -15,9 +17,23 @@ interface CognitoUserInterface {
 
 // @ts-ignore
 export class UserServiceStub implements UserService {
-    set user(user: User) {}
+    private _user: WritableSignal<User> = signal(mockUser);
+    private _user$: Observable<User> = toObservable(this._user);
+
+    get user(): WritableSignal<User> {
+        return this._user;
+    }
+
+    set user(user: User) {
+        this._user.set(user);
+    }
+
     get user$(): Observable<User> {
-        return of(mockUser);
+        return this._user$;
+    }
+
+    getCurrentUser(): User {
+        return this._user();
     }
 
     private createDefaultNewUser(): User {

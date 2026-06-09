@@ -22,7 +22,7 @@ import { takeUntil } from 'rxjs/operators';
 export class DashboardDoorWidgetComponent implements OnInit, OnDestroy {
     @Input() retryEvents: Observable<void>;
     @Input() domainBase: string;
-    @Output() error = new EventEmitter<any>();
+    @Output() componentError = new EventEmitter<any>();
 
     public doorStatus?: string;
     public doorStatusOnError = false;
@@ -79,7 +79,7 @@ export class DashboardDoorWidgetComponent implements OnInit, OnDestroy {
                 error: err => {
                     this.doorStatusOnError = true;
                     this.doorStatus = undefined;
-                    this.error.emit(err);
+                    this.componentError.emit(err);
                     this.changeDetectorRef.markForCheck();
                 },
             });
@@ -100,7 +100,7 @@ export class DashboardDoorWidgetComponent implements OnInit, OnDestroy {
                     this.nextEventsOnError = true;
                     this.nextOpeningTime = undefined;
                     this.nextClosingTime = undefined;
-                    this.error.emit(err);
+                    this.componentError.emit(err);
                     this.changeDetectorRef.markForCheck();
                 },
             });

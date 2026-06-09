@@ -18,13 +18,13 @@ class TestHostComponent {
 
 describe('TopNavComponent', () => {
     let fixture: ComponentFixture<TestHostComponent>;
-    let hostComponent: TestHostComponent;
+    let _hostComponent: TestHostComponent;
     let hostComponentDE: DebugElement;
     let hostComponentNE: Element;
 
-    let component: TopNavComponent;
+    let _component: TopNavComponent;
     let componentDE: DebugElement;
-    let componentNE: Element;
+    let _componentNE: Element;
 
     let navigationService: NavigationService;
 

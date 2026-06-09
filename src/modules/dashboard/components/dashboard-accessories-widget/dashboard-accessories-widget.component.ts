@@ -27,7 +27,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class DashboardAccessoriesWidgetComponent implements OnInit, OnDestroy {
     @Input() retryEvents: Observable<void>;
-    @Output() error = new EventEmitter<any>();
+    @Output() componentError = new EventEmitter<any>();
 
     public lightStatus?: boolean;
     public lightStatusOnError = false;
@@ -84,7 +84,7 @@ export class DashboardAccessoriesWidgetComponent implements OnInit, OnDestroy {
                 error: err => {
                     this.lightStatusOnError = true;
                     this.lightStatus = undefined;
-                    this.error.emit(err);
+                    this.componentError.emit(err);
                     this.changeDetectorRef.markForCheck();
                 },
             });
@@ -103,7 +103,7 @@ export class DashboardAccessoriesWidgetComponent implements OnInit, OnDestroy {
                 error: err => {
                     this.fanStatusOnError = true;
                     this.fanStatus = undefined;
-                    this.error.emit(err);
+                    this.componentError.emit(err);
                     this.changeDetectorRef.markForCheck();
                 },
             });
@@ -122,7 +122,7 @@ export class DashboardAccessoriesWidgetComponent implements OnInit, OnDestroy {
                 error: err => {
                     this.musicStatusOnError = true;
                     this.musicStatus = undefined;
-                    this.error.emit(err);
+                    this.componentError.emit(err);
                     this.changeDetectorRef.markForCheck();
                 },
             });

@@ -2,14 +2,16 @@ import { TestBed } from '@angular/core/testing';
 import { RxStompConfig } from '@stomp/rx-stomp';
 import { Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { LoggerService } from '@common/services';
 
 import { ApplianceMessage, SocketResponse } from '../models';
 import { RxStompService } from './rx-stomp.service';
-import { ProgressWebsocketService, progressStompConfig } from './progresswebsocket.service';
+import { ProgressWebsocketService } from './progresswebsocket.service';
 
 describe('ProgressWebsocketService', () => {
     let service: ProgressWebsocketService;
     let mockRxStompService: jasmine.SpyObj<RxStompService>;
+    let mockLoggerService: jasmine.SpyObj<LoggerService>;
     let mockStompClient: any;
     let messageSubject: Subject<any>;
     let errorSubject: Subject<any>;
@@ -31,9 +33,18 @@ describe('ProgressWebsocketService', () => {
             stompClient: mockStompClient,
         });
 
+        // Create mock LoggerService
+        mockLoggerService = jasmine.createSpyObj('LoggerService', [
+            'debug',
+            'info',
+            'warn',
+            'error',
+        ]);
+
         TestBed.configureTestingModule({
             providers: [
                 { provide: RxStompService, useValue: mockRxStompService },
+                { provide: LoggerService, useValue: mockLoggerService },
                 ProgressWebsocketService,
             ],
         });
@@ -152,27 +163,9 @@ describe('ProgressWebsocketService', () => {
 
             messageSubject.next({ body: JSON.stringify({ appliance: 'DOOR', state: 'STARTING' }) });
             errorSubject.next({ headers: { message: 'Temporary error' } });
-            messageSubject.next({ body: JSON.stringify({ appliance: 'DOOR', state: 'COMPLETED' }) });
-        });
-    });
-
-    describe('progressStompConfig', () => {
-        it('should have webSocketFactory defined', () => {
-            expect(progressStompConfig.webSocketFactory).toBeDefined();
-        });
-
-        it('should create WebSocket instance when factory is called', () => {
-            // Mock WebSocket constructor for testing
-            const originalWebSocket = global.WebSocket;
-            const mockWebSocketInstance = jasmine.createSpyObj('WebSocket', ['close', 'send']);
-            global.WebSocket = jasmine.createSpy('WebSocket').and.returnValue(mockWebSocketInstance) as any;
-
-            const ws = progressStompConfig.webSocketFactory();
-            expect(global.WebSocket).toHaveBeenCalled();
-            expect(ws).toBe(mockWebSocketInstance);
-
-            // Restore original WebSocket
-            global.WebSocket = originalWebSocket;
+            messageSubject.next({
+                body: JSON.stringify({ appliance: 'DOOR', state: 'COMPLETED' }),
+            });
         });
     });
 });

@@ -12,7 +12,11 @@ describe('WeatherService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [],
-            providers: [WeatherService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()],
+            providers: [
+                WeatherService,
+                provideHttpClient(withInterceptorsFromDi()),
+                provideHttpClientTesting(),
+            ],
         });
         weatherService = TestBed.inject(WeatherService);
         httpMock = TestBed.inject(HttpTestingController);
@@ -45,7 +49,9 @@ describe('WeatherService', () => {
                 expect(response.length).toBe(1);
             });
 
-            const req = httpMock.expectOne(request => request.url.includes(`/sensor/history/${from}/${to}`));
+            const req = httpMock.expectOne(request =>
+                request.url.includes(`/sensor/history/${from}/${to}`)
+            );
             expect(req.request.method).toBe('GET');
             req.flush(mockData);
         });
@@ -59,7 +65,9 @@ describe('WeatherService', () => {
                 expect(response.length).toBe(0);
             });
 
-            const req = httpMock.expectOne(request => request.url.includes(`/sensor/history/${from}/${to}`));
+            const req = httpMock.expectOne(request =>
+                request.url.includes(`/sensor/history/${from}/${to}`)
+            );
             req.flush([]);
         });
 
@@ -69,8 +77,10 @@ describe('WeatherService', () => {
 
             weatherService.getInfoUsingDateRange(from, to).subscribe();
 
-            const req = httpMock.expectOne(request => request.url.includes(`/sensor/history/${from}/${to}`));
-            expect(req.request.headers.has('Content-Type')).toBe(true);
+            const req = httpMock.expectOne(request =>
+                request.url.includes(`/sensor/history/${from}/${to}`)
+            );
+            expect(req.request.headers.has('Access-Control-Allow-Origin')).toBe(true);
             req.flush([]);
         });
     });

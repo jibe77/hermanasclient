@@ -3,7 +3,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    OnInit,
     ViewChild,
 } from '@angular/core';
 import { Chart } from 'chart.js';
@@ -14,12 +13,11 @@ import { Chart } from 'chart.js';
     templateUrl: './weather-charts-area.component.html',
     styleUrls: ['weather-charts-area.component.scss'],
 })
-export class WeatherChartsAreaComponent implements OnInit, AfterViewInit {
+export class WeatherChartsAreaComponent implements AfterViewInit {
     @ViewChild('myAreaChart') myAreaChart!: ElementRef<HTMLCanvasElement>;
     chart!: Chart;
 
     constructor() {}
-    ngOnInit() {}
 
     ngAfterViewInit() {
         this.chart = new Chart(this.myAreaChart.nativeElement, {

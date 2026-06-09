@@ -13,10 +13,7 @@ export interface DoorStatus {
 
 @Injectable()
 export class DoorService extends AbstractService {
-    constructor(
-        private _httpClient: HttpClient,
-        private logger: LoggerService
-    ) {
+    constructor(private _httpClient: HttpClient, private logger: LoggerService) {
         super();
     }
 

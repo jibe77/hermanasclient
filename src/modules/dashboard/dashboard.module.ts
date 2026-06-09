@@ -24,17 +24,23 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@a
 
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 
-@NgModule({ declarations: [...dashboardContainers.containers, ...dashboardComponents.components],
-    exports: [...dashboardContainers.containers, ...dashboardComponents.components], imports: [CommonModule,
+@NgModule({
+    declarations: [...dashboardContainers.containers, ...dashboardComponents.components],
+    exports: [...dashboardContainers.containers, ...dashboardComponents.components],
+    imports: [
+        CommonModule,
         RouterModule,
         ReactiveFormsModule,
         FormsModule,
         AppCommonModule,
         NavigationModule,
-        AmplifyAuthenticatorModule], providers: [
+        AmplifyAuthenticatorModule,
+    ],
+    providers: [
         ...dashboardServices.services,
         ...dashboardGuards.guards,
         { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
         provideHttpClient(withInterceptorsFromDi()),
-    ] })
+    ],
+})
 export class DashboardModule {}

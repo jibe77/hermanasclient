@@ -20,7 +20,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class DashboardWeatherWidgetComponent implements OnInit, OnDestroy {
     @Input() retryEvents: Observable<void>;
-    @Output() error = new EventEmitter<any>();
+    @Output() componentError = new EventEmitter<any>();
 
     public temperature?: string;
     public temperatureExternal?: number;
@@ -30,10 +30,7 @@ export class DashboardWeatherWidgetComponent implements OnInit, OnDestroy {
 
     private destroy$ = new Subject<void>();
 
-    constructor(
-        private meteoService: MeteoService,
-        private changeDetectorRef: ChangeDetectorRef
-    ) {}
+    constructor(private meteoService: MeteoService, private changeDetectorRef: ChangeDetectorRef) {}
 
     ngOnInit() {
         this.loadMeteoInfo();
@@ -72,7 +69,7 @@ export class DashboardWeatherWidgetComponent implements OnInit, OnDestroy {
                     this.humidity = undefined;
                     this.temperatureExternal = undefined;
                     this.humidityExternal = undefined;
-                    this.error.emit(err);
+                    this.componentError.emit(err);
                     this.changeDetectorRef.markForCheck();
                 },
             });

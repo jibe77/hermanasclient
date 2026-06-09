@@ -19,7 +19,11 @@ describe('DoorService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [],
-            providers: [DoorService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()],
+            providers: [
+                DoorService,
+                provideHttpClient(withInterceptorsFromDi()),
+                provideHttpClientTesting(),
+            ],
         });
         service = TestBed.inject(DoorService);
         httpMock = TestBed.inject(HttpTestingController);
@@ -60,7 +64,9 @@ describe('DoorService', () => {
 
             service.getDoorStatus().subscribe(response => {
                 expect(response.timeStatusHasChangedAsDate).toBeInstanceOf(Date);
-                expect(response.timeStatusHasChangedAsDate.toISOString()).toContain('2025-12-04T15:30:00');
+                expect(response.timeStatusHasChangedAsDate.toISOString()).toContain(
+                    '2025-12-04T15:30:00'
+                );
             });
 
             const req = httpMock.expectOne(request => request.url.includes('/door/status'));

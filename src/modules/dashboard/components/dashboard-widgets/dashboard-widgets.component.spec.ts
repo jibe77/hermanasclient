@@ -1,37 +1,35 @@
 import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
 
 import { DashboardWidgetsComponent } from './dashboard-widgets.component';
+import { ProgressWebsocketService } from '@modules/dashboard/services/progresswebsocket.service';
 
 @Component({
-    template: `
-        <sb-dashboard-charts
-            [someInput]="someInput"
-            (someFunction)="someFunction($event)"
-        ></sb-dashboard-charts>
-    `,
+    template: ` <sb-dashboard-widgets></sb-dashboard-widgets> `,
 })
-class TestHostComponent {
-    // someInput = 1;
-    // someFunction(event: Event) {}
-}
+class TestHostComponent {}
 
 describe('DashboardWidgetsComponent', () => {
     let fixture: ComponentFixture<TestHostComponent>;
-    let hostComponent: TestHostComponent;
+    let _hostComponent: TestHostComponent;
     let hostComponentDE: DebugElement;
     let hostComponentNE: Element;
 
-    let component: DashboardWidgetsComponent;
+    let _component: DashboardWidgetsComponent;
     let componentDE: DebugElement;
-    let componentNE: Element;
+    let _componentNE: Element;
+    let mockWebsocketService: jasmine.SpyObj<ProgressWebsocketService>;
 
     beforeEach(() => {
+        mockWebsocketService = jasmine.createSpyObj('ProgressWebsocketService', ['getObservable']);
+        mockWebsocketService.getObservable.and.returnValue(of());
+
         TestBed.configureTestingModule({
             declarations: [TestHostComponent, DashboardWidgetsComponent],
             imports: [NoopAnimationsModule],
-            providers: [],
+            providers: [{ provide: ProgressWebsocketService, useValue: mockWebsocketService }],
             schemas: [NO_ERRORS_SCHEMA],
         }).compileComponents();
 
@@ -47,8 +45,11 @@ describe('DashboardWidgetsComponent', () => {
         fixture.detectChanges();
     });
 
-    // TODO : test broken
-    // it('should display the component', () => {
-    //    expect(hostComponentNE.querySelector('sb-dashboard-widgets')).toEqual(jasmine.anything());
-    // });
+    it('should display the component', () => {
+        expect(hostComponentNE.querySelector('sb-dashboard-widgets')).toBeTruthy();
+    });
+
+    it('should create the component', () => {
+        expect(component).toBeTruthy();
+    });
 });

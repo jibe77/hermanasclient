@@ -19,13 +19,13 @@ class TestHostComponent {
 
 describe('SideNavComponent', () => {
     let fixture: ComponentFixture<TestHostComponent>;
-    let hostComponent: TestHostComponent;
+    let _hostComponent: TestHostComponent;
     let hostComponentDE: DebugElement;
     let hostComponentNE: Element;
 
-    let component: SideNavComponent;
+    let _component: SideNavComponent;
     let componentDE: DebugElement;
-    let componentNE: Element;
+    let _componentNE: Element;
 
     let navigationService: NavigationService;
     let userService: UserService;

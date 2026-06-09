@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NavigationService } from '@modules/navigation/services';
 
 @Component({
@@ -7,9 +7,8 @@ import { NavigationService } from '@modules/navigation/services';
     templateUrl: './top-nav.component.html',
     styleUrls: ['top-nav.component.scss'],
 })
-export class TopNavComponent implements OnInit {
+export class TopNavComponent {
     constructor(private navigationService: NavigationService) {}
-    ngOnInit() {}
     toggleSideNav() {
         this.navigationService.toggleSideNav();
     }

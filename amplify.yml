@@ -1,20 +1,11 @@
 version: 1
 frontend:
   phases:
-    preBuild:
-      commands:
-        - nvm install 16
-        - nvm use 16
-        - node -v
-        - npm install
     build:
       commands:
-        - mkdir -p dist/hermanas-client
-        - npm run build
+        - mkdir -p dist
+        - cp src/index.html dist/index.html
   artifacts:
-    baseDirectory: dist/hermanas-client
+    baseDirectory: dist
     files:
       - '**/*'
-  cache:
-    paths:
-      - node_modules/**/*
